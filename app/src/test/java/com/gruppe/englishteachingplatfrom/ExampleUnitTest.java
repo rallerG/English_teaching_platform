@@ -1,4 +1,4 @@
-package com.a39.gruppe.enlglishteachingplatform;
+package com.gruppe.englishteachingplatfrom;
 
 import org.junit.Test;
 
