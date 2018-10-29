@@ -1,4 +1,4 @@
-package com.gruppe.englishteachingplatfrom;
+package com.a39.gruppe.enlglishteachingplatform;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.gruppe.englishteachingplatfrom", appContext.getPackageName());
+        assertEquals("com.a39.gruppe.enlglishteachingplatform", appContext.getPackageName());
     }
 }
