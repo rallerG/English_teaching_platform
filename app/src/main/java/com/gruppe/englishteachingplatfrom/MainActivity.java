@@ -67,8 +67,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_filter_rating) {
             return true;
+        } else if (id == R.id.action_filter_country){
+            //Do stuff
+        } else if (id == R.id.action_filter_price){
+            //do stuff
         }
 
         return super.onOptionsItemSelected(item);
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_matches) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_favorites) {
 
         } else if (id == R.id.nav_pending) {
