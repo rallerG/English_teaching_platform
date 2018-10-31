@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 public class DialogBox extends Fragment {
 
-    private DialogBoxViewModel mViewModel;
+
 
     public static DialogBox newInstance() {
         return new DialogBox();
@@ -26,8 +26,8 @@ public class DialogBox extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(DialogBoxViewModel.class);
-        // TODO: Use the ViewModel
+
+        
     }
 
 }
