@@ -6,6 +6,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="dialogbox_text">  Marie\nPro. Teacher\n180 DKK/hr </string>
-    <string name="dialogbox_text2"> Are you sure you want to send a request to Marie? </string>
+    <string name="dialogbox_text">Marie\nPro. Teacher\n180 DKK/hr </string>
+    <string name="dialogbox_text2">Are you sure you want to send a request to Marie? </string>
+    <string name="confirmation_text">Congratulations. \nThe request has been\nsent</string>
+
 </resources>
