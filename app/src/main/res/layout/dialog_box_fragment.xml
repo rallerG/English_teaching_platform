@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/TeacherInfo2"
                 android:layout_width="148dp"
                 android:layout_height="64dp"
                 android:layout_marginTop="16dp"
@@ -27,13 +27,13 @@
                 android:layout_marginBottom="176dp"
                 android:text="@string/dialogbox_text"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/button2"
+                app:layout_constraintBottom_toTopOf="@+id/SendButton"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintStart_toEndOf="@+id/TeacherImage2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/TeacherImage2"
                 android:layout_width="107dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="14dp"
@@ -42,14 +42,14 @@
                 android:layout_marginBottom="44dp"
                 android:contentDescription="TeacherPic"
                 android:src="@drawable/ic_menu_camera"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
-                app:layout_constraintEnd_toStartOf="@+id/textView5"
+                app:layout_constraintBottom_toTopOf="@+id/ConfirmationMessage"
+                app:layout_constraintEnd_toStartOf="@+id/TeacherInfo2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic[1]" />
 
             <RatingBar
-                android:id="@+id/ratingBar"
+                android:id="@+id/RatingBar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="81dp"
                 android:layout_height="20dp"
@@ -65,11 +65,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/TeacherImage2"
                 app:layout_constraintVertical_bias="1.0" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/OkayButton"
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_marginStart="30dp"
@@ -79,14 +79,15 @@
                 android:text="Cancel"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button2"
+                app:layout_constraintEnd_toStartOf="@+id/SendButton"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toBottomOf="@+id/ConfirmationMessage" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/SendButton"
                 android:layout_width="0dp"
                 android:layout_height="52dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="34dp"
                 android:layout_marginBottom="29dp"
                 android:backgroundTint="@color/colorPrimary"
@@ -94,11 +95,12 @@
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintStart_toEndOf="@+id/OkayButton"
+                app:layout_constraintTop_toBottomOf="@+id/ConfirmationMessage"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/ConfirmationMessage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="31dp"
@@ -106,10 +108,10 @@
                 android:layout_marginBottom="21dp"
                 android:text="@string/dialogbox_text2"
                 android:textSize="17sp"
-                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintBottom_toTopOf="@+id/OkayButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                app:layout_constraintTop_toBottomOf="@+id/TeacherImage2" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
