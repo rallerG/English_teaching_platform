@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".LoginOrSignupActivity"
     tools:layout_editor_absoluteY="25dp"
-    tools:showIn="@layout/activity_loginOrSignup">
+    tools:showIn="@layout/activity_login_or_signup">
 
     <Button
         android:id="@+id/signup"

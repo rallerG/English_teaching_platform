@@ -14,7 +14,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loginOrSignup);
+        setContentView(R.layout.activity_login_or_signup);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,7 +53,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.signup :
-                startActivity(new Intent(this, SignupActivity.class));
+                startActivity(new Intent(this, WhatAreYouActivity.class));
                 break;
         }
     }
