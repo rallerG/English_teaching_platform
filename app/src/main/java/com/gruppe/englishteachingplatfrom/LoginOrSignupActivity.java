@@ -14,27 +14,18 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_or_signup);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.content_login_or_signup);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         //Setting ClickListeninger on the buttons
-        Button loginFacebook = (Button) findViewById(R.id.loginFacebook);
+        Button loginFacebook =  findViewById(R.id.loginFacebook);
         loginFacebook.setOnClickListener(this);
-        Button loginWeChat = (Button) findViewById(R.id.loginWeChat);
+        Button loginWeChat =  findViewById(R.id.loginWeChat);
         loginWeChat.setOnClickListener(this);
-        Button login = (Button) findViewById(R.id.login);
+        Button login =  findViewById(R.id.login);
         login.setOnClickListener(this);
-        Button signup = (Button) findViewById(R.id.signup);
+        Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
     }
 
