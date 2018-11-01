@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +28,14 @@ public class DialogBox extends Fragment implements View.OnClickListener {
                              @Nullable Bundle savedInstanceState) {
         View vw = inflater.inflate(R.layout.dialog_box_fragment, container, false);
 
-        cancelButton = vw.findViewById(R.id.OkayButton);
+        cancelButton = vw.findViewById(R.id.CancelButton);
         sendButton = vw.findViewById(R.id.SendButton);
-        teacherImage = vw.findViewById(R.id.TeacherImage2);
-        teacherInfo = vw.findViewById(R.id.TeacherInfo2);
+        teacherImage = vw.findViewById(R.id.TeacherImage);
+        teacherInfo = vw.findViewById(R.id.TeacherInfo);
         confirmationText = vw.findViewById(R.id.ConfirmationMessage);
         ratingBar = vw.findViewById(R.id.RatingBar);
 
         cancelButton.setOnClickListener(this);
-        sendButton.setOnClickListener(this);
 
 
         return vw;
@@ -41,14 +43,39 @@ public class DialogBox extends Fragment implements View.OnClickListener {
 
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        Button sendButton = getView().findViewById(R.id.SendButton);
+        sendButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager
+                        .beginTransaction();
+
+                ConfirmationBox fragment2 = new ConfirmationBox();
+                fragmentTransaction.replace(R.id.fragmentContent, fragment2);
+//provide the fragment ID of your first fragment which you have given in
+//fragment_layout_example.xml file in place of first argument
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
+
+    }
+
+    @Override
     public void onClick(View v) {
 
-        if(v == sendButton){
-            getFragmentManager().beginTransaction().replace(R.id.fragment, new ConfirmationBox()).addToBackStack(null).commit();
-        }
-        else{
 
-        }
+            getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ConfirmationBox()).addToBackStack(null).commit();
+
+
+
 
 
     }
