@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".loginOrSignupActivity"
+    tools:context=".LoginOrSignupActivity"
     tools:layout_editor_absoluteY="25dp"
     tools:showIn="@layout/activity_loginOrSignup">
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/signup"
         android:layout_width="192dp"
         android:layout_height="0dp"
         android:layout_marginBottom="70dp"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/login"
         android:layout_width="192dp"
         android:layout_height="0dp"
         android:layout_marginBottom="50dp"
@@ -35,10 +35,10 @@
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/loginWeChat" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginFacebook"
         android:layout_width="191dp"
         android:layout_height="0dp"
         android:layout_marginBottom="28dp"
@@ -46,13 +46,13 @@
         android:text="Login with Facebook"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/loginWeChat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/loginWeChat"
         android:layout_width="192dp"
         android:layout_height="0dp"
         android:layout_marginBottom="28dp"
@@ -60,10 +60,10 @@
         android:text="Login with WeChat"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/loginFacebook" />
 
     <View
         android:id="@+id/divider2"
@@ -71,10 +71,10 @@
         android:layout_height="2dp"
         android:layout_marginBottom="50dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toTopOf="@+id/signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
     <TextView
         android:id="@+id/textView3"
@@ -87,7 +87,7 @@
         android:textColor="@android:color/holo_blue_light"
         android:textSize="48sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/loginFacebook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

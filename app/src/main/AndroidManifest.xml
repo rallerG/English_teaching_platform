@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".loginOrSignupActivity"
+            android:name=".LoginOrSignupActivity"
             android:label="@string/title_activity_loginOrSignup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -28,11 +28,11 @@
             android:label="@string/title_activity_whatAreYou"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".signupActivity"
+            android:name=".SignupActivity"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".loginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
