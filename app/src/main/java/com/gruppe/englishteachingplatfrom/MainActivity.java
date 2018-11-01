@@ -14,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FavoriteFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +89,21 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_matches) {
-
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragmentContent, new FavoriteFragment()).
+                    commit();
         } else if (id == R.id.nav_favorites) {
-
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragmentContent, new FavoriteFragment()).
+                    commit();
         } else if (id == R.id.nav_pending) {
-
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragmentContent, new FavoriteFragment()).
+                    commit();
         } else if (id == R.id.nav_settings) {
-
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.fragmentContent, new FavoriteFragment()).
+                    commit();
         } else if (id == R.id.nav_logout) {
 
         }
@@ -101,5 +111,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }
