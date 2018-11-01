@@ -26,6 +26,14 @@
         <activity
             android:name=".WhatAreYouActivity"
             android:label="@string/title_activity_whatAreYou"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".signupActivity"
+            android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".loginActivity"
+            android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
