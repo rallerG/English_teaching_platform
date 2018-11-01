@@ -41,7 +41,7 @@
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="44dp"
                 android:contentDescription="TeacherPic"
-                android:src="@drawable/ic_menu_camera"
+                android:src="@mipmap/ic_launcher_student_round"
                 app:layout_constraintBottom_toTopOf="@+id/ConfirmationMessage"
                 app:layout_constraintEnd_toStartOf="@+id/TeacherInfo"
                 app:layout_constraintStart_toStartOf="parent"
