@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
         android:contentDescription="TODO"
-        android:scaleType="center"
+        android:scaleType="center" />
 
 
     <TextView

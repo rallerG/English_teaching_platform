@@ -22,16 +22,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
-    private Context mContext;
-    private Context mRank;
-    private Context mPrice;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> names, Context rank, Context price, ArrayList<String> imageUrls) {
+    private Context mContext;
+//    private Context mRank;
+//    private Context mPrice;
+
+    public RecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
-        mRank = rank;
-        mPrice = price;
+//        mRank = rank;
+//        mPrice = price;
     }
 
     @Override
@@ -70,15 +71,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         CircleImageView image;
         TextView name;
-        TextView rank;
-        TextView price;
+//        TextView rank;
+//        TextView price;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.listeelem_billede);
             name = itemView.findViewById(R.id.textView4);
-            rank = itemView.findViewById(R.id.textView6);
-            price = itemView.findViewById(R.id.textView5);
+//            rank = itemView.findViewById(R.id.textView6);
+//            price = itemView.findViewById(R.id.textView5);
 
         }
     }
