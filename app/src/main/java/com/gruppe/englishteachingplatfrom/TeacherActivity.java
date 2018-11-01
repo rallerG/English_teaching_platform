@@ -21,6 +21,8 @@ public class TeacherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
 
+
+        /*
         TranslateAnimation animation = new TranslateAnimation(0.0f, 0.0f, -800.0f, 0.0f); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
 
         animation.setDuration(1400); // animation duration, change accordingly
@@ -39,7 +41,7 @@ public class TeacherActivity extends Activity {
 
         fragmentTransaction.add(R.id.teacher_layout,fragment);
         fragmentTransaction.commit();
-
+*/
     }
 
 

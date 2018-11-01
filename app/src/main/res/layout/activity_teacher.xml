@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="300dp"
+        android:layout_width="335dp"
         android:layout_height="113dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shadow"
@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="300dp"
-        android:layout_height="81dp"
+        android:layout_width="335dp"
+        android:layout_height="100dp"
         android:layout_marginTop="132dp"
         android:background="@drawable/shadow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="300dp"
+        android:layout_width="335dp"
         android:layout_height="158dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shadow"
@@ -49,7 +49,7 @@
         android:layout_marginTop="144dp"
         android:text="Inbox"
         android:textColor="#464646"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +61,7 @@
         android:layout_marginTop="35dp"
         android:text="Scedule"
         android:textColor="#464646"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -73,7 +73,7 @@
         android:layout_marginTop="35dp"
         android:text="Reviews"
         android:textColor="#464646"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
@@ -84,71 +84,9 @@
         android:layout_marginStart="110dp"
         android:layout_marginTop="10dp"
         android:text="You got 3 new requests"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <LinearLayout
-        android:layout_width="143dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="30dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_toggle_star_color"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="79dp" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/ic_toggle_star_color"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="79dp" />
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/ic_toggle_star_color"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="79dp" />
-
-        <ImageView
-            android:id="@+id/imageView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/ic_toggle_star_color"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="79dp" />
-
-        <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_toggle_star_color"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="79dp" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="0" />
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView15"
@@ -161,17 +99,6 @@
         app:srcCompat="@drawable/inbox" />
 
     <ImageView
-        android:id="@+id/imageView18"
-        android:layout_width="18dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="150dp"
-        android:rotation="270"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?android:attr/findOnPageNextDrawable" />
-
-    <ImageView
         android:id="@+id/imageView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -180,5 +107,53 @@
         app:layout_constraintEnd_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/forums" />
+
+    <RatingBar
+        android:id="@+id/ratingBar_small"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="96dp"
+        android:numStars="5"
+        android:rating="1"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="15dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/ic_baseline_arrow_forward_ios_24px_"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="25dp"
+        android:src="@android:drawable/ic_dialog_email"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="25dp"
+        android:src="@android:drawable/sym_action_chat"
+        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
 </android.support.constraint.ConstraintLayout>
