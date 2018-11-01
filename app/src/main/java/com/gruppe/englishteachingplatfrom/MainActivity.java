@@ -32,19 +32,6 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-        if(findViewById(R.id.fragmentContent) != null){
-
-
-
-
-            if(savedInstanceState != null){
-                return;
-            }
-
-            DialogBox fragment = new DialogBox();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragmentContent, fragment).commit();
-
-        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
