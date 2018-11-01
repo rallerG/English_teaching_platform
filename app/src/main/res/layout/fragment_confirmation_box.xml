@@ -40,7 +40,7 @@
                 android:layout_marginBottom="44dp"
                 android:contentDescription="TeacherPic"
                 android:src="@drawable/ic_menu_camera"
-                app:layout_constraintBottom_toTopOf="@+id/ConfirmationMessage"
+                app:layout_constraintBottom_toTopOf="@+id/ConfirmationMessage2"
                 app:layout_constraintEnd_toStartOf="@+id/TeacherInfo2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -80,10 +80,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.897"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ConfirmationMessage" />
+                app:layout_constraintTop_toBottomOf="@+id/ConfirmationMessage2" />
 
             <TextView
-                android:id="@+id/ConfirmationMessage"
+                android:id="@+id/ConfirmationMessage2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="31dp"
