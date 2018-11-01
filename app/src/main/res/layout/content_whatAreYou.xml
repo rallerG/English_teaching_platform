@@ -9,31 +9,31 @@
     tools:showIn="@layout/activity_whatAreYou">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/teacher"
         android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginBottom="58dp"
         android:background="@android:color/holo_blue_light"
         android:text="Teacher"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintBottom_toTopOf="@+id/student"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/student"
         android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginBottom="58dp"
         android:background="@android:color/holo_blue_light"
         android:text="Student"
-        app:layout_constraintBottom_toTopOf="@+id/button8"
+        app:layout_constraintBottom_toTopOf="@+id/institute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/teacher" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/institute"
         android:layout_width="153dp"
         android:layout_height="0dp"
         android:layout_marginBottom="98dp"
@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/student" />
 
     <TextView
         android:id="@+id/textView2"
@@ -69,7 +69,7 @@
         android:layout_marginStart="63dp"
         android:text="You choice will have effect on the app interface and the use of the app"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/teacher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
