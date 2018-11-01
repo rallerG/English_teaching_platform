@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".WhatAreYouActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -13,16 +13,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_login" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/ic_menu_info_details"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="right|top" />
+    <include layout="@layout/content_whatAreYou" />
 
 </android.support.design.widget.CoordinatorLayout>
