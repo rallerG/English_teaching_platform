@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:padding="5dp">
 
@@ -20,8 +20,8 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="156dp"
-        android:layout_height="56dp"
+        android:layout_width="150dp"
+        android:layout_height="51dp"
         android:layout_alignStart="@+id/listeelem_billede"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="4dp"
@@ -39,8 +39,8 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="128dp"
-        android:layout_height="45dp"
+        android:layout_width="103dp"
+        android:layout_height="41dp"
         android:layout_alignTop="@+id/ratingBar"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="0dp"
