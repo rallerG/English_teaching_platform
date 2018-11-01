@@ -30,74 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="326dp">
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:text="Email" />
-
-            <EditText
-                android:id="@+id/phonenumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                android:text="Phone number" />
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <CheckBox
-                        android:id="@+id/checkBoxWeChat"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:text="WeChat" />
-
-                    <EditText
-                        android:id="@+id/wechatid"
-                        android:layout_width="274dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="WeChat id" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp">
-
-                    <CheckBox
-                        android:id="@+id/checkBoxSkype"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Skype" />
-
-                    <EditText
-                        android:id="@+id/skypeusername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Skype username" />
-                </TableRow>
-            </TableLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
             tools:layout_editor_absoluteX="7dp"
             tools:layout_editor_absoluteY="61dp">
 
@@ -197,14 +129,6 @@
             tools:layout_editor_absoluteX="218dp"
             tools:layout_editor_absoluteY="519dp" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contact information"
-            android:textColor="@android:color/holo_blue_light"
-            tools:layout_editor_absoluteX="7dp"
-            tools:layout_editor_absoluteY="307dp" />
     </ScrollView>
 
     <TextView
@@ -217,5 +141,82 @@
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="333dp">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact information"
+            android:textColor="@android:color/holo_blue_light"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="307dp" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text="Email" />
+
+        <EditText
+            android:id="@+id/phonenumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:text="Phone number" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/checkBoxWeChat"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="WeChat" />
+
+                <EditText
+                    android:id="@+id/wechatid"
+                    android:layout_width="274dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="WeChat id" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <CheckBox
+                    android:id="@+id/checkBoxSkype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Skype" />
+
+                <EditText
+                    android:id="@+id/skypeusername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Skype username" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
