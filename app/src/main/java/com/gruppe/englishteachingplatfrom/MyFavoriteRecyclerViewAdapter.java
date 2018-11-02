@@ -45,7 +45,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
 //        holder.mContentView.setText(mValues.get(position).content);
 
         holder.mNameView.setText(mProfiles.get(position).getmName());
-        holder.mRatingNum.setText(mProfiles.get(position).getmRating());
+        holder.mRatingNum.setText(String.format("%.1f", Float.parseFloat(mProfiles.get(position).getmRating())));
         holder.mRatingBar.setRating(Float.parseFloat(mProfiles.get(position).getmRating()));
         holder.mTitleView.setText(mProfiles.get(position).getmTitle());
         holder.mPriceView.setText(mProfiles.get(position).getmPrice());
@@ -90,7 +90,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
 
             mImageView = view.findViewById(R.id.listImageView);
             mNameView = view.findViewById(R.id.nameView);
-            mRatingBar = view.findViewById(R.id.ratingBar);
+            mRatingBar = view.findViewById(R.id.ratingBar6);
             mRatingNum = view.findViewById(R.id.ratingNum1);
             mTitleView = view.findViewById(R.id.titleView3);
             mPriceView = view.findViewById(R.id.priceView4);

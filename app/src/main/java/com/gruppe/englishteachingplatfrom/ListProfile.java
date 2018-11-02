@@ -24,7 +24,7 @@ public class ListProfile {
         ArrayList<ListProfile> profiles = new ArrayList<ListProfile>();
         System.out.println("PROFILER BLEV OPRETTET!!!");
         for (int i = 1; i <= numContacts; i++) {
-            profiles.add(new ListProfile("Navn " + ++lastProfileId, Integer.toString((int)Math.random() * 5), "Tutor", Integer.toString((int)Math.random() * 250 + 70) + " DKK/hr"));
+            profiles.add(new ListProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
         }
 
         return profiles;
