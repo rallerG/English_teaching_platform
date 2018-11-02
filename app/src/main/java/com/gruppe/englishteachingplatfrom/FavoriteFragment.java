@@ -69,7 +69,7 @@ public class FavoriteFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(ListProfile.createListProfile(5), mListener));
         }
         return view;
     }
@@ -104,6 +104,6 @@ public class FavoriteFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(ListProfile item);
     }
 }

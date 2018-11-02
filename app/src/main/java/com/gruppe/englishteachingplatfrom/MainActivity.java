@@ -18,8 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
+    public void onListFragmentInteraction(ListProfile item) {
+        //TODO handle clicking on profile
     }
 }
