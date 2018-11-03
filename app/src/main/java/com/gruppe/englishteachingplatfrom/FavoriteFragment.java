@@ -69,7 +69,7 @@ public class FavoriteFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(ListProfile.createListProfile(5), mListener));
+            recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(ListProfile.createListProfile(10), mListener));
         }
         return view;
     }
