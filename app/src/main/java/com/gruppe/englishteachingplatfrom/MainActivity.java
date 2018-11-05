@@ -40,10 +40,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                getImages();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, new DialogBox()).
+                        addToBackStack(null).commit();
             }
         });
 
@@ -149,19 +147,19 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_matches) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
+                    addToBackStack(null).commit();
         } else if (id == R.id.nav_favorites) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
+                    addToBackStack(null).commit();
         } else if (id == R.id.nav_pending) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
+                    addToBackStack(null).commit();
         } else if (id == R.id.nav_settings) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
+                    addToBackStack(null).commit();
         } else if (id == R.id.nav_logout) {
 
         }
