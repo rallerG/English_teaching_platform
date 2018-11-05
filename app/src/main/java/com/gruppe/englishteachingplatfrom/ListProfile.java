@@ -3,6 +3,7 @@ package com.gruppe.englishteachingplatfrom;
 import java.util.ArrayList;
 
 public class ListProfile {
+    private static ArrayList<ListProfile> profiles = new ArrayList<ListProfile>();
     //Needs a picture attribute
     private String mName;
     private String mRating;
@@ -21,10 +22,11 @@ public class ListProfile {
     private static int lastProfileId = 0;
 
     public static ArrayList<ListProfile> createListProfile(int numContacts) {
-        ArrayList<ListProfile> profiles = new ArrayList<ListProfile>();
-        System.out.println("PROFILER BLEV OPRETTET!!!");
-        for (int i = 1; i <= numContacts; i++) {
-            profiles.add(new ListProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
+        if (profiles.isEmpty()) {
+            for (int i = 1; i <= numContacts; i++) {
+                profiles.add(new ListProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
+            }
+            System.out.println("PROFILER BLEV OPRETTET!!!");
         }
 
         return profiles;
