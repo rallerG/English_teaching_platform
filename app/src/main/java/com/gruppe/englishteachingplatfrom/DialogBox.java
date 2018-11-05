@@ -71,8 +71,12 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-
-            getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ConfirmationBox()).addToBackStack(null).commit();
+            if(v == sendButton){
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ConfirmationBox()).addToBackStack(null).commit();
+            }
+            else{
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new Menu1()).addToBackStack(null).commit();
+            }
 
 
 
