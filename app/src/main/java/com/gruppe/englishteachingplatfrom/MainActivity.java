@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_favorites:
                 fragment = new FavoriteFragment();
+
                 break;
             case R.id.nav_pending:
                 fragment = new Menu1();
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContent, fragment);
+            ft.addToBackStack(null);
             ft.commit();
         }
 
