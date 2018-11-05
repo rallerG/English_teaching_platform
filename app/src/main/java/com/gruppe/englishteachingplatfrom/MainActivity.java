@@ -22,14 +22,14 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FavoriteFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FavoriteFragment.OnListFragmentInteractionListener, View.OnClickListener {
 
     private  static final  String TAG = "MainActivity";
 
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
-
+    public FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +37,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, new DialogBox()).
-                        addToBackStack(null).commit();
-
-            }
-        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -217,5 +209,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(ListProfile item) {
         //TODO handle clicking on profile
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == fab) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, new DialogBox()).
+                addToBackStack(null).commit();
+            fab.hide();
+        }
+
     }
 }
