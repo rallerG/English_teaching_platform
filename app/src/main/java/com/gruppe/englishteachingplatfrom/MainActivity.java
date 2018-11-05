@@ -90,19 +90,19 @@ public class MainActivity extends AppCompatActivity
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
 
-        initRecyclerView();
+//        initRecyclerView();
 
     }
 
-    private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
-        recyclerView.setAdapter(adapter);
-    }
+//    private void initRecyclerView(){
+//        Log.d(TAG, "initRecyclerView: init recyclerview");
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+//        recyclerView.setLayoutManager(layoutManager);
+//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
+//        recyclerView.setAdapter(adapter);
+//    }
 
     @Override
     public void onBackPressed() {
