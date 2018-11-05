@@ -26,12 +26,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login :
-                if (username.getText().equals("teacher")) {
+                if (username.getText().toString().equals("teacher")) {
                     startActivity(new Intent(this, TeacherActivity.class));
+                    finish();
                     System.out.println("not done yet");
                 }
-                else if (username.getText().equals("student")) {
+                else if (username.getText().toString().equals("student")) {
                     startActivity(new Intent(this, MainActivity.class));
+                    finish();
                     System.out.println("not done yet");
                 }
                 else {
