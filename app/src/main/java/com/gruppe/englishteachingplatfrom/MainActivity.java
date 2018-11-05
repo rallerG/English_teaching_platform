@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                getImages();
+//                getImages();
             }
         });
 
@@ -56,6 +57,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Pick what fragment to display oncreate
+        displaySelectedScreen(R.id.nav_matches);
+
     }
 
     private void getImages(){
@@ -90,19 +95,19 @@ public class MainActivity extends AppCompatActivity
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
 
-        initRecyclerView();
+//        initRecyclerView();
 
     }
 
-    private void initRecyclerView(){
-        Log.d(TAG, "initRecyclerView: init recyclerview");
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
-        recyclerView.setAdapter(adapter);
-    }
+//    private void initRecyclerView(){
+//        Log.d(TAG, "initRecyclerView: init recyclerview");
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+//        recyclerView.setLayoutManager(layoutManager);
+//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
+//        recyclerView.setAdapter(adapter);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -143,32 +148,69 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+            displaySelectedScreen(item.getItemId());
 
-        if (id == R.id.nav_matches) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
-        } else if (id == R.id.nav_favorites) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
-        } else if (id == R.id.nav_pending) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
-        } else if (id == R.id.nav_settings) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.fragmentContent, new FavoriteFragment()).
-                    commit();
-        } else if (id == R.id.nav_logout) {
+//          Handle navigation view item clicks here.
+////        int id = item.getItemId();
+////
+////        if (id == R.id.nav_matches) {
+////            getSupportFragmentManager().beginTransaction().
+////                    replace(R.id.fragmentContent, new FavoriteFragment()).
+////                    commit();
+////        } else if (id == R.id.nav_favorites) {
+////            getSupportFragmentManager().beginTransaction().
+////                    replace(R.id.fragmentContent, new FavoriteFragment()).
+////                    commit();
+////        } else if (id == R.id.nav_pending) {
+////            getSupportFragmentManager().beginTransaction().
+////                    replace(R.id.fragmentContent, new FavoriteFragment()).
+////                    commit();
+////        } else if (id == R.id.nav_settings) {
+////            getSupportFragmentManager().beginTransaction().
+////                    replace(R.id.fragmentContent, new Menu1()).
+////                    commit();
+////        } else if (id == R.id.nav_logout) {
+////
+////        }
+////
+////        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+////        drawer.closeDrawer(GravityCompat.START);
 
+        return true;
+    }
+
+    private void displaySelectedScreen(int itemId) {
+
+        //creating fragment object
+        Fragment fragment = null;
+
+        //initializing the fragment object which is selected
+        switch (itemId) {
+            case R.id.nav_matches:
+                fragment = new Menu1();
+                break;
+            case R.id.nav_favorites:
+                fragment = new FavoriteFragment();
+                break;
+            case R.id.nav_pending:
+                fragment = new Menu1();
+                break;
+            case R.id.nav_settings:
+                fragment = new FavoriteFragment();
+                break;
+            case R.id.nav_logout:
+                break;
+        }
+
+        //replacing the fragment
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContent, fragment);
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override
