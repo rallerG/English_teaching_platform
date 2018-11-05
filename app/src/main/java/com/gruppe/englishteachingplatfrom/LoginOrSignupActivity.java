@@ -33,12 +33,12 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginFacebook :
-                //startActivity(new Intent(this, FacebookActivity.class));
-                System.out.println("not done yet");
+                startActivity(new Intent(this, MainActivity.class));
+                System.out.println("Testing");
                 break;
             case R.id.loginWeChat :
-                //startActivity(new Intent(this,WeChatActivity.class));
-                System.out.println("not done yet");
+                startActivity(new Intent(this, MainActivity.class));
+                System.out.println("Testing");
                 break;
             case R.id.login :
                 startActivity(new Intent(this, LoginActivity.class));
