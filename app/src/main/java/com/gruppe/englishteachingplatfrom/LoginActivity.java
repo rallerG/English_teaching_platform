@@ -28,12 +28,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login :
                 if (username.getText().toString().equals("teacher")) {
                     startActivity(new Intent(this, TeacherActivity.class));
-                    finish();
+                    finishAffinity();
                     System.out.println("not done yet");
                 }
                 else if (username.getText().toString().equals("student")) {
                     startActivity(new Intent(this, MainActivity.class));
-                    finish();
+                    finishAffinity();
                     System.out.println("not done yet");
                 }
                 else {
