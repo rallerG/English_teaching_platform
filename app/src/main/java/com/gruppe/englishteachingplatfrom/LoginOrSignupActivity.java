@@ -15,8 +15,6 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_login_or_signup);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         //Setting ClickListeninger on the buttons
         Button loginFacebook =  findViewById(R.id.loginFacebook);
