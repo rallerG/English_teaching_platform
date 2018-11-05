@@ -49,6 +49,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
         holder.mRatingBar.setRating(Float.parseFloat(mProfiles.get(position).getmRating()));
         holder.mTitleView.setText(mProfiles.get(position).getmTitle());
         holder.mPriceView.setText(mProfiles.get(position).getmPrice());
+        holder.mImageView.setImageResource(R.mipmap.ic_launcher_foreground_student);
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
