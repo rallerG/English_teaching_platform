@@ -10,36 +10,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
-import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
-
-import java.util.List;
-
 /**
  * A fragment representing a list of Items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class FavoriteFragment extends Fragment {
+public class ListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private int listId;
     private OnListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public FavoriteFragment() {
+    public ListFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static FavoriteFragment newInstance(int columnCount) {
-        FavoriteFragment fragment = new FavoriteFragment();
+    public static ListFragment newInstance(int columnCount) {
+        ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -69,7 +65,18 @@ public class FavoriteFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(ListProfile.createListProfile(10), mListener));
+                System.out.println(listId);
+            switch (getArguments().getInt("id")) {
+                case R.id.nav_matches:
+                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createMatchTeacherProfile(10), mListener));
+                    break;
+                case R.id.nav_favorites:
+                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createFavoriteTeacherProfile(10), mListener));
+                    break;
+                case R.id.nav_pending:
+                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createPendingTeacherProfile(10), mListener));
+                    break;
+            }
         }
         getActivity().setTitle("List");
 
@@ -106,6 +113,6 @@ public class FavoriteFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(ListProfile item);
+        void onListFragmentInteraction(TeacherProfile item);
     }
 }

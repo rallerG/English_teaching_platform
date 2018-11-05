@@ -1,6 +1,5 @@
 package com.gruppe.englishteachingplatfrom;
 
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +8,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.gruppe.englishteachingplatfrom.FavoriteFragment.OnListFragmentInteractionListener;
+import com.gruppe.englishteachingplatfrom.ListFragment.OnListFragmentInteractionListener;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -23,10 +20,10 @@ import java.util.List;
  */
 public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavoriteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<ListProfile> mProfiles;
+    private final List<TeacherProfile> mProfiles;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyFavoriteRecyclerViewAdapter(List<ListProfile> items, OnListFragmentInteractionListener listener) {
+    public MyFavoriteRecyclerViewAdapter(List<TeacherProfile> items, OnListFragmentInteractionListener listener) {
         mProfiles = items;
         mListener = listener;
     }
@@ -79,7 +76,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
         public final TextView mRatingNum;
         public final TextView mTitleView;
         public final TextView mPriceView;
-        public ListProfile mLProfile;
+        public TeacherProfile mLProfile;
 
 //        public final TextView mIdView;
 //        public final TextView mContentView;

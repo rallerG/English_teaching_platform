@@ -1,13 +1,9 @@
 package com.gruppe.englishteachingplatfrom;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,7 +18,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FavoriteFragment.OnListFragmentInteractionListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener, View.OnClickListener {
 
     private  static final  String TAG = "MainActivity";
 
@@ -51,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Pick what fragment to display oncreate
-        displaySelectedScreen(R.id.nav_matches);
+        displaySelectedScreen(R.id.nav_settings);
 
     }
 
@@ -147,15 +143,15 @@ public class MainActivity extends AppCompatActivity
 ////
 ////        if (id == R.id.nav_matches) {
 ////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new FavoriteFragment()).
+////                    replace(R.id.fragmentContent, new ListFragment()).
 ////                    commit();
 ////        } else if (id == R.id.nav_favorites) {
 ////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new FavoriteFragment()).
+////                    replace(R.id.fragmentContent, new ListFragment()).
 ////                    commit();
 ////        } else if (id == R.id.nav_pending) {
 ////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new FavoriteFragment()).
+////                    replace(R.id.fragmentContent, new ListFragment()).
 ////                    commit();
 ////        } else if (id == R.id.nav_settings) {
 ////            getSupportFragmentManager().beginTransaction().
@@ -176,21 +172,25 @@ public class MainActivity extends AppCompatActivity
 
         //creating fragment object
         Fragment fragment = null;
+        Bundle args = new Bundle();
+        args.putInt("id", itemId);
 
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_matches:
-                fragment = new Menu1();
+                fragment = new ListFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_favorites:
-                fragment = new FavoriteFragment();
-
+                fragment = new ListFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_pending:
-                fragment = new Menu1();
+                fragment = new ListFragment();
+                fragment.setArguments(args);
                 break;
             case R.id.nav_settings:
-                fragment = new FavoriteFragment();
+                fragment = new Menu1();
                 break;
             case R.id.nav_logout:
                 break;
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(ListProfile item) {
+    public void onListFragmentInteraction(TeacherProfile item) {
         //TODO handle clicking on profile
     }
 
