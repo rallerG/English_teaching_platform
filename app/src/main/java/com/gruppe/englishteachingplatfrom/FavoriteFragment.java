@@ -71,6 +71,8 @@ public class FavoriteFragment extends Fragment {
             }
             recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(ListProfile.createListProfile(10), mListener));
         }
+        getActivity().setTitle("List");
+
         return view;
     }
 
