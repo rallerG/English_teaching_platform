@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("not done yet");
                 }
                 else if (username.getText().equals("student")) {
-                    //startActivity(new Intent(this, studentActivity.class));
+                    startActivity(new Intent(this, MainActivity.class));
                     System.out.println("not done yet");
                 }
                 else {
