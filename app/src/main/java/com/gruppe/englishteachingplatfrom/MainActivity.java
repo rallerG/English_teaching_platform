@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
         if(view == fab) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, new DialogBox()).
                 addToBackStack(null).commit();
-            fab.hide();
+           // fab.hide();
         }
 
     }
