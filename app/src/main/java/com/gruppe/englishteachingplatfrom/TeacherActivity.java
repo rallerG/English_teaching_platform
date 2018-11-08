@@ -9,18 +9,23 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.support.v4.app.FragmentManager;
+import android.widget.TableLayout;
+import android.widget.Toast;
 
-public class TeacherActivity extends AppCompatActivity {
+public class TeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    TableLayout inbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
 
+        inbox = findViewById(R.id.inbox);
+        inbox.setOnClickListener(this);
 
         /*
         TranslateAnimation animation = new TranslateAnimation(0.0f, 0.0f, -800.0f, 0.0f); // new TranslateAnimation (float fromXDelta,float toXDelta, float fromYDelta, float toYDelta)
@@ -45,4 +50,12 @@ public class TeacherActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if(v == inbox){
+            System.out.println("Du trykkede på inbox");
+            Toast.makeText(TeacherActivity.this,
+                    "You will be directed to your inbox", Toast.LENGTH_LONG).show();
+        }
+    }
 }
