@@ -26,7 +26,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="130dp"
-                android:layout_marginTop="96dp"
+                android:layout_marginTop="90dp"
                 android:numStars="5"
                 android:rating="1"
                 android:scaleX="1.5"
@@ -37,8 +37,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="370dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/shadow">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -47,18 +49,20 @@
                     <ImageView
                         android:id="@+id/imageView15"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="-90dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="-110dp"
+                        android:layout_marginTop="20dp"
+                        android:tint="@color/colorTint"
                         app:layout_constraintEnd_toStartOf="@+id/textView3"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/inbox" />
+                        app:srcCompat="@android:drawable/ic_dialog_email" />
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="-145dp"
+                        android:layout_marginTop="10dp"
                         android:text="Inbox"
                         android:textColor="#464646"
                         android:textSize="24sp"
@@ -70,7 +74,7 @@
                         android:layout_width="15dp"
                         android:layout_height="17dp"
                         android:layout_marginLeft="130dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="25dp"
                         android:src="@drawable/ic_baseline_arrow_forward_ios_24px_"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.134"
@@ -81,13 +85,15 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="110dp"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_marginTop="-5dp"
                         android:text="You got 3 new requests"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -97,19 +103,21 @@
             </TableLayout>
 
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="370dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shadow">
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="112dp"
-                        android:layout_marginTop="96dp"
+                        android:layout_marginTop="10dp"
                         android:text="Scedule"
                         android:textColor="#464646"
                         android:textSize="24sp"
@@ -124,8 +132,10 @@
             </TableLayout>
 
             <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="370dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shadow">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -133,18 +143,19 @@
 
                     <ImageView
                         android:id="@+id/imageView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
+                        android:layout_width="35dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="60dp"
+                        android:layout_marginTop="15dp"
                         app:layout_constraintEnd_toStartOf="@+id/textView7"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView5"
                         app:srcCompat="@drawable/forums" />
 
                     <TextView
                         android:id="@+id/textView7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="10dp"
                         android:text="Reviews"
                         android:textColor="#464646"
                         android:textSize="24sp"
@@ -155,7 +166,7 @@
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent">
 
                 </TableRow>
 

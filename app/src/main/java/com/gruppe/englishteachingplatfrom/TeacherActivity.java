@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.animation.TranslateAnimation;
 import android.support.v4.app.FragmentManager;
 
-public class TeacherActivity extends Activity {
+public class TeacherActivity extends AppCompatActivity {
 
 
 
