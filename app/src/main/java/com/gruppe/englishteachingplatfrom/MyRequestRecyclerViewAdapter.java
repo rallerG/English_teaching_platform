@@ -1,9 +1,11 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.RequestFragment.OnListFragmentInteractionListener;
@@ -31,7 +33,7 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
+  /*      holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
 
@@ -45,6 +47,7 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
                 }
             }
         });
+        */
     }
 
     @Override
@@ -53,21 +56,34 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+      /*
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
         public DummyItem mItem;
+        */
+        public final TextView studName;
+        public final ImageView star;
+
+
 
         public ViewHolder(View view) {
             super(view);
+            /*
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
-        }
+            */
+            studName = view.findViewById(R.id.studName);
+            star = view.findViewById(R.id.star);
 
+
+        }
+/*
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
         }
+        */
     }
 }

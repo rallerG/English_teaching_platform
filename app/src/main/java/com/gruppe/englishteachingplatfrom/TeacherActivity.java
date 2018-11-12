@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -53,9 +54,18 @@ public class TeacherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v == inbox){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.teacher_layout, new RequestFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+
             System.out.println("Du trykkede på inbox");
             Toast.makeText(TeacherActivity.this,
                     "You will be directed to your inbox", Toast.LENGTH_LONG).show();
+
+
+
+
         }
     }
 }
