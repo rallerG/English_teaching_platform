@@ -81,8 +81,8 @@ public class ViewPagerFragment extends Fragment {
 
             if (position >= 0) {
 
-                page.setScaleX(0.7f - 0.05f * position);
-                page.setScaleY(0.7f);
+                page.setScaleX(0.8f - 0.05f * position);
+                page.setScaleY(0.8f);
 
                 page.setTranslationX(-page.getWidth() * position);
 
