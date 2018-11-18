@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity
 ////                    commit();
 ////        } else if (id == R.id.nav_settings) {
 ////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new Menu1()).
+////                    replace(R.id.fragmentContent, new ViewPagerFragment()).
 ////                    commit();
 ////        } else if (id == R.id.nav_logout) {
 ////
@@ -190,7 +192,7 @@ public class MainActivity extends AppCompatActivity
                 fragment.setArguments(args);
                 break;
             case R.id.nav_settings:
-                fragment = new Menu1();
+                fragment = new ViewPagerFragment();
                 break;
             case R.id.nav_logout:
                 break;
