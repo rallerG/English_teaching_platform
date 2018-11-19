@@ -13,17 +13,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.support.v4.app.FragmentManager;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
 public class TeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
     TableLayout inbox;
+    ScrollView scroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher);
+
+        scroll = findViewById(R.id.scroll);
 
         inbox = findViewById(R.id.inbox);
         inbox.setOnClickListener(this);
@@ -55,16 +59,13 @@ public class TeacherActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v == inbox){
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.teacher_layout, new RequestFragment());
+            ft.replace(R.id.teacher_layout, new RequestFragment());
             ft.addToBackStack(null);
             ft.commit();
 
             System.out.println("Du trykkede på inbox");
             Toast.makeText(TeacherActivity.this,
                     "You will be directed to your inbox", Toast.LENGTH_LONG).show();
-
-
-
 
         }
     }
