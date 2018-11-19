@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
+
 
 public class DialogBox extends Fragment implements View.OnClickListener {
 
@@ -75,7 +77,7 @@ public class DialogBox extends Fragment implements View.OnClickListener {
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ConfirmationBox()).addToBackStack(null).commit();
             }
             else{
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new Menu1()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
             }
 
 
