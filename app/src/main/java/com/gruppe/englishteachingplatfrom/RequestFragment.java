@@ -1,14 +1,20 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
@@ -16,12 +22,12 @@ import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
 public class RequestFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
+    ToggleButton toggleStar;
 
     public RequestFragment() {
     }
@@ -49,6 +55,8 @@ public class RequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_list, container, false);
+        View view1 = inflater.inflate(R.layout.fragment_request, container, false);
+        toggleStar = view1.findViewById(R.id.toggleStar);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -61,6 +69,19 @@ public class RequestFragment extends Fragment {
             }
             recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
+        toggleStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color));
+                    toggleStar.setActivated(false);
+                } else {
+                    toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color));
+                    toggleStar.setActivated(true);
+                }
+            }
+        });
+
         return view;
     }
 
