@@ -57,6 +57,7 @@ public class RequestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_request_list, container, false);
         View view1 = inflater.inflate(R.layout.fragment_request, container, false);
         toggleStar = view1.findViewById(R.id.toggleStar);
+      //  toggleStar.setBackgroundResource(R.drawable.ic_toggle_star_color1);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -69,18 +70,20 @@ public class RequestFragment extends Fragment {
             }
             recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
-        toggleStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
+/*                toggleStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color));
+                    toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color1));
                     toggleStar.setActivated(false);
                 } else {
                     toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color));
                     toggleStar.setActivated(true);
                 }
             }
-        });
+        });*/
 
         return view;
     }
