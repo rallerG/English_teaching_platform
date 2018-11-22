@@ -10,11 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gruppe.englishteachingplatfrom.DialogBox;
 import com.gruppe.englishteachingplatfrom.R;
 
 import java.util.List;
 
-public class ViewPagerAdapter extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter  {
 
     private List<ViewPagerModel> contents;
     private Context context;
@@ -56,6 +57,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         name = (TextView) view.findViewById(R.id.name);
         name.setText(contents.get(position).getPlace());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this is the on click listerner for the objects in the viewpager
+                System.out.println("works");
+            }
+        });
 
         return view;
 
