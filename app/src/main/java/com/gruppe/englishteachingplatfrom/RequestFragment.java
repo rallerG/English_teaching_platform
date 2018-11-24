@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -22,6 +23,7 @@ import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
 public class RequestFragment extends Fragment {
 
+//    SharedPreferences fav = getActivity().getPreferences(Context.MODE_PRIVATE);
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -32,8 +34,6 @@ public class RequestFragment extends Fragment {
     public RequestFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static RequestFragment newInstance(int columnCount) {
         RequestFragment fragment = new RequestFragment();
         Bundle args = new Bundle();
@@ -70,21 +70,6 @@ public class RequestFragment extends Fragment {
             }
             recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
-
-
-/*                toggleStar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color1));
-                    toggleStar.setActivated(false);
-                } else {
-                    toggleStar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color));
-                    toggleStar.setActivated(true);
-                }
-            }
-        });*/
-
         return view;
     }
 

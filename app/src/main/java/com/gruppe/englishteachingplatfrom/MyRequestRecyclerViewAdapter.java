@@ -1,10 +1,12 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +23,22 @@ import java.util.List;
 
 public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> {
 
+
+
+    List<Boolean> itemTitles;
     private int selectedPos = RecyclerView.NO_POSITION;
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
+    SparseBooleanArray sparseBooleanArray;
+    int selectedItemCount;
+    OnRecyclerItemClickListener listener;
 
     public MyRequestRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+
+        sparseBooleanArray = new SparseBooleanArray();
+        selectedItemCount = 0;
     }
 
     @Override
@@ -39,24 +50,14 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.itemView.setSelected(selectedPos == position);
+//        holder.star.setChecked(itemTitles.get(position));
 
-  /*      holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
-        */
-
+        if (sparseBooleanArray.get(position)) {
+            holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
+        } else {
+            holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
+        }
     }
 
     @Override
@@ -65,15 +66,14 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-      /*
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
-        */
+        /*
+          public final View mView;
+          public final TextView mIdView;
+          public final TextView mContentView;
+          public DummyItem mItem;
+          */
         public final TextView studName;
         public final ToggleButton star;
-
 
 
         public ViewHolder(View view) {
@@ -86,8 +86,6 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
             studName = view.findViewById(R.id.studName);
             star = view.findViewById(R.id.toggleStar);
-
-
             star.setOnClickListener(this);
 
 
@@ -107,6 +105,18 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
         @Override
         public void onClick(View v) {
+            if (!sparseBooleanArray.get(getAdapterPosition())) {
+                sparseBooleanArray.put(getAdapterPosition(), true);
+                selectedItemCount++;
+//                listener.selectedItemCount(selectedItemCount); // calling the method in main activity Because: in our case mainActivity our created interface for clicklisteners
+                notifyItemChanged(getAdapterPosition());
+            } else // if clicked item is already selected
+            {
+                sparseBooleanArray.put(getAdapterPosition(), false);
+                selectedItemCount--;
+              //  listener.selectedItemCount(selectedItemCount); // calling the method in main activity Because: in our case mainActivity our created interface for clicklisteners
+                notifyItemChanged(getAdapterPosition());
+            }
 
         }
 
@@ -114,12 +124,9 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         }
+    }
 
-/*
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
-        */
+    public interface OnRecyclerItemClickListener {
+        public void selectedItemCount(int count);
     }
 }
