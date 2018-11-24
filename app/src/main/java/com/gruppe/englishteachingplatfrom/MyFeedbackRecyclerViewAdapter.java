@@ -4,40 +4,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.FeedbackFragment.OnListFragmentInteractionListener;
-import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedbackRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<FeedbackProfile> feedback;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyFeedbackRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public MyFeedbackRecyclerViewAdapter(List<FeedbackProfile> items, OnListFragmentInteractionListener listener) {
+        feedback = items;
         mListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_feedback, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feedback, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mFeedback = feedback.get(position);
+        holder.mStudName.setText(feedback.get(position).getStudName());
+        holder.mRating.setRating(feedback.get(position).getRating());
+        holder.mContent.setText(feedback.get(position).getContent());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +41,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.mFeedback);
                 }
             }
         });
@@ -53,25 +49,31 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return feedback.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mStudName;
+        public final RatingBar mRating;
+        public final TextView mContent;
+        public FeedbackProfile mFeedback;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mStudName =  view.findViewById(R.id.studName);
+            mRating = view.findViewById(R.id.rating);
+            mContent = view.findViewById(R.id.content);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString()
+                    + " 'Name: " + mStudName.getText()
+                    + ", Rating: " + mRating.getRating()
+                    + ", Title: " + mContent.getText()
+                    + "'";
         }
     }
 }
