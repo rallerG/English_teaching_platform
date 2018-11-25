@@ -1,20 +1,18 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,7 +20,8 @@ import java.util.ArrayList;
 public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
     public static final ArrayList<FeedbackProfile> list = new ArrayList<FeedbackProfile>();
-    TableLayout inbox, feed;
+    TableLayout inbox;
+    LinearLayout feed;
     ScrollView scroll;
     RecyclerView feedback;
 
@@ -60,7 +59,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_teacher_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_teacher, container, false);
 
         feedback = view.findViewById(R.id.feedback);
         feed = view.findViewById(R.id.feed);
@@ -76,19 +75,24 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         list.add(new FeedbackProfile("Paul",5, "AMAZING LESSON! learned alot for just 2 hours of study"));
 
        // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, myArray);
-        if (view instanceof RecyclerView) {
+     //   if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(),list);
+        feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
+        feedback.setAdapter(recycleAdapter);
+
+
+     //       RecyclerView recyclerView = (RecyclerView) view;
+/*            if (mColumnCount <= 1) {
+                feedback.setLayoutManager(new LinearLayoutManager(context));
             } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+                feedback.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }*/
            // MyFeedbackRecyclerViewAdapter adapter = new MyFeedbackRecyclerViewAdapter(list, mListener);
           //  MyFeedbackRecyclerViewAdapter adapter = new MyFeedbackRecyclerViewAdapter(FeedbackProfile.createFeedback(5),mListener);
            // recyclerView.setAdapter(adapter);
-            recyclerView.setAdapter(new MyFeedbackRecyclerViewAdapter(list, mListener));
-        }
+         //   recyclerView.setAdapter(new MyFeedbackRecyclerViewAdapter(list, mListener));
+     //   }
 
         feed.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,22 @@ import java.util.List;
 public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedbackRecyclerViewAdapter.ViewHolder> {
 
     private final List<FeedbackProfile> feedback;
-    private final OnListFragmentInteractionListener mListener;
+    Context mContext;
 
-    public MyFeedbackRecyclerViewAdapter(List<FeedbackProfile> items, OnListFragmentInteractionListener listener) {
-        feedback = items;
-        mListener = listener;
+    public MyFeedbackRecyclerViewAdapter(Context mContext,List<FeedbackProfile> feedback) {
+        this.mContext = mContext;
+        this.feedback = feedback;
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feedback, parent, false);
-        return new ViewHolder(view);
+       // View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_feedback, parent, false);
+        View v;
+        v = LayoutInflater.from(mContext).inflate(R.layout.fragment_feedback,parent,false);
+
+
+        return new ViewHolder(v);
     }
 
     @Override
@@ -35,7 +41,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
         holder.mRating.setRating(feedback.get(position).getRating());
         holder.mContent.setText(feedback.get(position).getContent());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+   /*     holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
@@ -44,7 +50,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
                     mListener.onListFragmentInteraction(holder.mFeedback);
                 }
             }
-        });
+        });*/
     }
 
     @Override
