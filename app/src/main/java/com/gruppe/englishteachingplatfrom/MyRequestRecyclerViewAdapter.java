@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.ColorInt;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
@@ -40,6 +41,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
     TextView studName;
     ToggleButton star;
     TableLayout item;
+    ConstraintLayout itemHolder;
 
     public MyRequestRecyclerViewAdapter(Context mContext, List<MailProfile> items) {
         this.mContext = mContext;
@@ -73,6 +75,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         studName = view.findViewById(R.id.studName);
         star = view.findViewById(R.id.toggleStar);
         item = view.findViewById(R.id.item);
+        itemHolder = view.findViewById(R.id.holder);
    //         }
      //   });
 
@@ -87,9 +90,8 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         studName.setText(mValues.get(position).getStudName());
 
 
-        if(mValues.get(position).getVisited()){
-            item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
-        }
+
+       // notifyItemChanged(getAdapterPosition());
 
         if(mValues.get(position).getFavorite()){
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
@@ -104,7 +106,9 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
             mValues.get(position).setFavorite(false);
         }
-
+        if(mValues.get(position).getVisited()){
+            itemHolder.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorVisited));
+        }
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +153,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v ) {
             if (!sparseBooleanArray.get(getAdapterPosition())) {
                 sparseBooleanArray.put(getAdapterPosition(), true);
                 selectedItemCount++;
@@ -159,6 +163,8 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
                 selectedItemCount--;
                 notifyItemChanged(getAdapterPosition());
             }
+
+
         }
 
         @Override
@@ -171,4 +177,5 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
     public int getItemCount() {
         return mValues.size();
     }
+
 }
