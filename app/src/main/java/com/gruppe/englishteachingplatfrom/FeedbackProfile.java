@@ -19,14 +19,14 @@ public class FeedbackProfile {
         this.content = content;
     }
 
-    public static ArrayList<FeedbackProfile> createFeedback(int numContacts) {
-        if (feedbackProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                feedbackProfiles.add(new FeedbackProfile("Paul", 4, "Really good teacher"));
-            }
-        }
-        return feedbackProfiles;
-    }
+//    public static ArrayList<FeedbackProfile> createFeedback(int numContacts) {
+//        if (feedbackProfiles.isEmpty()) {
+//            for (int i = 1; i <= numContacts; i++) {
+//                feedbackProfiles.add(new FeedbackProfile("Paul", 4, "Really good teacher"));
+//            }
+//        }
+//        return feedbackProfiles;
+//    }
 
     public String getStudName() {
         return studName;

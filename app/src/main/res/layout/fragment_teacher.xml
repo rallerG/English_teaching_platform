@@ -129,7 +129,6 @@
             </TableLayout>
 
             <LinearLayout
-                android:id="@+id/feed"
                 android:layout_width="370dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/shadow"
@@ -137,6 +136,7 @@
                 tools:layout_editor_absoluteY="390dp">
 
                 <LinearLayout
+                    android:id="@+id/feed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
@@ -172,13 +172,14 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/feedback"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="2"
                         tools:listitem="@layout/fragment_feedback">
 
                     </android.support.v7.widget.RecyclerView>
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/viewAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/background_light"

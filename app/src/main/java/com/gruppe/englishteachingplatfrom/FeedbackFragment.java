@@ -26,7 +26,7 @@ public class FeedbackFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     RecyclerView feedback;
-    ArrayList<FeedbackProfile> list;
+    ArrayList<FeedbackProfile> list ;
     TextView star1,star2,star3,star4,star5, ratings, totalRate;
     RatingBar totalRating;
     float totAvgRating;
@@ -49,9 +49,8 @@ public class FeedbackFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-        list.add(new FeedbackProfile("Paul",3, "Good teacher"));
-        list.add(new FeedbackProfile("Paul",5, "AMAZING LESSON! learned alot for just 2 hours of study"));
-
+        list.add(new FeedbackProfile("Xian",3, "Good teacher"));
+        list.add(new FeedbackProfile("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
 
 
         if (getArguments() != null) {
@@ -147,6 +146,14 @@ public class FeedbackFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public ArrayList<FeedbackProfile> getFeedbackList() {
+        return list;
+    }
+
+    public void setFeedbackList(ArrayList<FeedbackProfile> list) {
+        this.list = list;
     }
 
     public interface OnListFragmentInteractionListener {

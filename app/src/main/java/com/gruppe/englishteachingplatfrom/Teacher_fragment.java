@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -24,26 +25,17 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     LinearLayout feed;
     ScrollView scroll;
     RecyclerView feedback;
+    Button viewAll;
 
     private FeedbackFragment.OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 
 
-
-
     public Teacher_fragment() {
         // Required empty public constructor
     }
 
-    @SuppressWarnings("unused")
-    public static Teacher_fragment newInstance(int columnCount) {
-        Teacher_fragment fragment = new Teacher_fragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,34 +57,17 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         feed = view.findViewById(R.id.feed);
         scroll = view.findViewById(R.id.scroll);
         inbox = view.findViewById(R.id.inbox);
+        viewAll = view.findViewById(R.id.viewAll);
+        viewAll.setOnClickListener(this);
 
 
+        list.add(new FeedbackProfile("Xian",3, "Good teacher"));
+        list.add(new FeedbackProfile("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
 
-        String[] myArray = {"biscuits", "laptops"};
-
-
-        list.add(new FeedbackProfile("Paul",3, "Good teacher"));
-        list.add(new FeedbackProfile("Paul",5, "AMAZING LESSON! learned alot for just 2 hours of study"));
-
-       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, myArray);
-     //   if (view instanceof RecyclerView) {
             Context context = view.getContext();
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(),list);
         feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
         feedback.setAdapter(recycleAdapter);
-
-
-     //       RecyclerView recyclerView = (RecyclerView) view;
-/*            if (mColumnCount <= 1) {
-                feedback.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                feedback.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }*/
-           // MyFeedbackRecyclerViewAdapter adapter = new MyFeedbackRecyclerViewAdapter(list, mListener);
-          //  MyFeedbackRecyclerViewAdapter adapter = new MyFeedbackRecyclerViewAdapter(FeedbackProfile.createFeedback(5),mListener);
-           // recyclerView.setAdapter(adapter);
-         //   recyclerView.setAdapter(new MyFeedbackRecyclerViewAdapter(list, mListener));
-     //   }
 
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,9 +83,14 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
+              //  ft.setCustomAnimations(R.anim.left_to_right,R.anim.left_to_right,R.anim.right_to_left,R.anim.left_to_right)
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ft.replace(R.id.fragmentContent, new RequestFragment());
                 ft.addToBackStack(null);
                 ft.commit();
+
+//                ft.replace(R.id.fragmentContent, new RequestFragment());
+//                ft.commit();
 
                 System.out.println("Du trykkede på inbox");
             }
@@ -121,6 +101,13 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if(v == viewAll){
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.replace(R.id.fragmentContent, new FeedbackFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+        }
     }
 
     @Override
