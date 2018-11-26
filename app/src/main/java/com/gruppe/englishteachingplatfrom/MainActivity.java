@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     public FloatingActionButton fab;
+    public int position;
+    public int pic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,7 +220,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         if(view == fab) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, new DialogBox()).
+            Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
+            if (frag instanceof ViewPagerFragment) {
+                position = ((ViewPagerFragment) frag).getCurrentPosition();
+                pic = ((ViewPagerFragment) frag).getCurrentPic();
+            }
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position);
+            bundle.putInt("pic", pic);
+            Fragment F = new DialogBox();
+            F.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                 addToBackStack(null).commit();
            // fab.hide();
         }
