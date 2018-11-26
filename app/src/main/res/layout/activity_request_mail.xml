@@ -8,7 +8,7 @@
 
 
     <ToggleButton
-        android:id="@+id/starMail"
+        android:id="@+id/mailStar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/mailName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
@@ -57,7 +57,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
-            android:id="@+id/content"
+            android:id="@+id/mailContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="content"

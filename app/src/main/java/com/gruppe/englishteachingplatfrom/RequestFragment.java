@@ -49,11 +49,11 @@ public class RequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
-        mail.add(new MailProfile("Huang", "I would like you to teach me stuff x 2", false));
-        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
-        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
-        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
+        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true, false));
+        mail.add(new MailProfile("Huang", "I would like you to teach me stuff x 2", false,false));
+        mail.add(new MailProfile("Zao", "I would like you to teach me stuff", false,false));
+        mail.add(new MailProfile("Jin", "I would like you to teach me stuff", false,false));
+        mail.add(new MailProfile("Xin", "I would like you to teach me stuff", true,false));
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);

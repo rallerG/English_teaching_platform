@@ -22,23 +22,24 @@ import android.widget.ToggleButton;
 import com.gruppe.englishteachingplatfrom.RequestFragment.OnListFragmentInteractionListener;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
-
-    private  ItemClickListener itemClickListener;
-    List<Boolean> itemTitles;
     private int selectedPos = RecyclerView.NO_POSITION;
     private final List<MailProfile> mValues;
     SparseBooleanArray sparseBooleanArray;
     int selectedItemCount;
-    OnRecyclerItemClickListener listener;
     Activity mail;
     Context mContext;
     private ArrayList<MailProfile> mails = new ArrayList<MailProfile>();
+    TextView studName;
+    ToggleButton star;
+    TableLayout item;
 
     public MyRequestRecyclerViewAdapter(Context mContext, List<MailProfile> items) {
         this.mContext = mContext;
@@ -54,7 +55,8 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
         final ViewHolder vHolder = new ViewHolder(view);
 
-
+//        name.setText(mValues.get(vHolder.getAdapterPosition()).getStudName());
+//        content.setText(mValues.get(vHolder.getAdapterPosition()).getContent());
 
     //    mail = new request_mail();
     //    mail.setContentView(R.layout.activity_request_mail);
@@ -64,19 +66,13 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         //    public void onClick(View v) {
           //      Intent intent = new Intent(mContext, request_mail.class);
 
-               /* TextView name = mail.findViewById(R.id.name);
-                TextView content = mail.findViewById(R.id.content);
-                ToggleButton starMail = mail.findViewById(R.id.starMail);
+               // TextView name = mail.findViewById(R.id.name);
+               // TextView content = mail.findViewById(R.id.content);
+              //  ToggleButton starMail = mail.findViewById(R.id.starMail);
 
-                name.setText(mValues.get(vHolder.getAdapterPosition()).getStudName());
-                content.setText(mValues.get(vHolder.getAdapterPosition()).getContent());
-
-                if(mValues.get(vHolder.getAdapterPosition()).getFavorite()){
-                    starMail.setBackgroundResource(R.drawable.ic_toggle_star_color1);
-                } else {
-                    starMail.setBackgroundResource(R.drawable.ic_toggle_star_color);
-                }
-*/
+        studName = view.findViewById(R.id.studName);
+        star = view.findViewById(R.id.toggleStar);
+        item = view.findViewById(R.id.item);
    //         }
      //   });
 
@@ -87,29 +83,44 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 //        holder.star.setChecked(itemTitles.get(position));
 
+      //  studName = view.findViewById(R.id.studName);
+        studName.setText(mValues.get(position).getStudName());
 
-        if (sparseBooleanArray.get(position)) {
+
+        if(mValues.get(position).getVisited()){
+            item.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+        }
+
+        if(mValues.get(position).getFavorite()){
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
         } else {
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
         }
 
+        if (sparseBooleanArray.get(position)) {
+            holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
+            mValues.get(position).setFavorite(true);
+        } else {
+            holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
+            mValues.get(position).setFavorite(false);
+        }
+
+
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Clicked on: " + mValues.get(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Clicked on: " + mValues.get(position).getStudName() + "Favorite: " + mValues.get(position).getFavorite() + " Visited: " + mValues.get(position).getVisited(),Toast.LENGTH_SHORT).show();
+                mValues.get(position).setVisited(true);
                 Intent intent = new Intent(mContext, request_mail.class);
+                intent.putExtra("studName", mValues.get(position).getStudName());
+                intent.putExtra("favorite", mValues.get(position).getFavorite());
                 mContext.startActivity(intent);
             }
         });
-
-
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
+    public void onClick(View v) { }
 
     @Override
     public boolean onLongClick(View v) {
@@ -124,19 +135,16 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
         public ViewHolder(View view) {
             super(view);
-            /*
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-            */
 
             view.setOnClickListener(this);
-
 
             item = view.findViewById(R.id.item);
             studName = view.findViewById(R.id.studName);
             star = view.findViewById(R.id.toggleStar);
             star.setOnClickListener(this);
+
+
+//            studName.setText(getAdapterPosition());
 
         }
 
@@ -145,17 +153,11 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
             if (!sparseBooleanArray.get(getAdapterPosition())) {
                 sparseBooleanArray.put(getAdapterPosition(), true);
                 selectedItemCount++;
-//                listener.selectedItemCount(selectedItemCount); // calling the method in main activity Because: in our case mainActivity our created interface for clicklisteners
                 notifyItemChanged(getAdapterPosition());
-            } else // if clicked item is already selected
-            {
+            } else {
                 sparseBooleanArray.put(getAdapterPosition(), false);
                 selectedItemCount--;
-              //  listener.selectedItemCount(selectedItemCount); // calling the method in main activity Because: in our case mainActivity our created interface for clicklisteners
                 notifyItemChanged(getAdapterPosition());
-            }
-            if(v == item) {
-                itemClickListener.onClick(v, getAdapterPosition());
             }
         }
 
@@ -165,16 +167,8 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         }
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener){
-        this.itemClickListener = itemClickListener;
-    }
-
     @Override
     public int getItemCount() {
         return mValues.size();
-    }
-
-    public interface OnRecyclerItemClickListener {
-        public void selectedItemCount(int count);
     }
 }
