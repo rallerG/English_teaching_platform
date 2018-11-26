@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     ImageView teacherImage;
     TextView teacherInfo, confirmationText;
     RatingBar ratingBar;
+    public   int pos;
+    public int pic;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -37,7 +40,18 @@ public class DialogBox extends Fragment implements View.OnClickListener {
         confirmationText = vw.findViewById(R.id.ConfirmationMessage);
         ratingBar = vw.findViewById(R.id.RatingBar);
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            pos = bundle.getInt("position", 0);
+            pic = bundle.getInt("pic", 0);
+        }
+
+
+        teacherInfo.setText(SingletonData.getNames().get(pos));
+        teacherImage.setImageResource(pic);
+
         cancelButton.setOnClickListener(this);
+
 
 
         return vw;
@@ -60,9 +74,6 @@ public class DialogBox extends Fragment implements View.OnClickListener {
 
                 ConfirmationBox fragment2 = new ConfirmationBox();
                 fragmentTransaction.replace(R.id.fragmentContent, fragment2);
-//provide the fragment ID of your first fragment which you have given in
-//fragment_layout_example.xml file in place of first argument
-                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
             }
@@ -73,10 +84,7 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-            if(v == sendButton){
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ConfirmationBox()).addToBackStack(null).commit();
-            }
-            else{
+            if(v == cancelButton){
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
             }
 
