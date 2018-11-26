@@ -1,6 +1,8 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.support.annotation.ColorInt;
@@ -12,30 +14,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.RequestFragment.OnListFragmentInteractionListener;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> {
+public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
 
-
+    private  ItemClickListener itemClickListener;
     List<Boolean> itemTitles;
     private int selectedPos = RecyclerView.NO_POSITION;
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<MailProfile> mValues;
     SparseBooleanArray sparseBooleanArray;
     int selectedItemCount;
     OnRecyclerItemClickListener listener;
+    Activity mail;
+    Context mContext;
+    private ArrayList<MailProfile> mails = new ArrayList<MailProfile>();
 
-    public MyRequestRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyRequestRecyclerViewAdapter(Context mContext, List<MailProfile> items) {
+        this.mContext = mContext;
         mValues = items;
-        mListener = listener;
 
         sparseBooleanArray = new SparseBooleanArray();
         selectedItemCount = 0;
@@ -44,12 +51,40 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_request, parent, false);
-        return new ViewHolder(view);
 
+        final ViewHolder vHolder = new ViewHolder(view);
+
+
+
+    //    mail = new request_mail();
+    //    mail.setContentView(R.layout.activity_request_mail);
+
+     //   vHolder.item.setOnClickListener(new View.OnClickListener() {
+      //      @Override
+        //    public void onClick(View v) {
+          //      Intent intent = new Intent(mContext, request_mail.class);
+
+               /* TextView name = mail.findViewById(R.id.name);
+                TextView content = mail.findViewById(R.id.content);
+                ToggleButton starMail = mail.findViewById(R.id.starMail);
+
+                name.setText(mValues.get(vHolder.getAdapterPosition()).getStudName());
+                content.setText(mValues.get(vHolder.getAdapterPosition()).getContent());
+
+                if(mValues.get(vHolder.getAdapterPosition()).getFavorite()){
+                    starMail.setBackgroundResource(R.drawable.ic_toggle_star_color1);
+                } else {
+                    starMail.setBackgroundResource(R.drawable.ic_toggle_star_color);
+                }
+*/
+   //         }
+     //   });
+
+        return vHolder;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 //        holder.star.setChecked(itemTitles.get(position));
 
 
@@ -58,23 +93,34 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         } else {
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
         }
+
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Clicked on: " + mValues.get(position),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, request_mail.class);
+                mContext.startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
-    public int getItemCount() {
-        return mValues.size();
+    public void onClick(View v) {
+
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-        /*
-          public final View mView;
-          public final TextView mIdView;
-          public final TextView mContentView;
-          public DummyItem mItem;
-          */
-        public final TextView studName;
-        public final ToggleButton star;
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
 
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+        private TableLayout item;
+        private TextView studName;
+        private ToggleButton star;
 
         public ViewHolder(View view) {
             super(view);
@@ -84,22 +130,13 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
             mContentView = (TextView) view.findViewById(R.id.content);
             */
 
+            view.setOnClickListener(this);
+
+
+            item = view.findViewById(R.id.item);
             studName = view.findViewById(R.id.studName);
             star = view.findViewById(R.id.toggleStar);
             star.setOnClickListener(this);
-
-
-/*            star.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
-                    //  star.setBackgroundDrawable(getResources().getDrawable(R.drawable.ic_toggle_star_color1));
-                } else {
-                    star.setBackgroundResource(R.drawable.ic_toggle_star_color);
-                }
-            }
-        });*/
 
         }
 
@@ -117,13 +154,24 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
               //  listener.selectedItemCount(selectedItemCount); // calling the method in main activity Because: in our case mainActivity our created interface for clicklisteners
                 notifyItemChanged(getAdapterPosition());
             }
-
+            if(v == item) {
+                itemClickListener.onClick(v, getAdapterPosition());
+            }
         }
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         }
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener){
+        this.itemClickListener = itemClickListener;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mValues.size();
     }
 
     public interface OnRecyclerItemClickListener {

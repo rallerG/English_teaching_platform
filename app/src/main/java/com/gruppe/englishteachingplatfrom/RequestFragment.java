@@ -20,14 +20,17 @@ import android.widget.ToggleButton;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
+import static com.gruppe.englishteachingplatfrom.request_mail.mail;
+
 
 public class RequestFragment extends Fragment {
 
 //    SharedPreferences fav = getActivity().getPreferences(Context.MODE_PRIVATE);
-
+    private RecyclerView.LayoutManager layoutManager;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private RecyclerView recycler;
 
     ToggleButton toggleStar;
 
@@ -46,9 +49,18 @@ public class RequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
+        mail.add(new MailProfile("Huang", "I would like you to teach me stuff x 2", false));
+        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
+        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
+        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true));
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
+
     }
 
     @Override
@@ -57,6 +69,10 @@ public class RequestFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_request_list, container, false);
         View view1 = inflater.inflate(R.layout.fragment_request, container, false);
         toggleStar = view1.findViewById(R.id.toggleStar);
+        recycler = view.findViewById(R.id.list);
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recycler.setLayoutManager(layoutManager);
       //  toggleStar.setBackgroundResource(R.drawable.ic_toggle_star_color1);
 
         // Set the adapter
@@ -68,7 +84,7 @@ public class RequestFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), mail));
         }
         return view;
     }

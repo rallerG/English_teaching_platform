@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <TableLayout
-        android:id="@+id/tableLayout"
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:layout_weight="1">
@@ -35,7 +35,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/tableLayout"
+                app:layout_constraintEnd_toEndOf="@+id/item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_toggle_star_color" />
 
