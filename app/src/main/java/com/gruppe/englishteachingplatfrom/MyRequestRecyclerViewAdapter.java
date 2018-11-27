@@ -38,7 +38,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
     Activity mail;
     Context mContext;
     private ArrayList<MailProfile> mails = new ArrayList<MailProfile>();
-    TextView studName;
+    TextView studName, content;
     ToggleButton star;
     TableLayout item;
     ConstraintLayout itemHolder;
@@ -71,7 +71,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
                // TextView name = mail.findViewById(R.id.name);
                // TextView content = mail.findViewById(R.id.content);
               //  ToggleButton starMail = mail.findViewById(R.id.starMail);
-
+        content = view.findViewById(R.id.FeedContent);
         studName = view.findViewById(R.id.studName);
         star = view.findViewById(R.id.toggleStar);
         item = view.findViewById(R.id.item);
@@ -88,7 +88,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
       //  studName = view.findViewById(R.id.studName);
         studName.setText(mValues.get(position).getStudName());
-
+        content.setText(mValues.get(position).getContent());
 
 
        // notifyItemChanged(getAdapterPosition());
@@ -134,7 +134,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
         private TableLayout item;
-        private TextView studName;
+        private TextView studName, content;
         private ToggleButton star;
 
         public ViewHolder(View view) {
@@ -142,6 +142,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
             view.setOnClickListener(this);
 
+            content = view.findViewById(R.id.FeedContent);
             item = view.findViewById(R.id.item);
             studName = view.findViewById(R.id.studName);
             star = view.findViewById(R.id.toggleStar);
