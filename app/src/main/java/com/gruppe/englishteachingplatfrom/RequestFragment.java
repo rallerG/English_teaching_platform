@@ -25,11 +25,9 @@ import static com.gruppe.englishteachingplatfrom.request_mail.mail;
 
 public class RequestFragment extends Fragment {
 
-//    SharedPreferences fav = getActivity().getPreferences(Context.MODE_PRIVATE);
     private RecyclerView.LayoutManager layoutManager;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
     private RecyclerView recycler;
 
     ToggleButton toggleStar;
@@ -49,18 +47,15 @@ public class RequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mail.add(new MailProfile("Chang", "I would like you to teach me stuff", true, false));
-        mail.add(new MailProfile("Huang", "I would like you to teach me stuff x 2", false,false));
-        mail.add(new MailProfile("Zao", "I would like you to teach me stuff", false,false));
-        mail.add(new MailProfile("Jin", "I would like you to teach me stuff", false,false));
-        mail.add(new MailProfile("Xin", "I would like you to teach me stuff", true,false));
+        mail.add(new MailProfile("Chang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Huang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Zao", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Jin", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Xin", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-
-
-
     }
 
     @Override
@@ -73,7 +68,6 @@ public class RequestFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getContext());
         recycler.setLayoutManager(layoutManager);
-      //  toggleStar.setBackgroundResource(R.drawable.ic_toggle_star_color1);
 
         // Set the adapter
         if (view instanceof RecyclerView) {

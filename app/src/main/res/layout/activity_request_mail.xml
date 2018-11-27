@@ -48,7 +48,7 @@
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
         android:background="@color/colorTint"

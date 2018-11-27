@@ -29,18 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
+public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {
 
-    private int selectedPos = RecyclerView.NO_POSITION;
     private final List<MailProfile> mValues;
     SparseBooleanArray sparseBooleanArray;
     int selectedItemCount;
-    Activity mail;
     Context mContext;
-    private ArrayList<MailProfile> mails = new ArrayList<MailProfile>();
     TextView studName, content;
     ToggleButton star;
-    TableLayout item;
     ConstraintLayout itemHolder;
 
     public MyRequestRecyclerViewAdapter(Context mContext, List<MailProfile> items) {
@@ -57,78 +53,52 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
 
         final ViewHolder vHolder = new ViewHolder(view);
 
-//        name.setText(mValues.get(vHolder.getAdapterPosition()).getStudName());
-//        content.setText(mValues.get(vHolder.getAdapterPosition()).getContent());
-
-    //    mail = new request_mail();
-    //    mail.setContentView(R.layout.activity_request_mail);
-
-     //   vHolder.item.setOnClickListener(new View.OnClickListener() {
-      //      @Override
-        //    public void onClick(View v) {
-          //      Intent intent = new Intent(mContext, request_mail.class);
-
-               // TextView name = mail.findViewById(R.id.name);
-               // TextView content = mail.findViewById(R.id.content);
-              //  ToggleButton starMail = mail.findViewById(R.id.starMail);
         content = view.findViewById(R.id.FeedContent);
         studName = view.findViewById(R.id.studName);
         star = view.findViewById(R.id.toggleStar);
-        item = view.findViewById(R.id.item);
         itemHolder = view.findViewById(R.id.holder);
-   //         }
-     //   });
-
         return vHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-//        holder.star.setChecked(itemTitles.get(position));
 
-      //  studName = view.findViewById(R.id.studName);
-        studName.setText(mValues.get(position).getStudName());
-        content.setText(mValues.get(position).getContent());
+        holder.studName.setText(mValues.get(position).getStudName());
+        holder.content.setText(mValues.get(position).getContent());
 
 
-       // notifyItemChanged(getAdapterPosition());
-
-        if(mValues.get(position).getFavorite()){
+        if (mValues.get(position).getFavorite()) {
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
         } else {
             holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
         }
-
-        if (sparseBooleanArray.get(position)) {
-            holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color1);
-            mValues.get(position).setFavorite(true);
-        } else {
-            holder.star.setBackgroundResource(R.drawable.ic_toggle_star_color);
-            mValues.get(position).setFavorite(false);
-        }
-        if(mValues.get(position).getVisited()){
+        if (mValues.get(position).getVisited()) {
             itemHolder.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorVisited));
         }
 
-        holder.item.setOnClickListener(new View.OnClickListener() {
+        holder.itemHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Clicked on: " + mValues.get(position).getStudName() + "Favorite: " + mValues.get(position).getFavorite() + " Visited: " + mValues.get(position).getVisited(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Clicked on: " + mValues.get(position).getStudName() + "Favorite: " + mValues.get(position).getFavorite() + " Visited: " + mValues.get(position).getVisited(), Toast.LENGTH_SHORT).show();
                 mValues.get(position).setVisited(true);
                 Intent intent = new Intent(mContext, request_mail.class);
                 intent.putExtra("studName", mValues.get(position).getStudName());
                 intent.putExtra("favorite", mValues.get(position).getFavorite());
+                intent.putExtra("content", mValues.get(position).getContent());
+//                itemHolder.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorVisited));
+                holder.itemHolder.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorVisited));
                 mContext.startActivity(intent);
             }
         });
     }
 
     @Override
-    public void onClick(View v) { }
-
-    @Override
     public boolean onLongClick(View v) {
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
     }
 
 
@@ -136,6 +106,7 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
         private TableLayout item;
         private TextView studName, content;
         private ToggleButton star;
+        private ConstraintLayout itemHolder;
 
         public ViewHolder(View view) {
             super(view);
@@ -143,35 +114,39 @@ public class MyRequestRecyclerViewAdapter extends  RecyclerView.Adapter<MyReques
             view.setOnClickListener(this);
 
             content = view.findViewById(R.id.FeedContent);
-            item = view.findViewById(R.id.item);
             studName = view.findViewById(R.id.studName);
             star = view.findViewById(R.id.toggleStar);
             star.setOnClickListener(this);
-
-
-//            studName.setText(getAdapterPosition());
-
+            itemHolder = view.findViewById(R.id.holder);
         }
 
         @Override
-        public void onClick(View v ) {
+        public void onClick(View v) {
+
             if (!sparseBooleanArray.get(getAdapterPosition())) {
                 sparseBooleanArray.put(getAdapterPosition(), true);
-                selectedItemCount++;
+                mValues.get(getAdapterPosition()).setFavorite(true);
                 notifyItemChanged(getAdapterPosition());
             } else {
                 sparseBooleanArray.put(getAdapterPosition(), false);
-                selectedItemCount--;
+                mValues.get(getAdapterPosition()).setFavorite(false);
                 notifyItemChanged(getAdapterPosition());
             }
-
-
         }
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
         }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     @Override

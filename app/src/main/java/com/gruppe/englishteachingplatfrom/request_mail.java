@@ -15,6 +15,7 @@ public class request_mail extends AppCompatActivity {
     public static final ArrayList<MailProfile> mail = new ArrayList<MailProfile>();
     TextView name;
     ToggleButton favorite;
+    TextView feedContent;
     List<MailProfile> items;
 
 
@@ -25,15 +26,19 @@ public class request_mail extends AppCompatActivity {
 
         name = findViewById(R.id.mailName);
         favorite = findViewById(R.id.mailStar);
+        feedContent = findViewById(R.id.mailContent);
 
-        Intent intent= getIntent();
+        Intent intent = getIntent();
         Bundle intentData = intent.getExtras();
 
-        String studName = (String)intentData.get("studName");
+        String studName = (String) intentData.get("studName");
         name.setText(studName);
 
         boolean studFavorite = (boolean) intentData.get("favorite");
         favorite.setChecked(studFavorite);
+
+        String studContent = (String) intentData.get("content");
+        feedContent.setText(studContent);
 
 
     }
