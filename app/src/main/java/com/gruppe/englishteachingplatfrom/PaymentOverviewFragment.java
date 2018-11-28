@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,7 +81,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
         historyButton.setOnClickListener(this);
 
         // Begin the transaction
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.paymentLists, new PaymentActiveFragment());
         ft.commit();
 

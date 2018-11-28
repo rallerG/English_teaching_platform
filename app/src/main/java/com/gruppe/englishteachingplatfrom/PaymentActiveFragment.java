@@ -69,9 +69,9 @@ public class PaymentActiveFragment extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
+//        if (getArguments() != null) {
+//            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+//        }
     }
 
     @Override
@@ -95,14 +95,8 @@ public class PaymentActiveFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-
-            if (mColumnCount <= 1) {
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(teacherPaymentRequestList, mListener));
         }
         return view;
