@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.gruppe.englishteachingplatfrom.FeedbackFragment.OnListFragmentInteractionListener;
+import com.gruppe.englishteachingplatfrom.FeedbackFragment;
 
 import java.util.List;
 

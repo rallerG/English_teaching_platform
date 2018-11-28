@@ -27,7 +27,6 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     RecyclerView feedback;
     Button viewAll;
 
-    private FeedbackFragment.OnListFragmentInteractionListener mListener;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 
@@ -113,7 +112,6 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     public interface OnListFragmentInteractionListener {

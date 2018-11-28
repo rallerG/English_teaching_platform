@@ -43,7 +43,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Rate"
-                            android:textAlignment="center"
+                            android:textAlignment="textEnd"
                             android:textSize="24sp" />
 
                         <TextView
@@ -93,11 +93,11 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="-8dp"
+                            android:layout_marginLeft="-4dp"
                             android:numStars="5"
                             android:rating="5"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,11 +106,11 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="-6dp"
+                            android:layout_marginLeft="-3dp"
                             android:numStars="4"
                             android:rating="5"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,11 +119,11 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="-4dp"
+                            android:layout_marginLeft="-2dp"
                             android:numStars="3"
                             android:rating="5"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,11 +132,11 @@
                             style="?android:attr/ratingBarStyleSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="-2dp"
+                            android:layout_marginLeft="-1dp"
                             android:numStars="2"
                             android:rating="5"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,8 +147,8 @@
                             android:layout_height="wrap_content"
                             android:numStars="1"
                             android:rating="5"
-                            android:scaleX="0.8"
-                            android:scaleY="0.8"
+                            android:scaleX="0.9"
+                            android:scaleY="0.9"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -206,6 +206,211 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorFeedbackHeader"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorTint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/oneStar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RatingBar
+                                android:id="@+id/rating11"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:numStars="1"
+                                android:rating="5"
+                                android:scaleX="0.9"
+                                android:scaleY="0.9"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/twoStar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RatingBar
+                                android:id="@+id/rating10"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="-1dp"
+                                android:layout_weight="1"
+                                android:numStars="2"
+                                android:rating="5"
+                                android:scaleX="0.9"
+                                android:scaleY="0.9"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/threeStar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RatingBar
+                                android:id="@+id/rating9"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="-2dp"
+                                android:layout_weight="1"
+                                android:numStars="3"
+                                android:rating="5"
+                                android:scaleX="0.9"
+                                android:scaleY="0.9"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/fourStar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RatingBar
+                                android:id="@+id/rating8"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="-3dp"
+                                android:layout_weight="1"
+                                android:numStars="4"
+                                android:rating="5"
+                                android:scaleX="0.9"
+                                android:scaleY="0.9"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/fiveStar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RatingBar
+                                android:id="@+id/rating6"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTintMode="screen"
+                                android:clickable="true"
+                                android:numStars="5"
+                                android:rating="5"
+                                android:scaleX="1"
+                                android:scaleY="1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/all"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/border"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="All" />
+
+                        </LinearLayout>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorTint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </LinearLayout>
 
