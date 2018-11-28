@@ -1,15 +1,19 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -28,9 +32,10 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     RecyclerView feedback;
     ArrayList<FeedbackProfile> list;
     TextView star1, star2, star3, star4, star5, ratings, totalRate;
-    LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all;
+    LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
     float totAvgRating;
+
 
     public FeedbackFragment() {
     }
@@ -115,6 +120,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         star3.setText(String.valueOf(totStar3));
         star4.setText(String.valueOf(totStar4));
         star5.setText(String.valueOf(totStar5));
+        ratings.setText(String.valueOf(list.size()) + " ratings");
 
         totAvgRating = totalStar / list.size();
         totalRate.setText(String.valueOf(totAvgRating));
@@ -126,19 +132,6 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
         feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
         feedback.setAdapter(recycleAdapter);
-/*            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }*/
-
-
-        //   recyclerView.setAdapter(new MyFeedbackRecyclerViewAdapter(FeedbackProfile.createFeedback(2), mListener));
-        //        MyFeedbackRecyclerViewAdapter adapter = new MyFeedbackRecyclerViewAdapter(list,mListener);
-        // feedback.setAdapter(new MyFeedbackRecyclerViewAdapter(list, mListener));
-        //             feedback.setAdapter(adapter);
-//            feedback.setLayoutManager(new LinearLayoutManager(context));
-        //  }
         return view;
     }
 
@@ -165,25 +158,41 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v == oneStar) {
-            sortList(1);
+            sortList(1, oneStar, prevBtn);
+            prevBtn = oneStar;
         } else if (v == twoStar) {
-            sortList(2);
+            sortList(2, twoStar, prevBtn);
+            prevBtn = twoStar;
         } else if (v == threeStar) {
-            sortList(3);
+            sortList(3, threeStar, prevBtn);
+            prevBtn = threeStar;
         } else if (v == fourStar) {
-            sortList(4);
+            sortList(4, fourStar, prevBtn);
+            prevBtn = fourStar;
         } else if (v == fiveStar) {
-            sortList(5);
+            sortList(5, fiveStar, prevBtn);
+            prevBtn = fiveStar;
         } else if (v == all){
             MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
             feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
             feedback.setAdapter(recycleAdapter);
+            if(prevBtn != null) {
+                prevBtn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.border));
+            }
+            all.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.selectedborder));
+            prevBtn = all;
         }
     }
 
-    public void sortList(int rating) {
+    public void sortList(int rating, LinearLayout btn, LinearLayout prevBtn) {
         ArrayList<FeedbackProfile> tempList = new ArrayList<FeedbackProfile>();
         tempList.clear();
+
+        this.prevBtn = prevBtn;
+        if(prevBtn != null) {
+            prevBtn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.border));
+        }
+        btn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.selectedborder));
         for (FeedbackProfile f : list) {
             if (f.getRating() == rating) {
                 tempList.add(new FeedbackProfile(f.getStudName(), f.getRating(), f.getContent()));
