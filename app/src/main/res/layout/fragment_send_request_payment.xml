@@ -35,17 +35,21 @@
 
         <EditText
             android:id="@+id/AmountEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="27dp"
+            android:layout_marginTop="236dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="136dp"
             android:ems="10"
             android:hint="Amount"
             android:inputType="numberSigned"
-            app:layout_constraintBaseline_toBaselineOf="@+id/valutaTextView"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
             app:layout_constraintEnd_toStartOf="@+id/valutaTextView"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/valutaTextView"
@@ -88,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/valutaTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/AmountEditText" />
 
     </android.support.constraint.ConstraintLayout>
 
