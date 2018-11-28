@@ -24,7 +24,8 @@ import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
-        PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener, View.OnClickListener {
+        PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener,
+        PaymentHistoryFragment.OnFragmentInteractionListener, View.OnClickListener {
 
     private  static final  String TAG = "MainActivity";
 

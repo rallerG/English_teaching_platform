@@ -7,6 +7,10 @@ public class PaymentDummyBackend {
 
     private ArrayList<TeacherDummy> teacherDummies = new ArrayList<>();
 
+
+    private ArrayList<TeacherDummy> teacherDummiesHistory = new ArrayList<>();
+
+    //Active list
     private TeacherDummy t1 = new TeacherDummy("Thomas", "14.04.2018", 270);
     private TeacherDummy t2 = new TeacherDummy("Mikkel", "12.02.2018", 270);
     private TeacherDummy t3 = new TeacherDummy("Julie", "05.03.2018", 270);
@@ -14,6 +18,15 @@ public class PaymentDummyBackend {
     private TeacherDummy t5 = new TeacherDummy("Christoffer", "23.12.2018", 270);
     private TeacherDummy t6 = new TeacherDummy("Knud", "04.07.2018", 270);
     private TeacherDummy t7 = new TeacherDummy("Peter", "01.03.2018", 270);
+
+    //History list
+    private TeacherDummy h1 = new TeacherDummy("Adrian", "21.03.2017", 270);
+    private TeacherDummy h2 = new TeacherDummy("Jacob", "02.07.2017", 270);
+    private TeacherDummy h3 = new TeacherDummy("Christian", "15.05.2017", 270);
+    private TeacherDummy h4 = new TeacherDummy("Nikolaj", "21.03.2016", 270);
+    private TeacherDummy h5 = new TeacherDummy("Sara", "03.11.2017", 270);
+    private TeacherDummy h6 = new TeacherDummy("Line", "24.01.2015", 270);
+    private TeacherDummy h7 = new TeacherDummy("Susan", "11.04.2016", 270);
 
     public PaymentDummyBackend() {
         teacherDummies.clear();
@@ -24,6 +37,14 @@ public class PaymentDummyBackend {
         teacherDummies.add(t5);
         teacherDummies.add(t6);
         teacherDummies.add(t7);
+
+        teacherDummiesHistory.add(h1);
+        teacherDummiesHistory.add(h2);
+        teacherDummiesHistory.add(h3);
+        teacherDummiesHistory.add(h4);
+        teacherDummiesHistory.add(h5);
+        teacherDummiesHistory.add(h6);
+        teacherDummiesHistory.add(h7);
     }
 
 
@@ -31,6 +52,9 @@ public class PaymentDummyBackend {
         return teacherDummies;
     }
 
+    public ArrayList<TeacherDummy> getTeacherDummiesHistory() {
+        return teacherDummiesHistory;
+    }
 
 
     class TeacherDummy{

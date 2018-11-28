@@ -92,9 +92,17 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         if (v == activeButton){
             Toast.makeText(getActivity(),"Activity", Toast.LENGTH_SHORT).show();
+            // Begin the transaction
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+            ft.commit();
 
         } else if (v == historyButton){
             Toast.makeText(getActivity(),"History", Toast.LENGTH_SHORT).show();
+            // Begin the transaction
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.paymentLists, new PaymentHistoryFragment());
+            ft.commit();
         }
     }
 
