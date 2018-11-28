@@ -4,9 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 
 /**
@@ -22,12 +27,18 @@ public class PaymentActiveFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_COLUMN_COUNT = "column-count";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int mColumnCount = 10;
 
+
+    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList;
     private OnFragmentInteractionListener mListener;
+    private PaymentDummyBackend test = new PaymentDummyBackend();
+
 
     public PaymentActiveFragment() {
         // Required empty public constructor
@@ -54,17 +65,46 @@ public class PaymentActiveFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        if (getArguments() != null) {
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
+//        }
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        teacherPaymentRequestList = test.getTeacherDummies();
+//        View view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
+//
+//        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        MyPaymentRecyclerViewAdapter mAdapter = new MyPaymentRecyclerViewAdapter(teacherPaymentRequestList, mListener);
+//        mRecyclerView.setAdapter(mAdapter);
+//        return view;
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_active, container, false);
+//        return inflater.inflate(R.layout.fragment_payment_request_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
+
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
+            if (mColumnCount <= 1) {
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(teacherPaymentRequestList, mListener));
+        }
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

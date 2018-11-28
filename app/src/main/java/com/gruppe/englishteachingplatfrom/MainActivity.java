@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -20,7 +21,8 @@ import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
+        PaymentActiveFragment.OnFragmentInteractionListener, View.OnClickListener {
 
     private  static final  String TAG = "MainActivity";
 
@@ -191,6 +193,10 @@ public class MainActivity extends AppCompatActivity
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 break;
+            case R.id.nav_money:
+                fragment = new PaymentActiveFragment();
+                fragment.setArguments(args);
+                break;
             case R.id.nav_settings:
                 fragment = new ViewPagerFragment();
                 break;
@@ -222,6 +228,11 @@ public class MainActivity extends AppCompatActivity
                 addToBackStack(null).commit();
            // fab.hide();
         }
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

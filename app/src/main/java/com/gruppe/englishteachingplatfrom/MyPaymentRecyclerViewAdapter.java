@@ -1,6 +1,5 @@
 package com.gruppe.englishteachingplatfrom;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,10 +12,10 @@ import java.util.List;
 
 public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPaymentRecyclerViewAdapter.PaymentViewHolder> {
 
-    private List<TeacherProfile> teacherPaymentRequestList;
-    private ListFragment.OnListFragmentInteractionListener mListener;
+    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList;
+    private PaymentActiveFragment.OnFragmentInteractionListener mListener;
 
-    public MyPaymentRecyclerViewAdapter(List<TeacherProfile> teacherPaymentRequestList, ListFragment.OnListFragmentInteractionListener listener) {
+    public MyPaymentRecyclerViewAdapter(List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList, PaymentActiveFragment.OnFragmentInteractionListener listener) {
         this.teacherPaymentRequestList = teacherPaymentRequestList;
         this.mListener = listener;
     }
@@ -25,17 +24,17 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
     @Override
     public PaymentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_item, parent, false);
+                .inflate(R.layout.fragment_payment_request_item, parent, false);
         return new PaymentViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i) {
-        TeacherProfile teacherProfile = teacherPaymentRequestList.get(i);
+        PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentRequestList.get(i);
 
-        paymentViewHolder.textViewName.setText(teacherProfile.getmName());
-        paymentViewHolder.textViewPrice.setText(teacherProfile.getmPrice());
-        paymentViewHolder.textViewDate.setText("23.04.2018");
+        paymentViewHolder.textViewName.setText(teacherPaymentRequestList.get(i).getName());
+        paymentViewHolder.textViewPrice.setText(Integer.toString(teacherPaymentRequestList.get(i).getPrice()));
+        paymentViewHolder.textViewDate.setText(teacherPaymentRequestList.get(i).getDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
 
 
