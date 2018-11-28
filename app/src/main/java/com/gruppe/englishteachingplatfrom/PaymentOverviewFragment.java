@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -17,7 +20,7 @@ import android.view.ViewGroup;
  * Use the {@link PaymentOverviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PaymentOverviewFragment extends Fragment {
+public class PaymentOverviewFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,6 +29,8 @@ public class PaymentOverviewFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button activeButton, historyButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,14 +68,31 @@ public class PaymentOverviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_overview, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_overview, container, false);
+
+        activeButton = (Button) view.findViewById(R.id.activeButton);
+        historyButton = (Button) view.findViewById(R.id.historyButton);
+
+        activeButton.setOnClickListener(this);
+        historyButton.setOnClickListener(this);
+
+        // Begin the transaction
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+        ft.commit();
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onClick(View v) {
+        if (v == activeButton){
+            Toast.makeText(getActivity(),"Activity", Toast.LENGTH_SHORT).show();
+
+        } else if (v == historyButton){
+            Toast.makeText(getActivity(),"History", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -90,6 +112,7 @@ public class PaymentOverviewFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

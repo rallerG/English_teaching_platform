@@ -33,7 +33,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentRequestList.get(i);
 
         paymentViewHolder.textViewName.setText(teacherPaymentRequestList.get(i).getName());
-        paymentViewHolder.textViewPrice.setText(Integer.toString(teacherPaymentRequestList.get(i).getPrice()));
+        paymentViewHolder.textViewPrice.setText(Integer.toString(teacherPaymentRequestList.get(i).getPrice())+" DKK");
         paymentViewHolder.textViewDate.setText(teacherPaymentRequestList.get(i).getDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
 

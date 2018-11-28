@@ -20,9 +20,11 @@ import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 
 import java.util.ArrayList;
 
+import static android.app.PendingIntent.getActivity;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
-        PaymentActiveFragment.OnFragmentInteractionListener, View.OnClickListener {
+        PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener, View.OnClickListener {
 
     private  static final  String TAG = "MainActivity";
 
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Pick what fragment to display oncreate
-        displaySelectedScreen(R.id.nav_settings);
+        displaySelectedScreen(6);
 
     }
 
@@ -184,23 +186,33 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_matches:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
+                setTitle("Matches");
                 break;
             case R.id.nav_favorites:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
+                setTitle("Favorites");
                 break;
             case R.id.nav_pending:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
+                setTitle("Pending");
                 break;
             case R.id.nav_money:
-                fragment = new PaymentActiveFragment();
+                fragment = new PaymentOverviewFragment();
                 fragment.setArguments(args);
+                setTitle("Payment");
                 break;
             case R.id.nav_settings:
                 fragment = new ViewPagerFragment();
+                setTitle("Settings");
                 break;
             case R.id.nav_logout:
+                setTitle("Gruppe Magnus");
+                break;
+            default:
+                fragment = new ViewPagerFragment();
+                setTitle("Gruppe Magnus");
                 break;
         }
 

@@ -78,6 +78,7 @@ public class PaymentActiveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         teacherPaymentRequestList = test.getTeacherDummies();
+
 //        View view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
 //
 //        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);

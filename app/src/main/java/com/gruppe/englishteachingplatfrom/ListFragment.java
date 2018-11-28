@@ -78,7 +78,7 @@ public class ListFragment extends Fragment {
                     break;
             }
         }
-        getActivity().setTitle("List");
+//        getActivity().setTitle("List");
 
         return view;
     }
