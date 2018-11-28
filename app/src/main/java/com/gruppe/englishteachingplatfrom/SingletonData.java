@@ -18,15 +18,15 @@ public class SingletonData {
         return (Instance);
     }
 
-    public static ArrayList<String> getNames(){
+    public  ArrayList<String> getNames(){
         return names;
     }
 
-    public static ArrayList<String> getProf(){
+    public  ArrayList<String> getProf(){
         return prof;
     }
 
-    public static ArrayList<String> getNation(){
+    public  ArrayList<String> getNation(){
         return nation;
     }
 
