@@ -19,6 +19,8 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
     ImageView teacherImage;
     TextView teacherInfo, confirmationText;
     RatingBar ratingBar;
+    int pic;
+    int pos;
 
     public ConfirmationBox(){
 
@@ -29,12 +31,20 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View vw = inflater.inflate(R.layout.fragment_confirmation_box, container, false);
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            pos = bundle.getInt("position", 0);
+            pic = bundle.getInt("pic", 0);
+        }
+
         teacherImage= vw.findViewById(R.id.TeacherImage2);
         teacherInfo = vw.findViewById(R.id.TeacherInfo2);
         confirmationText = vw.findViewById(R.id.ConfirmationMessage2);
         ratingBar = vw.findViewById(R.id.RatingBar2);
 
         okayButton = vw.findViewById(R.id.OkayButton);
+        teacherImage.setImageResource(pic);
+        teacherInfo.setText(SingletonData.getNames().get(pos)+ "\nPro. Teacher\n180 DKK/hr");
         okayButton.setOnClickListener(this);
 
         return vw;

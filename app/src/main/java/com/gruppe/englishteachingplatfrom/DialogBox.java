@@ -47,7 +47,8 @@ public class DialogBox extends Fragment implements View.OnClickListener {
         }
 
 
-        teacherInfo.setText(SingletonData.getNames().get(pos));
+        teacherInfo.setText(SingletonData.getNames().get(pos)+ "\nPro. Teacher\n180 DKK/hr");
+        confirmationText.setText("Are you sure you want to send a request to " + SingletonData.getNames().get(pos) + "?");
         teacherImage.setImageResource(pic);
 
         cancelButton.setOnClickListener(this);
@@ -67,13 +68,17 @@ public class DialogBox extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
-
+                Bundle bundle = new Bundle();
+                bundle.putInt("position", pos);
+                bundle.putInt("pic", pic);
+                ConfirmationBox fragment2 = new ConfirmationBox();
+                fragment2.setArguments(bundle);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager
                         .beginTransaction();
 
-                ConfirmationBox fragment2 = new ConfirmationBox();
-                fragmentTransaction.replace(R.id.fragmentContent, fragment2);
+
+                fragmentTransaction.replace(R.id.fragmentContent, fragment2).addToBackStack(null);
                 fragmentTransaction.commit();
 
             }
