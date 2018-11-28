@@ -126,6 +126,9 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         totalRate.setText(String.valueOf(totAvgRating));
         totalRating.setRating(totAvgRating);
 
+
+        all.setBackgroundResource(R.drawable.selectedborder);
+        prevBtn = all;
         // Set the adapter
         //   if (view instanceof RecyclerView) {
         Context context = view.getContext();
@@ -172,14 +175,12 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         } else if (v == fiveStar) {
             sortList(5, fiveStar, prevBtn);
             prevBtn = fiveStar;
-        } else if (v == all){
+        } else if (v == all) {
             MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
             feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
             feedback.setAdapter(recycleAdapter);
-            if(prevBtn != null) {
-                prevBtn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.border));
-            }
-            all.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.selectedborder));
+            prevBtn.setBackgroundResource(R.drawable.border);
+            all.setBackgroundResource(R.drawable.selectedborder);
             prevBtn = all;
         }
     }
@@ -189,10 +190,8 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         tempList.clear();
 
         this.prevBtn = prevBtn;
-        if(prevBtn != null) {
-            prevBtn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.border));
-        }
-        btn.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.selectedborder));
+        prevBtn.setBackgroundResource(R.drawable.border);
+        btn.setBackgroundResource(R.drawable.selectedborder);
         for (FeedbackProfile f : list) {
             if (f.getRating() == rating) {
                 tempList.add(new FeedbackProfile(f.getStudName(), f.getRating(), f.getContent()));
