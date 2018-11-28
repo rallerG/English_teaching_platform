@@ -31,6 +31,8 @@ public class ViewPagerFragment extends Fragment {
 
     private ArrayList<ViewPagerModel> mContents;
 
+    private SingletonData info;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,8 @@ public class ViewPagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewpager_list, container, false);
+
+        info = SingletonData.getInstance();
 
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
 
@@ -54,23 +58,23 @@ public class ViewPagerFragment extends Fragment {
 
        // String names[] = {"Smith", "Johnson", "David", "Adam"};
 
-        SingletonData.getNames().add("Smith");
-        SingletonData.getNames().add("Johnson");
-        SingletonData.getNames().add("David");
-        SingletonData.getNames().add("Adam");
+        info.getNames().add("Smith");
+        info.getNames().add("Johnson");
+        info.getNames().add("David");
+        info.getNames().add("Adam");
 
        // String desig[] = {"English Teacher"};
-        SingletonData.getProf().add("English Teacher");
+        info.getProf().add("English Teacher");
 
        // String place[] = {"USA", "DENMARK", "SWEDEN"};
 
-        SingletonData.getNation().add("USA");
-        SingletonData.getNation().add("Denmark");
-        SingletonData.getNation().add("Sweden");
+        info.getNation().add("USA");
+        info.getNation().add("Denmark");
+        info.getNation().add("Sweden");
 
-        ArrayList<String> names = SingletonData.getNames();
-        ArrayList<String> prof = SingletonData.getProf();
-        ArrayList<String> nation = SingletonData.getNation();
+        ArrayList<String> names = info.getNames();
+        ArrayList<String> prof = info.getProf();
+        ArrayList<String> nation = info.getNation();
         for (int i = 0; i < images.length; i++){
 
             ViewPagerModel viewPagerModel = new ViewPagerModel();
