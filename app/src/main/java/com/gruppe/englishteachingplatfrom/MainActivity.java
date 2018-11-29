@@ -17,6 +17,7 @@ import android.view.MenuItem;
 
 import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     public FloatingActionButton fab;
+    public FloatingActionButton floatingActionButton;
+    public int position;
+    public int pic;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(this);
 
 
@@ -50,6 +57,12 @@ public class MainActivity extends AppCompatActivity
 
         //Pick what fragment to display oncreate
         displaySelectedScreen(R.id.nav_settings);
+
+
+
+
+
+
 
     }
 
@@ -192,6 +205,7 @@ public class MainActivity extends AppCompatActivity
                 fragment.setArguments(args);
                 break;
             case R.id.nav_settings:
+              //  fragment = new frag_Pager();
                 fragment = new ViewPagerFragment();
                 break;
             case R.id.nav_logout:
@@ -218,7 +232,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View view) {
         if(view == fab) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, new DialogBox()).
+            Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
+            if (frag instanceof ViewPagerFragment) {
+                position = ((ViewPagerFragment) frag).getCurrentPosition();
+                pic = ((ViewPagerFragment) frag).getCurrentPic();
+            }
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position);
+            bundle.putInt("pic", pic);
+            Fragment F = new DialogBox();
+            F.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                 addToBackStack(null).commit();
            // fab.hide();
         }
