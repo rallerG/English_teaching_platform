@@ -42,4 +42,10 @@ dependencies {
 
     //circle imageview
     api 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Swipe button
+    implementation 'com.ebanx:swipe-button:0.8.3'
+
+    //Searchable spinner
+    implementation 'gr.escsoft.michaelprimez.searchablespinner:SearchableSpinner:1.0.9'
 }

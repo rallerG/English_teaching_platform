@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -20,8 +21,12 @@ import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 
 import java.util.ArrayList;
 
+import static android.app.PendingIntent.getActivity;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
+        PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener,
+        PaymentHistoryFragment.OnFragmentInteractionListener, View.OnClickListener {
 
     private  static final  String TAG = "MainActivity";
 
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Pick what fragment to display oncreate
-        displaySelectedScreen(R.id.nav_settings);
+        displaySelectedScreen(6);
 
 
 
@@ -195,20 +200,34 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_matches:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
+                setTitle("Matches");
                 break;
             case R.id.nav_favorites:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
+                setTitle("Favorites");
                 break;
             case R.id.nav_pending:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
+                setTitle("Pending");
+                break;
+            case R.id.nav_money:
+                fragment = new PaymentOverviewFragment();
+                fragment.setArguments(args);
+                setTitle("Payment");
                 break;
             case R.id.nav_settings:
               //  fragment = new frag_Pager();
                 fragment = new ViewPagerFragment();
+                setTitle("Settings");
                 break;
             case R.id.nav_logout:
+                setTitle("Gruppe Magnus");
+                break;
+            default:
+                fragment = new ViewPagerFragment();
+                setTitle("Gruppe Magnus");
                 break;
         }
 
@@ -246,6 +265,11 @@ public class MainActivity extends AppCompatActivity
                 addToBackStack(null).commit();
            // fab.hide();
         }
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
