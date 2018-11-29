@@ -63,6 +63,7 @@ public class ViewPagerAdapter extends PagerAdapter  {
             public void onClick(View v) {
                 // this is the on click listerner for the objects in the viewpager
                 System.out.println("works");
+
             }
         });
 
