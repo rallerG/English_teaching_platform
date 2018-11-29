@@ -15,10 +15,13 @@ import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 
 public class ConfirmationBox extends Fragment implements View.OnClickListener {
 
-    Button okayButton;
-    ImageView teacherImage;
-    TextView teacherInfo, confirmationText;
-    RatingBar ratingBar;
+    private Button okayButton;
+    private ImageView teacherImage;
+    private TextView teacherInfo, confirmationText;
+    private RatingBar ratingBar;
+    private int pic;
+    private int pos;
+    private SingletonData info;
 
     public ConfirmationBox(){
 
@@ -29,12 +32,22 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View vw = inflater.inflate(R.layout.fragment_confirmation_box, container, false);
 
+        info = SingletonData.getInstance();
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            pos = bundle.getInt("position", 0);
+            pic = bundle.getInt("pic", 0);
+        }
+
         teacherImage= vw.findViewById(R.id.TeacherImage2);
         teacherInfo = vw.findViewById(R.id.TeacherInfo2);
         confirmationText = vw.findViewById(R.id.ConfirmationMessage2);
         ratingBar = vw.findViewById(R.id.RatingBar2);
 
         okayButton = vw.findViewById(R.id.OkayButton);
+        teacherImage.setImageResource(pic);
+        teacherInfo.setText(info.getNames().get(pos)+ "\nPro. Teacher\n180 DKK/hr");
         okayButton.setOnClickListener(this);
 
         return vw;

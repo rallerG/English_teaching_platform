@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SendRequestPaymentFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
+            android:id="@+id/SearchableSpinner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginEnd="38dp"
+            android:layout_marginBottom="133dp"
+            android:gravity="center_horizontal"
+            app:DoneSearchTintColor="@android:color/holo_purple"
+            app:RevealEmptyText="Tap to select student"
+            app:RevealViewBackgroundColor="@android:color/background_light"
+            app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
+            app:ShowBorders="false"
+            app:SpinnerExpandHeight="300dp"
+            app:StartSearchTintColor="@android:color/background_dark"
+            app:layout_constraintBottom_toTopOf="@+id/valutaTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/AmountEditText"
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="236dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="136dp"
+            android:ems="10"
+            android:hint="Amount"
+            android:inputType="numberSigned"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
+            app:layout_constraintEnd_toStartOf="@+id/valutaTextView"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/valutaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="146dp"
+            android:text="DKK"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/AmountEditText"
+            app:layout_constraintTop_toBottomOf="@+id/SearchableSpinner" />
+
+        <com.ebanx.swipebtn.SwipeButton
+            android:id="@+id/swipe_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="35dp"
+            app:button_background="@drawable/shape_button"
+            app:button_bottom_padding="20dp"
+            app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24px_"
+            app:button_image_enabled="@drawable/ic_toggle_star_color1"
+            app:button_image_height="60dp"
+            app:button_image_width="90dp"
+            app:button_left_padding="20dp"
+            app:button_right_padding="20dp"
+            app:button_top_padding="20dp"
+            app:has_activate_state="true"
+            app:initial_state="disabled"
+            app:inner_text="Send request"
+            app:inner_text_background="@drawable/shape_rounded"
+            app:inner_text_bottom_padding="18dp"
+            app:inner_text_color="@android:color/white"
+            app:inner_text_left_padding="48dp"
+            app:inner_text_size="20sp"
+            app:inner_text_top_padding="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AmountEditText" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".TeacherMainActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -22,24 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:clickable="true"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_send" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_menu_favorite_24px" />
+    <include layout="@layout/content_teacher" />
 
 </android.support.design.widget.CoordinatorLayout>

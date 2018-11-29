@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.SingletonData;
 import com.gruppe.englishteachingplatfrom.TeacherProfile;
 
 import java.util.ArrayList;
@@ -24,7 +25,11 @@ public class ViewPagerFragment extends Fragment {
 
     private ViewPagerAdapter mAdapter;
 
+    private ArrayList<Integer> img = new ArrayList<Integer>();
+
     private ArrayList<ViewPagerModel> mContents;
+
+    private SingletonData info;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,29 +42,48 @@ public class ViewPagerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewpager_list, container, false);
 
+        info = SingletonData.getInstance();
+
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
 
         mContents = new ArrayList<>();
 
         int images[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3 };
 
-        String names[] = {"Smith", "Johnson", "David", "Adam"};
+        img.add(R.drawable.profile1);
+        img.add(R.drawable.profile2);
+        img.add(R.drawable.profile3);
 
-        String desig[] = {"English Teacher"};
+       // String names[] = {"Smith", "Johnson", "David", "Adam"};
 
-        String place[] = {"USA", "DENMARK", "SWEDEN"};
+        info.getNames().add("Smith");
+        info.getNames().add("Johnson");
+        info.getNames().add("David");
+        info.getNames().add("Adam");
 
+       // String desig[] = {"English Teacher"};
+        info.getProf().add("English Teacher");
+
+       // String place[] = {"USA", "DENMARK", "SWEDEN"};
+
+        info.getNation().add("USA");
+        info.getNation().add("Denmark");
+        info.getNation().add("Sweden");
+
+        ArrayList<String> names = info.getNames();
+        ArrayList<String> prof = info.getProf();
+        ArrayList<String> nation = info.getNation();
         for (int i = 0; i < images.length; i++){
 
             ViewPagerModel viewPagerModel = new ViewPagerModel();
 
             viewPagerModel.images = images[i];
 
-            viewPagerModel.names = names[i];
+            viewPagerModel.names = names.get(i);
 
-            viewPagerModel.desig = desig[0];
+            viewPagerModel.desig = prof.get(0);
 
-            viewPagerModel.place = place[i];
+            viewPagerModel.place = nation.get(i);
 
             mContents.add(viewPagerModel);
 
@@ -69,9 +93,19 @@ public class ViewPagerFragment extends Fragment {
         mViewPager.setPageTransformer(true, new ViewPagerStack());
         mViewPager.setOffscreenPageLimit(3);
 
+
         mViewPager.setAdapter(mAdapter);
 
         return view;
+    }
+
+    public int getCurrentPosition(){
+        return mViewPager.getCurrentItem();
+    }
+
+    public int getCurrentPic(){
+
+        return img.get(mViewPager.getCurrentItem());
     }
 
     private class ViewPagerStack implements ViewPager.PageTransformer {

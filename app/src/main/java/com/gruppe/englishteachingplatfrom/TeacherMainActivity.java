@@ -1,55 +1,42 @@
 package com.gruppe.englishteachingplatfrom;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
+import android.view.View;
 
 
 import java.util.ArrayList;
 
-import static android.app.PendingIntent.getActivity;
+public class TeacherMainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener, View.OnClickListener {
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
-        PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener,
-        PaymentHistoryFragment.OnFragmentInteractionListener, View.OnClickListener {
 
-    private  static final  String TAG = "MainActivity";
+    RecyclerView list;
+
+   // private  static final  String TAG = "MainActivity";
 
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
-    public FloatingActionButton fab;
-    public FloatingActionButton floatingActionButton;
-    public int position;
-    public int pic;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_teacher_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(this);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,18 +48,12 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Pick what fragment to display oncreate
-        displaySelectedScreen(6);
-
-
-
-
-
-
+        displaySelectedScreen(R.id.nav_settings);
 
     }
 
     private void getImages(){
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+      //  Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
         mNames.add("Havasu Falls");
@@ -103,19 +84,7 @@ public class MainActivity extends AppCompatActivity
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
 
-//        initRecyclerView();
-
     }
-
-//    private void initRecyclerView(){
-//        Log.d(TAG, "initRecyclerView: init recyclerview");
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//        recyclerView.setLayoutManager(layoutManager);
-//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
-//        recyclerView.setAdapter(adapter);
-//    }
 
     @Override
     public void onBackPressed() {
@@ -136,9 +105,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -158,31 +124,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
             displaySelectedScreen(item.getItemId());
 
-//          Handle navigation view item clicks here.
-////        int id = item.getItemId();
-////
-////        if (id == R.id.nav_matches) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ListFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_favorites) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ListFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_pending) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ListFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_settings) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ViewPagerFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_logout) {
-////
-////        }
-////
-////        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-////        drawer.closeDrawer(GravityCompat.START);
 
         return true;
     }
@@ -197,37 +138,22 @@ public class MainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
-            case R.id.nav_matches:
-                fragment = new ListFragment();
+            case R.id.first:
+                fragment = new RequestFragment();
                 fragment.setArguments(args);
-                setTitle("Matches");
                 break;
             case R.id.nav_favorites:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
-                setTitle("Favorites");
                 break;
             case R.id.nav_pending:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
-                setTitle("Pending");
-                break;
-            case R.id.nav_money:
-                fragment = new PaymentOverviewFragment();
-                fragment.setArguments(args);
-                setTitle("Payment");
                 break;
             case R.id.nav_settings:
-              //  fragment = new frag_Pager();
-                fragment = new ViewPagerFragment();
-                setTitle("Settings");
+                fragment = new Teacher_fragment();
                 break;
             case R.id.nav_logout:
-                setTitle("Gruppe Magnus");
-                break;
-            default:
-                fragment = new ViewPagerFragment();
-                setTitle("Gruppe Magnus");
                 break;
         }
 
@@ -249,27 +175,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(View view) {
-        if(view == fab) {
-            Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
-            if (frag instanceof ViewPagerFragment) {
-                position = ((ViewPagerFragment) frag).getCurrentPosition();
-                pic = ((ViewPagerFragment) frag).getCurrentPic();
-            }
-            Bundle bundle = new Bundle();
-            bundle.putInt("position", position);
-            bundle.putInt("pic", pic);
-            Fragment F = new DialogBox();
-            F.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
-                addToBackStack(null).commit();
-           // fab.hide();
-        }
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onClick(View v) {
 
     }
 }

@@ -15,7 +15,10 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".TeacherActivity" />
+        <activity
+            android:name=".TeacherMainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -44,6 +47,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".clickCard_Activity"></activity>
+        <activity android:name=".request_mail"></activity>
     </application>
 
 </manifest>
