@@ -2,6 +2,8 @@ package com.gruppe.englishteachingplatfrom.Teacher_slider;
 
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.gruppe.englishteachingplatfrom.DialogBox;
 import com.gruppe.englishteachingplatfrom.R;
 
+
 import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter  {
+
 
     private List<ViewPagerModel> contents;
     private Context context;
@@ -42,11 +48,11 @@ public class ViewPagerAdapter extends PagerAdapter  {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
+        final View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
 
         container.addView(view);
 
@@ -63,6 +69,14 @@ public class ViewPagerAdapter extends PagerAdapter  {
             public void onClick(View v) {
                 // this is the on click listerner for the objects in the viewpager
                 System.out.println("works");
+
+
+
+              Toast.makeText(context,contents.get(position).names,Toast.LENGTH_SHORT).show();
+
+              view.getContext().
+
+
             }
         });
 

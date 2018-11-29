@@ -46,6 +46,7 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".clickCard_Activity"></activity>
         <activity android:name=".request_mail"></activity>
     </application>
 
