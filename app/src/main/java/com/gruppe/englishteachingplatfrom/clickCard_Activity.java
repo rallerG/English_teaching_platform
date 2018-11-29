@@ -1,13 +1,17 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class clickCard_Activity extends AppCompatActivity {
+public class clickCard_Activity extends Fragment {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_click_card);
+
     }
+
+
+
 }
