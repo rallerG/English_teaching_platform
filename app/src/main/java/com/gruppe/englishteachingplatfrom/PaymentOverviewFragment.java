@@ -36,6 +36,8 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
     private OnFragmentInteractionListener mListener;
 
+    private PaymentDummyBackend p = PaymentDummyBackend.getInstance();
+
     public PaymentOverviewFragment() {
         // Required empty public constructor
     }
@@ -70,6 +72,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        p.createList();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_payment_overview, container, false);

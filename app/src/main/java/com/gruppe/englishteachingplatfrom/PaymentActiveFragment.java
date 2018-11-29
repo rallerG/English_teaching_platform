@@ -35,9 +35,7 @@ public class PaymentActiveFragment extends Fragment {
     private int mColumnCount = 10;
 
 
-    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList;
     private OnFragmentInteractionListener mListener;
-    private PaymentDummyBackend test = new PaymentDummyBackend();
 
 
     public PaymentActiveFragment() {
@@ -77,7 +75,6 @@ public class PaymentActiveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        teacherPaymentRequestList = test.getTeacherDummies();
 
 //        View view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
 //
@@ -97,7 +94,7 @@ public class PaymentActiveFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(teacherPaymentRequestList, mListener));
+            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(PaymentDummyBackend.getInstance().getTeacherDummies(), mListener));
         }
         return view;
     }

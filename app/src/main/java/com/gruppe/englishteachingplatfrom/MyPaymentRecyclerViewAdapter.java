@@ -15,11 +15,12 @@ import java.util.List;
 
 public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPaymentRecyclerViewAdapter.PaymentViewHolder> {
 
-    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList;
+//    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList;
     private PaymentActiveFragment.OnFragmentInteractionListener mListener;
+    PaymentDummyBackend p = PaymentDummyBackend.getInstance();
 
     public MyPaymentRecyclerViewAdapter(List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList, PaymentActiveFragment.OnFragmentInteractionListener listener) {
-        this.teacherPaymentRequestList = teacherPaymentRequestList;
+//        this.teacherPaymentRequestList = teacherPaymentRequestList;
         this.mListener = listener;
     }
 
@@ -32,21 +33,23 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, final int i) {
-        PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentRequestList.get(i);
+    public void onBindViewHolder(@NonNull final PaymentViewHolder paymentViewHolder, final int i) {
+//        PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentRequestList.get(i);
 
-        paymentViewHolder.textViewName.setText(teacherPaymentRequestList.get(i).getName());
-        paymentViewHolder.textViewPrice.setText(Integer.toString(teacherPaymentRequestList.get(i).getPrice())+" DKK");
-        paymentViewHolder.textViewDate.setText(teacherPaymentRequestList.get(i).getDate());
+        paymentViewHolder.textViewName.setText(p.getTeacherDummies().get(i).getName());
+        paymentViewHolder.textViewPrice.setText(Integer.toString(p.getTeacherDummies().get(i).getPrice())+" DKK");
+        paymentViewHolder.textViewDate.setText(p.getTeacherDummies().get(i).getDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
 
         paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 System.out.println("Knap " + i);
                 Toast.makeText(v.getContext(),"Accept nr. " + i, Toast.LENGTH_SHORT).show();
 
+                p.addToHistory(p.getTeacherDummies().get(i));
+                p.getTeacherDummies().remove(i);
+                notifyDataSetChanged();
             }
         });
 
@@ -55,6 +58,8 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             public void onClick(View v) {
                 System.out.println("Knap " + i);
                 Toast.makeText(v.getContext(),"Reject nr. " + i, Toast.LENGTH_SHORT).show();
+                p.getTeacherDummies().remove(i);
+                notifyDataSetChanged();
             }
         });
 
@@ -63,7 +68,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
     @Override
     public int getItemCount() {
-        return teacherPaymentRequestList.size();
+        return p.getTeacherDummies().size();
     }
 
     class PaymentViewHolder extends RecyclerView.ViewHolder {

@@ -26,9 +26,9 @@ public class PaymentHistoryFragment extends Fragment {
     private int mColumnCount = 10;
 
 
-    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentHistorytList;
+//    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentHistorytList;
     private OnFragmentInteractionListener mListener;
-    private PaymentDummyBackend test = new PaymentDummyBackend();
+//    private PaymentDummyBackend test = new PaymentDummyBackend();
 
 
     public PaymentHistoryFragment() {
@@ -68,7 +68,7 @@ public class PaymentHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        teacherPaymentHistorytList = test.getTeacherDummiesHistory();
+//        teacherPaymentHistorytList = test.getTeacherDummiesHistory();
 
         View view = inflater.inflate(R.layout.fragment_payment_history_list, container, false);
 
@@ -77,7 +77,7 @@ public class PaymentHistoryFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(teacherPaymentHistorytList, mListener));
+            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(PaymentDummyBackend.getInstance().getTeacherDummiesHistory(), mListener));
         }
         return view;
     }

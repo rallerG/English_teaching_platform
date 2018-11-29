@@ -5,10 +5,17 @@ import java.util.ArrayList;
 public class PaymentDummyBackend {
 
 
-    private ArrayList<TeacherDummy> teacherDummies = new ArrayList<>();
+    private static PaymentDummyBackend Instance = null;
 
+    private static ArrayList<TeacherDummy> teacherDummies = new ArrayList<>();
+    private static ArrayList<TeacherDummy> teacherDummiesHistory = new ArrayList<>();
 
-    private ArrayList<TeacherDummy> teacherDummiesHistory = new ArrayList<>();
+    public static PaymentDummyBackend getInstance() {
+        if(Instance == null){
+            Instance = new PaymentDummyBackend();
+        }
+        return Instance;
+    }
 
     //Active list
     private TeacherDummy t1 = new TeacherDummy("Thomas", "14.04.2018", 270);
@@ -28,7 +35,7 @@ public class PaymentDummyBackend {
     private TeacherDummy h6 = new TeacherDummy("Line", "24.01.2015", 270);
     private TeacherDummy h7 = new TeacherDummy("Susan", "11.04.2016", 270);
 
-    public PaymentDummyBackend() {
+    void createList(){
         teacherDummies.clear();
         teacherDummies.add(t1);
         teacherDummies.add(t2);
@@ -47,6 +54,9 @@ public class PaymentDummyBackend {
         teacherDummiesHistory.add(h7);
     }
 
+    private PaymentDummyBackend() {
+    }
+
 
     public ArrayList<TeacherDummy> getTeacherDummies() {
         return teacherDummies;
@@ -56,6 +66,9 @@ public class PaymentDummyBackend {
         return teacherDummiesHistory;
     }
 
+    public void addToHistory(TeacherDummy teacherAcpt){
+        teacherDummiesHistory.add(teacherAcpt);
+    }
 
     class TeacherDummy{
        private String name;
