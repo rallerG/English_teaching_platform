@@ -40,8 +40,14 @@ public class SendRequestPaymentFragment extends Fragment {
 
         ss = view.findViewById(R.id.SearchableSpinner);
 
-        names.add("Kqly1");
-        names.add("Kqly2");
+        names.add("Peter");
+        names.add("Hans");
+        names.add("Jens");
+        names.add("Christian");
+        names.add("Simon");
+        names.add("Lars");
+        names.add("Patrick");
+
 
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.searchable_spinner_layout_item, R.id.nameView, names){
             @Override
@@ -55,7 +61,6 @@ public class SendRequestPaymentFragment extends Fragment {
         ss.setAdapter(adapter);
 
         //Add search function?
-
 
         return view;
     }

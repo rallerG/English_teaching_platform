@@ -56,13 +56,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="146dp"
-            android:text="TextView"
+            android:text="DKK"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/AmountEditText"
-            app:layout_constraintTop_toBottomOf="@+id/SearchableSpinner"
-            tools:text="DKK" />
+            app:layout_constraintTop_toBottomOf="@+id/SearchableSpinner" />
 
         <com.ebanx.swipebtn.SwipeButton
             android:id="@+id/swipe_btn"

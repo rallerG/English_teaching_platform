@@ -45,7 +45,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v == card) {
-            getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
+            //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
         }
     }
 }

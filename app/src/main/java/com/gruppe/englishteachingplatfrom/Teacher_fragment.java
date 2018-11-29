@@ -112,7 +112,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         if(v == pay){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            ft.replace(R.id.fragmentContent, new FeedbackFragment()); // replace with payment fragment
+            ft.replace(R.id.fragmentContent, new SendRequestPaymentFragment()); // replace with payment fragment
             ft.addToBackStack(null);
             ft.commit();
         }
