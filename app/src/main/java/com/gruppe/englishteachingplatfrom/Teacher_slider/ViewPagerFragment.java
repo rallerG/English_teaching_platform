@@ -25,8 +25,6 @@ public class ViewPagerFragment extends Fragment {
 
     private ViewPagerAdapter mAdapter;
 
-    private SingletonData singletonData = SingletonData.getInstance();
-
     private ArrayList<Integer> img = new ArrayList<Integer>();
 
     private ArrayList<ViewPagerModel> mContents;
