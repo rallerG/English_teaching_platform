@@ -2,58 +2,86 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="85dp"
     android:orientation="horizontal">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TableRow
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/studName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-12dp">
+            android:layout_weight="1"
+            android:text="Name"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/studName"
-                android:layout_width="57dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="100dp"
-                android:layout_weight="1"
-                android:text="Name"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/FeedContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='"Hello, I would like you to teach me English. Can we schedule a date and time?'
+            android:textSize="12sp" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/star"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/tableLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_toggle_star_color" />
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </TableRow>
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/holder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_toggle_star_color" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ToggleButton
+            android:id="@+id/toggleStar"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@drawable/fav_checkbox"
+            android:checked="false"
+            android:textOff="@null"
+            android:textOn="@null" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="-5dp"
-                android:text='"Hello, I would like you to teach me English. Can we schedule a date and time?'
-                android:textSize="12sp" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textAlignment="textStart"
+            tools:layout_editor_absoluteX="308dp"
+            tools:layout_editor_absoluteY="63dp" />
+    </LinearLayout>
 
-        </TableRow>
-
-    </TableLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="-1dp"
+        android:background="@color/colorTint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

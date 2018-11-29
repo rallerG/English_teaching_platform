@@ -1,33 +1,40 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
 import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 
+import static com.gruppe.englishteachingplatfrom.request_mail.mail;
+
 
 public class RequestFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
+    private RecyclerView.LayoutManager layoutManager;
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private RecyclerView recycler;
 
+    ToggleButton toggleStar;
 
     public RequestFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static RequestFragment newInstance(int columnCount) {
         RequestFragment fragment = new RequestFragment();
         Bundle args = new Bundle();
@@ -40,6 +47,12 @@ public class RequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mail.add(new MailProfile("Chang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Huang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Zao", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Jin", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+        mail.add(new MailProfile("Xin", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -49,6 +62,12 @@ public class RequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_list, container, false);
+        View view1 = inflater.inflate(R.layout.fragment_request, container, false);
+        toggleStar = view1.findViewById(R.id.toggleStar);
+        recycler = view.findViewById(R.id.list);
+
+        layoutManager = new LinearLayoutManager(getContext());
+        recycler.setLayoutManager(layoutManager);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -59,7 +78,7 @@ public class RequestFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), mail));
         }
         return view;
     }
