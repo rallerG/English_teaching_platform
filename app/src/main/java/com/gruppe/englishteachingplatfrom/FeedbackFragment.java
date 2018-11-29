@@ -48,6 +48,11 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         list = new ArrayList<>();
         list.add(new FeedbackProfile("Xian", 3, "Good teacher"));
         list.add(new FeedbackProfile("Geng", 5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
+        list.add(new FeedbackProfile("Chuang", 1, "Bad teacher"));
+        list.add(new FeedbackProfile("Jin", 2, "Couldn't follow his lesson"));
+        list.add(new FeedbackProfile("Li", 5, "Cool teacher"));
+        list.add(new FeedbackProfile("Xia", 3, "Nice"));
+        list.add(new FeedbackProfile("Huan", 5, "I recommend this teacher, he is very kind and can help overtime if needed"));
 
 
         if (getArguments() != null) {

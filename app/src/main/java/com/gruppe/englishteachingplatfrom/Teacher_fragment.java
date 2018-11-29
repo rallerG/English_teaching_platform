@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
     public static final ArrayList<FeedbackProfile> list = new ArrayList<FeedbackProfile>();
-    TableLayout inbox;
+    LinearLayout inbox, pay;
     LinearLayout feed;
     ScrollView scroll;
     RecyclerView feedback;
@@ -57,7 +57,9 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         scroll = view.findViewById(R.id.scroll);
         inbox = view.findViewById(R.id.inbox);
         viewAll = view.findViewById(R.id.viewAll);
+        pay = view.findViewById(R.id.pay);
         viewAll.setOnClickListener(this);
+        pay.setOnClickListener(this);
 
 
         list.add(new FeedbackProfile("Xian",3, "Good teacher"));
@@ -104,6 +106,13 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.fragmentContent, new FeedbackFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+        if(v == pay){
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.replace(R.id.fragmentContent, new FeedbackFragment()); // replace with payment fragment
             ft.addToBackStack(null);
             ft.commit();
         }
