@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class SingletonData {
 
     private static SingletonData Instance = null;
-    private static ArrayList names = new ArrayList<String>();
-    private static ArrayList prof = new ArrayList<String>();
-    private static ArrayList nation = new ArrayList<String>();
+    private static ArrayList<String> names = new ArrayList<String>();
+    private static ArrayList<String> prof = new ArrayList<String>();
+    private static ArrayList<String> nation = new ArrayList<String>();
 
     private SingletonData(){
     }
