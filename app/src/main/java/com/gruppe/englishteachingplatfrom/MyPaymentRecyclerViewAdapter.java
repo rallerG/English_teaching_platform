@@ -1,12 +1,15 @@
 package com.gruppe.englishteachingplatfrom;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i) {
+    public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, final int i) {
         PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentRequestList.get(i);
 
         paymentViewHolder.textViewName.setText(teacherPaymentRequestList.get(i).getName());
@@ -37,6 +40,23 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         paymentViewHolder.textViewDate.setText(teacherPaymentRequestList.get(i).getDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
 
+        paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                System.out.println("Knap " + i);
+                Toast.makeText(v.getContext(),"Accept nr. " + i, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        paymentViewHolder.rejectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Knap " + i);
+                Toast.makeText(v.getContext(),"Reject nr. " + i, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -50,6 +70,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
         ImageView imageView;
         TextView textViewName, textViewPrice, textViewDate;
+        Button acceptButton, rejectButton;
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -57,6 +78,11 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             textViewName = itemView.findViewById(R.id.teacherName);
             textViewPrice = itemView.findViewById(R.id.amount);
             textViewDate = itemView.findViewById(R.id.date);
+
+            acceptButton = (Button) itemView.findViewById(R.id.accept_btn);
+            rejectButton = (Button) itemView.findViewById(R.id.reject_btn);
+
+
         }
     }
 }
