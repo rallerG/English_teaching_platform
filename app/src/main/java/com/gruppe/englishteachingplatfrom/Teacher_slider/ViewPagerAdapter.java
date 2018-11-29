@@ -74,7 +74,7 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
               Toast.makeText(context,contents.get(position).names,Toast.LENGTH_SHORT).show();
 
-              view.getContext().
+              //view.getContext().
 
 
             }
