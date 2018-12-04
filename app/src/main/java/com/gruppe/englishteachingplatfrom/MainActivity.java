@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,24 +20,19 @@ import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 
 import java.util.ArrayList;
 
-import static android.app.PendingIntent.getActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
         PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener,
         PaymentHistoryFragment.OnFragmentInteractionListener, View.OnClickListener {
 
-    private  static final  String TAG = "MainActivity";
+    private static final String TAG = "MainActivity";
 
     //vars
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
     public FloatingActionButton fab;
     public FloatingActionButton floatingActionButton;
     public int position;
     public int pic;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,62 +54,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Pick what fragment to display oncreate
+        //Pick what fragment to display onCreate
         displaySelectedScreen(6);
-
-
-
-
-
-
-
     }
-
-    private void getImages(){
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-
-
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
-
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-
-
-        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
-
-        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
-
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
-
-//        initRecyclerView();
-
-    }
-
-//    private void initRecyclerView(){
-//        Log.d(TAG, "initRecyclerView: init recyclerview");
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-//        recyclerView.setLayoutManager(layoutManager);
-//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
-//        recyclerView.setAdapter(adapter);
-//    }
 
     @Override
     public void onBackPressed() {
@@ -144,9 +85,9 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_filter_rating) {
             return true;
-        } else if (id == R.id.action_filter_country){
+        } else if (id == R.id.action_filter_country) {
             //Do stuff
-        } else if (id == R.id.action_filter_price){
+        } else if (id == R.id.action_filter_price) {
             //do stuff
         }
 
@@ -156,37 +97,9 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-            displaySelectedScreen(item.getItemId());
-
-//          Handle navigation view item clicks here.
-////        int id = item.getItemId();
-////
-////        if (id == R.id.nav_matches) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ListFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_favorites) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ListFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_pending) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ListFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_settings) {
-////            getSupportFragmentManager().beginTransaction().
-////                    replace(R.id.fragmentContent, new ViewPagerFragment()).
-////                    commit();
-////        } else if (id == R.id.nav_logout) {
-////
-////        }
-////
-////        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-////        drawer.closeDrawer(GravityCompat.START);
-
+        displaySelectedScreen(item.getItemId());
         return true;
     }
-
 
     private void displaySelectedScreen(int itemId) {
 
@@ -218,7 +131,7 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Payment");
                 break;
             case R.id.nav_settings:
-              //  fragment = new frag_Pager();
+                //  fragment = new frag_Pager();
                 fragment = new ViewPagerFragment();
                 setTitle("Settings");
                 break;
@@ -250,7 +163,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        if(view == fab) {
+        if (view == fab) {
             Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
             if (frag instanceof ViewPagerFragment) {
                 position = ((ViewPagerFragment) frag).getCurrentPosition();
@@ -262,10 +175,8 @@ public class MainActivity extends AppCompatActivity
             Fragment F = new DialogBox();
             F.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
-                addToBackStack(null).commit();
-           // fab.hide();
+                    addToBackStack(null).commit();
         }
-
     }
 
     @Override
