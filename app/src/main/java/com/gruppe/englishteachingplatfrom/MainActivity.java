@@ -15,10 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
-
-
-import java.util.ArrayList;
+import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragmentView;
 
 
 public class MainActivity extends AppCompatActivity
@@ -132,14 +129,14 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 //  fragment = new frag_Pager();
-                fragment = new ViewPagerFragment();
+                fragment = new ViewPagerFragmentView();
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
                 setTitle("Gruppe Magnus");
                 break;
             default:
-                fragment = new ViewPagerFragment();
+                fragment = new ViewPagerFragmentView();
                 setTitle("Gruppe Magnus");
                 break;
         }
@@ -165,9 +162,9 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         if (view == fab) {
             Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
-            if (frag instanceof ViewPagerFragment) {
-                position = ((ViewPagerFragment) frag).getCurrentPosition();
-                pic = ((ViewPagerFragment) frag).getCurrentPic();
+            if (frag instanceof ViewPagerFragmentView) {
+                position = ((ViewPagerFragmentView) frag).getCurrentPosition();
+                pic = ((ViewPagerFragmentView) frag).getCurrentPic();
             }
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);

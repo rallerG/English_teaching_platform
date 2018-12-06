@@ -20,13 +20,13 @@ import com.gruppe.englishteachingplatfrom.R;
 
 import java.util.List;
 
-public class ViewPagerAdapter extends PagerAdapter  {
+public class ViewPagerAdapterController extends PagerAdapter  {
 
 
     private List<ViewPagerModel> contents;
     private Context context;
 
-    public ViewPagerAdapter(List<ViewPagerModel> contents, Context context) {
+    public ViewPagerAdapterController(List<ViewPagerModel> contents, Context context) {
 
         this.contents = contents;
         this.context = context;

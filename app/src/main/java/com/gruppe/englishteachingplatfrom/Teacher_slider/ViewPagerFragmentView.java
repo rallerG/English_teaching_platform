@@ -1,29 +1,23 @@
 package com.gruppe.englishteachingplatfrom.Teacher_slider;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gruppe.englishteachingplatfrom.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.SingletonData;
-import com.gruppe.englishteachingplatfrom.TeacherProfile;
 
 import java.util.ArrayList;
 
 
-public class ViewPagerFragment extends Fragment {
+public class ViewPagerFragmentView extends Fragment {
 
     private ViewPager mViewPager;
 
-    private ViewPagerAdapter mAdapter;
+    private ViewPagerAdapterController mAdapter;
 
     private ArrayList<Integer> img = new ArrayList<Integer>();
 
@@ -89,7 +83,7 @@ public class ViewPagerFragment extends Fragment {
 
         }
 
-        mAdapter = new ViewPagerAdapter(mContents, getActivity());
+        mAdapter = new ViewPagerAdapterController(mContents, getActivity());
         mViewPager.setPageTransformer(true, new ViewPagerStack());
         mViewPager.setOffscreenPageLimit(3);
 
