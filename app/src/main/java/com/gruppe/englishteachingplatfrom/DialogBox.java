@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragmentView;
+import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
 
 
 public class DialogBox extends Fragment implements View.OnClickListener {
@@ -91,7 +93,7 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
             if(v == cancelButton){
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragmentView()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
             }
 
 

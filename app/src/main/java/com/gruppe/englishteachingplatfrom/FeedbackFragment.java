@@ -1,19 +1,28 @@
 package com.gruppe.englishteachingplatfrom;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.gruppe.englishteachingplatfrom.dummy.DummyContent;
+import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FeedbackFragment extends Fragment implements View.OnClickListener {
@@ -199,41 +208,4 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public static class ViewPagerModel {
-
-        public int images;
-
-        public String names;
-
-        public String desig;
-
-        public String place;
-
-        public int getImages() {
-
-            return images;
-
-        }
-
-        public String getNames() {
-
-            return names;
-
-        }
-
-        public String getDesig() {
-
-            return desig;
-
-        }
-
-        public String getPlace() {
-
-            return place;
-
-        }
-
-
-
-    }
 }

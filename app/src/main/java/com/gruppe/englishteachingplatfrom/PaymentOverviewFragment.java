@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gruppe.englishteachingplatfrom.Teacher_slider.ViewPagerFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
