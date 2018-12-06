@@ -10,6 +10,6 @@
     android:layout_marginRight="16dp"
     android:scrollbars="vertical"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".PaymentActiveFragment"
+    tools:context=".view.PaymentActiveFragment"
     tools:itemCount="4"
     tools:listitem="@layout/fragment_payment_request_item" />
