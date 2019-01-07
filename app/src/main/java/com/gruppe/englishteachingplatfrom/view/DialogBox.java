@@ -49,8 +49,8 @@ public class DialogBox extends Fragment implements View.OnClickListener {
         }
 
 
-        teacherInfo.setText(info.getNames().get(pos)+ "\nPro. Teacher\n180 DKK/hr");
-        confirmationText.setText("Are you sure you want to send a request to " + info.getNames().get(pos) + "?");
+        teacherInfo.setText(info.getTeacher().get(pos).getmName()+ "\nPro. Teacher\n180 DKK/hr");
+        confirmationText.setText("Are you sure you want to send a request to " + info.getTeacher().get(pos).getmName() + "?");
         teacherImage.setImageResource(pic);
 
         cancelButton.setOnClickListener(this);

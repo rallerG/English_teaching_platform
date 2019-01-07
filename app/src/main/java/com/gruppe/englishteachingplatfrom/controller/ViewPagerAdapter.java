@@ -8,34 +8,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter  {
 
 
-    private List<ViewPagerModel> contents;
+    private ArrayList<TeacherProfile> contents;
     private Context context;
+    int images[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
 
-    public ViewPagerAdapter(List<ViewPagerModel> contents, Context context) {
+    public ViewPagerAdapter(ArrayList<TeacherProfile> contents, Context context) {
 
         this.contents = contents;
         this.context = context;
-
     }
 
     @Override
     public int getCount() {
-
         return  contents.size();
-
     }
 
     @Override
@@ -55,12 +56,27 @@ public class ViewPagerAdapter extends PagerAdapter  {
         container.addView(view);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.iv);
-        imageView.setImageResource(contents.get(position).getImages());
+        imageView.setImageResource(images[position]);
 
-        TextView name, deig, place;
+        TextView name, title, rate, price;
+        RatingBar rating;
 
-        name = (TextView) view.findViewById(R.id.name);
-        name.setText(contents.get(position).getPlace());
+        name = view.findViewById(R.id.name);
+        name.setText(contents.get(position).getmName());
+
+        title = view.findViewById(R.id.title);
+        title.setText(contents.get(position).getmTitle());
+
+        //Rating should be replaced by teacher rating
+        rating = view.findViewById(R.id.rating);
+        rating.setRating(Float.parseFloat(contents.get(position).getmRating()));
+
+        rate = view.findViewById(R.id.rate);
+        rate.setText(""+ rating.getRating());
+
+        //Price should be replaced by teacher pricing
+        price = view.findViewById(R.id.price);
+        price.setText(contents.get(position).getmPrice() + "dkk");
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +84,7 @@ public class ViewPagerAdapter extends PagerAdapter  {
                 // this is the on click listerner for the objects in the viewpager
                 System.out.println("works");
 
-
-
-              Toast.makeText(context,contents.get(position).names,Toast.LENGTH_SHORT).show();
+              Toast.makeText(context,contents.get(position).getmName(),Toast.LENGTH_SHORT).show();
 
               //view.getContext().
 

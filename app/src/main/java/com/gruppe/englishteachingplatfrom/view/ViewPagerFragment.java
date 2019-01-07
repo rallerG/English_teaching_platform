@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.controller.ViewPagerAdapter;
 import com.gruppe.englishteachingplatfrom.model.SingletonData;
 
@@ -21,11 +21,12 @@ public class ViewPagerFragment extends Fragment {
 
     private ViewPagerAdapter mAdapter;
 
-    private ArrayList<Integer> img = new ArrayList<Integer>();
-
-    private ArrayList<ViewPagerModel> mContents;
+    private ArrayList<TeacherProfile> mContents;
 
     private SingletonData info;
+
+    int img[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,51 +45,20 @@ public class ViewPagerFragment extends Fragment {
 
         mContents = new ArrayList<>();
 
-        int images[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3 };
 
-        img.add(R.drawable.profile1);
-        img.add(R.drawable.profile2);
-        img.add(R.drawable.profile3);
+        info.getTeacher().add(new TeacherProfile("Smith","3", "English Teacher", "1" ));
+        info.getTeacher().add(new TeacherProfile("Johnson","4", "English Teacher", "2" ));
+        info.getTeacher().add(new TeacherProfile("David","1", "English Teacher", "3" ));
+        info.getTeacher().add(new TeacherProfile("Adam","5", "English Teacher", "4" ));
+        info.getTeacher().add(new TeacherProfile("Adam","5", "English Teacher", "5" ));
+        info.getTeacher().add(new TeacherProfile("Adam","5", "English Teacher", "6" ));
+        info.getTeacher().add(new TeacherProfile("Adam","5", "English Teacher", "7" ));
+        info.getTeacher().add(new TeacherProfile("Adam","5", "English Teacher", "8" ));
+        info.getTeacher().add(new TeacherProfile("Adam","5", "English Teacher", "9" ));
 
-       // String names[] = {"Smith", "Johnson", "David", "Adam"};
-
-        info.getNames().add("Smith");
-        info.getNames().add("Johnson");
-        info.getNames().add("David");
-        info.getNames().add("Adam");
-
-       // String desig[] = {"English Teacher"};
-        info.getProf().add("English Teacher");
-
-       // String place[] = {"USA", "DENMARK", "SWEDEN"};
-
-        info.getNation().add("USA");
-        info.getNation().add("Denmark");
-        info.getNation().add("Sweden");
-
-        ArrayList<String> names = info.getNames();
-        ArrayList<String> prof = info.getProf();
-        ArrayList<String> nation = info.getNation();
-        for (int i = 0; i < images.length; i++){
-
-            ViewPagerModel viewPagerModel = new ViewPagerModel();
-
-            viewPagerModel.images = images[i];
-
-            viewPagerModel.names = names.get(i);
-
-            viewPagerModel.desig = prof.get(0);
-
-            viewPagerModel.place = nation.get(i);
-
-            mContents.add(viewPagerModel);
-
-        }
-
-        mAdapter = new ViewPagerAdapter(mContents, getActivity());
+        mAdapter = new ViewPagerAdapter(info.getTeacher(), getActivity());
         mViewPager.setPageTransformer(true, new ViewPagerStack());
         mViewPager.setOffscreenPageLimit(3);
-
 
         mViewPager.setAdapter(mAdapter);
 
@@ -100,8 +70,7 @@ public class ViewPagerFragment extends Fragment {
     }
 
     public int getCurrentPic(){
-
-        return img.get(mViewPager.getCurrentItem());
+        return img[getCurrentPosition()];
     }
 
     private class ViewPagerStack implements ViewPager.PageTransformer {
@@ -117,10 +86,7 @@ public class ViewPagerFragment extends Fragment {
                 page.setTranslationX(-page.getWidth() * position);
 
                 page.setTranslationY(-30 * position);
-
             }
-
         }
-
     }
 }
