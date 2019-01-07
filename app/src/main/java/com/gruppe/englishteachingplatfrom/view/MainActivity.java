@@ -52,8 +52,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Pick what fragment to display onCreate
-        displaySelectedScreen(6);
+        if(savedInstanceState == null) {
+            //Pick what fragment to display onCreate
+            displaySelectedScreen(6);
+        }
     }
 
     @Override
