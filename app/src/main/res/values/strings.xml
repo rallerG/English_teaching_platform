@@ -9,10 +9,10 @@
     <string name="action_filter_country">Filter by country</string>
     <string name="action_filter_price">Filter by price</string>
     <string name="action_settings">Settings</string>
-  
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-  
+
     <string name="dialogbox_text">Marie\nPro. Teacher\n180 DKK/hr </string>
     <string name="dialogbox_text2">Are you sure you want to send a request to Marie? </string>
     <string name="confirmation_text">Congratulations. \nThe request has been\nsent</string>
