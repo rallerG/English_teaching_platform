@@ -7,8 +7,8 @@ public class PaymentDummyBackend {
 
     private static PaymentDummyBackend Instance = null;
 
-    private static ArrayList<TeacherDummy> teacherDummies = new ArrayList<>();
-    private static ArrayList<TeacherDummy> teacherDummiesHistory = new ArrayList<>();
+    private static ArrayList<Payment> teacherDummies = new ArrayList<>();
+    private static ArrayList<Payment> teacherDummiesHistory = new ArrayList<>();
 
     public static PaymentDummyBackend getInstance() {
         if(Instance == null){
@@ -18,7 +18,7 @@ public class PaymentDummyBackend {
     }
 
     //Active list
-    private TeacherDummy t1 = new TeacherDummy("Thomas", "14.04.2018", 270);
+    private TeacherDummy t1 = Payment.newTransaction();
     private TeacherDummy t2 = new TeacherDummy("Mikkel", "12.02.2018", 270);
     private TeacherDummy t3 = new TeacherDummy("Julie", "05.03.2018", 270);
     private TeacherDummy t4 = new TeacherDummy("Jonas", "20.07.2018", 270);
@@ -54,15 +54,16 @@ public class PaymentDummyBackend {
         teacherDummiesHistory.add(h7);
     }
 
+
     private PaymentDummyBackend() {
     }
 
 
-    public ArrayList<TeacherDummy> getTeacherDummies() {
+    public ArrayList<Payment> getTeacherDummies() {
         return teacherDummies;
     }
 
-    public ArrayList<TeacherDummy> getTeacherDummiesHistory() {
+    public ArrayList<Payment> getTeacherDummiesHistory() {
         return teacherDummiesHistory;
     }
 
