@@ -26,7 +26,7 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
     private ArrayList<TeacherProfile> contents;
     private Context context;
-    int images[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
+  //  int images[] = {R.drawable.profile1,R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
 
     public ViewPagerAdapter(ArrayList<TeacherProfile> contents, Context context) {
 
@@ -41,9 +41,7 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-
         return view ==(LinearLayout) object;
-
     }
 
     @Override
@@ -53,10 +51,12 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
         final View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
 
-        container.addView(view);
+        container.addView(view,0);
+
+        System.out.println("position: " + position);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.iv);
-        imageView.setImageResource(images[position]);
+        imageView.setImageResource(contents.get(position).getmPicture());
 
         TextView name, title, rate, price;
         RatingBar rating;
@@ -86,21 +86,15 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
               Toast.makeText(context,contents.get(position).getmName(),Toast.LENGTH_SHORT).show();
 
-              //view.getContext().
-
-
             }
         });
-
         return view;
 
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
         container.removeView((View) object);
-
     }
 
 
