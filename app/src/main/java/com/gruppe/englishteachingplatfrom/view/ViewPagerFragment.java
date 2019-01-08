@@ -23,9 +23,9 @@ public class ViewPagerFragment extends Fragment {
 
     private SingletonData info;
 
+    Parcelable state;
+
 //    int img[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
-
-
 
 
     @Override
@@ -42,21 +42,10 @@ public class ViewPagerFragment extends Fragment {
         info = SingletonData.getInstance();
 
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
-        if(savedInstanceState != null) {
-            mViewPager.onRestoreInstanceState(savedInstanceState);
-        }
-        if(savedInstanceState == null) {
-            info.getTeacher().add(new TeacherProfile("0", "3", "English Teacher", "1", R.drawable.profile1));
-            info.getTeacher().add(new TeacherProfile("1", "4", "English Teacher", "2", R.drawable.profile2));
-            info.getTeacher().add(new TeacherProfile("2", "1", "English Teacher", "3", R.drawable.profile3));
-            info.getTeacher().add(new TeacherProfile("3", "5", "English Teacher", "4", R.drawable.profile3));
-            info.getTeacher().add(new TeacherProfile("4", "5", "English Teacher", "5", R.drawable.profile3));
-            info.getTeacher().add(new TeacherProfile("5", "5", "English Teacher", "6", R.drawable.profile3));
-            info.getTeacher().add(new TeacherProfile("6", "5", "English Teacher", "7", R.drawable.profile3));
-            info.getTeacher().add(new TeacherProfile("7", "5", "English Teacher", "8", R.drawable.profile3));
-            info.getTeacher().add(new TeacherProfile("8", "5", "English Teacher", "9", R.drawable.profile3));
-        }
 
+
+
+        System.out.println("størrelse af teacher " +info.getTeacher().size());
         mAdapter = new ViewPagerAdapter(info.getTeacher(), getActivity());
         mViewPager.setPageTransformer(true, new ViewPagerStack());
         mViewPager.setOffscreenPageLimit(3);
@@ -98,6 +87,13 @@ public class ViewPagerFragment extends Fragment {
         mListState = RecyclerView.LayoutManager.onSaveInstanceState();
         state.putParcelable(LIST_STATE_KEY, mListState);
     }*/
+
+    @Override
+    public void onPause() {
+        // Save ListView state @ onPause
+        state = mViewPager.onSaveInstanceState();
+        super.onPause();
+    }
 
 
 }
