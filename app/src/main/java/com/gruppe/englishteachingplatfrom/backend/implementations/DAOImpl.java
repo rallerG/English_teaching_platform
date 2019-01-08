@@ -1,4 +1,4 @@
-package com.gruppe.englishteachingplatfrom.backend;
+package com.gruppe.englishteachingplatfrom.backend.implementations;
 
 
 import android.support.annotation.NonNull;
@@ -13,14 +13,14 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.CollectionObject;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.DocumentObject;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
 
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public abstract class DAOImpl<T> implements DocumentObject<T>, CollectionObject<T> {
+public abstract class DAOImpl<T> implements Document<T>, Collection<T> {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
     private Class<T> type;

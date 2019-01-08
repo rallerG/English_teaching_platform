@@ -2,6 +2,6 @@ package com.gruppe.englishteachingplatfrom.backend.interfaces;
 
 import java.util.List;
 
-public interface CollectionObject <T> {
+public interface Collection<T> {
     List<T> getAll();
 }
