@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
-import com.gruppe.englishteachingplatfrom.model.PaymentDummyBackend;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.R;
 
 
@@ -95,7 +95,7 @@ public class PaymentActiveFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(PaymentDummyBackend.getInstance().getTeacherDummies(), mListener));
+            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(Singleton.getInstance().getTeacherDummies(), mListener));
         }
         return view;
     }

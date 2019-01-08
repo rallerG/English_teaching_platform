@@ -2,17 +2,17 @@ package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
 
-public class PaymentDummyBackend {
+public class Singleton {
 
 
-    private static PaymentDummyBackend Instance = null;
+    private static Singleton Instance = null;
 
     private static ArrayList<Payment> teacherDummies = new ArrayList<>();
-    private static ArrayList<Payment> teacherDummiesHistory = new ArrayList<>();
+    private static ArrayList<Payment> studentDummies = new ArrayList<>();
 
-    public static PaymentDummyBackend getInstance() {
+    public static Singleton getInstance() {
         if(Instance == null){
-            Instance = new PaymentDummyBackend();
+            Instance = new Singleton();
         }
         return Instance;
     }
@@ -45,18 +45,19 @@ public class PaymentDummyBackend {
         teacherDummies.add(t6);
         teacherDummies.add(t7);
 
-        teacherDummiesHistory.add(h1);
-        teacherDummiesHistory.add(h2);
-        teacherDummiesHistory.add(h3);
-        teacherDummiesHistory.add(h4);
-        teacherDummiesHistory.add(h5);
-        teacherDummiesHistory.add(h6);
-        teacherDummiesHistory.add(h7);
+        studentDummies.add(h1);
+        studentDummies.add(h2);
+        studentDummies.add(h3);
+        studentDummies.add(h4);
+        studentDummies.add(h5);
+        studentDummies.add(h6);
+        studentDummies.add(h7);
     }
 
 
-    private PaymentDummyBackend() {
+    private Singleton() {
     }
+
 
 
     public ArrayList<Payment> getTeacherDummies() {
@@ -64,11 +65,11 @@ public class PaymentDummyBackend {
     }
 
     public ArrayList<Payment> getTeacherDummiesHistory() {
-        return teacherDummiesHistory;
+        return studentDummies;
     }
 
     public void addToHistory(TeacherDummy teacherAcpt){
-        teacherDummiesHistory.add(teacherAcpt);
+        studentDummies.add(teacherAcpt);
     }
 
     public class TeacherDummy{
@@ -107,3 +108,9 @@ public class PaymentDummyBackend {
         }
     }
 }
+
+
+
+//    private static ArrayList<String> names = new ArrayList<String>();
+//    private static ArrayList<String> prof = new ArrayList<String>();
+//    private static ArrayList<String> nation = new ArrayList<String>();

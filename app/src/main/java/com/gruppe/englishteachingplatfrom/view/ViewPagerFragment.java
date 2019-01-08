@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
 import com.gruppe.englishteachingplatfrom.controller.ViewPagerAdapter;
-import com.gruppe.englishteachingplatfrom.model.SingletonData;
 
 import java.util.ArrayList;
 

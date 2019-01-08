@@ -11,7 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.SingletonData;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 
 public class ConfirmationBox extends Fragment implements View.OnClickListener {
@@ -22,7 +22,7 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
     private RatingBar ratingBar;
     private int pic;
     private int pos;
-    private SingletonData info;
+    private Singleton info;
 
     public ConfirmationBox(){
 
@@ -33,7 +33,7 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View vw = inflater.inflate(R.layout.fragment_confirmation_box, container, false);
 
-        info = SingletonData.getInstance();
+        info = Singleton.getInstance();
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
