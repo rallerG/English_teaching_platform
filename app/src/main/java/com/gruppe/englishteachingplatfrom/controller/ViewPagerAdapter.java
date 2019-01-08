@@ -2,10 +2,14 @@ package com.gruppe.englishteachingplatfrom.controller;
 
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -21,11 +25,15 @@ import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends PagerAdapter  {
+public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListener {
 
 
     private ArrayList<TeacherProfile> contents;
     private Context context;
+    LinearLayout information, expander;
+    ImageView imageView;
+    CardView card;
+    TextView txt;
   //  int images[] = {R.drawable.profile1,R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
 
     public ViewPagerAdapter(ArrayList<TeacherProfile> contents, Context context) {
@@ -41,7 +49,7 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view ==(LinearLayout) object;
+        return view ==(FrameLayout) object;
     }
 
     @Override
@@ -49,19 +57,40 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final View view = inflater.inflate(R.layout.fragment_viewpager, container, false);
+        final View view = inflater.inflate(R.layout.fragment_page_frag, container, false);
+
+
+/*
+        expander = view.findViewById(R.id.expander);
+        expander.setOnClickListener(this);*/
+
+
 
         container.addView(view,0);
 
         System.out.println("position: " + position);
 
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
+        imageView = (ImageView) view.findViewById(R.id.pic);
+
+
+
         imageView.setImageResource(contents.get(position).getmPicture());
+
 
         TextView name, title, rate, price;
         RatingBar rating;
 
-        name = view.findViewById(R.id.name);
+        card = view.findViewById(R.id.card);
+        card.setOnClickListener(this);
+    /*    information = view.findViewById(R.id.information);
+        information.setVisibility(View.INVISIBLE);*/
+
+    //    information.setOnClickListener(this);
+
+        txt = view.findViewById(R.id.sup_txt);
+        txt.setText(contents.get(position).getmInfo());
+        txt.setVisibility(View.INVISIBLE);
+       /* name = view.findViewById(R.id.name);
         name.setText(contents.get(position).getmName());
 
         title = view.findViewById(R.id.title);
@@ -73,10 +102,10 @@ public class ViewPagerAdapter extends PagerAdapter  {
 
         rate = view.findViewById(R.id.rate);
         rate.setText(""+ rating.getRating());
-
+*/
         //Price should be replaced by teacher pricing
-        price = view.findViewById(R.id.price);
-        price.setText(contents.get(position).getmPrice() + "dkk");
+    /*    price = view.findViewById(R.id.price);
+        price.setText(contents.get(position).getmPrice() + "dkk");*/
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,5 +127,21 @@ public class ViewPagerAdapter extends PagerAdapter  {
     }
 
 
+    @Override
+    public void onClick(View v) {
+       /* if(v == expander){
+            System.out.println("Du trykkede på en teacher");
+                information.setVisibility(View.GONE);
+            } else {
+                information.setVisibility(View.VISIBLE);
+            }
 
+            if(v == imageView){
+            information.setVisibility(View.VISIBLE);
+            }*/
+       if(v == card){
+           txt.setVisibility(View.VISIBLE);
+
+       }
+    }
 }

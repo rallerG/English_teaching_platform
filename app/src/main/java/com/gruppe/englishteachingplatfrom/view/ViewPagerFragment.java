@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
@@ -15,15 +16,14 @@ import com.gruppe.englishteachingplatfrom.controller.ViewPagerAdapter;
 import com.gruppe.englishteachingplatfrom.model.SingletonData;
 
 
-public class ViewPagerFragment extends Fragment {
+public class ViewPagerFragment extends Fragment implements View.OnClickListener {
 
     private ViewPager mViewPager;
-
     private ViewPagerAdapter mAdapter;
-
     private SingletonData info;
 
     Parcelable state;
+ //   LinearLayout information;
 
 //    int img[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
 
@@ -42,8 +42,10 @@ public class ViewPagerFragment extends Fragment {
         info = SingletonData.getInstance();
 
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
+ //       information = view.findViewById(R.id.information);
+//        information.setVisibility(View.GONE);
 
-
+        mViewPager.setOnClickListener(this);
 
         System.out.println("størrelse af teacher " +info.getTeacher().size());
         mAdapter = new ViewPagerAdapter(info.getTeacher(), getActivity());
@@ -63,6 +65,13 @@ public class ViewPagerFragment extends Fragment {
         return info.getTeacher().get(getCurrentPosition()).getmPicture();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == mViewPager){
+            expand();
+        }
+    }
+
     private class ViewPagerStack implements ViewPager.PageTransformer {
 
         @Override
@@ -70,8 +79,8 @@ public class ViewPagerFragment extends Fragment {
 
             if (position >= 0) {
 
-                page.setScaleX(0.8f - 0.05f * position);
-                page.setScaleY(0.8f);
+             /*   page.setScaleX(0.8f - 0.05f * position);
+                page.setScaleY(0.8f);*/
 
                 page.setTranslationX(-page.getWidth() * position);
 
@@ -95,5 +104,8 @@ public class ViewPagerFragment extends Fragment {
         super.onPause();
     }
 
+    public void expand(){
+
+    }
 
 }

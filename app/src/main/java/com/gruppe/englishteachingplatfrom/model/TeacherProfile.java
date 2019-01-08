@@ -13,13 +13,15 @@ public class TeacherProfile {
     private String mRating;
     private String mTitle;
     private String mPrice;
+    private String mInfo;
 
-    public TeacherProfile(String mName, String mRating, String mTitle, String mPrice, int mPicture) {
+    public TeacherProfile(String mName, String mRating, String mTitle, String mPrice, int mPicture, String mInfo) {
         this.mName = mName;
         this.mRating = mRating;
         this.mTitle = mTitle;
         this.mPrice = mPrice;
         this.mPicture = mPicture;
+        this.mInfo = mInfo;
     }
 
 
@@ -29,7 +31,7 @@ public class TeacherProfile {
     public static ArrayList<TeacherProfile> createPendingTeacherProfile(int numContacts) {
         if (pendingProfiles.isEmpty()) {
             for (int i = 1; i <= numContacts; i++) {
-                pendingProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr", 0));
+                pendingProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr", 0, null));
             }
             System.out.println("PROFILER BLEV OPRETTET!!!");
         }
@@ -40,7 +42,7 @@ public class TeacherProfile {
     public static ArrayList<TeacherProfile> createFavoriteTeacherProfile(int numContacts) {
         if (favoriteProfiles.isEmpty()) {
             for (int i = 1; i <= numContacts; i++) {
-                favoriteProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr",0));
+                favoriteProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr",0,null));
             }
             System.out.println("PROFILER BLEV OPRETTET!!!");
         }
@@ -51,7 +53,7 @@ public class TeacherProfile {
     public static ArrayList<TeacherProfile> createMatchTeacherProfile(int numContacts) {
         if (MatchProfiles.isEmpty()) {
             for (int i = 1; i <= numContacts; i++) {
-                MatchProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr",0));
+                MatchProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr",0,null));
             }
             System.out.println("PROFILER BLEV OPRETTET!!!");
         }
@@ -81,5 +83,8 @@ public class TeacherProfile {
     }
     public void setmPicture(int mPicture) {
         this.mPicture = mPicture;
+    }
+    public String getmInfo() {
+        return mInfo;
     }
 }
