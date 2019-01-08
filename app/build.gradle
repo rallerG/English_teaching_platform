@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -48,4 +49,5 @@ dependencies {
 
     //Searchable spinner
     implementation 'gr.escsoft.michaelprimez.searchablespinner:SearchableSpinner:1.0.9'
+    implementation 'com.google.firebase:firebase-firestore:17.0.1'
 }
