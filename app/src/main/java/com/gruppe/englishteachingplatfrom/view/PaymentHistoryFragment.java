@@ -69,7 +69,7 @@ public class PaymentHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        teacherPaymentHistorytList = test.getTeacherDummiesHistory();
+//        teacherPaymentHistorytList = test.getStudentDummies();
 
         View view = inflater.inflate(R.layout.fragment_payment_history_list, container, false);
 
@@ -78,7 +78,7 @@ public class PaymentHistoryFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(Singleton.getInstance().getTeacherDummiesHistory(), mListener));
+            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(Singleton.getInstance().getStudentDummies(), mListener));
         }
         return view;
     }

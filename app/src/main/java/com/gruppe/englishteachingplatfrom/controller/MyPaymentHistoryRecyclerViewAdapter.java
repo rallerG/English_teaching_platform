@@ -38,9 +38,9 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
     public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i) {
 //        Singleton.TeacherDummy teacherProfile = teacherPaymentHistoryList.get(i);
 
-        paymentViewHolder.textViewName.setText(p.getTeacherDummiesHistory().get(i).getName());
-        paymentViewHolder.textViewPrice.setText(Integer.toString(p.getTeacherDummiesHistory().get(i).getPrice())+" DKK");
-        paymentViewHolder.textViewDate.setText(p.getTeacherDummiesHistory().get(i).getDate());
+        paymentViewHolder.textViewName.setText(p.getStudentDummies().get(i).getName());
+        paymentViewHolder.textViewPrice.setText(Integer.toString(p.getStudentDummies().get(i).getPrice())+" DKK");
+        paymentViewHolder.textViewDate.setText(p.getStudentDummies().get(i).getDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
         paymentViewHolder.textViewStatus.setText("Payed");
     }
@@ -48,7 +48,7 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     @Override
     public int getItemCount() {
-        return p.getTeacherDummiesHistory().size();
+        return p.getStudentDummies().size();
     }
 
     class PaymentViewHolder extends RecyclerView.ViewHolder {
