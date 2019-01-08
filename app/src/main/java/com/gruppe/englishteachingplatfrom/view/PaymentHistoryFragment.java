@@ -78,7 +78,7 @@ public class PaymentHistoryFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(Singleton.getInstance().getStudentDummies(), mListener));
+            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(Singleton.getInstance().getTeacherDummies(), mListener));
         }
         return view;
     }

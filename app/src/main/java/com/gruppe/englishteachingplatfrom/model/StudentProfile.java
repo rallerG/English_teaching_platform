@@ -29,4 +29,36 @@ public class StudentProfile {
         this.profilePicture = profilePicture;
         this.rating = rating;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getProfilePicture() {
+        return profilePicture;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public static ArrayList<TeacherProfile> getPendingProfiles() {
+        return pendingProfiles;
+    }
+
+    public static ArrayList<TeacherProfile> getFavoriteProfiles() {
+        return favoriteProfiles;
+    }
+
+    public static ArrayList<TeacherProfile> getMatchProfiles() {
+        return MatchProfiles;
+    }
 }

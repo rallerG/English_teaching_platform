@@ -13,17 +13,19 @@ import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.view.ListFragment.OnListFragmentInteractionListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavoriteRecyclerViewAdapter.ViewHolder> {
 
-//    private final List<TeacherProfile> mProfiles;
+    private  List<TeacherProfile> mProfiles;
     private final OnListFragmentInteractionListener mListener;
 
-    Singleton p = Singleton.getInstance();
 
 
-    public MyFavoriteRecyclerViewAdapter(OnListFragmentInteractionListener listener) {
-//        mProfiles = items;
+    public MyFavoriteRecyclerViewAdapter(ArrayList<TeacherProfile> teacherDummies, OnListFragmentInteractionListener listener) {
+        mProfiles = teacherDummies;
         mListener = listener;
     }
 
@@ -43,17 +45,17 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
 //        holder.mLanguageView.setText(mProfiles.get(position).getmTitle());
 //        holder.mPriceView.setText(mProfiles.get(position).getmPrice());
 
-        holder.mNameView.setText(p.getTeacherDummies().get(position).getName());
-        holder.mRatingNum.setText(Double.toString(p.getTeacherDummies().get(position).getRating()));
-        holder.mRatingBar.setRating( (float) (p.getTeacherDummies().get(position).getRating()));
-        holder.mLanguageView.setText(p.getTeacherDummies().get(position).getLanguage());
-        holder.mPriceView.setText(p.getTeacherDummies().get(position).getPrice());
+        holder.mNameView.setText(mProfiles.get(position).getName());
+        holder.mRatingNum.setText(Double.toString(mProfiles.get(position).getRating()));
+        holder.mRatingBar.setRating( (float) (mProfiles.get(position).getRating()));
+        holder.mLanguageView.setText(mProfiles.get(position).getLanguage());
+        holder.mPriceView.setText(Integer.toString(mProfiles.get(position).getPrice()));
         holder.mImageView.setImageResource(R.mipmap.ic_launcher_foreground_student);
     }
 
     @Override
     public int getItemCount() {
-        return p.getTeacherDummies().size();
+        return mProfiles.size();
     }
 
 
