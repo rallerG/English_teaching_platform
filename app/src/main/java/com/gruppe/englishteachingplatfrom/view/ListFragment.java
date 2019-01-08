@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 /**
@@ -28,6 +29,7 @@ public class ListFragment extends Fragment {
     private int mColumnCount = 1;
     private int listId;
     private OnListFragmentInteractionListener mListener;
+    Singleton p = Singleton.getInstance();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,13 +74,13 @@ public class ListFragment extends Fragment {
                 System.out.println(listId);
             switch (getArguments().getInt("id")) {
                 case R.id.nav_matches:
-                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createMatchTeacherProfile(10), mListener));
+                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
                     break;
                 case R.id.nav_favorites:
-                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createFavoriteTeacherProfile(10), mListener));
+                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
                     break;
                 case R.id.nav_pending:
-                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createPendingTeacherProfile(10), mListener));
+                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
                     break;
             }
         }
