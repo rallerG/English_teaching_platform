@@ -9,15 +9,12 @@ public class TeacherProfile {
     //Needs a picture attribute
     private String id;
     private String name;
-
-
-
-    private String rating;
+    private double rating;
     private int profilePic;
     private String language;
     private int price;
 
-    public TeacherProfile(String id, String name, String rating, int profilePic, String language, int price) {
+    public TeacherProfile(String id, String name, double rating, int profilePic, String language, int price) {
         this.name = name;
         this.rating = rating;
         this.profilePic = profilePic;
@@ -48,7 +45,7 @@ public class TeacherProfile {
         return id;
     }
 
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
 

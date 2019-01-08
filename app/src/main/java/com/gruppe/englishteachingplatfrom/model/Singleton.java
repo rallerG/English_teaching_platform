@@ -77,7 +77,7 @@ public class Singleton {
     private static int lastTeacherProfileId = 0;
     public static ArrayList<TeacherProfile> createRandomTeacherProfile(int numContacts) {
             for (int i = 1; i <= numContacts; i++) {
-                teacherDummies.add(new TeacherProfile("Navn " + ++lastTeacherProfileId, Float.toString((float) (Math.random() * 5.0)), Integer.toString((int) (Math.random() * 250.0 + 70)), 0, "English", 299));
+                teacherDummies.add(new TeacherProfile("" + ++lastTeacherProfileId,"Navn ", (Math.random() * 5.0), 0, "English", (int) (Math.random() * 250.0 + 70)));
             }
             System.out.println("PROFILER BLEV OPRETTET!!!");
 
