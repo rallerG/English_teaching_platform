@@ -18,13 +18,13 @@ public class Singleton {
     }
 
     //Active list
-    private TeacherProfile t1 = new TeacherProfile("Hans", "0", "Teacher", "270");
-    private TeacherProfile t2 = new TeacherProfile("Mikkel", "0", "Teacher", "270");
-    private TeacherProfile t3 = new TeacherProfile("Julie", "0", "Teacher", "270");
-    private TeacherProfile t4 = new TeacherProfile("Jonas", "0", "Teacher", "270");
-    private TeacherProfile t5 = new TeacherProfile("Christoffer", "0", "Teacher", "270");
-    private TeacherProfile t6 = new TeacherProfile("Knud", "0", "Teacher", "270");
-    private TeacherProfile t7 = new TeacherProfile("Peter", "0", "Teacher", "270");
+    private TeacherProfile t1 = new TeacherProfile("Hans", "0", "Teacher", 270, "English", 299);
+    private TeacherProfile t2 = new TeacherProfile("Mikkel", "0", "Teacher", 270, "English", 299);
+    private TeacherProfile t3 = new TeacherProfile("Julie", "0", "Teacher", 270, "English", 299);
+    private TeacherProfile t4 = new TeacherProfile("Jonas", "0", "Teacher", 270, "English", 299);
+    private TeacherProfile t5 = new TeacherProfile("Christoffer", "0", "Teacher", 270, "English", 299);
+    private TeacherProfile t6 = new TeacherProfile("Knud", "0", "Teacher", 270, "English", 299);
+    private TeacherProfile t7 = new TeacherProfile("Peter", "0", "Teacher", 270, "English", 299);
 
     //History list
     private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0, 0);
@@ -70,14 +70,14 @@ public class Singleton {
         return studentDummies;
     }
 
-    public void addToHistory(TeacherDummy teacherAcpt){
-        studentDummies.add(teacherAcpt);
-    }
+//    public void addToHistory(TeacherDummy teacherAcpt){
+//        studentDummies.add(teacherAcpt);
+//    }
 
     private static int lastTeacherProfileId = 0;
     public static ArrayList<TeacherProfile> createRandomTeacherProfile(int numContacts) {
             for (int i = 1; i <= numContacts; i++) {
-                teacherDummies.add(new TeacherProfile("Navn " + ++lastTeacherProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
+                teacherDummies.add(new TeacherProfile("Navn " + ++lastTeacherProfileId, Float.toString((float) (Math.random() * 5.0)), Integer.toString((int) (Math.random() * 250.0 + 70)), 0, "English", 299));
             }
             System.out.println("PROFILER BLEV OPRETTET!!!");
 
