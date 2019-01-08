@@ -1,8 +1,9 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class TeacherProfile {
+public class TeacherProfile extends DocumentObject{
     private static ArrayList<StudentProfile> pendingProfiles = new ArrayList<>();
     private static ArrayList<StudentProfile> favoriteProfiles = new ArrayList<>();
     private static ArrayList<StudentProfile> MatchProfiles = new ArrayList<>();
@@ -59,6 +60,11 @@ public class TeacherProfile {
 
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public Map<String, String> toMap() {
+        return null;
     }
 }
 

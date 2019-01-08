@@ -5,7 +5,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocu
 public class StudentPendingsDocumentImpl extends DAOImpl implements StudentPendingsDocument {
     private String parentStudentDocumentId;
     public StudentPendingsDocumentImpl(String parentStudentDocumentId) {
-        super("students/"+parentStudentDocumentId+"/pendings", );
+        super("students/"+parentStudentDocumentId+"/pendings");
         this.parentStudentDocumentId = parentStudentDocumentId;
     }
 

@@ -15,25 +15,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public abstract class DAOImpl<T> implements Document<T>, Collection<T> {
+public abstract class DAOImpl implements Document, Collection {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
-    private Class<T> type;
 
-    public DAOImpl(String collectionReference, Class<T> type) {
+    public DAOImpl(String collectionReference) {
         this.collection = db.collection(collectionReference);
-        this.type = type;
     }
 
     @Override
-    public void add(T document) {
+    public void add(DocumentObject document) {
        collection.document()
-                .set(document)
+                .set(document.toMap())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -49,9 +48,9 @@ public abstract class DAOImpl<T> implements Document<T>, Collection<T> {
     }
 
     @Override
-    public void update(String documentId, T newDocument) {
+    public void update(String documentId, DocumentObject newDocument) {
         collection.document(documentId)
-                    .set(newDocument)
+                    .set(newDocument.toMap())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -67,7 +66,7 @@ public abstract class DAOImpl<T> implements Document<T>, Collection<T> {
     }
 
     @Override
-    public T get(String documentId) {
+    public DocumentObject get(String documentId) {
             collection.document(documentId)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -76,7 +75,7 @@ public abstract class DAOImpl<T> implements Document<T>, Collection<T> {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
-                                    T objectToReturn = document.toObject(type); //missing .class
+                                    DocumentObject objectToReturn = document.toObject(DocumentObject.class); //missing .class
                                     Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 } else {
                                     Log.d(TAG, "No such document");
@@ -108,7 +107,7 @@ public abstract class DAOImpl<T> implements Document<T>, Collection<T> {
     }
 
     @Override
-    public List<T> getAll() {
+    public List<DocumentObject> getAll() {
         collection
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

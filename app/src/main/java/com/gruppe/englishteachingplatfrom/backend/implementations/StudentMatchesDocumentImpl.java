@@ -5,7 +5,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocum
 public class StudentMatchesDocumentImpl extends DAOImpl implements StudentMatchesDocument {
     private String parentStudentDocumentId;
     public StudentMatchesDocumentImpl(String parentStudentDocumentId) {
-        super("students/"+parentStudentDocumentId+"/matches", );
+        super("students/"+parentStudentDocumentId+"/matches");
         this.parentStudentDocumentId = parentStudentDocumentId;
     }
 

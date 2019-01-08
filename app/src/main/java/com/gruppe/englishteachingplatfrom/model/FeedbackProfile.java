@@ -1,8 +1,9 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class FeedbackProfile {
+public class FeedbackProfile extends DocumentObject {
     private String studName;
     private int rating;
     private String content;
@@ -33,5 +34,10 @@ public class FeedbackProfile {
     }
     public String getContent() {
         return content;
+    }
+
+    @Override
+    public Map<String, String> toMap() {
+        return null;
     }
 }

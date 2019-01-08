@@ -1,8 +1,10 @@
 package com.gruppe.englishteachingplatfrom.backend.interfaces;
 
-public interface Document<T>  {
-    void add(T document);
-    void update(String id, T newDocument);
-    T get(String id);
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
+
+public interface Document  {
+    void add(DocumentObject document);
+    void update(String id, DocumentObject newDocument);
+    DocumentObject get(String id);
     void delete(String id);
 }
