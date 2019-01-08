@@ -3,74 +3,68 @@ package com.gruppe.englishteachingplatfrom.model;
 import java.util.ArrayList;
 
 public class TeacherProfile {
-    private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
-    private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
-    private static ArrayList<TeacherProfile> MatchProfiles = new ArrayList<TeacherProfile>();
+    private static ArrayList<StudentProfile> pendingProfiles = new ArrayList<>();
+    private static ArrayList<StudentProfile> favoriteProfiles = new ArrayList<>();
+    private static ArrayList<StudentProfile> MatchProfiles = new ArrayList<>();
     //Needs a picture attribute
-    private String mName;
-    private String mRating;
-    private String mTitle;
-    private String mPrice;
+    private String id;
+    private String name;
+    private double rating;
+    private int profilePic;
+    private String language;
+    private int price;
 
-    public TeacherProfile(String mName, String mRating, String mTitle, String mPrice) {
-        this.mName = mName;
-        this.mRating = mRating;
-        this.mTitle = mTitle;
-        this.mPrice = mPrice;
+    public TeacherProfile(String id, String name, double rating, int profilePic, String language, int price) {
+        this.name = name;
+        this.rating = rating;
+        this.profilePic = profilePic;
+        this.language = language;
+        this.price = price;
     }
 
 
-    //TODO make a method that returns a list of ListProfiles, generated from some date
-    private static int lastProfileId = 0;
 
-    public static ArrayList<TeacherProfile> createPendingTeacherProfile(int numContacts) {
-        if (pendingProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                pendingProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-        }
 
+    public static ArrayList<StudentProfile> getPendingProfiles() {
         return pendingProfiles;
     }
 
-    public static ArrayList<TeacherProfile> createFavoriteTeacherProfile(int numContacts) {
-        if (favoriteProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                favoriteProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-        }
-
+    public static ArrayList<StudentProfile> getFavoriteProfiles() {
         return favoriteProfiles;
     }
 
-    public static ArrayList<TeacherProfile> createMatchTeacherProfile(int numContacts) {
-        if (MatchProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                MatchProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-        }
-
+    public static ArrayList<StudentProfile> getMatchProfiles() {
         return MatchProfiles;
     }
 
-
-
-    public String getmName() {
-        return mName;
+    public String getName() {
+        return name;
     }
 
-    public String getmRating() {
-        return mRating;
+    public String getId() {
+        return id;
     }
 
-    public String getmTitle() {
-        return mTitle;
+    public double getRating() {
+        return rating;
     }
 
-    public String getmPrice() {
-        return mPrice;
+    public int getProfilePic() {
+        return profilePic;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
+
+
+
+
+
+
+

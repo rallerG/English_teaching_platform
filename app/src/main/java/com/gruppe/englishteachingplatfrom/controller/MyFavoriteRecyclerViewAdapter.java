@@ -9,19 +9,23 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.view.ListFragment.OnListFragmentInteractionListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavoriteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<TeacherProfile> mProfiles;
+    private  List<TeacherProfile> mProfiles;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyFavoriteRecyclerViewAdapter(List<TeacherProfile> items, OnListFragmentInteractionListener listener) {
-        mProfiles = items;
+
+
+    public MyFavoriteRecyclerViewAdapter(ArrayList<TeacherProfile> teacherDummies, OnListFragmentInteractionListener listener) {
+        mProfiles = teacherDummies;
         mListener = listener;
     }
 
@@ -35,11 +39,17 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        holder.mNameView.setText(mProfiles.get(position).getmName());
-        holder.mRatingNum.setText(String.format("%.1f", Float.parseFloat(mProfiles.get(position).getmRating())));
-        holder.mRatingBar.setRating(Float.parseFloat(mProfiles.get(position).getmRating()));
-        holder.mTitleView.setText(mProfiles.get(position).getmTitle());
-        holder.mPriceView.setText(mProfiles.get(position).getmPrice());
+//        holder.mNameView.setText(mProfiles.get(position).getmName());
+//        holder.mRatingNum.setText(String.format("%.1f", Float.parseFloat(mProfiles.get(position).getmRating())));
+//        holder.mRatingBar.setRating(Float.parseFloat(mProfiles.get(position).getmRating()));
+//        holder.mLanguageView.setText(mProfiles.get(position).getmTitle());
+//        holder.mPriceView.setText(mProfiles.get(position).getmPrice());
+
+        holder.mNameView.setText(mProfiles.get(position).getName());
+        holder.mRatingNum.setText(Double.toString(mProfiles.get(position).getRating()));
+        holder.mRatingBar.setRating( (float) (mProfiles.get(position).getRating()));
+        holder.mLanguageView.setText(mProfiles.get(position).getLanguage());
+        holder.mPriceView.setText(Integer.toString(mProfiles.get(position).getPrice()));
         holder.mImageView.setImageResource(R.mipmap.ic_launcher_foreground_student);
     }
 
@@ -54,9 +64,9 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
         public final TextView mNameView;
         public final RatingBar mRatingBar;
         public final TextView mRatingNum;
-        public final TextView mTitleView;
+        public final TextView mLanguageView;
         public final TextView mPriceView;
-        public TeacherProfile mLProfile;
+//        public TeacherProfile mLProfile;
 
         public ViewHolder(View view) {
             super(view);
@@ -64,7 +74,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
             mNameView = view.findViewById(R.id.nameView);
             mRatingBar = view.findViewById(R.id.ratingBar6);
             mRatingNum = view.findViewById(R.id.ratingNum1);
-            mTitleView = view.findViewById(R.id.titleView3);
+            mLanguageView = view.findViewById(R.id.titleView3);
             mPriceView = view.findViewById(R.id.priceView4);
         }
 
@@ -73,7 +83,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
             return super.toString()
                     + " 'Name: " + mNameView.getText()
                     + ", Rating: " + mRatingNum.getText()
-                    + ", Title: " + mTitleView.getText()
+                    + ", Language: " + mLanguageView.getText()
                     + ", Price: " + mPriceView.getText()
                     + "'";
         }

@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
 import com.gruppe.englishteachingplatfrom.controller.ViewPagerAdapter;
-import com.gruppe.englishteachingplatfrom.model.SingletonData;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class ViewPagerFragment extends Fragment {
 
     private ArrayList<ViewPagerModel> mContents;
 
-    private SingletonData info;
+    private Singleton info;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class ViewPagerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewpager_list, container, false);
 
-        info = SingletonData.getInstance();
+        info = Singleton.getInstance();
 
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
 
@@ -52,34 +52,34 @@ public class ViewPagerFragment extends Fragment {
 
        // String names[] = {"Smith", "Johnson", "David", "Adam"};
 
-        info.getNames().add("Smith");
-        info.getNames().add("Johnson");
-        info.getNames().add("David");
-        info.getNames().add("Adam");
+//        info.getNames().add("Smith");
+//        info.getNames().add("Johnson");
+//        info.getNames().add("David");
+//        info.getNames().add("Adam");
 
        // String desig[] = {"English Teacher"};
-        info.getProf().add("English Teacher");
+//        info.getProf().add("English Teacher");
 
        // String place[] = {"USA", "DENMARK", "SWEDEN"};
 
-        info.getNation().add("USA");
-        info.getNation().add("Denmark");
-        info.getNation().add("Sweden");
+//        info.getNation().add("USA");
+//        info.getNation().add("Denmark");
+//        info.getNation().add("Sweden");
 
-        ArrayList<String> names = info.getNames();
-        ArrayList<String> prof = info.getProf();
-        ArrayList<String> nation = info.getNation();
+//        ArrayList<String> names = info.getNames();
+//        ArrayList<String> prof = info.getProf();
+//        ArrayList<String> nation = info.getNation();
         for (int i = 0; i < images.length; i++){
 
             ViewPagerModel viewPagerModel = new ViewPagerModel();
 
             viewPagerModel.images = images[i];
 
-            viewPagerModel.names = names.get(i);
-
-            viewPagerModel.desig = prof.get(0);
-
-            viewPagerModel.place = nation.get(i);
+//            viewPagerModel.names = names.get(i);
+//
+//            viewPagerModel.desig = prof.get(0);
+//
+//            viewPagerModel.place = nation.get(i);
 
             mContents.add(viewPagerModel);
 

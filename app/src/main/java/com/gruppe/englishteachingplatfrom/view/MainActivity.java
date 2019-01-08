@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 
@@ -31,9 +32,11 @@ public class MainActivity extends AppCompatActivity
     public FloatingActionButton floatingActionButton;
     public int position;
     public int pic;
+    Singleton p = Singleton.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        p.createList();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

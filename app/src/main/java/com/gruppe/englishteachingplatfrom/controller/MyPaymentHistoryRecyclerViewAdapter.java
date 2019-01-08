@@ -9,20 +9,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.PaymentDummyBackend;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.view.PaymentHistoryFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<MyPaymentHistoryRecyclerViewAdapter.PaymentViewHolder> {
 
-//    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentHistoryList;
+    private ArrayList<TeacherProfile> teacherPaymentHistoryList;
+    //    private List<Singleton.TeacherDummy> teacherPaymentHistoryList;
     private PaymentHistoryFragment.OnFragmentInteractionListener mListener;
-    PaymentDummyBackend p = PaymentDummyBackend.getInstance();
 
 
-    public MyPaymentHistoryRecyclerViewAdapter(List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList, PaymentHistoryFragment.OnFragmentInteractionListener listener) {
-//        this.teacherPaymentHistoryList = teacherPaymentRequestList;
+    public MyPaymentHistoryRecyclerViewAdapter(ArrayList<TeacherProfile> teacherProfiles, PaymentHistoryFragment.OnFragmentInteractionListener listener) {
+        this.teacherPaymentHistoryList = teacherProfiles;
         this.mListener = listener;
     }
 
@@ -36,11 +39,11 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     @Override
     public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i) {
-//        PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentHistoryList.get(i);
+//        Singleton.TeacherDummy teacherProfile = teacherPaymentHistoryList.get(i);
 
-        paymentViewHolder.textViewName.setText(p.getTeacherDummiesHistory().get(i).getName());
-        paymentViewHolder.textViewPrice.setText(Integer.toString(p.getTeacherDummiesHistory().get(i).getPrice())+" DKK");
-        paymentViewHolder.textViewDate.setText(p.getTeacherDummiesHistory().get(i).getDate());
+        paymentViewHolder.textViewName.setText(teacherPaymentHistoryList.get(i).getName());
+        paymentViewHolder.textViewPrice.setText(teacherPaymentHistoryList.get(i).getId()+" DKK");
+        paymentViewHolder.textViewDate.setText(teacherPaymentHistoryList.get(i).getId());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
         paymentViewHolder.textViewStatus.setText("Payed");
     }
@@ -48,7 +51,7 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     @Override
     public int getItemCount() {
-        return p.getTeacherDummiesHistory().size();
+        return teacherPaymentHistoryList.size();
     }
 
     class PaymentViewHolder extends RecyclerView.ViewHolder {
