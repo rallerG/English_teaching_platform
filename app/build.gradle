@@ -49,5 +49,6 @@ dependencies {
 
     //Searchable spinner
     implementation 'gr.escsoft.michaelprimez.searchablespinner:SearchableSpinner:1.0.9'
-    implementation 'com.google.firebase:firebase-firestore:17.0.1'
+    implementation 'com.google.firebase:firebase-firestore:17.1.5'
+    implementation 'com.google.firebase:firebase-core:16.0.6'
 }
