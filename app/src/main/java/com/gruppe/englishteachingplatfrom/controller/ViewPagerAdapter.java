@@ -2,8 +2,7 @@ package com.gruppe.englishteachingplatfrom.controller;
 
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -59,12 +58,16 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
         final View view = inflater.inflate(R.layout.fragment_page_frag, container, false);
 
+        view.setOnItemClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                txt.setVisibility(View.VISIBLE);
+            }
+        });
+
 
 /*
         expander = view.findViewById(R.id.expander);
         expander.setOnClickListener(this);*/
-
-
 
         container.addView(view,0);
 
@@ -139,9 +142,6 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
             if(v == imageView){
             information.setVisibility(View.VISIBLE);
             }*/
-       if(v == card){
-           txt.setVisibility(View.VISIBLE);
 
-       }
     }
 }
