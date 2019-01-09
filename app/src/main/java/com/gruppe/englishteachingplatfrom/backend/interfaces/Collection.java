@@ -4,6 +4,6 @@ import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 
 import java.util.List;
 
-public interface Collection {
-    List<DocumentObject> getAll();
+public interface Collection <T extends DocumentObject> {
+    List<T> getAll();
 }

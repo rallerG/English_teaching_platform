@@ -1,6 +1,5 @@
 package com.gruppe.englishteachingplatfrom.backend.implementations;
 
-
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -9,24 +8,30 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public abstract class DAOImpl implements Document, Collection {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+public abstract class DAOImpl <T extends DocumentObject> implements Document, Collection {
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
+    private Class<T> type;
 
-    public DAOImpl(String collectionReference) {
+    public DAOImpl(String collectionReference, Class<T> type) {
         this.collection = db.collection(collectionReference);
+        this.type = type;
     }
 
     @Override
@@ -36,7 +41,7 @@ public abstract class DAOImpl implements Document, Collection {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully added!");
+                        Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -54,7 +59,7 @@ public abstract class DAOImpl implements Document, Collection {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            Log.d(TAG, "--update()--"+"DocumentSnapshot successfully updated!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -75,8 +80,21 @@ public abstract class DAOImpl implements Document, Collection {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
-                                    DocumentObject objectToReturn = document.toObject(DocumentObject.class); //missing .class
-                                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                    //DocumentObject objectToReturn = document.toObject(type); //missing .class
+                                    Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
+
+                                    DocumentReference studentReference = (DocumentReference) document.get("student");
+                                    DocumentReference teacherReference = (DocumentReference) document.get("student");
+                                    if (studentReference != null) {
+                                        Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
+                                        StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                        studentsDocument.get(studentReference.getId());
+                                    }
+                                    else if (teacherReference != null) {
+                                        Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
+                                        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                        teachersDocument.get(studentReference.getId());
+                                    }
                                 } else {
                                     Log.d(TAG, "No such document");
                                 }
@@ -95,7 +113,7 @@ public abstract class DAOImpl implements Document, Collection {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                        Log.d(TAG, " --delete()-- DocumentSnapshot successfully deleted!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -107,7 +125,7 @@ public abstract class DAOImpl implements Document, Collection {
     }
 
     @Override
-    public List<DocumentObject> getAll() {
+    public List<T> getAll() {
         collection
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -115,7 +133,20 @@ public abstract class DAOImpl implements Document, Collection {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                Log.d(TAG," --getAll()-- "+ document.getId() + " => " + document.getData());
+
+                                DocumentReference studentReference = (DocumentReference) document.get("student");
+                                DocumentReference teacherReference = (DocumentReference) document.get("student");
+                                if (studentReference != null) {
+                                    Log.d(TAG, " --getAll()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
+                                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                    studentsDocument.get(studentReference.getId());
+                                }
+                                else if (teacherReference != null) {
+                                    Log.d(TAG, " --getAll()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
+                                    TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                    teachersDocument.get(studentReference.getId());
+                                }
                             }
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());

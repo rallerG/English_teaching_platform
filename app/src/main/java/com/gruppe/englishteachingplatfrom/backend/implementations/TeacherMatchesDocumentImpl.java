@@ -1,12 +1,13 @@
 package com.gruppe.englishteachingplatfrom.backend.implementations;
 
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
-public class TeacherMatchesDocumentImpl extends DAOImpl implements TeacherMatchesDocument {
+public class TeacherMatchesDocumentImpl extends DAOImpl<StudentProfile> implements TeacherMatchesDocument {
     private String parentTeacherDocumentId;
     public TeacherMatchesDocumentImpl(String parentTeacherDocumentId) {
-        super("teachers/"+parentTeacherDocumentId+"/matches");
+        super("teachers/"+parentTeacherDocumentId+"/matches",StudentProfile.class);
         this.parentTeacherDocumentId = parentTeacherDocumentId;
     }
 
