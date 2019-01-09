@@ -97,6 +97,11 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
+        if(v == floating_Fav){
+            // checker whether the teacher is favorited by the student and set the image accordingly
+            // should have the standard heart images for favorite (empty and filled)
+            ((FloatingActionButton) v).setImageResource(R.drawable.ic_if_filter_1608702);
+        }
     }
 
     private class ViewPagerStack implements ViewPager.PageTransformer {
