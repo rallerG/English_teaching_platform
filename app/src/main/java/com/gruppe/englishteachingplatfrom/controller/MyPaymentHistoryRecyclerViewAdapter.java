@@ -39,8 +39,8 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
 //        Singleton.TeacherDummy teacherProfile = paymentHistoryList.get(i);
 
         paymentViewHolder.textViewName.setText(paymentHistoryList.get(i).getTeacher().getName());
-        paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getTeacher().getPrice() +" DKK");
-        paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getTeacher().getId());
+        paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getPrice() +" DKK");
+        paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getPaymentDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
         paymentViewHolder.textViewStatus.setText("Payed");
     }
