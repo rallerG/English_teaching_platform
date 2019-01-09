@@ -31,10 +31,12 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.loginFacebook :
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
                 System.out.println("Testing");
                 break;
             case R.id.loginWeChat :
                 startActivity(new Intent(this, TeacherMainActivity.class));
+                finish();
                 System.out.println("Testing");
                 break;
             case R.id.login :

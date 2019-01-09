@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -155,6 +156,8 @@ public class TeacherMainActivity extends AppCompatActivity
                 fragment = new Teacher_fragment();
                 break;
             case R.id.nav_logout:
+                startActivity(new Intent(this, LoginOrSignupActivity.class));
+                finish();
                 break;
         }
 
