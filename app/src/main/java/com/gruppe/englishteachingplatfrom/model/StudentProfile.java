@@ -33,11 +33,11 @@ public class StudentProfile extends DocumentObject{
         this.rating = rating;
     }
 
-    public static ArrayList<Payment> getActivePaymentDummies() {
+    public ArrayList<Payment> getActivePaymentDummies() {
         return activePaymentDummies;
     }
 
-    public static ArrayList<Payment> getHistoryPaymentDummies() {
+    public ArrayList<Payment> getHistoryPaymentDummies() {
         return historyPaymentDummies;
     }
 

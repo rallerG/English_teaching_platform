@@ -26,15 +26,64 @@ public class Payment {
     }
 
 
-    public static Payment newTransaction(StudentProfile student, TeacherProfile teacher, int price) {
+    public static void newTransaction(StudentProfile student, TeacherProfile teacher, int price) {
         //id = 0; //Fix
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
 
-        return new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
+        Payment obj = new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
+        teacher.getActivePaymentDummies().add(obj);
+        student.getActivePaymentDummies().add(obj);
+
+//        System.out.println(teacher.getActivePaymentDummies().get(0).toString());
+//        System.out.println(student.getActivePaymentDummies().get(0).toString());
+
+//        return new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
     }
 
+    //TODO Create pay method that flips booleans and adds payment date
+
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getRequestDate() {
+        return requestDate;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public TeacherProfile getTeacher() {
+        return teacher;
+    }
+
+    public StudentProfile getStudent() {
+        return student;
+    }
+
+    public boolean isPayed() {
+        return isPayed;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setPayed(boolean payed) {
+        isPayed = payed;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String toString() {
+        return "Price: " + getPrice() + "\n RequestDate: " + getRequestDate() + "\n PaymentDate: " + getPaymentDate() + "\n isPayed: " + isPayed + "\n isActive: " + isActive();
+    }
 
 //    private Payment t1 = new Payment("Thomas", "14.04.2018", 270);
 //    private Payment t2 = new Payment("Mikkel", "12.02.2018", 270);
