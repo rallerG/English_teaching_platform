@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Payment {
-    //private int id;
+    private static int lastId = 0;
+    private int id;
     private int price;
     private String requestDate;
     private String paymentDate;
@@ -14,8 +15,8 @@ public class Payment {
     private boolean isPayed;
     private boolean isActive;
 
-    private Payment(/*int id,*/ int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
-        //this.id = id;
+    private Payment(int id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+        this.id = id;
         this.price = price;
         this.requestDate = requestDate;
         this.paymentDate = paymentDate;
@@ -27,23 +28,45 @@ public class Payment {
 
 
     public static void newTransaction(StudentProfile student, TeacherProfile teacher, int price) {
-        //id = 0; //Fix
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
 
-        Payment obj = new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
+
+        Payment obj = new Payment(lastId++, price, theRequestDate, "", teacher, student, false, true);
         teacher.getActivePaymentDummies().add(obj);
         student.getActivePaymentDummies().add(obj);
 
 //        System.out.println(teacher.getActivePaymentDummies().get(0).toString());
 //        System.out.println(student.getActivePaymentDummies().get(0).toString());
-
 //        return new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
     }
 
     //TODO Create pay method that flips booleans and adds payment date
+    public static void payTransaction(Payment payment) {
+        payment.setActive(false);
+        payment.setPayed(true);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String thePaymentDate = (dateFormat.format(date)).toString();
+        payment.setPaymentDate(thePaymentDate);
 
+        payment.getStudent().getHistoryPaymentDummies().add(payment);
+        payment.getStudent().getActivePaymentDummies().remove(payment);
+
+        payment.getTeacher().getHistoryPaymentDummies().add(payment);
+        payment.getTeacher().getActivePaymentDummies().remove(payment);
+
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
 
     public int getPrice() {
         return price;
