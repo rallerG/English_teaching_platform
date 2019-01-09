@@ -54,6 +54,9 @@ public class Singleton {
         studentDummies.add(h5);
         studentDummies.add(h6);
         studentDummies.add(h7);
+
+        teacherDummies.get(0).getMatchProfiles().clear();
+        teacherDummies.get(0).getMatchProfiles().addAll(studentDummies);
     }
 
 

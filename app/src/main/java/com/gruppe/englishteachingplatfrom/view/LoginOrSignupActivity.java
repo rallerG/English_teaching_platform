@@ -34,7 +34,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 System.out.println("Testing");
                 break;
             case R.id.loginWeChat :
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, TeacherMainActivity.class));
                 System.out.println("Testing");
                 break;
             case R.id.login :

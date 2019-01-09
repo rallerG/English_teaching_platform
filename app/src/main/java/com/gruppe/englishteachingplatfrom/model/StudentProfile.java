@@ -12,6 +12,8 @@ public class StudentProfile extends DocumentObject{
     private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> MatchProfiles = new ArrayList<TeacherProfile>();
+    private static ArrayList<Payment> activePaymentDummies = new ArrayList<>();
+    private static ArrayList<Payment> historyPaymentDummies = new ArrayList<>();
 
 
     //Constructer with ID
@@ -29,6 +31,14 @@ public class StudentProfile extends DocumentObject{
         this.email = email;
         this.profilePicture = profilePicture;
         this.rating = rating;
+    }
+
+    public static ArrayList<Payment> getActivePaymentDummies() {
+        return activePaymentDummies;
+    }
+
+    public static ArrayList<Payment> getHistoryPaymentDummies() {
+        return historyPaymentDummies;
     }
 
     public String getId() {
