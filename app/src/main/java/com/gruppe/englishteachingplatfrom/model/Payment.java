@@ -59,6 +59,12 @@ public class Payment {
 
     }
 
+    public static void deleteTransaction(Payment payment) {
+        payment.getStudent().getActivePaymentDummies().remove(payment);
+        payment.getTeacher().getActivePaymentDummies().remove(payment);
+        
+    }
+
 
     public int getId() {
         return id;
