@@ -17,7 +17,7 @@ public class TeacherProfile extends DocumentObject{
     private String language;
     private int price;
 
-    public TeacherProfile(String id, String name, double rating, int profilePic, String language, int price) {
+    public TeacherProfile(String name, String id, double rating, int profilePic, String language, int price) {
         this.name = name;
         this.rating = rating;
         this.profilePic = profilePic;

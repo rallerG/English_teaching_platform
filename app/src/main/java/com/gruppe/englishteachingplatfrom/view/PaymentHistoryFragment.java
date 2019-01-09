@@ -29,7 +29,7 @@ public class PaymentHistoryFragment extends Fragment {
 
 //    private List<Singleton.TeacherDummy> teacherPaymentHistorytList;
     private OnFragmentInteractionListener mListener;
-//    private Singleton test = new Singleton();
+    private Singleton p = Singleton.getInstance();
 
 
     public PaymentHistoryFragment() {
@@ -78,7 +78,7 @@ public class PaymentHistoryFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(Singleton.getInstance().getTeacherDummies(), mListener));
+            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(p.getStudentDummies().get(0).getHistoryPaymentDummies(), mListener));
         }
         return view;
     }

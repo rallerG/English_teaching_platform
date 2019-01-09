@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -34,6 +37,10 @@ public class PaymentActiveFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private int mColumnCount = 10;
+
+
+
+    Singleton p = Singleton.getInstance();
 
 
     private OnFragmentInteractionListener mListener;
@@ -95,7 +102,7 @@ public class PaymentActiveFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(Singleton.getInstance().getTeacherDummies(), mListener));
+            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getStudentDummies().get(0).getActivePaymentDummies(), mListener));
         }
         return view;
     }
