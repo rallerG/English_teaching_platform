@@ -7,6 +7,8 @@ public class TeacherProfile extends DocumentObject{
     private static ArrayList<StudentProfile> pendingProfiles = new ArrayList<>();
     private static ArrayList<StudentProfile> favoriteProfiles = new ArrayList<>();
     private static ArrayList<StudentProfile> MatchProfiles = new ArrayList<>();
+    private static ArrayList<Payment> activePaymentDummies = new ArrayList<>();
+    private static ArrayList<Payment> historyPaymentDummies = new ArrayList<>();
     //Needs a picture attribute
     private String id;
     private String name;
@@ -15,7 +17,7 @@ public class TeacherProfile extends DocumentObject{
     private String language;
     private int price;
 
-    public TeacherProfile(String id, String name, double rating, int profilePic, String language, int price) {
+    public TeacherProfile(String name, String id, double rating, int profilePic, String language, int price) {
         this.name = name;
         this.rating = rating;
         this.profilePic = profilePic;
@@ -24,17 +26,23 @@ public class TeacherProfile extends DocumentObject{
     }
 
 
+    public ArrayList<Payment> getActivePaymentDummies() {
+        return activePaymentDummies;
+    }
 
+    public ArrayList<Payment> getHistoryPaymentDummies() {
+        return historyPaymentDummies;
+    }
 
-    public static ArrayList<StudentProfile> getPendingProfiles() {
+    public ArrayList<StudentProfile> getPendingProfiles() {
         return pendingProfiles;
     }
 
-    public static ArrayList<StudentProfile> getFavoriteProfiles() {
+    public ArrayList<StudentProfile> getFavoriteProfiles() {
         return favoriteProfiles;
     }
 
-    public static ArrayList<StudentProfile> getMatchProfiles() {
+    public ArrayList<StudentProfile> getMatchProfiles() {
         return MatchProfiles;
     }
 

@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -137,7 +138,9 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
-                setTitle("Gruppe Magnus");
+                startActivity(new Intent(this, LoginOrSignupActivity.class));
+                finish();
+//                setTitle("Gruppe Magnus");
                 break;
             default:
                 fragment = new ViewPagerFragment();
