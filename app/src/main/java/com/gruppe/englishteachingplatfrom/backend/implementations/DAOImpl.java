@@ -28,10 +28,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
     private Class<T> type;
+    private T objectToReturn;
+    private List<T> listOfObjectsToReturn;
 
     public DAOImpl(String collectionReference, Class<T> type) {
         this.collection = db.collection(collectionReference);
         this.type = type;
+        objectToReturn = null;
+        listOfObjectsToReturn = null;
     }
 
     @Override
@@ -72,6 +76,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public DocumentObject get(String documentId) {
+        objectToReturn = null;
             collection.document(documentId)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -80,9 +85,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
-                                    //DocumentObject objectToReturn = document.toObject(type); //missing .class
-                                    Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
-
                                     DocumentReference studentReference = (DocumentReference) document.get("student");
                                     DocumentReference teacherReference = (DocumentReference) document.get("student");
                                     if (studentReference != null) {
@@ -95,6 +97,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                         TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                         teachersDocument.get(studentReference.getId());
                                     }
+                                    else {
+                                        objectToReturn = document.toObject(type); //missing .class
+                                        Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
+                                    }
                                 } else {
                                     Log.d(TAG, "No such document");
                                 }
@@ -103,7 +109,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                             }
                         }
         });
-        return null;
+        return objectToReturn;
     }
 
     @Override
@@ -126,6 +132,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public List<T> getAll() {
+        listOfObjectsToReturn = null;
         collection
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,19 +140,23 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG," --getAll()-- "+ document.getId() + " => " + document.getData());
-
                                 DocumentReference studentReference = (DocumentReference) document.get("student");
                                 DocumentReference teacherReference = (DocumentReference) document.get("student");
                                 if (studentReference != null) {
                                     Log.d(TAG, " --getAll()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
                                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                                     studentsDocument.get(studentReference.getId());
+                                    listOfObjectsToReturn.add(document.toObject(type));
                                 }
                                 else if (teacherReference != null) {
                                     Log.d(TAG, " --getAll()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
                                     TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                     teachersDocument.get(studentReference.getId());
+                                    listOfObjectsToReturn.add(document.toObject(type));
+                                }
+                                else {
+                                    Log.d(TAG," --getAll()-- "+ document.getId() + " => " + document.getData());
+                                    listOfObjectsToReturn.add(document.toObject(type));
                                 }
                             }
                         } else {
