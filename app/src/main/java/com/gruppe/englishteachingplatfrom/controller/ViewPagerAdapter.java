@@ -58,11 +58,11 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
         final View view = inflater.inflate(R.layout.fragment_page_frag, container, false);
 
-        view.setOnItemClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                txt.setVisibility(View.VISIBLE);
-            }
-        });
+//        view.setOnItemClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//                txt.setVisibility(View.VISIBLE);
+//            }
+//        });
 
 
 /*

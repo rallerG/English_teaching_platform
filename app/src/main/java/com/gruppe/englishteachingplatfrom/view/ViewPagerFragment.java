@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,11 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
     private ViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
     private SingletonData info;
+    private FloatingActionButton floating_Send;
+    private FloatingActionButton floating_Fav;
+    private int position1;
+    private int pic1;
+
 
     Parcelable state;
  //   LinearLayout information;
@@ -47,6 +53,12 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
 
         mViewPager.setOnClickListener(this);
 
+        floating_Fav = view.findViewById(R.id.floating_fav);
+        floating_Send = view.findViewById(R.id.floating_send);
+
+        floating_Send.setOnClickListener(this);
+        floating_Fav.setOnClickListener(this);
+
         System.out.println("størrelse af teacher " +info.getTeacher().size());
         mAdapter = new ViewPagerAdapter(info.getTeacher(), getActivity());
         mViewPager.setPageTransformer(true, new ViewPagerStack());
@@ -69,6 +81,21 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         if (v == mViewPager){
             expand();
+        }
+
+        if (v == floating_Send) {
+            Fragment frag = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
+            if (frag instanceof ViewPagerFragment) {
+                position1 = ((ViewPagerFragment) frag).getCurrentPosition();
+                pic1 = ((ViewPagerFragment) frag).getCurrentPic();
+            }
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position1);
+            bundle.putInt("pic", pic1);
+            Fragment F = new DialogBox();
+            F.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                    addToBackStack(null).commit();
         }
     }
 
