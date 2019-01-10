@@ -59,54 +59,54 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     @Override
     public void update(String documentId, DocumentObject newDocument) {
         collection.document(documentId)
-                    .set(newDocument.toMap())
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "--update()--"+"DocumentSnapshot successfully updated!");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error updating document", e);
-                        }
-                    });
+                .set(newDocument.toMap())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "--update()--"+"DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
     }
 
     @Override
     public DocumentObject get(String documentId) {
         objectToReturn = null;
-            collection.document(documentId)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    DocumentReference studentReference = (DocumentReference) document.get("student");
-                                    DocumentReference teacherReference = (DocumentReference) document.get("student");
-                                    if (studentReference != null) {
-                                        Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
-                                        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                        studentsDocument.get(studentReference.getId());
-                                    }
-                                    else if (teacherReference != null) {
-                                        Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
-                                        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                        teachersDocument.get(studentReference.getId());
-                                    }
-                                    else {
-                                        objectToReturn = document.toObject(type); //missing .class
-                                        Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
-                                    }
-                                } else {
-                                    Log.d(TAG, "No such document");
+        collection.document(documentId)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                DocumentReference studentReference = (DocumentReference) document.get("student");
+                                DocumentReference teacherReference = (DocumentReference) document.get("teacher");
+                                if (studentReference != null) {
+                                    Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
+                                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                    studentsDocument.get(studentReference.getId());
+                                }
+                                else if (teacherReference != null) {
+                                    Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
+                                    TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                    teachersDocument.get(studentReference.getId());
+                                }
+                                else {
+                                    objectToReturn = document.toObject(type); //missing .class
+                                    Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
                                 }
                             } else {
-                                Log.d(TAG, "get failed with ", task.getException());
+                                Log.d(TAG, "No such document");
                             }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
                         }
         });
         return objectToReturn;
