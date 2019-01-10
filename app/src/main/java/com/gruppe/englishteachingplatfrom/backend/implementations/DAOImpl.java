@@ -172,6 +172,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                         }
                     }
                 });
-        return null;
+        return listOfObjectsToReturn;
     }
 }
