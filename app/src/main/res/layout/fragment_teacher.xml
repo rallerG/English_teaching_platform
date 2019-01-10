@@ -20,17 +20,45 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <RatingBar
-                android:id="@+id/ratingBar2"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="80dp"
-                android:numStars="5"
-                android:rating="3"
-                android:scaleX="1.5"
-                android:scaleY="1.5" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="100dp"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RatingBar
+                        android:id="@+id/ratingBar2"
+                        style="?android:attr/ratingBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:numStars="5"
+                        android:rating="3"
+                        android:scaleX=".7"
+                        android:scaleY=".7"
+                        android:theme="@style/RatingBar" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="-160dp"
+                    android:background="@mipmap/ic_launcher_student_round"
+                    android:elevation="@dimen/fab_margin"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/inbox"

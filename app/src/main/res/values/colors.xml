@@ -6,4 +6,5 @@
     <color name="colorTint">#b7b7b7</color>
     <color name="colorFeedbackHeader">#f0efef</color>
     <color name="colorVisited">#e2e2e2</color>
+    <color name="golden">#ffbf00 </color>
 </resources>
