@@ -24,13 +24,13 @@ public class Singleton {
     }
 
     //Active list
-    private TeacherProfile t1 = new TeacherProfile("Hans", "0", 0, 270, "English", 299);
-    private TeacherProfile t2 = new TeacherProfile("Mikkel", "0", 0, 270, "English", 299);
-    private TeacherProfile t3 = new TeacherProfile("Julie", "0", 0, 270, "English", 299);
-    private TeacherProfile t4 = new TeacherProfile("Jonas", "0", 0, 270, "English", 299);
-    private TeacherProfile t5 = new TeacherProfile("Christoffer", "0", 0, 270, "English", 299);
-    private TeacherProfile t6 = new TeacherProfile("Knud", "0", 0, 270, "English", 299);
-    private TeacherProfile t7 = new TeacherProfile("Peter", "0", 0, 270, "English", 299);
+    private TeacherProfile t1 = new TeacherProfile("Hans", 0, 0, "English",  299);
+    private TeacherProfile t2 = new TeacherProfile("Mikkel", 0, 0, "English",  299);
+    private TeacherProfile t3 = new TeacherProfile("Julie", 0, 0, "English", 299);
+    private TeacherProfile t4 = new TeacherProfile("Jonas", 0, 0, "English", 299);
+    private TeacherProfile t5 = new TeacherProfile("Christoffer", 0, 0, "English", 299);
+    private TeacherProfile t6 = new TeacherProfile("Knud", 0, 0, "English", 299);
+    private TeacherProfile t7 = new TeacherProfile("Peter", 0, 0, "English", 299);
 
     //History list
     private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0, 0);
@@ -83,25 +83,25 @@ public class Singleton {
 //        studentDummies.add(teacherAcpt);
 //    }
 
-    private static int lastTeacherProfileId = 0;
-    public static ArrayList<TeacherProfile> createRandomTeacherProfile(int numContacts) {
-            for (int i = 1; i <= numContacts; i++) {
-                teacherDummies.add(new TeacherProfile("" + ++lastTeacherProfileId,"Navn ", (Math.random() * 5.0), 0, "English", (int) (Math.random() * 250.0 + 70)));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-
-        return teacherDummies;
-    }
-
-    private static int lastStudentProfileId = 0;
-    public static ArrayList<StudentProfile> createRandomStudentProfile(int numContacts) {
-            for (int i = 1; i <= numContacts; i++) {
-                studentDummies.add(new StudentProfile("" + ++lastStudentProfileId, "Navn ", "test@email.com", 0, (Math.random() * 250.0 + 70)));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-
-        return studentDummies;
-    }
+//    private static int lastTeacherProfileId = 0;
+//    public static ArrayList<TeacherProfile> createRandomTeacherProfile(int numContacts) {
+//            for (int i = 1; i <= numContacts; i++) {
+//                teacherDummies.add(new TeacherProfile("Navn ", (Math.random() * 5.0) , 0, "English", (int) (Math.random() * 250.0 + 70)));
+//            }
+//            System.out.println("PROFILER BLEV OPRETTET!!!");
+//
+//        return teacherDummies;
+//    }
+//
+//    private static int lastStudentProfileId = 0;
+//    public static ArrayList<StudentProfile> createRandomStudentProfile(int numContacts) {
+//            for (int i = 1; i <= numContacts; i++) {
+//                studentDummies.add(new StudentProfile("" + ++lastStudentProfileId, "Navn ", "test@email.com", 0, (Math.random() * 250.0 + 70)));
+//            }
+//            System.out.println("PROFILER BLEV OPRETTET!!!");
+//
+//        return studentDummies;
+//    }
 }
 
 
