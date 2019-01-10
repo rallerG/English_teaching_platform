@@ -3,13 +3,19 @@ package com.gruppe.englishteachingplatfrom.controller;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.gruppe.englishteachingplatfrom.model.SingletonData;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.view.Page_frag;
+
+import java.util.ArrayList;
 
 public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnClickListener {
 
-    private static final int Num_Pages = 3;
+    private SingletonData  info = SingletonData.getInstance();
+    private ArrayList<TeacherProfile> contents = info.getTeacher();
 
 
     public FragPagerAdapter(FragmentManager fm) {
@@ -18,12 +24,12 @@ public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnCli
 
     @Override
     public Fragment getItem(int i) {
-        return new Page_frag();
+        return new Page_frag(i);
     }
 
     @Override
     public int getCount() {
-        return Num_Pages;
+        return contents.size();
     }
 
     @Override

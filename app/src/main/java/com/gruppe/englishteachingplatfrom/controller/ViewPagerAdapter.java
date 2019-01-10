@@ -29,11 +29,12 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
     private ArrayList<TeacherProfile> contents;
     private Context context;
-    LinearLayout information, expander;
-    ImageView imageView;
-    CardView card;
-    TextView txt;
+    private LinearLayout information, expander;
+    private ImageView imageView;
+    private CardView card;
+    private TextView txt;
   //  int images[] = {R.drawable.profile1,R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
+
 
     public ViewPagerAdapter(ArrayList<TeacherProfile> contents, Context context) {
 

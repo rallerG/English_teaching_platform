@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Gruppe Magnus");
                 break;
             default:
-                fragment = new ViewPagerFragment();
+                fragment = new frag_Pager();
                 setTitle("Gruppe Magnus");
                 break;
         }
