@@ -21,7 +21,7 @@
         <item name="android:contentDescription">"Lala"</item>
     </style>
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlActivated">@color/golden</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/colorVisited</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
