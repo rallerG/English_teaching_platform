@@ -67,8 +67,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         pay.setOnClickListener(this);
 
 
-        list.add(new FeedbackProfile("Xian",3, "Good teacher"));
-        list.add(new FeedbackProfile("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
+        //list.add(new FeedbackProfile("Xian",3, "Good teacher"));
+        //list.add(new FeedbackProfile("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
 
             Context context = view.getContext();
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(),list);
