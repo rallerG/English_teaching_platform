@@ -36,7 +36,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         card.setOnClickListener(this);
 
         txt = rootview.findViewById(R.id.sup_text);
-        txt.setVisibility(View.INVISIBLE);
+     //   txt.setVisibility(View.INVISIBLE);
 
         return rootview;
     }
@@ -46,7 +46,8 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v == card) {
             //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
-        txt.setVisibility(View.VISIBLE);
+
+            txt.setVisibility(View.VISIBLE);
         }
     }
 }

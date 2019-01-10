@@ -90,9 +90,9 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
     //    information.setOnClickListener(this);
 
-  //      txt = view.findViewById(R.id.sup_txt);
-  //      txt.setText(contents.get(position).getmInfo());
-  //      txt.setVisibility(View.INVISIBLE);
+        txt = view.findViewById(R.id.sup_text);
+        //txt.setText(contents.get(position).getmInfo());
+       // txt.setVisibility(View.INVISIBLE);
        /* name = view.findViewById(R.id.name);
         name.setText(contents.get(position).getmName());
 
@@ -117,7 +117,6 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
                 System.out.println("works");
 
               Toast.makeText(context,contents.get(position).getmName(),Toast.LENGTH_SHORT).show();
-
             }
         });
         return view;
@@ -129,9 +128,15 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
         container.removeView((View) object);
     }
 
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 
     @Override
     public void onClick(View v) {
+        if(v == card){
+            txt.setVisibility(View.INVISIBLE);
+        }
        /* if(v == expander){
             System.out.println("Du trykkede på en teacher");
                 information.setVisibility(View.GONE);
