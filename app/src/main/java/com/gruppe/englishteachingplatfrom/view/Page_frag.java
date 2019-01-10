@@ -6,6 +6,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 
@@ -14,6 +15,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
 
 
     CardView card;
+    TextView txt;
 
     public Page_frag() {
         // Required empty public constructor
@@ -33,6 +35,8 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
 
+        txt = rootview.findViewById(R.id.sup_text);
+        txt.setVisibility(View.INVISIBLE);
 
         return rootview;
     }
@@ -42,6 +46,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v == card) {
             //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
+        txt.setVisibility(View.VISIBLE);
         }
     }
 }

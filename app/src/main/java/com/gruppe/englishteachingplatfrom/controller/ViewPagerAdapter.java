@@ -90,9 +90,9 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
     //    information.setOnClickListener(this);
 
-        txt = view.findViewById(R.id.sup_txt);
-        txt.setText(contents.get(position).getmInfo());
-        txt.setVisibility(View.INVISIBLE);
+  //      txt = view.findViewById(R.id.sup_txt);
+  //      txt.setText(contents.get(position).getmInfo());
+  //      txt.setVisibility(View.INVISIBLE);
        /* name = view.findViewById(R.id.name);
         name.setText(contents.get(position).getmName());
 
