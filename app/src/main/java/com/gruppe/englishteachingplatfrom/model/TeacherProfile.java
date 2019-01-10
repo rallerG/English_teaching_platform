@@ -1,6 +1,8 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TeacherProfile extends DocumentObject{
@@ -12,12 +14,13 @@ public class TeacherProfile extends DocumentObject{
     //Needs a picture attribute
     private String id;
     private String name;
+    private String email;
     private double rating;
     private int profilePic;
     private String language;
     private int price;
 
-    public TeacherProfile(String name, String id, double rating, int profilePic, String language, int price) {
+    public TeacherProfile(String name, double rating, int profilePic, String language, int price) {
         this.name = name;
         this.rating = rating;
         this.profilePic = profilePic;
@@ -50,6 +53,10 @@ public class TeacherProfile extends DocumentObject{
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }
@@ -71,8 +78,26 @@ public class TeacherProfile extends DocumentObject{
     }
 
     @Override
-    public Map<String, String> toMap() {
-        return null;
+    public Map<String, Object> toMap() {
+        Map<String, Object> mapToReturn = new HashMap<>();
+        mapToReturn.put("fullname",this.name);
+        mapToReturn.put("mail", this.email);
+        return mapToReturn;
+    }
+
+    @Override
+    public void toObject(String documentId,Map<String, Object> mapOfObject) {
+        setId(documentId);
+        setName((String) mapOfObject.get("fullname"));
+        setEmail((String) mapOfObject.get("mail"));
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 

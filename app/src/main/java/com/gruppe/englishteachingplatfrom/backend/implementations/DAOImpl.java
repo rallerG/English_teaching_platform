@@ -20,7 +20,9 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -29,7 +31,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     private CollectionReference collection;
     private Class<T> type;
     private T objectToReturn;
-    private List<T> listOfObjectsToReturn;
+    private List<DocumentObject> listOfObjectsToReturn;
 
     public DAOImpl(String collectionReference, Class<T> type) {
         this.collection = db.collection(collectionReference);
@@ -91,15 +93,17 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
                                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                                     studentsDocument.get(studentReference.getId());
+                                    objectToReturn.toObject(document.getId(),document.getData());
                                 }
                                 else if (teacherReference != null) {
                                     Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
                                     TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                     teachersDocument.get(studentReference.getId());
+                                    objectToReturn.toObject(document.getId(),document.getData());
                                 }
                                 else {
-                                    objectToReturn = document.toObject(type); //missing .class
                                     Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
+                                    objectToReturn.toObject(document.getId(),document.getData());
                                 }
                             } else {
                                 Log.d(TAG, "No such document");
@@ -131,7 +135,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     }
 
     @Override
-    public List<T> getAll() {
+    public List<DocumentObject> getAll() {
         listOfObjectsToReturn = null;
         collection
                 .get()
@@ -140,23 +144,27 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                DocumentObject documentObject = null;
                                 DocumentReference studentReference = (DocumentReference) document.get("student");
-                                DocumentReference teacherReference = (DocumentReference) document.get("student");
+                                DocumentReference teacherReference = (DocumentReference) document.get("teacher");
                                 if (studentReference != null) {
                                     Log.d(TAG, " --getAll()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
                                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                                     studentsDocument.get(studentReference.getId());
-                                    listOfObjectsToReturn.add(document.toObject(type));
+                                    documentObject.toObject(document.getId(),document.getData());
+                                    listOfObjectsToReturn.add(documentObject);
                                 }
                                 else if (teacherReference != null) {
                                     Log.d(TAG, " --getAll()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
                                     TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                     teachersDocument.get(studentReference.getId());
-                                    listOfObjectsToReturn.add(document.toObject(type));
+                                    documentObject.toObject(studentReference.getId(),document.getData());
+                                    listOfObjectsToReturn.add(documentObject);
                                 }
                                 else {
                                     Log.d(TAG," --getAll()-- "+ document.getId() + " => " + document.getData());
-                                    listOfObjectsToReturn.add(document.toObject(type));
+                                    documentObject.toObject(studentReference.getId(),document.getData());
+                                    listOfObjectsToReturn.add(documentObject);
                                 }
                             }
                         } else {

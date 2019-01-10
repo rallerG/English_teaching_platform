@@ -1,6 +1,12 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Singleton {
 
