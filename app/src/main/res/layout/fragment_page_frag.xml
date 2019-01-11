@@ -12,65 +12,96 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card"
-            android:layout_width="0dp"
-            android:layout_height="399dp"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="26dp"
-            app:cardElevation="@dimen/fab_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.constraint.ConstraintLayout
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-                <ImageView
-                    android:id="@+id/teacherIMG"
-                    android:layout_width="144dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="44dp"
-                    android:layout_marginBottom="110dp"
-                    android:src="@mipmap/ic_launcher_student"
-                    app:layout_constraintBottom_toTopOf="@+id/teachText"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginTop="23dp"
+                    android:layout_marginEnd="26dp"
+                    app:cardElevation="@dimen/fab_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/teachText"
-                    android:layout_width="124dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginBottom="113dp"
-                    android:text="Text"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/teacherIMG" />
-            </android.support.constraint.ConstraintLayout>
 
-        </android.support.v7.widget.CardView>
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/pic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="227dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginEnd="16dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/profile1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/sup_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:layout_marginTop="16dp"
+                            android:text="TXT"
+                            android:textSize="30sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/pic" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/information"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="320dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:orientation="vertical"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/card">
+
+                                <TextView
+                                    android:id="@+id/textView16"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Information"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/bio"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+                            </LinearLayout>
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
+
     </android.support.constraint.ConstraintLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:src="@drawable/ic_menu_pending" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_fav"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_menu_favorite_24px" />
 
 </FrameLayout>

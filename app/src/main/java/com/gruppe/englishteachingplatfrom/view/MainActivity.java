@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(this);
+//        fab = (FloatingActionButton) findViewById(R.id.fab);
+//        floatingActionButton = findViewById(R.id.floatingActionButton);
+//        fab.setOnClickListener(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -56,8 +56,10 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Pick what fragment to display onCreate
-        displaySelectedScreen(6);
+        if(savedInstanceState == null) {
+            //Pick what fragment to display onCreate
+            displaySelectedScreen(6);
+        }
     }
 
     @Override
@@ -143,7 +145,7 @@ public class MainActivity extends AppCompatActivity
 //                setTitle("Gruppe Magnus");
                 break;
             default:
-                fragment = new ViewPagerFragment();
+                fragment = new frag_Pager();
                 setTitle("Gruppe Magnus");
                 break;
         }

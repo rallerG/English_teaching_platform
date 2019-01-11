@@ -1,31 +1,40 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
+
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.controller.ViewPagerAdapter;
 
-import java.util.ArrayList;
 
-
-public class ViewPagerFragment extends Fragment {
+public class ViewPagerFragment extends Fragment implements View.OnClickListener {
 
     private ViewPager mViewPager;
-
     private ViewPagerAdapter mAdapter;
+    private SingletonData info;
+    private FloatingActionButton floating_Send;
+    private FloatingActionButton floating_Fav;
+    private int position1;
+    private int pic1;
 
-    private ArrayList<Integer> img = new ArrayList<Integer>();
 
-    private ArrayList<ViewPagerModel> mContents;
+    Parcelable state;
+ //   LinearLayout information;
 
-    private Singleton info;
+//    int img[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3,R.drawable.profile3 };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,54 +50,21 @@ public class ViewPagerFragment extends Fragment {
         info = Singleton.getInstance();
 
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
+ //       information = view.findViewById(R.id.information);
+//        information.setVisibility(View.GONE);
 
-        mContents = new ArrayList<>();
+        mViewPager.setOnClickListener(this);
 
-        int images[] = {R.drawable.profile1, R.drawable.profile2, R.drawable.profile3 };
+        floating_Fav = view.findViewById(R.id.floating_fav);
+        floating_Send = view.findViewById(R.id.floating_send);
 
-        img.add(R.drawable.profile1);
-        img.add(R.drawable.profile2);
-        img.add(R.drawable.profile3);
+        floating_Send.setOnClickListener(this);
+        floating_Fav.setOnClickListener(this);
 
-       // String names[] = {"Smith", "Johnson", "David", "Adam"};
-
-//        info.getNames().add("Smith");
-//        info.getNames().add("Johnson");
-//        info.getNames().add("David");
-//        info.getNames().add("Adam");
-
-       // String desig[] = {"English Teacher"};
-//        info.getProf().add("English Teacher");
-
-       // String place[] = {"USA", "DENMARK", "SWEDEN"};
-
-//        info.getNation().add("USA");
-//        info.getNation().add("Denmark");
-//        info.getNation().add("Sweden");
-
-//        ArrayList<String> names = info.getNames();
-//        ArrayList<String> prof = info.getProf();
-//        ArrayList<String> nation = info.getNation();
-        for (int i = 0; i < images.length; i++){
-
-            ViewPagerModel viewPagerModel = new ViewPagerModel();
-
-            viewPagerModel.images = images[i];
-
-//            viewPagerModel.names = names.get(i);
-//
-//            viewPagerModel.desig = prof.get(0);
-//
-//            viewPagerModel.place = nation.get(i);
-
-            mContents.add(viewPagerModel);
-
-        }
-
-        mAdapter = new ViewPagerAdapter(mContents, getActivity());
+        System.out.println("størrelse af teacher " +info.getTeacher().size());
+        mAdapter = new ViewPagerAdapter(info.getTeacher(), getActivity());
         mViewPager.setPageTransformer(true, new ViewPagerStack());
         mViewPager.setOffscreenPageLimit(3);
-
 
         mViewPager.setAdapter(mAdapter);
 
@@ -100,8 +76,34 @@ public class ViewPagerFragment extends Fragment {
     }
 
     public int getCurrentPic(){
+        return info.getTeacher().get(getCurrentPosition()).getmPicture();
+    }
 
-        return img.get(mViewPager.getCurrentItem());
+    @Override
+    public void onClick(View v) {
+        if (v == mViewPager){
+            mViewPager.getAdapter().notifyDataSetChanged();
+        }
+
+        if (v == floating_Send) {
+            Fragment frag = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
+            if (frag instanceof ViewPagerFragment) {
+                position1 = ((ViewPagerFragment) frag).getCurrentPosition();
+                pic1 = ((ViewPagerFragment) frag).getCurrentPic();
+            }
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position1);
+            bundle.putInt("pic", pic1);
+            Fragment F = new DialogBox();
+            F.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                    addToBackStack(null).commit();
+        }
+        if(v == floating_Fav){
+            // checker whether the teacher is favorited by the student and set the image accordingly
+            // should have the standard heart images for favorite (empty and filled)
+            ((FloatingActionButton) v).setImageResource(R.drawable.ic_if_filter_1608702);
+        }
     }
 
     private class ViewPagerStack implements ViewPager.PageTransformer {
@@ -111,16 +113,33 @@ public class ViewPagerFragment extends Fragment {
 
             if (position >= 0) {
 
-                page.setScaleX(0.8f - 0.05f * position);
-                page.setScaleY(0.8f);
+             /*   page.setScaleX(0.8f - 0.05f * position);
+                page.setScaleY(0.8f);*/
 
                 page.setTranslationX(-page.getWidth() * position);
 
                 page.setTranslationY(-30 * position);
-
             }
-
         }
+    }
+
+/*    public void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+
+        // Save list state
+        mListState = RecyclerView.LayoutManager.onSaveInstanceState();
+        state.putParcelable(LIST_STATE_KEY, mListState);
+    }*/
+
+    @Override
+    public void onPause() {
+        // Save ListView state @ onPause
+        state = mViewPager.onSaveInstanceState();
+        super.onPause();
+    }
+
+    public void expand(){
 
     }
+
 }
