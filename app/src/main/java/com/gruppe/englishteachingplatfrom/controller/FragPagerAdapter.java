@@ -24,7 +24,7 @@ public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnCli
 
     @Override
     public Fragment getItem(int position) {
-        return new Page_frag(position);
+        return new Page_frag();
     }
 
     @Override

@@ -27,14 +27,9 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     private SingletonData info = SingletonData.getInstance();
     private ArrayList<TeacherProfile> contents = info.getTeacher();
     private int position;
-    private ExpandableLayout expander;
+   private ExpandableLayout expander;
 
     public Page_frag() {
-
-    }
-
-    public Page_frag(int position) {
-        this.position = position;
 
     }
 
