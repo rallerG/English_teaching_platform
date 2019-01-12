@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,44 +13,51 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/ViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="496dp">
+                android:layout_height="700dp"
+                app:layout_constraintTop_toTopOf="parent">
 
             </android.support.v4.view.ViewPager>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floating_fav"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:layout_marginBottom="@dimen/fab_margin"
-                    android:clickable="true"
-                    app:srcCompat="@drawable/ic_menu_favorite_24px" />
-
-                <Space
-                    android:layout_width="238dp"
-                    android:layout_height="match_parent" />
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floating_send"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:clickable="true"
-                    app:srcCompat="@android:drawable/ic_menu_send" />
-            </TableRow>
 
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="508dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floating_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_menu_favorite_24px" />
+
+        <Space
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floating_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_menu_send" />
+    </TableRow>
+
+</android.support.constraint.ConstraintLayout>

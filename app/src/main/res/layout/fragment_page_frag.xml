@@ -20,15 +20,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/card"
                     android:layout_width="330dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="26dp"
                     android:layout_marginTop="23dp"
-                    android:layout_marginEnd="26dp"
                     app:cardElevation="@dimen/fab_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -39,41 +38,94 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/pic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="227dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginEnd="16dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/profile1"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/sup_text"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="54dp"
-                            android:layout_marginTop="16dp"
-                            android:text="TXT"
-                            android:textSize="30sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/pic" />
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/pic"
+                                android:layout_width="match_parent"
+                                android:layout_height="227dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginEnd="16dp"
+                                android:src="@drawable/profile1"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/name"
+                                    android:layout_width="170dp"
+                                    android:layout_height="54dp"
+                                    android:layout_marginLeft="16dp"
+                                    android:layout_marginTop="8dp"
+                                    android:text="Name"
+                                    android:textSize="28sp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/pic" />
+
+                                <TextView
+                                    android:id="@+id/language"
+                                    android:layout_width="880dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="16dp"
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:text="Language" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <RatingBar
+                                    android:id="@+id/ratingBar"
+                                    android:layout_width="179dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="-40dp"
+                                    android:layout_weight="1"
+                                    android:scaleX=".6"
+                                    android:scaleY=".6" />
+
+                                <TextView
+                                    android:id="@+id/rate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="-40dp"
+                                    android:layout_weight="1"
+                                    android:text="Rate" />
+
+                                <TextView
+                                    android:id="@+id/price"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Price" />
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                         <net.cachapa.expandablelayout.ExpandableLayout
                             android:id="@+id/information"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="320dp"
+                            android:layout_marginTop="350dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="240dp"
                                 android:layout_height="wrap_content"
 
                                 android:orientation="vertical"
