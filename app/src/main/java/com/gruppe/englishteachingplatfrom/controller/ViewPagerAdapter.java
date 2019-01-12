@@ -78,7 +78,7 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
 
 
-        imageView.setImageResource(contents.get(position).getmPicture());
+        imageView.setImageResource(contents.get(position).getProfilePic());
 
 
         TextView name, title, rate, price;
@@ -91,7 +91,7 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
     //    information.setOnClickListener(this);
 
-        txt = view.findViewById(R.id.sup_text);
+        txt = view.findViewById(R.id.name);
         //txt.setText(contents.get(position).getmInfo());
        // txt.setVisibility(View.INVISIBLE);
        /* name = view.findViewById(R.id.name);
@@ -117,7 +117,7 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
                 // this is the on click listerner for the objects in the viewpager
                 System.out.println("works");
 
-              Toast.makeText(context,contents.get(position).getmName(),Toast.LENGTH_SHORT).show();
+              Toast.makeText(context,contents.get(position).getName(),Toast.LENGTH_SHORT).show();
             }
         });
         return view;

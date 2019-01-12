@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.SingletonData;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -22,10 +22,10 @@ public class Page_frag extends Fragment implements View.OnClickListener {
 
 
     private CardView card;
-    private TextView txt, bio;
+    private TextView name, bio;
     private ImageView imageView;
-    private SingletonData info = SingletonData.getInstance();
-    private ArrayList<TeacherProfile> contents = info.getTeacher();
+    private Singleton teacher = Singleton.getInstance();
+    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
     private int position;
    private ExpandableLayout expander;
 
@@ -49,7 +49,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         expander = rootview.findViewById(R.id.information);
         bio = rootview.findViewById(R.id.bio);
 
-        txt = rootview.findViewById(R.id.sup_text);
+        name = rootview.findViewById(R.id.name);
      //   txt.setVisibility(View.INVISIBLE);
 
         return rootview;
@@ -60,11 +60,9 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v == card) {
             //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
-            if(txt.getVisibility() == View.VISIBLE){
-                txt.setVisibility(View.INVISIBLE);
+            if(expander.isExpanded()) {
                 expander.collapse();
-            }else{
-                txt.setVisibility(View.VISIBLE);
+            } else {
                 expander.expand();
             }
         }

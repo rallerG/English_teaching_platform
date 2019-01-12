@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.controller.FragPagerAdapter;
-import com.gruppe.englishteachingplatfrom.model.SingletonData;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
@@ -20,11 +20,11 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
 
         ViewPager mPager;
         FragPagerAdapter mAdapter;
-        private SingletonData info = SingletonData.getInstance();
+        private Singleton teacher = Singleton.getInstance();
         private FloatingActionButton floating_Send;
         private FloatingActionButton floating_Fav;
         private ImageView imageView;
-        private ArrayList<TeacherProfile> contents = info.getTeacher();
+        private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
         private int position1;
         private int pic1;
 
@@ -47,7 +47,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
 
 
 
-            info = SingletonData.getInstance();
+            teacher = Singleton.getInstance();
 
             floating_Fav = view.findViewById(R.id.floating_fav);
             floating_Send = view.findViewById(R.id.floating_send);
@@ -71,7 +71,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
     }
 
     public int getCurrentPic(){
-        return info.getTeacher().get(getCurrentPosition()).getmPicture();
+        return teacher.getTeacherDummies().get(getCurrentPosition()).getProfilePic();
     }
 
     private class ViewPagerStack implements ViewPager.PageTransformer {

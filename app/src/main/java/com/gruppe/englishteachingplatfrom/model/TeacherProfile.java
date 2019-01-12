@@ -74,13 +74,13 @@ public class TeacherProfile extends DocumentObject{
     public Map<String, String> toMap() {
         return null;
     }
-    public int getmPicture() {
-        return mPicture;
+/*    public int getmPicture() {
+        return profilePic;
     }
-    public void setmPicture(int mPicture) {
-        this.mPicture = mPicture;
+    public void setmPicture(int profilePic) {
+        this.profilePic = profilePic;
     }
     public String getmInfo() {
         return mInfo;
-    }
+    }*/
 }

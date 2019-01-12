@@ -23,7 +23,7 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
 
     private ViewPager mViewPager;
     private ViewPagerAdapter mAdapter;
-    private SingletonData info;
+    private Singleton teacher;
     private FloatingActionButton floating_Send;
     private FloatingActionButton floating_Fav;
     private int position1;
@@ -47,7 +47,7 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_viewpager_list, container, false);
 
-        info = Singleton.getInstance();
+        teacher = Singleton.getInstance();
 
         mViewPager = (ViewPager) view.findViewById(R.id.ViewPager);
  //       information = view.findViewById(R.id.information);
@@ -61,8 +61,8 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
         floating_Send.setOnClickListener(this);
         floating_Fav.setOnClickListener(this);
 
-        System.out.println("størrelse af teacher " +info.getTeacher().size());
-        mAdapter = new ViewPagerAdapter(info.getTeacher(), getActivity());
+        System.out.println("størrelse af teacher " +teacher.getTeacherDummies().size());
+        mAdapter = new ViewPagerAdapter(teacher.getTeacherDummies(), getActivity());
         mViewPager.setPageTransformer(true, new ViewPagerStack());
         mViewPager.setOffscreenPageLimit(3);
 
@@ -76,7 +76,7 @@ public class ViewPagerFragment extends Fragment implements View.OnClickListener 
     }
 
     public int getCurrentPic(){
-        return info.getTeacher().get(getCurrentPosition()).getmPicture();
+        return teacher.getTeacherDummies().get(getCurrentPosition()).getProfilePic();
     }
 
     @Override
