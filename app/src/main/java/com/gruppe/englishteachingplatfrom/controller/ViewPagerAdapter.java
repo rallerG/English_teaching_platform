@@ -2,7 +2,6 @@ package com.gruppe.englishteachingplatfrom.controller;
 
 
 import android.content.Context;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -18,11 +17,9 @@ import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
-import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListener {
 
@@ -74,7 +71,7 @@ public class ViewPagerAdapter extends PagerAdapter implements View.OnClickListen
 
         System.out.println("position: " + position);
 
-        imageView = (ImageView) view.findViewById(R.id.pic);
+        imageView = (ImageView) view.findViewById(R.id.teacherPic);
 
 
 

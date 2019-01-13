@@ -95,14 +95,15 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v == floating_Send) {
-            Fragment frag = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
-            if (frag instanceof ViewPagerFragment) {
-                position1 = ((ViewPagerFragment) frag).getCurrentPosition();
-                pic1 = ((ViewPagerFragment) frag).getCurrentPic();
-            }
+//            Fragment frag = getActivity().getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
+//            if (frag instanceof ViewPagerFragment) {
+//                position1 = ((ViewPagerFragment) frag).getCurrentPosition();
+//                pic1 = ((ViewPagerFragment) frag).getCurrentPic();
+//            }
+            position1 = mPager.getCurrentItem();
             Bundle bundle = new Bundle();
             bundle.putInt("position", position1);
-            bundle.putInt("pic", pic1);
+           // bundle.putInt("pic", pic1);
             Fragment F = new DialogBox();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).

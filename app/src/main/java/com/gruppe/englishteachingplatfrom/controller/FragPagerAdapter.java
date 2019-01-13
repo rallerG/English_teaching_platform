@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.controller;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -24,7 +25,11 @@ public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnCli
 
     @Override
     public Fragment getItem(int position) {
-        return new Page_frag();
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        Fragment page = new Page_frag();
+        page.setArguments(bundle);
+        return page;
     }
 
     @Override

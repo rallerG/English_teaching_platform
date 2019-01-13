@@ -26,8 +26,10 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     private ImageView imageView;
     private Singleton teacher = Singleton.getInstance();
     private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
-    private int position;
-   private ExpandableLayout expander;
+    private int pos;
+    private int pic;
+    private String tName;
+    private ExpandableLayout expander;
 
     public Page_frag() {
 
@@ -43,13 +45,24 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_page_frag, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            pos = bundle.getInt("position", 0);
+        }
+        pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
+
+//        imageView =  rootview.findViewById(R.id.teacherPic);
+//        imageView.setImageResource(pic);
 
         expander = rootview.findViewById(R.id.information);
         bio = rootview.findViewById(R.id.bio);
 
         name = rootview.findViewById(R.id.name);
+        tName = contents.get(pos).getName();
+        name.setText(tName);
      //   txt.setVisibility(View.INVISIBLE);
 
         return rootview;
