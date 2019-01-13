@@ -19,6 +19,8 @@ public class FeedbackProfile extends DocumentObject {
         this.content = content;
     }
 
+    public FeedbackProfile () {}
+
 //    public static ArrayList<FeedbackProfile> createFeedback(int numContacts) {
 //        if (feedbackProfiles.isEmpty()) {
 //            for (int i = 1; i <= numContacts; i++) {
@@ -35,11 +37,13 @@ public class FeedbackProfile extends DocumentObject {
     }
 
     @Override
-    public void toObject(String documentId, Map<String, Object> mapOfObject) {
-        setStudentProfile((StudentProfile) mapOfObject.get("student"));
-        setId(documentId);
-        setRating((Double) mapOfObject.get("rating"));
-        setContent((String) mapOfObject.get("content"));
+    public FeedbackProfile toObject(String documentId, Map<String, Object> mapOfObject) {
+        FeedbackProfile feedbackProfile = new FeedbackProfile();
+        feedbackProfile.setStudentProfile((StudentProfile) mapOfObject.get("student"));
+        feedbackProfile.setId(documentId);
+        feedbackProfile.setRating((Double) mapOfObject.get("rating"));
+        feedbackProfile.setContent((String) mapOfObject.get("content"));
+        return feedbackProfile;
     }
 
     public StudentProfile getStudentProfile() {

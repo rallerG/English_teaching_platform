@@ -6,7 +6,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 public class StudentPendingsDocumentImpl extends DAOImpl<TeacherProfile> implements StudentPendingsDocument {
     private String parentStudentDocumentId;
     public StudentPendingsDocumentImpl(String parentStudentDocumentId) {
-        super("students/"+parentStudentDocumentId+"/pendings",TeacherProfile.class);
+        super("students/"+parentStudentDocumentId+"/pendings");
         this.parentStudentDocumentId = parentStudentDocumentId;
     }
 

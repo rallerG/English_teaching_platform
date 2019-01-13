@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 public class LoginOrSignupActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,6 +27,10 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         login.setOnClickListener(this);
         Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
+
+        StudentsDocument studentsDocument = new StudentsDocumentImpl();
+        System.out.println(((StudentProfile) studentsDocument.get("1")).getName());
+
     }
 
     @Override

@@ -26,6 +26,11 @@ public class StudentProfile extends DocumentObject{
         this.rating = rating;
     }
 
+    public StudentProfile () {
+        this.profilePicture = 0;
+        this.rating = 0;
+    }
+
     //Constructer without ID for database
     public StudentProfile(String name, String email, int profilePicture, double rating) {
         this.name = name;
@@ -95,9 +100,11 @@ public class StudentProfile extends DocumentObject{
     }
 
     @Override
-    public void toObject(String documentId,Map<String, Object> mapOfObject) {
-        setId(documentId);
-        setName((String) mapOfObject.get("fullname"));
-        setEmail((String) mapOfObject.get("mail"));
+    public StudentProfile toObject(String documentId,Map<String, Object> mapOfObject) {
+        StudentProfile studentProfile = new StudentProfile();
+        studentProfile.setId(documentId);
+        studentProfile.setName((String) mapOfObject.get("fullname"));
+        studentProfile.setEmail((String) mapOfObject.get("mail"));
+        return studentProfile;
     }
 }

@@ -28,6 +28,12 @@ public class TeacherProfile extends DocumentObject{
         this.price = price;
     }
 
+    public TeacherProfile () {
+        this.profilePic = 0;
+        this.rating = 0;
+        this.price = 0;
+    }
+
 
     public ArrayList<Payment> getActivePaymentDummies() {
         return activePaymentDummies;
@@ -86,10 +92,12 @@ public class TeacherProfile extends DocumentObject{
     }
 
     @Override
-    public void toObject(String documentId,Map<String, Object> mapOfObject) {
-        setId(documentId);
-        setName((String) mapOfObject.get("fullname"));
-        setEmail((String) mapOfObject.get("mail"));
+    public TeacherProfile toObject(String documentId,Map<String, Object> mapOfObject) {
+        TeacherProfile teacherProfile = new TeacherProfile();
+        teacherProfile.setId(documentId);
+        teacherProfile.setName((String) mapOfObject.get("fullname"));
+        teacherProfile.setEmail((String) mapOfObject.get("mail"));
+        return teacherProfile;
     }
 
     public void setEmail(String email) {

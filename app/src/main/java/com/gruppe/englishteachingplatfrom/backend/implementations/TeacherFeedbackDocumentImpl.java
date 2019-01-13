@@ -7,7 +7,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 public class TeacherFeedbackDocumentImpl extends DAOImpl<FeedbackProfile> implements TeacherFeedbackDocument {
     private String parentTeacherDocumentId;
     public TeacherFeedbackDocumentImpl(String parentTeacherDocumentId) {
-        super("teachers/"+parentTeacherDocumentId+"/feedback",FeedbackProfile.class);
+        super("teachers/"+parentTeacherDocumentId+"/feedback");
         this.parentTeacherDocumentId = parentTeacherDocumentId;
     }
 

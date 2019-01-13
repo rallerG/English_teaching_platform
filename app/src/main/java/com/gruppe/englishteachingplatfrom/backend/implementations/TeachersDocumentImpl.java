@@ -5,6 +5,6 @@ import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 public class TeachersDocumentImpl extends DAOImpl<StudentProfile> implements TeachersDocument {
     public TeachersDocumentImpl() {
-        super("teachers", StudentProfile.class);
+        super("teachers");
     }
 }

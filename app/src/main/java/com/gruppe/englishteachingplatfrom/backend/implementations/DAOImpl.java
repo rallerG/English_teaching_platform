@@ -20,6 +20,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +30,13 @@ import static android.support.constraint.Constraints.TAG;
 public abstract class DAOImpl <T extends DocumentObject> implements Document, Collection {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
-    private Class<T> type;
-    private T objectToReturn;
+    private DocumentObject objectToReturn;
     private List<DocumentObject> listOfObjectsToReturn;
+    ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
+    Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
 
-    public DAOImpl(String collectionReference, Class<T> type) {
+    public DAOImpl(String collectionReference) {
         this.collection = db.collection(collectionReference);
-        this.type = type;
         objectToReturn = null;
         listOfObjectsToReturn = null;
     }
@@ -78,7 +79,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public DocumentObject get(String documentId) {
-        objectToReturn = null;
+        try {
+            objectToReturn = getInstance();
+        } catch (Exception e) {
+            System.out.println("Could not define subclass of superclass: "+e);
+        }
         collection.document(documentId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -93,17 +98,17 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
                                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                                     studentsDocument.get(studentReference.getId());
-                                    objectToReturn.toObject(document.getId(),document.getData());
+                                    objectToReturn = (T) objectToReturn.toObject(document.getId(),document.getData());
                                 }
                                 else if (teacherReference != null) {
                                     Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
                                     TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                     teachersDocument.get(studentReference.getId());
-                                    objectToReturn.toObject(document.getId(),document.getData());
+                                    objectToReturn = (T) objectToReturn.toObject(document.getId(),document.getData());
                                 }
                                 else {
                                     Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
-                                    objectToReturn.toObject(document.getId(),document.getData());
+                                    objectToReturn = (StudentProfile) objectToReturn.toObject(document.getId(),document.getData());
                                 }
                             } else {
                                 Log.d(TAG, "No such document");
@@ -173,5 +178,9 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     }
                 });
         return listOfObjectsToReturn;
+    }
+
+    public T getInstance() throws Exception {
+        return type.newInstance();
     }
 }
