@@ -30,7 +30,7 @@ public class Payment extends DocumentObject {
 
     public Payment (){}
 
-    public static void newTransaction(String id,StudentProfile student, TeacherProfile teacher, int price) {
+    public static void newTransaction(String id, StudentProfile student, TeacherProfile teacher, int price) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
