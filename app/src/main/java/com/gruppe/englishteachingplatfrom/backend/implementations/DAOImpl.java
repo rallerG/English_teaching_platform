@@ -20,13 +20,10 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
-import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
