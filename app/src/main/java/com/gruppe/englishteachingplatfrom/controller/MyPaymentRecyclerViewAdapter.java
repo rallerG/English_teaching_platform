@@ -11,19 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.PaymentDummyBackend;
+import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.view.PaymentActiveFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPaymentRecyclerViewAdapter.PaymentViewHolder> {
 
-//    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList;
+    private List<Payment> activePaymentList;
     private PaymentActiveFragment.OnFragmentInteractionListener mListener;
-    PaymentDummyBackend p = PaymentDummyBackend.getInstance();
 
-    public MyPaymentRecyclerViewAdapter(List<PaymentDummyBackend.TeacherDummy> teacherPaymentRequestList, PaymentActiveFragment.OnFragmentInteractionListener listener) {
-//        this.teacherPaymentRequestList = teacherPaymentRequestList;
+    public MyPaymentRecyclerViewAdapter(ArrayList<Payment> paymentDummies, PaymentActiveFragment.OnFragmentInteractionListener listener) {
+        this.activePaymentList = paymentDummies;
         this.mListener = listener;
     }
 
@@ -37,21 +37,20 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
     @Override
     public void onBindViewHolder(@NonNull final PaymentViewHolder paymentViewHolder, final int i) {
-//        PaymentDummyBackend.TeacherDummy teacherProfile = teacherPaymentRequestList.get(i);
+//        Singleton.TeacherDummy teacherProfile = activePaymentList.get(i);
 
-        paymentViewHolder.textViewName.setText(p.getTeacherDummies().get(i).getName());
-        paymentViewHolder.textViewPrice.setText(Integer.toString(p.getTeacherDummies().get(i).getPrice())+" DKK");
-        paymentViewHolder.textViewDate.setText(p.getTeacherDummies().get(i).getDate());
+        paymentViewHolder.textViewName.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName());
+        paymentViewHolder.textViewPrice.setText(Integer.toString(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getPrice())+" DKK");
+        //TODO Make get date again
+        paymentViewHolder.textViewDate.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getRequestDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
 
         paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Knap " + i);
-                Toast.makeText(v.getContext(),"Accept nr. " + i, Toast.LENGTH_SHORT).show();
-
-                p.addToHistory(p.getTeacherDummies().get(i));
-                p.getTeacherDummies().remove(i);
+                System.out.println("Knap " + paymentViewHolder.getAdapterPosition());
+                Toast.makeText(v.getContext(),"Accept nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getName(), Toast.LENGTH_SHORT).show();
+                Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 notifyDataSetChanged();
             }
         });
@@ -59,9 +58,10 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         paymentViewHolder.rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Knap " + i);
-                Toast.makeText(v.getContext(),"Reject nr. " + i, Toast.LENGTH_SHORT).show();
-                p.getTeacherDummies().remove(i);
+                System.out.println("Knap " + paymentViewHolder.getAdapterPosition());
+                Toast.makeText(v.getContext(),"Reject nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getName(), Toast.LENGTH_SHORT).show();
+
+                Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 notifyDataSetChanged();
             }
         });
@@ -71,7 +71,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
     @Override
     public int getItemCount() {
-        return p.getTeacherDummies().size();
+        return activePaymentList.size();
     }
 
     class PaymentViewHolder extends RecyclerView.ViewHolder {

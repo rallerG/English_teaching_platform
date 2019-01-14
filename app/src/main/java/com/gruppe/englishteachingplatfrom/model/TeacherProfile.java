@@ -1,76 +1,129 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class TeacherProfile {
-    private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
-    private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
-    private static ArrayList<TeacherProfile> MatchProfiles = new ArrayList<TeacherProfile>();
+public class TeacherProfile extends DocumentObject{
+    private static ArrayList<StudentProfile> pendingProfiles = new ArrayList<>();
+    private static ArrayList<StudentProfile> favoriteProfiles = new ArrayList<>();
+    private static ArrayList<StudentProfile> MatchProfiles = new ArrayList<>();
+    private static ArrayList<Payment> activePaymentDummies = new ArrayList<>();
+    private static ArrayList<Payment> historyPaymentDummies = new ArrayList<>();
     //Needs a picture attribute
-    private String mName;
-    private String mRating;
-    private String mTitle;
-    private String mPrice;
+    private String id;
+    private String name;
+    private String email;
+    private double rating;
+    private int profilePic;
+    private String language;
+    private int price;
 
-    public TeacherProfile(String mName, String mRating, String mTitle, String mPrice) {
-        this.mName = mName;
-        this.mRating = mRating;
-        this.mTitle = mTitle;
-        this.mPrice = mPrice;
+    public TeacherProfile(String name, double rating, int profilePic, String language, int price) {
+        this.name = name;
+        this.rating = rating;
+        this.profilePic = profilePic;
+        this.language = language;
+        this.price = price;
+    }
+
+    public TeacherProfile () {
+        this.profilePic = 0;
+        this.rating = 0;
+        this.price = 0;
     }
 
 
-    //TODO make a method that returns a list of ListProfiles, generated from some date
-    private static int lastProfileId = 0;
+    public ArrayList<Payment> getActivePaymentDummies() {
+        return activePaymentDummies;
+    }
 
-    public static ArrayList<TeacherProfile> createPendingTeacherProfile(int numContacts) {
-        if (pendingProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                pendingProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-        }
+    public ArrayList<Payment> getHistoryPaymentDummies() {
+        return historyPaymentDummies;
+    }
 
+    public ArrayList<StudentProfile> getPendingProfiles() {
         return pendingProfiles;
     }
 
-    public static ArrayList<TeacherProfile> createFavoriteTeacherProfile(int numContacts) {
-        if (favoriteProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                favoriteProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-        }
-
+    public ArrayList<StudentProfile> getFavoriteProfiles() {
         return favoriteProfiles;
     }
 
-    public static ArrayList<TeacherProfile> createMatchTeacherProfile(int numContacts) {
-        if (MatchProfiles.isEmpty()) {
-            for (int i = 1; i <= numContacts; i++) {
-                MatchProfiles.add(new TeacherProfile("Navn " + ++lastProfileId, Float.toString((float) (Math.random() * 5.0)), "Tutor", Integer.toString((int) (Math.random() * 250.0 + 70)) + " DKK/hr"));
-            }
-            System.out.println("PROFILER BLEV OPRETTET!!!");
-        }
-
+    public ArrayList<StudentProfile> getMatchProfiles() {
         return MatchProfiles;
     }
 
-
-
-    public String getmName() {
-        return mName;
+    public String getName() {
+        return name;
     }
 
-    public String getmRating() {
-        return mRating;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getmTitle() {
-        return mTitle;
+    public String getId() {
+        return id;
     }
 
-    public String getmPrice() {
-        return mPrice;
+    public double getRating() {
+        return rating;
     }
+
+    public int getProfilePic() {
+        return profilePic;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    @Override
+    public Map<String, Object> toMap() {
+        Map<String, Object> mapToReturn = new HashMap<>();
+        mapToReturn.put("fullname",this.name);
+        mapToReturn.put("mail", this.email);
+        return mapToReturn;
+    }
+
+    @Override
+    public void toObject(String documentId,Map<String, Object> mapOfObject) {
+        this.setId(documentId);
+        this.setName((String) mapOfObject.get("fullname"));
+        this.setEmail((String) mapOfObject.get("mail"));
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String toString() {
+        return "Name: " + getName() + "\n Email: " + getEmail();
+    }
+
+
+
+
+/*    public int getmPicture() {
+        return profilePic;
+    }
+    public void setmPicture(int profilePic) {
+        this.profilePic = profilePic;
+    }
+    public String getmInfo() {
+        return mInfo;
+    }*/
 }

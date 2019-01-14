@@ -38,8 +38,8 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mFeedback = feedback.get(position);
-        holder.mStudName.setText(feedback.get(position).getStudName());
-        holder.mRating.setRating(feedback.get(position).getRating());
+        holder.mStudName.setText(feedback.get(position).getStudentProfile().getName());
+        holder.mRating.setRating((float) feedback.get(position).getRating());
         holder.mContent.setText(feedback.get(position).getContent());
 
    /*     holder.mView.setOnClickListener(new View.OnClickListener() {

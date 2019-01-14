@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.controller.MyPaymentHistoryRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.PaymentDummyBackend;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 public class PaymentHistoryFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -27,9 +27,9 @@ public class PaymentHistoryFragment extends Fragment {
     private int mColumnCount = 10;
 
 
-//    private List<PaymentDummyBackend.TeacherDummy> teacherPaymentHistorytList;
+//    private List<Singleton.TeacherDummy> teacherPaymentHistorytList;
     private OnFragmentInteractionListener mListener;
-//    private PaymentDummyBackend test = new PaymentDummyBackend();
+    private Singleton p = Singleton.getInstance();
 
 
     public PaymentHistoryFragment() {
@@ -69,7 +69,7 @@ public class PaymentHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        teacherPaymentHistorytList = test.getTeacherDummiesHistory();
+//        teacherPaymentHistorytList = test.getStudentDummies();
 
         View view = inflater.inflate(R.layout.fragment_payment_history_list, container, false);
 
@@ -78,7 +78,7 @@ public class PaymentHistoryFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(PaymentDummyBackend.getInstance().getTeacherDummiesHistory(), mListener));
+            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(p.getStudentDummies().get(0).getHistoryPaymentDummies(), mListener));
         }
         return view;
     }

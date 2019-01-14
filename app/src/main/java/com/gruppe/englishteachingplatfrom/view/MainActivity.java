@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 
@@ -31,16 +33,18 @@ public class MainActivity extends AppCompatActivity
     public FloatingActionButton floatingActionButton;
     public int position;
     public int pic;
+    Singleton p = Singleton.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        p.createList();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(this);
+//        fab = (FloatingActionButton) findViewById(R.id.fab);
+//        floatingActionButton = findViewById(R.id.floatingActionButton);
+//        fab.setOnClickListener(this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -52,8 +56,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Pick what fragment to display onCreate
-        displaySelectedScreen(6);
+        if(savedInstanceState == null) {
+            //Pick what fragment to display onCreate
+            //DisplaySelectedScreen(6);
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.fragmentContent, new frag_Pager());
+            ft.commit();
+        }
     }
 
     @Override
@@ -63,6 +73,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            setTitle(R.string.app_name);
         }
     }
 
@@ -108,6 +119,11 @@ public class MainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
+            case R.id.nav_home:
+                fragment = new frag_Pager();;
+                fragment.setArguments(args);
+                setTitle(R.string.app_name);
+                break;
             case R.id.nav_matches:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
@@ -130,20 +146,24 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 //  fragment = new frag_Pager();
-                fragment = new ViewPagerFragment();
+                fragment = new frag_Pager();
+                fragment.setArguments(args);
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
-                setTitle("Gruppe Magnus");
+                startActivity(new Intent(this, LoginOrSignupActivity.class));
+                finish();
                 break;
             default:
-                fragment = new ViewPagerFragment();
-                setTitle("Gruppe Magnus");
+                fragment = new frag_Pager();
+                fragment.setArguments(args);
+                setTitle(R.string.app_name);
                 break;
         }
 
         //replacing the fragment
-        if (fragment != null) {
+        if (fragment != null ) {
+            getSupportFragmentManager().popBackStack();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContent, fragment);
             ft.addToBackStack(null);
@@ -163,10 +183,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         if (view == fab) {
             Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
-            if (frag instanceof ViewPagerFragment) {
-                position = ((ViewPagerFragment) frag).getCurrentPosition();
-                pic = ((ViewPagerFragment) frag).getCurrentPic();
-            }
+
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);
             bundle.putInt("pic", pic);

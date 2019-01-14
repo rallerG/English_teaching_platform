@@ -12,32 +12,28 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class ListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private int listId;
+//    private OnListFragmentInteractionListener mListener;
+
+    RecyclerView mRecyclerView;
+    MyFavoriteRecyclerViewAdapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+
+    Singleton p = Singleton.getInstance();
     private OnListFragmentInteractionListener mListener;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public ListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+   
     public static ListFragment newInstance(int columnCount) {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
@@ -60,31 +56,51 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-                System.out.println(listId);
-            switch (getArguments().getInt("id")) {
-                case R.id.nav_matches:
-                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createMatchTeacherProfile(10), mListener));
-                    break;
-                case R.id.nav_favorites:
-                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createFavoriteTeacherProfile(10), mListener));
-                    break;
-                case R.id.nav_pending:
-                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(TeacherProfile.createPendingTeacherProfile(10), mListener));
-                    break;
-            }
-        }
-//        getActivity().setTitle("List");
+//        // Set the adapter
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+//                System.out.println(listId);
+//            switch (getArguments().getInt("id")) {
+//                case R.id.nav_matches:
+//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
+//                    break;
+//                case R.id.nav_favorites:
+//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
+//                    break;
+//                case R.id.nav_pending:
+//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
+//                    break;
+//            }
+        
+//        getAc
+//tivity().setTitle("List");
 
-        return view;
+
+
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies());
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(int position) {
+                //What to do in click
+                System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+            }
+        });
+
+            return view;
     }
 
 

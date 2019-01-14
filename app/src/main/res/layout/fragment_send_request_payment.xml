@@ -8,72 +8,56 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner
-            android:id="@+id/SearchableSpinner"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="49dp"
-            android:layout_marginEnd="38dp"
-            android:layout_marginBottom="133dp"
-            android:gravity="center_horizontal"
-            app:DoneSearchTintColor="@android:color/holo_purple"
-            app:RevealEmptyText="Tap to select student"
-            app:RevealViewBackgroundColor="@android:color/background_light"
-            app:SearchViewBackgroundColor="@android:color/secondary_text_dark"
-            app:ShowBorders="false"
-            app:SpinnerExpandHeight="300dp"
-            app:StartSearchTintColor="@android:color/background_dark"
-            app:layout_constraintBottom_toTopOf="@+id/valutaTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/AmountEditText"
-            android:layout_width="162dp"
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="236dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="136dp"
-            android:ems="10"
-            android:hint="Amount"
-            android:inputType="numberSigned"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
-            app:layout_constraintEnd_toStartOf="@+id/valutaTextView"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp" />
 
-        <TextView
-            android:id="@+id/valutaTextView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="146dp"
-            android:text="DKK"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/AmountEditText"
-            app:layout_constraintTop_toBottomOf="@+id/SearchableSpinner" />
+            android:orientation="horizontal"
+            android:layout_marginTop="160dp"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/AmountEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Amount"
+                android:inputType="numberSigned"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/valutaTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DKK"
+                android:textSize="24sp" />
+        </LinearLayout>
 
         <com.ebanx.swipebtn.SwipeButton
             android:id="@+id/swipe_btn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="210dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginBottom="5dp"
             app:button_background="@drawable/shape_button"
             app:button_bottom_padding="20dp"
             app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24px_"
-            app:button_image_enabled="@drawable/ic_toggle_star_color1"
+            app:button_image_enabled="@drawable/baseline2x_close_black_18dp"
             app:button_image_height="60dp"
             app:button_image_width="90dp"
             app:button_left_padding="20dp"
@@ -87,12 +71,8 @@
             app:inner_text_color="@android:color/white"
             app:inner_text_left_padding="48dp"
             app:inner_text_size="20sp"
-            app:inner_text_top_padding="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AmountEditText" />
+            app:inner_text_top_padding="14dp" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </FrameLayout>

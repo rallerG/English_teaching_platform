@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.View;
 
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
@@ -50,42 +52,8 @@ public class TeacherMainActivity extends AppCompatActivity
 
         //Pick what fragment to display oncreate
         displaySelectedScreen(R.id.nav_settings);
-
     }
-
-    private void getImages(){
-      //  Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
-
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-
-
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
-
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-
-
-        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
-
-        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
-
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
-
-    }
+    
 
     @Override
     public void onBackPressed() {
@@ -139,6 +107,11 @@ public class TeacherMainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
+            case R.id.home:
+                fragment = new Teacher_fragment();
+//                fragment.setArguments(args);
+                setTitle("Gruppe Magnus");
+                break;
             case R.id.first:
                 fragment = new RequestFragment();
                 fragment.setArguments(args);
@@ -155,6 +128,8 @@ public class TeacherMainActivity extends AppCompatActivity
                 fragment = new Teacher_fragment();
                 break;
             case R.id.nav_logout:
+                startActivity(new Intent(this, LoginOrSignupActivity.class));
+                finish();
                 break;
         }
 
