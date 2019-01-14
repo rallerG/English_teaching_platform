@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
@@ -22,13 +23,14 @@ public class Page_frag extends Fragment implements View.OnClickListener {
 
 
     private CardView card;
-    private TextView name, bio;
+    private TextView name, bio, Language, Rate, Price;
     private ImageView imageView;
     private Singleton teacher = Singleton.getInstance();
     private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
-    private int pos;
-    private int pic;
-    private String tName;
+    private int pos, pic, tPrice;
+    RatingBar Rating;
+    float tRating, tRate;
+    private String tName, tLang;
     private ExpandableLayout expander;
 
     public Page_frag() {
@@ -38,7 +40,9 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if(savedInstanceState != null){
+            expander.collapse();
+        }
     }
 
     @Override
@@ -63,8 +67,24 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         name = rootview.findViewById(R.id.name);
         tName = contents.get(pos).getName();
         name.setText(tName);
-     //   txt.setVisibility(View.INVISIBLE);
 
+        Language = rootview.findViewById(R.id.language);
+        tLang = contents.get(pos).getLanguage();
+        Language.setText(tLang);
+
+ /*       Rating = rootview.findViewById(R.id.teacherRating);
+        tRating = (float) contents.get(pos).getRating();
+        Rating.setRating(tRating);*/
+
+        Rate = rootview.findViewById(R.id.rate);
+        tRate = (float) contents.get(pos).getRating();
+        Rate.setText("" + tRate);
+
+        Price = rootview.findViewById(R.id.price);
+        tPrice = contents.get(pos).getPrice();
+        Price.setText(""+tPrice);
+
+     //   txt.setVisibility(View.INVISIBLE);'
         return rootview;
     }
 

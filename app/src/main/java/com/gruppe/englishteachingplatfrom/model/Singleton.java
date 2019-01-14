@@ -24,13 +24,13 @@ public class Singleton {
     }
 
     //Active list
-    private TeacherProfile t1 = new TeacherProfile("Hans", 0, 0, "English",  299);
-    private TeacherProfile t2 = new TeacherProfile("Mikkel", 0, 0, "English",  299);
-    private TeacherProfile t3 = new TeacherProfile("Julie", 0, 0, "English", 299);
-    private TeacherProfile t4 = new TeacherProfile("Jonas", 0, 0, "English", 299);
+    private TeacherProfile t1 = new TeacherProfile("Hans", 2, 0, "English",  299);
+    private TeacherProfile t2 = new TeacherProfile("Mikkel", 4, 0, "English",  299);
+    private TeacherProfile t3 = new TeacherProfile("Julie", 1, 0, "English", 299);
+    private TeacherProfile t4 = new TeacherProfile("Jonas", 2, 0, "English", 299);
     private TeacherProfile t5 = new TeacherProfile("Christoffer", 0, 0, "English", 299);
-    private TeacherProfile t6 = new TeacherProfile("Knud", 0, 0, "English", 299);
-    private TeacherProfile t7 = new TeacherProfile("Peter", 0, 0, "English", 299);
+    private TeacherProfile t6 = new TeacherProfile("Knud", 5, 0, "English", 299);
+    private TeacherProfile t7 = new TeacherProfile("Peter", 5, 0, "English", 299);
 
     //History list
     private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0, 0);

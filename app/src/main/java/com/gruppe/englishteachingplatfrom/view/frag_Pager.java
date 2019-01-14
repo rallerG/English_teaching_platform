@@ -57,9 +57,17 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
 
 
             mPager = view.findViewById(R.id.ViewPager);
-            mPager.setPageTransformer(true, new ViewPagerStack());
+           // mPager.setPageTransformer(true, new ViewPagerStack());
             mPager.setOffscreenPageLimit(3);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
+
+            mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+                @Override
+                public void onPageSelected(int position) {
+
+                }
+            });
+
             mPager.setAdapter(mAdapter);
 
             // Need to find out how to have different pictures
