@@ -17,6 +17,7 @@ import android.view.View;
 
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class TeacherMainActivity extends AppCompatActivity
 
         //Pick what fragment to display oncreate
         displaySelectedScreen(R.id.nav_settings);
+        Singleton.downloadAllStudentProfiles();
 
     }
     
