@@ -40,6 +40,11 @@ public class Singleton {
     private StudentProfile h5 = new StudentProfile("Sara", "sara@live.dk", 0, 0);
     private StudentProfile h6 = new StudentProfile("Line", "line@sol.dk", 0, 0);
     private StudentProfile h7 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
+    private StudentProfile h8 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
+    private StudentProfile h9 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
+    private StudentProfile h10 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
+    private StudentProfile h11 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
+    private StudentProfile h12 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
 
 
     public void createList(){
@@ -60,6 +65,11 @@ public class Singleton {
         studentDummies.add(h5);
         studentDummies.add(h6);
         studentDummies.add(h7);
+        studentDummies.add(h8);
+        studentDummies.add(h9);
+        studentDummies.add(h10);
+        studentDummies.add(h11);
+        studentDummies.add(h12);
 
         teacherDummies.get(0).getMatchProfiles().clear();
         teacherDummies.get(0).getMatchProfiles().addAll(studentDummies);

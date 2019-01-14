@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
@@ -34,6 +35,8 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     private String mParam2;
 
     Button activeButton, historyButton;
+
+    TextView noActivePayment;
 
     private OnFragmentInteractionListener mListener;
 
@@ -81,6 +84,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
         activeButton = (Button) view.findViewById(R.id.activeButton);
         historyButton = (Button) view.findViewById(R.id.historyButton);
+        noActivePayment = (TextView) view.findViewById(R.id.textView13);
 
         activeButton.setOnClickListener(this);
         historyButton.setOnClickListener(this);
