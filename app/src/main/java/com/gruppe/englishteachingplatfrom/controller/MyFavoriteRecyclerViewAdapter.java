@@ -12,6 +12,7 @@ import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.view.ListFragment.OnListFragmentInteractionListener;
+import com.gruppe.englishteachingplatfrom.view.PaymentActiveFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,43 +20,42 @@ import java.util.List;
 
 public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavoriteRecyclerViewAdapter.ViewHolder> {
 
-    private  List<TeacherProfile> mProfiles;
-    private final OnListFragmentInteractionListener mListener;
+    private List<TeacherProfile> mProfiles;
+    private  OnItemClickListener mListener;
 
 
-
-    public MyFavoriteRecyclerViewAdapter(ArrayList<TeacherProfile> teacherDummies, OnListFragmentInteractionListener listener) {
+    public MyFavoriteRecyclerViewAdapter(ArrayList<TeacherProfile> teacherDummies) {
         mProfiles = teacherDummies;
-        mListener = listener;
     }
 
     @Override
     public MyFavoriteRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view_item, parent, false);
-        return new ViewHolder(view);
+                .inflate(R.layout.recycler_view_card_item, parent, false);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
-//        holder.mNameView.setText(mProfiles.get(position).getmName());
-//        holder.mRatingNum.setText(String.format("%.1f", Float.parseFloat(mProfiles.get(position).getmRating())));
-//        holder.mRatingBar.setRating(Float.parseFloat(mProfiles.get(position).getmRating()));
-//        holder.mLanguageView.setText(mProfiles.get(position).getmTitle());
-//        holder.mPriceView.setText(mProfiles.get(position).getmPrice());
-
         holder.mNameView.setText(mProfiles.get(position).getName());
         holder.mRatingNum.setText(Double.toString(mProfiles.get(position).getRating()));
-        holder.mRatingBar.setRating( (float) (mProfiles.get(position).getRating()));
+        holder.mRatingBar.setRating((float) (mProfiles.get(position).getRating()));
         holder.mLanguageView.setText(mProfiles.get(position).getLanguage());
-        holder.mPriceView.setText(Integer.toString(mProfiles.get(position).getPrice()));
-        holder.mImageView.setImageResource(R.mipmap.ic_launcher_foreground_student);
+        holder.mPriceView.setText(Integer.toString(mProfiles.get(position).getPrice()) + " DKK");
+        holder.mImageView.setImageResource(R.mipmap.ic_launcher_student_round);
     }
 
     @Override
     public int getItemCount() {
         return mProfiles.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 
 
@@ -68,7 +68,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
         public final TextView mPriceView;
 //        public TeacherProfile mLProfile;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, final OnItemClickListener Listener) {
             super(view);
             mImageView = view.findViewById(R.id.listImageView);
             mNameView = view.findViewById(R.id.nameView);
@@ -76,6 +76,18 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
             mRatingNum = view.findViewById(R.id.ratingNum1);
             mLanguageView = view.findViewById(R.id.titleView3);
             mPriceView = view.findViewById(R.id.priceView4);
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                        if (Listener != null) {
+                            int position = getAdapterPosition();
+                            if (position != RecyclerView.NO_POSITION) {
+                                Listener.onItemClick(position);
+                            }
+                        }
+                    }
+            });
         }
 
         @Override
@@ -88,4 +100,5 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
                     + "'";
         }
     }
+
 }
