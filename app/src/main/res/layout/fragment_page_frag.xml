@@ -89,7 +89,7 @@
                                 android:orientation="horizontal">
 
                                 <RatingBar
-                                    android:id="@+id/ratingBar"
+                                    android:id="@+id/teacherRating"
                                     android:layout_width="179dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="-40dp"
