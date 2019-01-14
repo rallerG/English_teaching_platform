@@ -14,7 +14,7 @@
             android:title="Your students" />
         <item
             android:id="@+id/nav_favorites"
-            android:icon="@drawable/ic_menu_favorite_24px"
+            android:icon="@drawable/ic_menu_money"
             android:title="Price" />
         <item
             android:id="@+id/nav_pending"
