@@ -114,6 +114,11 @@ public class MainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
+            case R.id.nav_home:
+                fragment = new frag_Pager();;
+                fragment.setArguments(args);
+                setTitle("Gruppe Magnus");
+                break;
             case R.id.nav_matches:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
@@ -136,7 +141,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 //  fragment = new frag_Pager();
-                fragment = new ViewPagerFragment();
+                fragment = new frag_Pager();
+                fragment.setArguments(args);
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
@@ -146,6 +152,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             default:
                 fragment = new frag_Pager();
+                fragment.setArguments(args);
                 setTitle("Gruppe Magnus");
                 break;
         }

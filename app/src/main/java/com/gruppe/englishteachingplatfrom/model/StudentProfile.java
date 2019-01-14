@@ -16,7 +16,7 @@ public class StudentProfile extends DocumentObject{
     private static ArrayList<Payment> historyPaymentDummies = new ArrayList<>();
 
 
-    //Constructer with ID
+    //Constructor with ID
     public StudentProfile(String id, String name, String email, int profilePicture, double rating) {
         this.id = id;
         Name = name;
@@ -25,7 +25,7 @@ public class StudentProfile extends DocumentObject{
         this.rating = rating;
     }
 
-    //Constructer without ID for database
+    //Constructor without ID for database
     public StudentProfile(String name, String email, int profilePicture, double rating) {
         Name = name;
         this.email = email;

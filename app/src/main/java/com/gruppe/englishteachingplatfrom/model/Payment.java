@@ -15,6 +15,7 @@ public class Payment {
     private boolean isPayed;
     private boolean isActive;
 
+    //Private because it is not to be used by other classes. Use newTransaction() instead.
     private Payment(int id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
         this.id = id;
         this.price = price;
