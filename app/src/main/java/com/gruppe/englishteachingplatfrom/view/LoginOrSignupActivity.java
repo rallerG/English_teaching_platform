@@ -8,8 +8,17 @@ import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LoginOrSignupActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,10 +38,28 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         signup.setOnClickListener(this);
 
         StudentsDocument studentsDocument = new StudentsDocumentImpl();
-        System.out.println(((StudentProfile) studentsDocument.get("1")).getName());
-
+        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+        studentsDocument.get("1", new Callback<StudentProfile>() {
+            @Override
+            public void onCallback(StudentProfile object) {
+                System.out.println("kqly"+object.getName());
+            }
+        });
+        teachersDocument.get("1", new Callback<TeacherProfile>() {
+            @Override
+            public void onCallback(TeacherProfile object) {
+                System.out.println("kqly"+object.getName());
+            }
+        });
+        teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+            @Override
+            public void onCallback(List<TeacherProfile> listOfObjects) {
+                for (TeacherProfile teacherProfile : listOfObjects) {
+                    System.out.println(teacherProfile.getId()+"kqly"+teacherProfile.getName());
+                }
+            }
+        });
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

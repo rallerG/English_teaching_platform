@@ -37,13 +37,11 @@ public class FeedbackProfile extends DocumentObject {
     }
 
     @Override
-    public FeedbackProfile toObject(String documentId, Map<String, Object> mapOfObject) {
-        FeedbackProfile feedbackProfile = new FeedbackProfile();
-        feedbackProfile.setStudentProfile((StudentProfile) mapOfObject.get("student"));
-        feedbackProfile.setId(documentId);
-        feedbackProfile.setRating((Double) mapOfObject.get("rating"));
-        feedbackProfile.setContent((String) mapOfObject.get("content"));
-        return feedbackProfile;
+    public void toObject(String documentId, Map<String, Object> mapOfObject) {
+        this.setStudentProfile((StudentProfile) mapOfObject.get("student"));
+        this.setId(documentId);
+        this.setRating((Double) mapOfObject.get("rating"));
+        this.setContent((String) mapOfObject.get("content"));
     }
 
     public StudentProfile getStudentProfile() {

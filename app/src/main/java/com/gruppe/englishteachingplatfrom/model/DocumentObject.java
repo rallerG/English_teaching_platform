@@ -5,5 +5,5 @@ import java.util.Map;
 
 public abstract class DocumentObject {
     public abstract Map<String, Object> toMap();
-    public abstract DocumentObject toObject(String documentId, Map<String, Object> mapOfObject);
+    public abstract void toObject(String documentId, Map<String, Object> mapOfObject);
 }
