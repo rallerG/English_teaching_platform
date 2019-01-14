@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -88,16 +89,26 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         return rootview;
     }
 
+    public static boolean clicked = false;
 
     @Override
     public void onClick(View v) {
-        if(v == card) {
-            //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
-            if(expander.isExpanded()) {
-                expander.collapse();
-            } else {
-                expander.expand();
+        if(!clicked)
+            if(v == card) {
+                //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
+                /*if(expander.isExpanded()) {
+                    expander.collapse();
+                } else {
+                    expander.expand();
+                }*/
+                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                i.putExtra("name", tName);
+                i.putExtra("price", tPrice);
+                i.putExtra("rate", tRate);
+                i.putExtra("language", tLang);
+                //remember information and description text (when objects are used)
+                startActivity(i);
+                clicked = true;
             }
-        }
     }
 }

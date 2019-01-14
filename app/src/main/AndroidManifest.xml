@@ -14,11 +14,11 @@
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.TeacherMainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -46,8 +46,9 @@
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.clickCard_Activity"></activity>
-        <activity android:name=".view.request_mail"></activity>
+        <activity android:name=".view.clickCard_Activity" />
+        <activity android:name=".view.request_mail" />
+        <activity android:name=".view.TeacherInfoActivity"></activity>
     </application>
 
 </manifest>
