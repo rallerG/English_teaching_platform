@@ -52,8 +52,6 @@ public class TeacherMainActivity extends AppCompatActivity
 
         //Pick what fragment to display oncreate
         displaySelectedScreen(R.id.nav_settings);
-        Singleton.downloadAllStudentProfiles();
-
     }
     
 

@@ -183,10 +183,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         if (view == fab) {
             Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
-            if (frag instanceof ViewPagerFragment) {
-                position = ((ViewPagerFragment) frag).getCurrentPosition();
-                pic = ((ViewPagerFragment) frag).getCurrentPic();
-            }
+
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);
             bundle.putInt("pic", pic);

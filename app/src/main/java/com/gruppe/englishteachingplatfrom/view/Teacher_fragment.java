@@ -30,7 +30,6 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     LinearLayout inbox, pay;
     LinearLayout feed;
     ScrollView scroll;
-    RecyclerView feedback;
     TextView viewAll;
 
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -58,13 +57,11 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
         View view = inflater.inflate(R.layout.fragment_teacher, container, false);
 
-        feedback = view.findViewById(R.id.feedback);
-        feed = view.findViewById(R.id.feed);
-        scroll = view.findViewById(R.id.scroll);
+        feed = view.findViewById(R.id.teacher_feedback);
         inbox = view.findViewById(R.id.inbox);
-        viewAll = view.findViewById(R.id.viewAll);
+    /*    viewAll = view.findViewById(R.id.viewAll);*/
         pay = view.findViewById(R.id.pay);
-        viewAll.setOnClickListener(this);
+//        viewAll.setOnClickListener(this);
         pay.setOnClickListener(this);
 
 
@@ -72,9 +69,6 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         //list.add(new FeedbackProfile("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
 
             Context context = view.getContext();
-        MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(),list);
-        feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
-        feedback.setAdapter(recycleAdapter);
 
         feed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,13 +102,13 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == viewAll){
+/*        if(v == viewAll){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.fragmentContent, new FeedbackFragment());
             ft.addToBackStack(null);
             ft.commit();
-        }
+        }*/
         if(v == pay){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

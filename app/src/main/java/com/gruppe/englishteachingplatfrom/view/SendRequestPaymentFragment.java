@@ -67,7 +67,7 @@ public class SendRequestPaymentFragment extends Fragment {
 
         //TODO Fix teacher id
 
-        p.createList();
+//        p.createList();
         currentTeacher = p.getTeacherDummies().get(0);
         names.clear();
         for (StudentProfile student : p.getTeacherDummies().get(0).getMatchProfiles()) {

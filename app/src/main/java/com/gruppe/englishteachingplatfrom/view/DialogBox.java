@@ -93,7 +93,6 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
             if(v == cancelButton){
-//                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
                 getActivity().getSupportFragmentManager().popBackStack();
             }
 
