@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            setTitle(R.string.app_name);
         }
     }
 
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_home:
                 fragment = new frag_Pager();;
                 fragment.setArguments(args);
-                setTitle("Gruppe Magnus");
+                setTitle(R.string.app_name);
                 break;
             case R.id.nav_matches:
                 fragment = new ListFragment();
@@ -152,23 +153,16 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
-//                setTitle("Gruppe Magnus");
                 break;
             default:
                 fragment = new frag_Pager();
                 fragment.setArguments(args);
-                setTitle("Gruppe Magnus");
+                setTitle(R.string.app_name);
                 break;
         }
 
         //replacing the fragment
-        if (fragment != null && !(fragment instanceof frag_Pager)) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragmentContent, fragment);
-            ft.addToBackStack(null);
-            ft.commit();
-        }
-        else if (fragment != null ) {
+        if (fragment != null ) {
             getSupportFragmentManager().popBackStack();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContent, fragment);
