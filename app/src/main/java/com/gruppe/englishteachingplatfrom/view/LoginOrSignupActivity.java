@@ -8,12 +8,15 @@ import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
+import com.gruppe.englishteachingplatfrom.model.FeedbackProfile;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
@@ -28,7 +31,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.content_login_or_signup);
 
         //Setting ClickListeninger on the buttons
-        Button loginFacebook =  findViewById(R.id.loginFacebook);
+        final Button loginFacebook =  findViewById(R.id.loginFacebook);
         loginFacebook.setOnClickListener(this);
         Button loginWeChat =  findViewById(R.id.loginWeChat);
         loginWeChat.setOnClickListener(this);
@@ -36,29 +39,6 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         login.setOnClickListener(this);
         Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
-
-        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-        studentsDocument.get("1", new Callback<StudentProfile>() {
-            @Override
-            public void onCallback(StudentProfile object) {
-                System.out.println("kqly"+object.getName());
-            }
-        });
-        teachersDocument.get("1", new Callback<TeacherProfile>() {
-            @Override
-            public void onCallback(TeacherProfile object) {
-                System.out.println("kqly"+object.getName());
-            }
-        });
-        teachersDocument.getAll(new CallbackList<TeacherProfile>() {
-            @Override
-            public void onCallback(List<TeacherProfile> listOfObjects) {
-                for (TeacherProfile teacherProfile : listOfObjects) {
-                    System.out.println(teacherProfile.getId()+"kqly"+teacherProfile.getName());
-                }
-            }
-        });
     }
     @Override
     public void onClick(View view) {
