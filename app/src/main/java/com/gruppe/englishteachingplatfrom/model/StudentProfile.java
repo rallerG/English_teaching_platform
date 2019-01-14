@@ -17,7 +17,7 @@ public class StudentProfile extends DocumentObject{
     private static ArrayList<Payment> historyPaymentDummies = new ArrayList<>();
 
 
-    //Constructer with ID
+    //Constructor with ID
     public StudentProfile(String id, String name, String email, int profilePicture, double rating) {
         this.id = id;
         this.name = name;

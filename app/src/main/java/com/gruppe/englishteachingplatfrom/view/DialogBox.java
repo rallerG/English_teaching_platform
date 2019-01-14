@@ -75,6 +75,7 @@ public class DialogBox extends Fragment implements View.OnClickListener {
                 bundle.putInt("pic", pic);
                 ConfirmationBox fragment2 = new ConfirmationBox();
                 fragment2.setArguments(bundle);
+                getActivity().getSupportFragmentManager().popBackStack();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager
                         .beginTransaction();
@@ -92,7 +93,8 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
             if(v == cancelButton){
-                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
+//                getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
+                getActivity().getSupportFragmentManager().popBackStack();
             }
 
 

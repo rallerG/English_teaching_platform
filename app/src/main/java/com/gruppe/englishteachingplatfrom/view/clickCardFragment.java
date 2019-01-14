@@ -1,3 +1,4 @@
+/*
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.controller.ViewPagerAdapter;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import com.gruppe.englishteachingplatfrom.model.ViewPagerModel;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class clickCardFragment extends Fragment {
 
     private ViewPagerAdapter mAdapter;
 
-    private ArrayList<ViewPagerModel> mContents;
+    private ArrayList<TeacherProfile> mContents;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,3 +72,4 @@ public class clickCardFragment extends Fragment {
 }
 
 
+*/

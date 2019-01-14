@@ -105,11 +105,13 @@ public class TeacherProfile extends DocumentObject{
     public void setId(String id) {
         this.id = id;
     }
+/*    public int getmPicture() {
+        return profilePic;
+    }
+    public void setmPicture(int profilePic) {
+        this.profilePic = profilePic;
+    }
+    public String getmInfo() {
+        return mInfo;
+    }*/
 }
-
-
-
-
-
-
-

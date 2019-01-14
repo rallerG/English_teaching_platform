@@ -57,7 +57,7 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        getFragmentManager().beginTransaction().replace(R.id.fragmentContent, new ViewPagerFragment()).addToBackStack(null).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
 
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
@@ -30,7 +31,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     LinearLayout feed;
     ScrollView scroll;
     RecyclerView feedback;
-    Button viewAll;
+    TextView viewAll;
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;

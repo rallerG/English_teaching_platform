@@ -17,6 +17,7 @@ public class Payment extends DocumentObject {
     private boolean isActive;
 
     private Payment(String id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+
         this.id = id;
         this.price = price;
         this.requestDate = requestDate;
