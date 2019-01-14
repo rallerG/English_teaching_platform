@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         if(savedInstanceState == null) {
             //Pick what fragment to display onCreate
-            displaySelectedScreen(6);
+            displaySelectedScreen(0);
         }
     }
 
