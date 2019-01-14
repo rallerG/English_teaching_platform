@@ -9,7 +9,10 @@
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp"
-    app:contentPadding="6dp">
+    app:contentPadding="6dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
