@@ -58,7 +58,11 @@ public class MainActivity extends AppCompatActivity
 
         if(savedInstanceState == null) {
             //Pick what fragment to display onCreate
-            displaySelectedScreen(6);
+            //DisplaySelectedScreen(6);
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(R.id.fragmentContent, new frag_Pager());
+            ft.commit();
         }
     }
 
@@ -158,7 +162,14 @@ public class MainActivity extends AppCompatActivity
         }
 
         //replacing the fragment
-        if (fragment != null) {
+        if (fragment != null && !(fragment instanceof frag_Pager)) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContent, fragment);
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+        else if (fragment != null ) {
+            getSupportFragmentManager().popBackStack();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContent, fragment);
             ft.addToBackStack(null);
