@@ -28,6 +28,8 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Singleton.downloadAllTeachersProfiles();
+        Singleton.downloadAllStudentProfiles();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_login_or_signup);
 
