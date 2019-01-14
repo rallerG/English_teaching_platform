@@ -13,6 +13,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
@@ -20,22 +22,25 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
 public abstract class DAOImpl <T extends DocumentObject> implements Document, Collection {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
-    private Class<T> type;
-    private T objectToReturn;
-    private List<T> listOfObjectsToReturn;
+    private DocumentObject objectToReturn;
+    ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
+    Class<T> type = (Class<T>) superClass.getActualTypeArguments()[0];
+    private List<T> listOfObjectsToReturn = new ArrayList<>();
 
-    public DAOImpl(String collectionReference, Class<T> type) {
+    public DAOImpl(String collectionReference) {
         this.collection = db.collection(collectionReference);
-        this.type = type;
         objectToReturn = null;
-        listOfObjectsToReturn = null;
     }
 
     @Override
@@ -75,41 +80,42 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     }
 
     @Override
-    public DocumentObject get(String documentId) {
-        objectToReturn = null;
+    public void get(String documentId, final Callback callback) {
+        try {
+            objectToReturn = getInstance();
+        } catch (Exception e) {
+            System.out.println("Could not define subclass of superclass: "+e);
+        }
         collection.document(documentId)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
+                    public void onSuccess(DocumentSnapshot document) {
                             if (document.exists()) {
                                 DocumentReference studentReference = (DocumentReference) document.get("student");
                                 DocumentReference teacherReference = (DocumentReference) document.get("teacher");
                                 if (studentReference != null) {
                                     Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
                                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                    studentsDocument.get(studentReference.getId());
+                                    //studentsDocument.get(studentReference.getId());
+                                    objectToReturn.toObject(document.getId(),document.getData());
                                 }
                                 else if (teacherReference != null) {
                                     Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
                                     TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                    teachersDocument.get(studentReference.getId());
+                                    //teachersDocument.get(studentReference.getId());
+                                    objectToReturn.toObject(document.getId(),document.getData());
                                 }
                                 else {
-                                    objectToReturn = document.toObject(type); //missing .class
                                     Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
+                                    objectToReturn.toObject(document.getId(),document.getData());
+                                    callback.onCallback(objectToReturn);
                                 }
                             } else {
                                 Log.d(TAG, "No such document");
                             }
-                        } else {
-                            Log.d(TAG, "get failed with ", task.getException());
-                        }
-                        }
+                    }
         });
-        return objectToReturn;
     }
 
     @Override
@@ -131,8 +137,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     }
 
     @Override
-    public List<T> getAll() {
-        listOfObjectsToReturn = null;
+    public void getAll(final CallbackList callbackList) {
         collection
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -140,30 +145,43 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                try {
+                                    objectToReturn = getInstance();
+                                } catch (Exception e) {
+                                    System.out.println("Could not define subclass of superclass: "+e);
+                                }
+
                                 DocumentReference studentReference = (DocumentReference) document.get("student");
-                                DocumentReference teacherReference = (DocumentReference) document.get("student");
+                                DocumentReference teacherReference = (DocumentReference) document.get("teacher");
                                 if (studentReference != null) {
                                     Log.d(TAG, " --getAll()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
                                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                    studentsDocument.get(studentReference.getId());
-                                    listOfObjectsToReturn.add(document.toObject(type));
+                                    //studentsDocument.get(studentReference.getId());
+                                    objectToReturn.toObject(document.getId(),document.getData());
+                                    listOfObjectsToReturn.add((T) objectToReturn);
                                 }
                                 else if (teacherReference != null) {
                                     Log.d(TAG, " --getAll()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
                                     TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                    teachersDocument.get(studentReference.getId());
-                                    listOfObjectsToReturn.add(document.toObject(type));
+                                    //teachersDocument.get(studentReference.getId());
+                                    objectToReturn.toObject(studentReference.getId(),document.getData());
+                                    listOfObjectsToReturn.add((T) objectToReturn);
                                 }
                                 else {
                                     Log.d(TAG," --getAll()-- "+ document.getId() + " => " + document.getData());
-                                    listOfObjectsToReturn.add(document.toObject(type));
+                                    objectToReturn.toObject(document.getId(),document.getData());
+                                    listOfObjectsToReturn.add((T) objectToReturn);
                                 }
                             }
+                            callbackList.onCallback(listOfObjectsToReturn);
                         } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
                 });
-        return null;
+    }
+
+    public T getInstance() throws Exception {
+        return type.newInstance();
     }
 }

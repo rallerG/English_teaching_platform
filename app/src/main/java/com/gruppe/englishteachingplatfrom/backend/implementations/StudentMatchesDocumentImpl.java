@@ -6,7 +6,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 public class StudentMatchesDocumentImpl extends DAOImpl<TeacherProfile> implements StudentMatchesDocument {
     private String parentStudentDocumentId;
     public StudentMatchesDocumentImpl(String parentStudentDocumentId) {
-        super("students/"+parentStudentDocumentId+"/matches",TeacherProfile.class);
+        super("students/"+parentStudentDocumentId+"/matches");
         this.parentStudentDocumentId = parentStudentDocumentId;
     }
 

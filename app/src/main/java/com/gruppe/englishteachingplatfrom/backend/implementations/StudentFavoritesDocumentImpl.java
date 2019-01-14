@@ -7,7 +7,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 public class StudentFavoritesDocumentImpl extends DAOImpl<TeacherProfile> implements StudentFavoritesDocument {
     private String parentStudentDocumentId;
     public StudentFavoritesDocumentImpl(String parentStudentDocumentId) {
-        super("students/"+parentStudentDocumentId+"/favorites", TeacherProfile.class);
+        super("students/"+parentStudentDocumentId+"/favorites");
         this.parentStudentDocumentId = parentStudentDocumentId;
     }
 

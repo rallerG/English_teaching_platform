@@ -4,6 +4,6 @@ import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 
 import java.util.List;
 
-public interface Collection <T extends DocumentObject> {
-    void getAll(CallbackList callbackList);
+public interface CallbackList <T extends DocumentObject> {
+    void onCallback(List<T> listOfObjects);
 }

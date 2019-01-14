@@ -1,11 +1,12 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class StudentProfile extends DocumentObject{
     private String id;
-    private String Name;
+    private String name;
     private String email;
     private int profilePicture;
     private double rating;
@@ -19,15 +20,20 @@ public class StudentProfile extends DocumentObject{
     //Constructor with ID
     public StudentProfile(String id, String name, String email, int profilePicture, double rating) {
         this.id = id;
-        Name = name;
+        this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
         this.rating = rating;
     }
 
-    //Constructor without ID for database
+    public StudentProfile () {
+        this.profilePicture = 0;
+        this.rating = 0;
+    }
+
+    //Constructer without ID for database
     public StudentProfile(String name, String email, int profilePicture, double rating) {
-        Name = name;
+        this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
         this.rating = rating;
@@ -41,20 +47,32 @@ public class StudentProfile extends DocumentObject{
         return historyPaymentDummies;
     }
 
+    public int getProfilePicture() {
+        return profilePicture;
+    }
+
     public String getId() {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getName() {
-        return Name;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public int getProfilePicture() {
-        return profilePicture;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public double getRating() {
@@ -74,7 +92,17 @@ public class StudentProfile extends DocumentObject{
     }
 
     @Override
-    public Map<String, String> toMap() {
-        return null;
+    public Map<String, Object> toMap() {
+        Map<String, Object> mapToReturn = new HashMap<>();
+        mapToReturn.put("fullname",this.name);
+        mapToReturn.put("mail", this.email);
+        return mapToReturn;
+    }
+
+    @Override
+    public void toObject(String documentId,Map<String, Object> mapOfObject) {
+        this.setId(documentId);
+        this.setName((String) mapOfObject.get("fullname"));
+        this.setEmail((String) mapOfObject.get("mail"));
     }
 }

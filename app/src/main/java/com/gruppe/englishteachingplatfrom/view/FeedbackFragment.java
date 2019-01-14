@@ -29,7 +29,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     TextView star1, star2, star3, star4, star5, ratings, totalRate;
     LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
-    float totAvgRating;
+    double totAvgRating;
 
 
     public FeedbackFragment() {
@@ -41,14 +41,14 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-        list.add(new FeedbackProfile("Xian", 3, "Good teacher"));
+        /*list.add(new FeedbackProfile("Xian", 3, "Good teacher"));
         list.add(new FeedbackProfile("Geng", 5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
         list.add(new FeedbackProfile("Chuang", 1, "Bad teacher"));
         list.add(new FeedbackProfile("Jin", 2, "Couldn't follow his lesson"));
         list.add(new FeedbackProfile("Li", 5, "Cool teacher"));
         list.add(new FeedbackProfile("Xia", 3, "Nice"));
         list.add(new FeedbackProfile("Huan", 5, "I recommend this teacher, he is very kind and can help overtime if needed"));
-
+        */
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -83,36 +83,33 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         fiveStar.setOnClickListener(this);
         all.setOnClickListener(this);
 
-        int totStar1 = 0;
-        int totStar2 = 0;
-        int totStar3 = 0;
-        int totStar4 = 0;
-        int totStar5 = 0;
-        int totalStar = 0;
+        double totStar1 = 0;
+        double totStar2 = 0;
+        double totStar3 = 0;
+        double totStar4 = 0;
+        double totStar5 = 0;
+        double totalStar = 0;
 
         for (FeedbackProfile feed : list) {
-            switch (feed.getRating()) {
-                case 1:
-                    totStar1++;
-                    totalStar += feed.getRating();
-                    break;
-                case 2:
-                    totStar2++;
-                    totalStar += feed.getRating();
-                    break;
-                case 3:
-                    totStar3++;
-                    totalStar += feed.getRating();
-                    break;
-                case 4:
-                    totStar4++;
-                    totalStar += feed.getRating();
-                    break;
-                case 5:
-                    totStar5++;
-                    totalStar += feed.getRating();
-                    break;
-                default:
+            if(feed.getRating() < 1) {
+                totStar1++;
+                totalStar += feed.getRating();
+            }
+            else if (1 > feed.getRating() && feed.getRating() < 2) {
+                totStar2++;
+                totalStar += feed.getRating();
+            }
+            else if (2 > feed.getRating() && feed.getRating() < 3) {
+                totStar3++;
+                totalStar += feed.getRating();
+            }
+             else if (3 > feed.getRating() && feed.getRating() < 4) {
+                totStar4++;
+                totalStar += feed.getRating();
+            }
+            else if (4 > feed.getRating() && feed.getRating() < 5) {
+                totStar5++;
+                totalStar += feed.getRating();
             }
         }
         star1.setText(String.valueOf(totStar1));
@@ -124,7 +121,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
 
         totAvgRating = totalStar / list.size();
         totalRate.setText(String.valueOf(totAvgRating));
-        totalRating.setRating(totAvgRating);
+        totalRating.setRating((float) totAvgRating);
 
 
         all.setBackgroundResource(R.drawable.selectedborder);
@@ -194,7 +191,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         btn.setBackgroundResource(R.drawable.selectedborder);
         for (FeedbackProfile f : list) {
             if (f.getRating() == rating) {
-                tempList.add(new FeedbackProfile(f.getStudName(), f.getRating(), f.getContent()));
+                tempList.add(new FeedbackProfile(f.getStudentProfile(), f.getRating(), f.getContent()));
             }
         }
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), tempList);

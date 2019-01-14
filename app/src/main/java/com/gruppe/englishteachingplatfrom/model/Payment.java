@@ -3,10 +3,11 @@ package com.gruppe.englishteachingplatfrom.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Payment {
-    private static int lastId = 0;
-    private int id;
+public class Payment extends DocumentObject {
+    private String id;
     private int price;
     private String requestDate;
     private String paymentDate;
@@ -15,8 +16,8 @@ public class Payment {
     private boolean isPayed;
     private boolean isActive;
 
-    //Private because it is not to be used by other classes. Use newTransaction() instead.
-    private Payment(int id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+    private Payment(String id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+
         this.id = id;
         this.price = price;
         this.requestDate = requestDate;
@@ -27,14 +28,14 @@ public class Payment {
         this.isActive = isActive;
     }
 
+    public Payment (){}
 
-    public static void newTransaction(StudentProfile student, TeacherProfile teacher, int price) {
+    public static void newTransaction(String id,StudentProfile student, TeacherProfile teacher, int price) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
 
-
-        Payment obj = new Payment(lastId++, price, theRequestDate, "", teacher, student, false, true);
+        Payment obj = new Payment(id, price, theRequestDate, "", teacher, student, false, true);
         teacher.getActivePaymentDummies().add(obj);
         student.getActivePaymentDummies().add(obj);
 
@@ -66,8 +67,27 @@ public class Payment {
         
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public int getId() {
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setRequestDate(String requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public void setStudent(StudentProfile student) {
+        this.student = student;
+    }
+
+    public void setTeacher(TeacherProfile teacher) {
+        this.teacher = teacher;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -113,6 +133,31 @@ public class Payment {
 
     public String toString() {
         return "Price: " + getPrice() + "\n RequestDate: " + getRequestDate() + "\n PaymentDate: " + getPaymentDate() + "\n isPayed: " + isPayed + "\n isActive: " + isActive();
+    }
+
+    @Override
+    public Map<String, Object> toMap() {
+        Map<String, Object> mapToReturn = new HashMap<>();
+        mapToReturn.put("price",this.getPrice());
+        mapToReturn.put("requestDate",this.getRequestDate());
+        mapToReturn.put("paymentDate", this.getPaymentDate());
+        mapToReturn.put("teacher",this.getTeacher());
+        mapToReturn.put("student",this.getStudent());
+        mapToReturn.put("isPayed",this.isPayed());
+        mapToReturn.put("isActive",this.isPayed());
+        return mapToReturn;
+    }
+
+    @Override
+    public void toObject(String documentId, Map<String, Object> mapOfObject) {
+        this.setId(documentId);
+        this.setPrice((int) mapOfObject.get("price"));
+        this.setRequestDate((String) mapOfObject.get("requestDate"));
+        this.setPaymentDate((String) mapOfObject.get("paymentDate"));
+        this.setTeacher((TeacherProfile) mapOfObject.get("teacher"));
+        this.setStudent((StudentProfile) mapOfObject.get("student"));
+        this.setPayed((boolean) mapOfObject.get("isPayed"));
+        this.setActive((boolean) mapOfObject.get("isActive"));
     }
 
 //    private Payment t1 = new Payment("Thomas", "14.04.2018", 270);

@@ -57,7 +57,7 @@
             app:button_background="@drawable/shape_button"
             app:button_bottom_padding="20dp"
             app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24px_"
-            app:button_image_enabled="@drawable/ic_toggle_star_color1"
+            app:button_image_enabled="@drawable/baseline2x_close_black_18dp"
             app:button_image_height="60dp"
             app:button_image_width="90dp"
             app:button_left_padding="20dp"
