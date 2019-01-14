@@ -116,7 +116,7 @@ public class SendRequestPaymentFragment extends Fragment {
                     //TODO fix teacher index
 //                    currentTeacher.getActivePaymentDummies().add(Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice));
 //                    chosenStudent.getActivePaymentDummies().add(Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice));
-                    Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice);
+                    Payment.newTransaction(currentTeacher.getId(),chosenStudent, currentTeacher, chosenPrice);
 
                     //TODO Start intent to teacher payment overview
 

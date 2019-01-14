@@ -107,7 +107,7 @@ public class TeacherMainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
-            case R.id.nav_home:
+            case R.id.home:
                 fragment = new Teacher_fragment();
 //                fragment.setArguments(args);
                 setTitle("Gruppe Magnus");
