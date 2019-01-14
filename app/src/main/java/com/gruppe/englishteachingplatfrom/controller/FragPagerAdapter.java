@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnClickListener {
 
-    private Singleton teacher = Singleton.getInstance();
-    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
+    private Singleton p = Singleton.getInstance();
+//    private ArrayList<TeacherProfile> contents = p.getTeacherDummies();
 
 
     public FragPagerAdapter(FragmentManager fm) {
@@ -34,7 +34,7 @@ public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnCli
 
     @Override
     public int getCount() {
-        return contents.size();
+        return p.getTeacherDummies().size();
     }
 
     @Override

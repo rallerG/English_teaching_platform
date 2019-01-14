@@ -17,6 +17,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocu
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.FeedbackProfile;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
@@ -44,6 +45,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginFacebook :
+                Singleton.downloadAllTeachersProfiles();
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 System.out.println("Testing");

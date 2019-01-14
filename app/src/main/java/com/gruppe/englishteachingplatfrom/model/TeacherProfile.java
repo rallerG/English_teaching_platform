@@ -105,6 +105,18 @@ public class TeacherProfile extends DocumentObject{
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String toString() {
+        return "Name: " + getName() + "\n Email: " + getEmail();
+    }
+
+
+
+
 /*    public int getmPicture() {
         return profilePic;
     }

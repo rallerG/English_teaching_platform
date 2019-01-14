@@ -105,4 +105,8 @@ public class StudentProfile extends DocumentObject{
         this.setName((String) mapOfObject.get("fullname"));
         this.setEmail((String) mapOfObject.get("mail"));
     }
+
+    public String toString() {
+        return "Name: " + getName() + "\n Email: " + getEmail();
+    }
 }
