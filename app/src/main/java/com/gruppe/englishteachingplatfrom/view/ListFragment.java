@@ -88,17 +88,21 @@ public class ListFragment extends Fragment {
                         mRecyclerView.setAdapter(mAdapter);
                         mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
-
                             @Override
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-                                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+//                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getMatchProfiles().get(position).getName());
+//                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getName());
                                     Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
-                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+//                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+//                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+//                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+//                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                                    i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
+                                    i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
+                                    i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
+                                    i.putExtra("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
                                     //remember information and description text (when objects are used)
                                     startActivity(i);
                                     clicked = true;
@@ -113,6 +117,7 @@ public class ListFragment extends Fragment {
                 studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
+                        System.out.println(listOfObjects);
                         p.getCurrrentStudent().getFavoriteProfiles().clear();
                         p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
                         mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getFavoriteProfiles());
@@ -126,12 +131,16 @@ public class ListFragment extends Fragment {
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-                                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
                                     Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
-                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+//                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+//                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+//                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+//                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                                    i.putExtra("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
+                                    i.putExtra("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
+                                    i.putExtra("rate", p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
+                                    i.putExtra("language", p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
                                     //remember information and description text (when objects are used)
                                     startActivity(i);
                                     clicked = true;
@@ -159,19 +168,22 @@ public class ListFragment extends Fragment {
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-                                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
                                     Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
-                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+//                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+//                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+//                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+//                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                                    i.putExtra("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
+                                    i.putExtra("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
+                                    i.putExtra("rate", p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
+                                    i.putExtra("language", p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
                                     //remember information and description text (when objects are used)
                                     startActivity(i);
                                     clicked = true;
                                 }
                             }
                         });
-
                     }
                 });
                 break;
