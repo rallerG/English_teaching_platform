@@ -40,7 +40,6 @@ public class ListFragment extends Fragment {
     RecyclerView mRecyclerView;
     MyFavoriteRecyclerViewAdapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
-
     Singleton p = Singleton.getInstance();
     private OnListFragmentInteractionListener mListener;
 
@@ -63,6 +62,7 @@ public class ListFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            listId = getArguments().getInt("id");
         }
     }
 
@@ -74,7 +74,7 @@ public class ListFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mLayoutManager = new LinearLayoutManager(getContext());
 
-        switch (mColumnCount) {
+        switch (listId) {
             case R.id.nav_matches:
                 StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl("1");
                 studentMatchesDocument.getAll(new CallbackList<TeacherProfile>() {
