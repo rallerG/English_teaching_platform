@@ -1,10 +1,9 @@
 package com.gruppe.englishteachingplatfrom.backend.implementations;
 
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
-import com.gruppe.englishteachingplatfrom.model.FeedbackProfile;
-import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+import com.gruppe.englishteachingplatfrom.model.Feedback;
 
-public class TeacherFeedbackDocumentImpl extends DAOImpl<FeedbackProfile> implements TeacherFeedbackDocument {
+public class TeacherFeedbackDocumentImpl extends DAOImpl<Feedback> implements TeacherFeedbackDocument {
     private String parentTeacherDocumentId;
     public TeacherFeedbackDocumentImpl(String parentTeacherDocumentId) {
         super("teachers/"+parentTeacherDocumentId+"/feedback");

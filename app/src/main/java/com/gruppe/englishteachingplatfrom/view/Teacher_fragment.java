@@ -4,29 +4,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
-import com.gruppe.englishteachingplatfrom.model.FeedbackProfile;
-import com.gruppe.englishteachingplatfrom.view.FeedbackFragment;
-import com.gruppe.englishteachingplatfrom.view.RequestFragment;
-import com.gruppe.englishteachingplatfrom.view.SendRequestPaymentFragment;
+import com.gruppe.englishteachingplatfrom.model.Feedback;
 
 import java.util.ArrayList;
 
 
 public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
-    public static final ArrayList<FeedbackProfile> list = new ArrayList<FeedbackProfile>();
+    public static final ArrayList<Feedback> list = new ArrayList<Feedback>();
     LinearLayout inbox, pay;
     LinearLayout feed;
     ScrollView scroll;
@@ -65,8 +58,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
         pay.setOnClickListener(this);
 
 
-        //list.add(new FeedbackProfile("Xian",3, "Good teacher"));
-        //list.add(new FeedbackProfile("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
+        //list.add(new Feedback("Xian",3, "Good teacher"));
+        //list.add(new Feedback("Geng",5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
 
             Context context = view.getContext();
 
@@ -125,6 +118,6 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
 
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(FeedbackProfile item);
+        void onListFragmentInteraction(Feedback item);
     }
 }
