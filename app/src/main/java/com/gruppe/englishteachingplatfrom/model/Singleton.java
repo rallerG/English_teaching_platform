@@ -94,7 +94,7 @@ public class Singleton {
     }
 
 
-    
+
 //    public static void downloadAllStudentProfiles() {
 //        StudentsDocument studentsDocument = new StudentsDocumentImpl();
 //        studentsDocument.getAll(new CallbackList<StudentProfile>() {
