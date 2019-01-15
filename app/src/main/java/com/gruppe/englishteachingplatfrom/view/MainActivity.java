@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
@@ -55,15 +56,24 @@ public class MainActivity extends AppCompatActivity
 //        floatingActionButton = findViewById(R.id.floatingActionButton);
 //        fab.setOnClickListener(this);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
+        //Set the current user in the burger menu.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView burgerMenuName = headerView.findViewById(R.id.textView2);
+        burgerMenuName.setText(p.getCurrrentStudent().getName());
+//        System.out.println("Print! " + p.getCurrrentStudent().getName());
+
+
+
 
         if(savedInstanceState == null) {
             //Pick what fragment to display onCreate
@@ -110,7 +120,6 @@ public class MainActivity extends AppCompatActivity
 //        getMenuInflater().inflate(R.menu.main, menu);
 //        return true;
 //    }
-
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        // Handle action bar item clicks here. The action bar will
@@ -200,6 +209,10 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+
+
+
     }
 
     @Override
