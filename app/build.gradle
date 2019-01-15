@@ -45,7 +45,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 
     //circle imageview
-    api 'de.hdodenhof:circleimageview:3.0.0'
+    api 'de.hdodenhof:circleimageview:2.2.0'
 
     //Swipe button
     implementation 'com.ebanx:swipe-button:0.8.3'
