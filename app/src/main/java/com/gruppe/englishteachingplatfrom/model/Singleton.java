@@ -85,7 +85,6 @@ public class Singleton {
     }
 
 
-
     public ArrayList<TeacherProfile> getTeacherDummies() {
         return teacherDummies;
     }
@@ -94,36 +93,38 @@ public class Singleton {
         return studentDummies;
     }
 
-    public static void downloadAllStudentProfiles() {
-        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-        studentsDocument.getAll(new CallbackList<StudentProfile>() {
-            @Override
-            public void onCallback(List<StudentProfile> listOfObjects) {
-                for (StudentProfile student : listOfObjects) {
-                    System.out.println(student.toString());
-                }
-                studentDummies.clear();
-                studentDummies.addAll(listOfObjects);
-            }
-        });
-    }
 
-    public static void downloadAllTeachersProfiles() {
-        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-        teachersDocument.getAll(new CallbackList<TeacherProfile>() {
-            @Override
-            public void onCallback(List<TeacherProfile> listOfObjects) {
-                for (TeacherProfile teacher : listOfObjects) {
-                    System.out.println(teacher.toString());
-                }
-                teacherDummies.clear();
-                teacherDummies.addAll(listOfObjects);
-                teacherDummies.addAll(listOfObjects);
-                teacherDummies.addAll(listOfObjects);
-                teacherDummies.addAll(listOfObjects);
-            }
-        });
-    }
+    
+//    public static void downloadAllStudentProfiles() {
+//        StudentsDocument studentsDocument = new StudentsDocumentImpl();
+//        studentsDocument.getAll(new CallbackList<StudentProfile>() {
+//            @Override
+//            public void onCallback(List<StudentProfile> listOfObjects) {
+//                for (StudentProfile student : listOfObjects) {
+//                    System.out.println(student.toString());
+//                }
+//                studentDummies.clear();
+//                studentDummies.addAll(listOfObjects);
+//            }
+//        });
+//    }
+
+//    public static void downloadAllTeachersProfiles() {
+//        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+//        teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+//            @Override
+//            public void onCallback(List<TeacherProfile> listOfObjects) {
+//                for (TeacherProfile teacher : listOfObjects) {
+//                    System.out.println(teacher.toString());
+//                }
+//                teacherDummies.clear();
+//                teacherDummies.addAll(listOfObjects);
+//                teacherDummies.addAll(listOfObjects);
+//                teacherDummies.addAll(listOfObjects);
+//                teacherDummies.addAll(listOfObjects);
+//            }
+//        });
+//    }
 
 //    public void addToHistory(TeacherDummy teacherAcpt){
 //        studentDummies.add(teacherAcpt);

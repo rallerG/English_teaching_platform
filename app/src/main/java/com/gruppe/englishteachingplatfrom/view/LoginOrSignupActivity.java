@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class LoginOrSignupActivity extends AppCompatActivity implements View.OnClickListener {
-
+    Singleton p = Singleton.getInstance();
     private ProgressDialog pDialog;
 
     @Override
@@ -58,12 +58,13 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
                 final Intent intent1 = new Intent(this, MainActivity.class);
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                Singleton.downloadAllTeachersProfiles();
+//                Singleton.downloadAllTeachersProfiles();
                 teachersDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
 //                        Singleton.downloadAllTeachersProfiles();
-
+                        p.getTeacherDummies().clear();
+                        p.getTeacherDummies().addAll(listOfObjects);
                         //loading bar
                         if (pDialog.isShowing()){
                             pDialog.dismiss();
@@ -83,10 +84,12 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
                 final Intent intent2 = new Intent(this, TeacherMainActivity.class);
                 StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                Singleton.downloadAllStudentProfiles();
+//                Singleton.downloadAllStudentProfiles();
                 studentsDocument.getAll(new CallbackList<StudentProfile>() {
                     @Override
                     public void onCallback(List<StudentProfile> listOfObjects) {
+                        p.getStudentDummies().clear();
+                        p.getStudentDummies().addAll(listOfObjects);
                         //loading bar
                         if (pDialog.isShowing()){
                             pDialog.dismiss();
