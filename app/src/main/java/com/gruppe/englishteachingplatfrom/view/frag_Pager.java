@@ -120,7 +120,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             Resources res = getContext().getResources();
             final int newColor = res.getColor(R.color.Heart);
 
-            
+
             if(checker == 0) {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
