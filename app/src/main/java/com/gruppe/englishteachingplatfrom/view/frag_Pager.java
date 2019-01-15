@@ -19,6 +19,10 @@ import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class frag_Pager extends Fragment implements View.OnClickListener {
 
@@ -32,6 +36,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
         private int position1;
         private int pic1;
         private int checker = 0;
+        private Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
         public frag_Pager() {
             // Required empty public constructor
         }
@@ -62,16 +67,27 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             mPager.setPageTransformer(true, new ViewPagerStack());
             mPager.setOffscreenPageLimit(3);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
+            mPager.setAdapter(mAdapter);
 
-            mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            for(int i = 0; i < mAdapter.getCount(); i++){
+                hm.put(i,0);
+            }
+
+            mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
                 @Override
                 public void onPageSelected(int position) {
+                    System.out.println("page changed " + position);
+                    // code for action on page change
+                    if(hm.get(position) != null){
+                        if( hm.get(position) == 1){
+                            System.out.println(""+ hm.get(position));
+                            floating_Fav.setImageResource(R.drawable.favourite_full);
+                        }
+                        else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);
+                    }
 
                 }
             });
-
-            mPager.setAdapter(mAdapter);
-
             // Need to find out how to have different pictures
             return view;
         }
@@ -124,9 +140,19 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             if(checker == 0) {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
+                if(hm.get(mPager.getCurrentItem()) != null){
+                    hm.remove(mPager.getCurrentItem());
+                    hm.put(mPager.getCurrentItem(), 1);
+                } else{ hm.put(mPager.getCurrentItem(), 1); }
+
                 checker = 1;
             } else  {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
+                if(hm.get(mPager.getCurrentItem()) != null){
+                    hm.remove(mPager.getCurrentItem());
+                    hm.put(mPager.getCurrentItem(), 0);
+                } else{ hm.put(mPager.getCurrentItem(), 0); }
+
                 checker = 0;
             }
         }
