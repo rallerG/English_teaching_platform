@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.gruppe.englishteachingplatfrom.model.FeedbackProfile;
+import com.gruppe.englishteachingplatfrom.model.Feedback;
 import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 
@@ -25,7 +25,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     RecyclerView feedback;
-    ArrayList<FeedbackProfile> list;
+    ArrayList<Feedback> list;
     TextView star1, star2, star3, star4, star5, ratings, totalRate;
     LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
@@ -41,13 +41,13 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-        /*list.add(new FeedbackProfile("Xian", 3, "Good teacher"));
-        list.add(new FeedbackProfile("Geng", 5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
-        list.add(new FeedbackProfile("Chuang", 1, "Bad teacher"));
-        list.add(new FeedbackProfile("Jin", 2, "Couldn't follow his lesson"));
-        list.add(new FeedbackProfile("Li", 5, "Cool teacher"));
-        list.add(new FeedbackProfile("Xia", 3, "Nice"));
-        list.add(new FeedbackProfile("Huan", 5, "I recommend this teacher, he is very kind and can help overtime if needed"));
+        /*list.add(new Feedback("Xian", 3, "Good teacher"));
+        list.add(new Feedback("Geng", 5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
+        list.add(new Feedback("Chuang", 1, "Bad teacher"));
+        list.add(new Feedback("Jin", 2, "Couldn't follow his lesson"));
+        list.add(new Feedback("Li", 5, "Cool teacher"));
+        list.add(new Feedback("Xia", 3, "Nice"));
+        list.add(new Feedback("Huan", 5, "I recommend this teacher, he is very kind and can help overtime if needed"));
         */
 
         if (getArguments() != null) {
@@ -90,7 +90,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         double totStar5 = 0;
         double totalStar = 0;
 
-        for (FeedbackProfile feed : list) {
+        for (Feedback feed : list) {
             if(feed.getRating() < 1) {
                 totStar1++;
                 totalStar += feed.getRating();
@@ -146,11 +146,11 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
-    public ArrayList<FeedbackProfile> getFeedbackList() {
+    public ArrayList<Feedback> getFeedbackList() {
         return list;
     }
 
-    public void setFeedbackList(ArrayList<FeedbackProfile> list) {
+    public void setFeedbackList(ArrayList<Feedback> list) {
         this.list = list;
     }
 
@@ -183,15 +183,15 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     }
 
     public void sortList(int rating, LinearLayout btn, LinearLayout prevBtn) {
-        ArrayList<FeedbackProfile> tempList = new ArrayList<FeedbackProfile>();
+        ArrayList<Feedback> tempList = new ArrayList<Feedback>();
         tempList.clear();
 
         this.prevBtn = prevBtn;
         prevBtn.setBackgroundResource(R.drawable.border);
         btn.setBackgroundResource(R.drawable.selectedborder);
-        for (FeedbackProfile f : list) {
+        for (Feedback f : list) {
             if (f.getRating() == rating) {
-                tempList.add(new FeedbackProfile(f.getStudentProfile(), f.getRating(), f.getContent()));
+                tempList.add(new Feedback(f.getStudentProfile(), f.getRating(), f.getContent()));
             }
         }
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), tempList);

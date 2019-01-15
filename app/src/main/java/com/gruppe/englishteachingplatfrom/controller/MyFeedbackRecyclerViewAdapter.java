@@ -9,17 +9,17 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.FeedbackProfile;
+import com.gruppe.englishteachingplatfrom.model.Feedback;
 
 import java.util.List;
 
 
 public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedbackRecyclerViewAdapter.ViewHolder> {
 
-    private final List<FeedbackProfile> feedback;
+    private final List<Feedback> feedback;
     Context mContext;
 
-    public MyFeedbackRecyclerViewAdapter(Context mContext,List<FeedbackProfile> feedback) {
+    public MyFeedbackRecyclerViewAdapter(Context mContext,List<Feedback> feedback) {
         this.mContext = mContext;
         this.feedback = feedback;
 
@@ -64,7 +64,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
         public final TextView mStudName;
         public final RatingBar mRating;
         public final TextView mContent;
-        public FeedbackProfile mFeedback;
+        public Feedback mFeedback;
 
         public ViewHolder(View view) {
             super(view);

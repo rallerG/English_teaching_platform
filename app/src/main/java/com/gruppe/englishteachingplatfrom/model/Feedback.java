@@ -1,30 +1,29 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-public class FeedbackProfile extends DocumentObject {
+public class Feedback extends DocumentObject {
     private StudentProfile studentProfile;
     private String id;
     private double rating;
     private String content;
   //  private String date;
 
-    private static ArrayList<FeedbackProfile> feedbackProfiles = new ArrayList<FeedbackProfile>();
+    private static ArrayList<Feedback> feedbackProfiles = new ArrayList<Feedback>();
 
-    public FeedbackProfile (StudentProfile studentProfile, double rating, String content){
+    public Feedback(StudentProfile studentProfile, double rating, String content){
         this.studentProfile = studentProfile;
         this.rating = rating;
         this.content = content;
     }
 
-    public FeedbackProfile () {}
+    public Feedback() {}
 
-//    public static ArrayList<FeedbackProfile> createFeedback(int numContacts) {
+//    public static ArrayList<Feedback> createFeedback(int numContacts) {
 //        if (feedbackProfiles.isEmpty()) {
 //            for (int i = 1; i <= numContacts; i++) {
-//                feedbackProfiles.add(new FeedbackProfile("Paul", 4, "Really good teacher"));
+//                feedbackProfiles.add(new Feedback("Paul", 4, "Really good teacher"));
 //            }
 //        }
 //        return feedbackProfiles;
