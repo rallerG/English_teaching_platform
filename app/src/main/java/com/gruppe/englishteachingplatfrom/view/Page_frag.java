@@ -85,7 +85,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         tPrice = contents.get(pos).getPrice();
         Price.setText(""+tPrice);
 
-     //   txt.setVisibility(View.INVISIBLE);'
+     //   txt.setVisibility(View.INVISIBLE);
         return rootview;
     }
 

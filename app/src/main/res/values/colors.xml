@@ -9,4 +9,5 @@
     <color name="colorVisited">#e2e2e2</color>
     <color name="golden">#ffbf00 </color>
     <color name="Green">#078418</color>
+    <color name="Heart"> #FF0023</color>
 </resources>

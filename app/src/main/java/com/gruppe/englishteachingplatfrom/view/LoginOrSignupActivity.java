@@ -9,10 +9,12 @@ import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
@@ -42,6 +44,16 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         login.setOnClickListener(this);
         Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
+
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        feedbackDocument.getAll(new CallbackList<Feedback>() {
+            @Override
+            public void onCallback(List<Feedback> listOfObjects) {
+                for (Feedback feedback : listOfObjects) {
+                    System.out.println("feedback kqly:"+ feedback.getStudentProfile().getName()+" : "+feedback.getRating());
+                }
+            }
+        });
     }
     @Override
     public void onClick(View view) {

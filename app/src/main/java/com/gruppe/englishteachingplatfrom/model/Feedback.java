@@ -41,10 +41,10 @@ public class Feedback extends DocumentObject {
     public void toObject(String documentId, Map<String, Object> mapOfObject) {
         StudentProfile studentProfile = new StudentProfile();
         Map<String, Object> mapStudent = new HashMap<>();
-        mapStudent.put("teacher_fullname",mapOfObject.get("teacher_fullname"));
-        mapStudent.put("teacher_mail",mapOfObject.get("teacher_mail"));
+        mapStudent.put("student_fullname",mapOfObject.get("student_fullname"));
+        mapStudent.put("student_mail",mapOfObject.get("student_mail"));
         studentProfile.toObject("1",mapStudent);
-        this.setStudentProfile((StudentProfile) mapOfObject.get("student"));
+        this.setStudentProfile(studentProfile);
         this.setId(documentId);
         this.setRating((Double) mapOfObject.get("rating"));
         this.setContent((String) mapOfObject.get("content"));

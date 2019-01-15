@@ -9,6 +9,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
 
 import java.util.List;
