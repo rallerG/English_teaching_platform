@@ -102,9 +102,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                         studentsDocument.get(studentReference.getId(), new Callback<StudentProfile>() {
                                             @Override
                                             public void onCallback(StudentProfile object) {
-                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
-                                                    map.put("student_"+entry.getKey(),entry.getValue());
-                                                }
                                             }
                                         });
                                     } else if (element.getKey().equals("teacher")) {
@@ -114,23 +111,22 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                         teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
                                             @Override
                                             public void onCallback(TeacherProfile object) {
-                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
-                                                    map.put("teacher_"+entry.getKey(),entry.getValue());
-                                                }
                                             }
                                         });
                                     } else {
                                         Log.d(TAG, " --get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
-                                        //objectToReturn.toObject(document.getId(), document.getData());
-                                        map.put(element.getKey(),element.getValue());
+                                        if (type == StudentProfile.class) {
+                                            map.put("student_"+element.getKey(),element.getValue());
+                                        }
+                                        else if (type == TeacherProfile.class) {
+                                            map.put("teacher_"+element.getKey(),element.getValue());
+                                        }
+                                        else {
+                                            map.put(element.getKey(),element.getValue());
+                                        }
                                     }
-                                    //objectToReturn.toObject(document.getId(),map);
-
                                 }
-                                for (Map.Entry<String, Object> entry : map.entrySet()) {
-                                    System.out.println("kqly: "+entry.getKey()+": "+entry.getValue());
-                                }
-                                //objectToReturn.toObject(document.getId(),map);
+                                objectToReturn.toObject(document.getId(),map);
                                 callback.onCallback(objectToReturn);
                             } else {
                                 Log.d(TAG, "No such document");
@@ -165,7 +161,6 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            //listOfObjectsToReturn.add((T) objectToReturn);
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 try {
                                     objectToReturn = getInstance();
@@ -177,36 +172,34 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                 for (Map.Entry<String, Object> element: document.getData().entrySet()) {
                                     if (element.getKey().equals("student")) {
                                         DocumentReference studentReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --get()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, " --getAll()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
                                         StudentsDocument studentsDocument = new StudentsDocumentImpl();
                                         studentsDocument.get(studentReference.getId(), new Callback<StudentProfile>() {
                                             @Override
                                             public void onCallback(StudentProfile object) {
-                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
-                                                    map.put("student_"+entry.getKey(),entry.getValue());
-                                                }
                                             }
                                         });
                                     } else if (element.getKey().equals("teacher")) {
                                         DocumentReference teacherReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --get()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, " --getAll()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
                                         TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                         teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
                                             @Override
                                             public void onCallback(TeacherProfile object) {
-                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
-                                                    map.put("teacher_"+entry.getKey(),entry.getValue());
-                                                }
                                             }
                                         });
                                     } else {
-                                        Log.d(TAG, " --get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
-                                        map.put(element.getKey(),element.getValue());
+                                        Log.d(TAG, " --getAll()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
+                                        if (type == StudentProfile.class) {
+                                            map.put("student_"+element.getKey(),element.getValue());
+                                        }
+                                        else if (type == TeacherProfile.class) {
+                                            map.put("teacher_"+element.getKey(),element.getValue());
+                                        }
+                                        else {
+                                            map.put(element.getKey(),element.getValue());
+                                        }
                                     }
-                                }
-                                int counter = 0;
-                                for (Map.Entry<String, Object> entry : map.entrySet()) {
-                                    System.out.println("kqly"+(counter++)+": "+entry.getKey()+": "+entry.getValue());
                                 }
                                 objectToReturn.toObject(document.getId(), map);
                                 listOfObjectsToReturn.add((T) objectToReturn);

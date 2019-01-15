@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,11 @@ public class FeedbackProfile extends DocumentObject {
 
     @Override
     public void toObject(String documentId, Map<String, Object> mapOfObject) {
+        StudentProfile studentProfile = new StudentProfile();
+        Map<String, Object> mapStudent = new HashMap<>();
+        mapStudent.put("teacher_fullname",mapOfObject.get("teacher_fullname"));
+        mapStudent.put("teacher_mail",mapOfObject.get("teacher_mail"));
+        studentProfile.toObject("1",mapStudent);
         this.setStudentProfile((StudentProfile) mapOfObject.get("student"));
         this.setId(documentId);
         this.setRating((Double) mapOfObject.get("rating"));
