@@ -42,38 +42,28 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         login.setOnClickListener(this);
         Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
+
+        TeacherFeedbackDocument teacherFeedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        teacherFeedbackDocument.get("1", new Callback<FeedbackProfile>() {
+            @Override
+            public void onCallback(FeedbackProfile object) {
+            }
+        });
     }
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginFacebook :
                 final Intent intent1 = new Intent(this, MainActivity.class);
-                TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                teachersDocument.getAll(new CallbackList<TeacherProfile>() {
-                    @Override
-                    public void onCallback(List<TeacherProfile> listOfObjects) {
-                        Singleton.downloadAllTeachersProfiles();
-                        //loading bar
-                        startActivity(intent1);
-                        finish();
-                        System.out.println("Testing");
-                    }
-                });
+                //loading bar
+                startActivity(intent1);
+                finish();
+                System.out.println("Testing");
                 break;
             case R.id.loginWeChat :
                 final Intent intent2 = new Intent(this, TeacherMainActivity.class);
-                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                studentsDocument.getAll(new CallbackList<StudentProfile>() {
-                    @Override
-                    public void onCallback(List<StudentProfile> listOfObjects) {
-                        Singleton.downloadAllStudentProfiles();
-                        //loading bar
-                        startActivity(intent2);
-                        finish();
-                        System.out.println("Testing");
-                    }
-                });
-                startActivity(new Intent(this, TeacherMainActivity.class));
+                //loading bar
+                startActivity(intent2);
                 finish();
                 System.out.println("Testing");
                 break;

@@ -20,10 +20,14 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -77,7 +81,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     }
 
     @Override
-    public void get(String documentId, final Callback callback) {
+    public void get(final String documentId, final Callback callback) {
         try {
             objectToReturn = getInstance();
         } catch (Exception e) {
@@ -89,25 +93,45 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     @Override
                     public void onSuccess(DocumentSnapshot document) {
                             if (document.exists()) {
-                                DocumentReference studentReference = (DocumentReference) document.get("student");
-                                DocumentReference teacherReference = (DocumentReference) document.get("teacher");
-                                if (studentReference != null) {
-                                    Log.d(TAG, " --get()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
-                                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                    //studentsDocument.get(studentReference.getId());
-                                    objectToReturn.toObject(document.getId(),document.getData());
+                                final Map<String, Object> map = new HashMap<>();
+                                for (Map.Entry<String, Object> element: document.getData().entrySet()) {
+                                    if (element.getKey().equals("student")) {
+                                        DocumentReference studentReference = (DocumentReference) element.getValue();
+                                        Log.d(TAG, " --get()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
+                                        StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                        studentsDocument.get(studentReference.getId(), new Callback<StudentProfile>() {
+                                            @Override
+                                            public void onCallback(StudentProfile object) {
+                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
+                                                    map.put("student_"+entry.getKey(),entry.getValue());
+                                                }
+                                            }
+                                        });
+                                    } else if (element.getKey().equals("teacher")) {
+                                        DocumentReference teacherReference = (DocumentReference) element.getValue();
+                                        Log.d(TAG, " --get()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
+                                        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                        teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
+                                            @Override
+                                            public void onCallback(TeacherProfile object) {
+                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
+                                                    map.put("teacher_"+entry.getKey(),entry.getValue());
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        Log.d(TAG, " --get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
+                                        //objectToReturn.toObject(document.getId(), document.getData());
+                                        map.put(element.getKey(),element.getValue());
+                                    }
+                                    //objectToReturn.toObject(document.getId(),map);
+
                                 }
-                                else if (teacherReference != null) {
-                                    Log.d(TAG, " --get()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
-                                    TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                    //teachersDocument.get(studentReference.getId());
-                                    objectToReturn.toObject(document.getId(),document.getData());
+                                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                    System.out.println("kqly: "+entry.getKey()+": "+entry.getValue());
                                 }
-                                else {
-                                    Log.d(TAG, " --get()-- "+"DocumentSnapshot data: " + document.getData());
-                                    objectToReturn.toObject(document.getId(),document.getData());
-                                    callback.onCallback(objectToReturn);
-                                }
+                                //objectToReturn.toObject(document.getId(),map);
+                                callback.onCallback(objectToReturn);
                             } else {
                                 Log.d(TAG, "No such document");
                             }
@@ -141,6 +165,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            //listOfObjectsToReturn.add((T) objectToReturn);
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 try {
                                     objectToReturn = getInstance();
@@ -148,27 +173,43 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     System.out.println("Could not define subclass of superclass: "+e);
                                 }
 
-                                DocumentReference studentReference = (DocumentReference) document.get("student");
-                                DocumentReference teacherReference = (DocumentReference) document.get("teacher");
-                                if (studentReference != null) {
-                                    Log.d(TAG, " --getAll()-- "+"Reference data " + studentReference.getId()+ " "+studentReference.getPath());
-                                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                    //studentsDocument.get(studentReference.getId());
-                                    objectToReturn.toObject(document.getId(),document.getData());
-                                    listOfObjectsToReturn.add((T) objectToReturn);
+                                final Map<String, Object> map = new HashMap<>();
+                                for (Map.Entry<String, Object> element: document.getData().entrySet()) {
+                                    if (element.getKey().equals("student")) {
+                                        DocumentReference studentReference = (DocumentReference) element.getValue();
+                                        Log.d(TAG, " --get()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
+                                        StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                        studentsDocument.get(studentReference.getId(), new Callback<StudentProfile>() {
+                                            @Override
+                                            public void onCallback(StudentProfile object) {
+                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
+                                                    map.put("student_"+entry.getKey(),entry.getValue());
+                                                }
+                                            }
+                                        });
+                                    } else if (element.getKey().equals("teacher")) {
+                                        DocumentReference teacherReference = (DocumentReference) element.getValue();
+                                        Log.d(TAG, " --get()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
+                                        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                        teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
+                                            @Override
+                                            public void onCallback(TeacherProfile object) {
+                                                for (Map.Entry<String, Object> entry : object.toMap().entrySet()) {
+                                                    map.put("teacher_"+entry.getKey(),entry.getValue());
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        Log.d(TAG, " --get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
+                                        map.put(element.getKey(),element.getValue());
+                                    }
                                 }
-                                else if (teacherReference != null) {
-                                    Log.d(TAG, " --getAll()-- "+"Reference data " + teacherReference.getId() + " "+teacherReference.getPath());
-                                    TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                    //teachersDocument.get(studentReference.getId());
-                                    objectToReturn.toObject(studentReference.getId(),document.getData());
-                                    listOfObjectsToReturn.add((T) objectToReturn);
+                                int counter = 0;
+                                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                    System.out.println("kqly"+(counter++)+": "+entry.getKey()+": "+entry.getValue());
                                 }
-                                else {
-                                    Log.d(TAG," --getAll()-- "+ document.getId() + " => " + document.getData());
-                                    objectToReturn.toObject(document.getId(),document.getData());
-                                    listOfObjectsToReturn.add((T) objectToReturn);
-                                }
+                                objectToReturn.toObject(document.getId(), map);
+                                listOfObjectsToReturn.add((T) objectToReturn);
                             }
                             callbackList.onCallback(listOfObjectsToReturn);
                         } else {
