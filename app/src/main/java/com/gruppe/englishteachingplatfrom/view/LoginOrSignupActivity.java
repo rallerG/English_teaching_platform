@@ -71,7 +71,6 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onCallback(StudentProfile object) {
                         p.setCurrrentStudent(object);
-
                         //loading bar
                         if (pDialog.isShowing()){
                             pDialog.dismiss();
