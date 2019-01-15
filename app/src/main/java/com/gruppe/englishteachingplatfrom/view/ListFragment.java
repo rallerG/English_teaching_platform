@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
@@ -20,6 +23,7 @@ public class ListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private int listId;
+    public static boolean clicked = false;
 //    private OnListFragmentInteractionListener mListener;
 
     RecyclerView mRecyclerView;
@@ -95,8 +99,18 @@ public class ListFragment extends Fragment {
 
             @Override
             public void onItemClick(int position) {
-                //What to do in click
-                System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                if(!clicked) {
+                    //What to do in click
+                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                    //remember information and description text (when objects are used)
+                    startActivity(i);
+                    clicked = true;
+                }
             }
         });
 

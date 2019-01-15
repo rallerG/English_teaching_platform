@@ -56,6 +56,7 @@ public class TeacherInfoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Page_frag.clicked = false;
+        ListFragment.clicked = false;
         super.onBackPressed();
     }
 }
