@@ -31,6 +31,7 @@ public class TeacherMainActivity extends AppCompatActivity
    // private  static final  String TAG = "MainActivity";
 
     //vars
+    Singleton p = Singleton.getInstance();
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
@@ -128,6 +129,7 @@ public class TeacherMainActivity extends AppCompatActivity
                 fragment = new Teacher_fragment();
                 break;
             case R.id.nav_logout:
+                p.setCurrrentTeacher(null);
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
                 break;

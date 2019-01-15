@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +18,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -34,10 +43,10 @@ public class MainActivity extends AppCompatActivity
     public int position;
     public int pic;
     Singleton p = Singleton.getInstance();
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        p.createList();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -60,9 +69,27 @@ public class MainActivity extends AppCompatActivity
             //Pick what fragment to display onCreate
             //DisplaySelectedScreen(6);
 
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.fragmentContent, new frag_Pager());
-            ft.commit();
+            pDialog = new ProgressDialog(this);
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(true);
+                pDialog.show();
+
+            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+            teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+                @Override
+                public void onCallback(List<TeacherProfile> listOfObjects) {
+                    p.getTeacherDummies().clear();
+                    p.getTeacherDummies().addAll(listOfObjects);
+                    //loading bar
+                    if (pDialog.isShowing()){
+                        pDialog.dismiss();
+                    }
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.add(R.id.fragmentContent, new frag_Pager());
+                    ft.commit();
+                }
+            });
+
         }
     }
 
@@ -151,6 +178,7 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
+                p.setCurrrentStudent(null);
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
                 break;

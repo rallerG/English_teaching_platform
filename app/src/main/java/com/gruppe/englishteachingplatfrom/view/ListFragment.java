@@ -13,10 +13,21 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
+import android.widget.Switch;
+
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentPendingsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
 
 public class ListFragment extends Fragment {
 
@@ -37,7 +48,7 @@ public class ListFragment extends Fragment {
     public ListFragment() {
     }
 
-   
+
     public static ListFragment newInstance(int columnCount) {
         ListFragment fragment = new ListFragment();
         Bundle args = new Bundle();
@@ -60,59 +71,142 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorite_list, container, false);
 
-//        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//                System.out.println(listId);
-//            switch (getArguments().getInt("id")) {
-//                case R.id.nav_matches:
-//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
-//                    break;
-//                case R.id.nav_favorites:
-//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
-//                    break;
-//                case R.id.nav_pending:
-//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
-//                    break;
-//            }
-        
-//        getAc
-//tivity().setTitle("List");
-
-
-
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies());
 
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+        switch (mColumnCount) {
+            case R.id.nav_matches:
+                StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl("1");
+                studentMatchesDocument.getAll(new CallbackList<TeacherProfile>() {
+                    @Override
+                    public void onCallback(List<TeacherProfile> listOfObjects) {
+                        p.getCurrrentStudent().getMatchProfiles().clear();
+                        p.getCurrrentStudent().getMatchProfiles().addAll(listOfObjects);
+                        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
+                        mRecyclerView.setHasFixedSize(true);
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
 
-            @Override
-            public void onItemClick(int position) {
-                if(!clicked) {
-                    //What to do in click
-                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
-                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
-                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
-                    //remember information and description text (when objects are used)
-                    startActivity(i);
-                    clicked = true;
-                }
-            }
-        });
+                            @Override
+                            public void onItemClick(int position) {
+                                if(!clicked) {
+                                    //What to do in click
+                                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                                    //remember information and description text (when objects are used)
+                                    startActivity(i);
+                                    clicked = true;
+                                }
+                            }
+                        });
+                    }
+                });
+                break;
+            case R.id.nav_favorites:
+                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl("1");
+                studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
+                    @Override
+                    public void onCallback(List<TeacherProfile> listOfObjects) {
+                        p.getCurrrentStudent().getFavoriteProfiles().clear();
+                        p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
+                        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getFavoriteProfiles());
+                        mRecyclerView.setHasFixedSize(true);
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+
+
+                            @Override
+                            public void onItemClick(int position) {
+                                if(!clicked) {
+                                    //What to do in click
+                                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                                    //remember information and description text (when objects are used)
+                                    startActivity(i);
+                                    clicked = true;
+                                }
+                            }
+                        });
+                    }
+                });
+                break;
+            case R.id.nav_pending:
+                StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl("1");
+                studentPendingsDocument.getAll(new CallbackList<TeacherProfile>() {
+                    @Override
+                    public void onCallback(List<TeacherProfile> listOfObjects) {
+                        p.getCurrrentStudent().getPendingProfiles().clear();
+                        p.getCurrrentStudent().getPendingProfiles().addAll(listOfObjects);
+                        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
+                        mRecyclerView.setHasFixedSize(true);
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+
+
+                            @Override
+                            public void onItemClick(int position) {
+                                if(!clicked) {
+                                    //What to do in click
+                                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+                                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+                                    //remember information and description text (when objects are used)
+                                    startActivity(i);
+                                    clicked = true;
+                                }
+                            }
+                        });
+
+                    }
+                });
+                break;
+            default:
+                System.out.println("Intet valgt i ListFragment.java");
+                break;
+        }
+
+
+//        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+//        mLayoutManager = new LinearLayoutManager(getContext());
+//        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies());
+
+//        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.setAdapter(mAdapter);
+//        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+//
+//
+//            @Override
+//            public void onItemClick(int position) {
+//                if(!clicked) {
+//                    //What to do in click
+//                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
+//                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+//                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
+//                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
+//                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
+//                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
+//                    //remember information and description text (when objects are used)
+//                    startActivity(i);
+//                    clicked = true;
+//                }
+//            }
+//        });
 
             return view;
     }
@@ -150,3 +244,34 @@ public class ListFragment extends Fragment {
         void onListFragmentInteraction(TeacherProfile item);
     }
 }
+
+
+
+
+
+
+
+//        // Set the adapter
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+//                System.out.println(listId);
+//            switch (getArguments().getInt("id")) {
+//                case R.id.nav_matches:
+//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
+//                    break;
+//                case R.id.nav_favorites:
+//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
+//                    break;
+//                case R.id.nav_pending:
+//                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
+//                    break;
+//            }
+        
+//        getAc
+//tivity().setTitle("List");

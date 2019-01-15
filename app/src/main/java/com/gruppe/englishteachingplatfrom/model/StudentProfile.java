@@ -79,15 +79,15 @@ public class StudentProfile extends DocumentObject{
         return rating;
     }
 
-    public static ArrayList<TeacherProfile> getPendingProfiles() {
+    public ArrayList<TeacherProfile> getPendingProfiles() {
         return pendingProfiles;
     }
 
-    public static ArrayList<TeacherProfile> getFavoriteProfiles() {
+    public ArrayList<TeacherProfile> getFavoriteProfiles() {
         return favoriteProfiles;
     }
 
-    public static ArrayList<TeacherProfile> getMatchProfiles() {
+    public ArrayList<TeacherProfile> getMatchProfiles() {
         return MatchProfiles;
     }
 
