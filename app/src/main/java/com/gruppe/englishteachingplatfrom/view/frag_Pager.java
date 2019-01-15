@@ -1,14 +1,18 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.controller.FragPagerAdapter;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
@@ -27,7 +31,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
         private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
         private int position1;
         private int pic1;
-
+        private int checker = 0;
         public frag_Pager() {
             // Required empty public constructor
         }
@@ -45,9 +49,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             View view =  inflater.inflate(R.layout.fragment_viewpager_list, container, false);
 
 
-
-
-            teacher = Singleton.getInstance();
+                    teacher = Singleton.getInstance();
 
             floating_Fav = view.findViewById(R.id.floating_fav);
             floating_Send = view.findViewById(R.id.floating_send);
@@ -115,7 +117,18 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
         if(v == floating_Fav){
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
-            ((FloatingActionButton) v).setImageResource(R.drawable.ic_if_filter_1608702);
+            Resources res = getContext().getResources();
+            final int newColor = res.getColor(R.color.Heart);
+
+            
+            if(checker == 0) {
+                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
+                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
+                checker = 1;
+            } else  {
+                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
+                checker = 0;
+            }
         }
 
     }
