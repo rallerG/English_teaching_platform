@@ -57,7 +57,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
 
 
             mPager = view.findViewById(R.id.ViewPager);
-           // mPager.setPageTransformer(true, new ViewPagerStack());
+            mPager.setPageTransformer(true, new ViewPagerStack());
             mPager.setOffscreenPageLimit(3);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
 
@@ -89,12 +89,12 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
 
             if (position >= 0) {
 
-             /*   page.setScaleX(0.8f - 0.05f * position);
-                page.setScaleY(0.8f);*/
+                page.setScaleX(1.0f -0.03f * position);
+               // page.setScaleY(0.8f);
 
                 page.setTranslationX(-page.getWidth() * position);
 
-                page.setTranslationY(-30 * position);
+                page.setTranslationY(10 * position);
             }
         }
     }
