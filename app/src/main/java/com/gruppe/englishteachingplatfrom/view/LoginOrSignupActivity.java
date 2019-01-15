@@ -39,6 +39,13 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         login.setOnClickListener(this);
         Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
+
+        TeacherFeedbackDocument teacherFeedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        teacherFeedbackDocument.get("1", new Callback<FeedbackProfile>() {
+            @Override
+            public void onCallback(FeedbackProfile object) {
+            }
+        });
     }
     @Override
     public void onClick(View view) {

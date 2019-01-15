@@ -154,8 +154,21 @@ public class Payment extends DocumentObject {
         this.setPrice((int) mapOfObject.get("price"));
         this.setRequestDate((String) mapOfObject.get("requestDate"));
         this.setPaymentDate((String) mapOfObject.get("paymentDate"));
-        this.setTeacher((TeacherProfile) mapOfObject.get("teacher"));
-        this.setStudent((StudentProfile) mapOfObject.get("student"));
+
+        TeacherProfile teacherProfile = new TeacherProfile();
+        Map<String, Object> mapTeacher = new HashMap<>();
+        mapTeacher.put("teacher_fullname",mapOfObject.get("teacher_fullname"));
+        mapTeacher.put("teacher_mail",mapOfObject.get("teacher_mail"));
+        teacherProfile.toObject("1",mapTeacher);
+        this.setTeacher(teacherProfile);
+
+        StudentProfile studentProfile = new StudentProfile();
+        Map<String, Object> mapStudent = new HashMap<>();
+        mapStudent.put("student_fullname",mapOfObject.get("student_fullname"));
+        mapStudent.put("student_mail",mapOfObject.get("student_mail"));
+        teacherProfile.toObject("1",mapStudent);
+        this.setStudent(studentProfile);
+
         this.setPayed((boolean) mapOfObject.get("isPayed"));
         this.setActive((boolean) mapOfObject.get("isActive"));
     }
