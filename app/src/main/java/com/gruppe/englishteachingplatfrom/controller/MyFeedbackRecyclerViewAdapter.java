@@ -14,12 +14,13 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedbackRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Feedback> feedback;
+    private List<Feedback> feedback;
     Context mContext;
 
     public MyFeedbackRecyclerViewAdapter(Context mContext,List<Feedback> feedback) {
@@ -39,12 +40,31 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mFeedback = feedback.get(position);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        Feedback feed = feedback.get(position);
+
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        feedbackDocument.getAll(new CallbackList<Feedback>() {
+            @Override
+            public void onCallback(List<Feedback> listOfObjects) {
+               // for (Feedback feedback : listOfObjects) {
+                holder.mStudName.setText(listOfObjects.get(position).getStudentProfile().getName());
+                holder.mRating.setRating((float) listOfObjects.get(position).getRating());
+                holder.mContent.setText(listOfObjects.get(position).getContent());
+                    /*System.out.println("feedback kqly:"+ feedback.getStudentProfile().getName()+" : "+feedback.getRating());
+                    holder.mStudName.setText("" + feedback.getStudentProfile().getName());
+                    holder.mRating.setRating((float) feedback.getRating());
+                    holder.mContent.setText(feedback.getContent());
+                *///}
+            }
+        });
+
+   /*     holder.mFeedback = feedback.get(position);
         holder.mStudName.setText(feedback.get(position).getStudentProfile().getName());
         holder.mRating.setRating((float) feedback.get(position).getRating());
         holder.mContent.setText(feedback.get(position).getContent());
-
+*/
    /*     holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
