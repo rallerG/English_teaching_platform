@@ -16,12 +16,15 @@ import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
 import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,14 +76,19 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feedback_list, container, false);
 
-        final TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+      /*  final TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
         feedbackDocument.getAll(new CallbackList<Feedback>() {
             @Override
             public void onCallback(List<Feedback> listOfObjects) {
-                for (Feedback feedback : listOfObjects) {
+                for (final Feedback feedback : listOfObjects) {
                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                    studentsDocument.get(feedback.get);
-                    list.add(new Feedback(feedback.getStudentProfile(), feedback.getRating(),feedback.getContent()));
+                    studentsDocument.get(feedback.getStudentId(), new Callback<StudentProfile>() {
+                        @Override
+                        public void onCallback(StudentProfile object) {
+                            feedback.setStudentProfile(object);
+                            list.add(new Feedback(feedback.getStudentProfile(), feedback.getRating(),feedback.getContent()));
+                        }
+                    });
 
                 }
                 MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
@@ -90,7 +98,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 feedback.setAdapter(recycleAdapter);
                 loader.setVisibility(View.INVISIBLE);
             }
-        });
+        });*/
 
         feedback = view.findViewById(R.id.list);
         star1 = view.findViewById(R.id.star1);

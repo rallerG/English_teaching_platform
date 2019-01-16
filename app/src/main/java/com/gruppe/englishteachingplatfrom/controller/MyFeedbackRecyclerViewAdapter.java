@@ -9,10 +9,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,21 +46,33 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        Feedback feed = feedback.get(position);
+        final Feedback feed = feedback.get(position);
 
         TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
         feedbackDocument.getAll(new CallbackList<Feedback>() {
             @Override
             public void onCallback(List<Feedback> listOfObjects) {
-               // for (Feedback feedback : listOfObjects) {
-                holder.mStudName.setText(listOfObjects.get(position).getStudentProfile().getName());
-                holder.mRating.setRating((float) listOfObjects.get(position).getRating());
-                holder.mContent.setText(listOfObjects.get(position).getContent());
+                for (final Feedback feed : listOfObjects) {
+                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                    studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
+                        @Override
+                        public void onCallback(StudentProfile object) {
+                            //feed.setStudentProfile(object);
+                            holder.mStudName.setText(object.getName());
+                        }
+                    });
+                    holder.mRating.setRating((float) feed.getRating());
+                    holder.mContent.setText(feed.getContent());
+
+                    //                holder.mStudName.setText(listOfObjects.get(position).getStudentProfile().getName());
+//                holder.mRating.setRating((float) listOfObjects.get(position).getRating());
+//                holder.mContent.setText(listOfObjects.get(position).getContent());
                     /*System.out.println("feedback kqly:"+ feedback.getStudentProfile().getName()+" : "+feedback.getRating());
                     holder.mStudName.setText("" + feedback.getStudentProfile().getName());
                     holder.mRating.setRating((float) feedback.getRating());
-                    holder.mContent.setText(feedback.getContent());
-                *///}
+                    holder.mContent.setText(feedback.getContent());*/
+                }
+          //  feedback.add(feed);
             }
         });
 
