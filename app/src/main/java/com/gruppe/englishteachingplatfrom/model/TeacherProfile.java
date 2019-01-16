@@ -82,6 +82,18 @@ public class TeacherProfile extends DocumentObject{
         return price;
     }
 
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public Map<String, Object> toMap() {
         Map<String, Object> mapToReturn = new HashMap<>();
@@ -95,6 +107,9 @@ public class TeacherProfile extends DocumentObject{
         this.setId(documentId);
         this.setName((String) mapOfObject.get("teacher_fullname"));
         this.setEmail((String) mapOfObject.get("teacher_mail"));
+        this.setRating(Double.parseDouble((String) mapOfObject.get("teacher_rating")));
+        this.setLanguage((String) mapOfObject.get("teacher_language"));
+        this.setPrice(Math.toIntExact((long) mapOfObject.get("teacher_price")));
     }
 
     public void setEmail(String email) {

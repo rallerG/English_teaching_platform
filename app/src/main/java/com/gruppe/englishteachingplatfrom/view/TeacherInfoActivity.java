@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class TeacherInfoActivity extends AppCompatActivity {
 
     private TextView name, language, rate, price, information, description;
+    private RatingBar rateBar;
     private ImageView image;
     private Singleton p = Singleton.getInstance();
 //    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
@@ -35,6 +36,7 @@ public class TeacherInfoActivity extends AppCompatActivity {
         price = findViewById(R.id.info_teacherprice);
         information = findViewById(R.id.information_text);
         description = findViewById(R.id.description_text);
+        rateBar = findViewById(R.id.info_teacherratingstars);
 
         rating = findViewById(R.id.info_teacherratingstars);
         Intent i = getIntent();
@@ -49,7 +51,9 @@ public class TeacherInfoActivity extends AppCompatActivity {
         language.setText(tLang);
         name.setText(tName);
         rate.setText(Float.toString(tRate));
-        price.setText(Integer.toString(tPrice));
+        price.setText(Integer.toString(tPrice) + " DKK/hr");
+        rateBar.setRating(tRate);
+        rateBar.setIsIndicator(true);
 
 
         information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
