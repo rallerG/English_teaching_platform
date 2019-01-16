@@ -13,11 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
 import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FeedbackFragment extends Fragment implements View.OnClickListener {
@@ -41,18 +45,24 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-        /*list.add(new Feedback("Xian", 3, "Good teacher"));
-        list.add(new Feedback("Geng", 5, "AMAZING LESSON! learned a lot for just 2 hours of study"));
-        list.add(new Feedback("Chuang", 1, "Bad teacher"));
-        list.add(new Feedback("Jin", 2, "Couldn't follow his lesson"));
-        list.add(new Feedback("Li", 5, "Cool teacher"));
-        list.add(new Feedback("Xia", 3, "Nice"));
-        list.add(new Feedback("Huan", 5, "I recommend this teacher, he is very kind and can help overtime if needed"));
-        */
+
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        feedbackDocument.getAll(new CallbackList<Feedback>() {
+            @Override
+            public void onCallback(List<Feedback> listOfObjects) {
+                for (Feedback feedback : listOfObjects) {
+                    list.add(new Feedback(feedback.getStudentProfile(), feedback.getRating(),feedback.getContent()));
+
+                }
+            }
+        });
+        System.out.println(list);
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
     }
 
     @Nullable
@@ -107,7 +117,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 totStar4++;
                 totalStar += feed.getRating();
             }
-            else if (4 > feed.getRating() && feed.getRating() < 5) {
+            else if (4 > feed.getRating() && feed.getRating() <= 5) {
                 totStar5++;
                 totalStar += feed.getRating();
             }
@@ -132,6 +142,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
         feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
         feedback.setAdapter(recycleAdapter);
+        recycleAdapter.notifyDataSetChanged();
         return view;
     }
 

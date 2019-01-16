@@ -17,6 +17,8 @@ public class Singleton {
 
 
     private static Singleton Instance = null;
+    private TeacherProfile currrentTeacher = null;
+    private StudentProfile currrentStudent = null;
 
     private static ArrayList<TeacherProfile> teacherDummies = new ArrayList<>();
     private static ArrayList<StudentProfile> studentDummies = new ArrayList<>();
@@ -91,6 +93,22 @@ public class Singleton {
 
     public ArrayList<StudentProfile> getStudentDummies() {
         return studentDummies;
+    }
+
+    public TeacherProfile getCurrrentTeacher() {
+        return currrentTeacher;
+    }
+
+    public void setCurrrentTeacher(TeacherProfile currrentTeacher) {
+        this.currrentTeacher = currrentTeacher;
+    }
+
+    public StudentProfile getCurrrentStudent() {
+        return currrentStudent;
+    }
+
+    public void setCurrrentStudent(StudentProfile currrentStudent) {
+        this.currrentStudent = currrentStudent;
     }
 
 

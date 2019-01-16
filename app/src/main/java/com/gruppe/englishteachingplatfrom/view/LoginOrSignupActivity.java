@@ -16,6 +16,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
@@ -65,21 +66,17 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 pDialog.show();
 
                 final Intent intent1 = new Intent(this, MainActivity.class);
-                TeachersDocument teachersDocument = new TeachersDocumentImpl();
-//                Singleton.downloadAllTeachersProfiles();
-                teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+                StudentsDocument studentDocument = new StudentsDocumentImpl();
+                studentDocument.get("1", new Callback<StudentProfile>() {
                     @Override
-                    public void onCallback(List<TeacherProfile> listOfObjects) {
-//                        Singleton.downloadAllTeachersProfiles();
-                        p.getTeacherDummies().clear();
-                        p.getTeacherDummies().addAll(listOfObjects);
+                    public void onCallback(StudentProfile object) {
+                        p.setCurrrentStudent(object);
                         //loading bar
                         if (pDialog.isShowing()){
                             pDialog.dismiss();
                         }
                         startActivity(intent1);
                         finish();
-                        System.out.println("Testing");
                     }
                 });
                 break;
@@ -91,25 +88,20 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 pDialog.show();
 
                 final Intent intent2 = new Intent(this, TeacherMainActivity.class);
-                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-//                Singleton.downloadAllStudentProfiles();
-                studentsDocument.getAll(new CallbackList<StudentProfile>() {
+                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                teachersDocument.get("1", new Callback<TeacherProfile>() {
                     @Override
-                    public void onCallback(List<StudentProfile> listOfObjects) {
-                        p.getStudentDummies().clear();
-                        p.getStudentDummies().addAll(listOfObjects);
+                    public void onCallback(TeacherProfile object) {
+                        p.setCurrrentTeacher(object);
+
                         //loading bar
                         if (pDialog.isShowing()){
                             pDialog.dismiss();
                         }
                         startActivity(intent2);
                         finish();
-                        System.out.println("Testing");
                     }
                 });
-//                startActivity(new Intent(this, TeacherMainActivity.class));
-//                finish();
-//                System.out.println("Testing");
                 break;
             case R.id.login :
                 startActivity(new Intent(this, LoginActivity.class));

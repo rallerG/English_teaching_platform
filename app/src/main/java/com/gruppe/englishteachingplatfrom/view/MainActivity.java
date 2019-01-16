@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,10 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -34,10 +44,10 @@ public class MainActivity extends AppCompatActivity
     public int position;
     public int pic;
     Singleton p = Singleton.getInstance();
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        p.createList();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,23 +56,50 @@ public class MainActivity extends AppCompatActivity
 //        floatingActionButton = findViewById(R.id.floatingActionButton);
 //        fab.setOnClickListener(this);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
+        //Set the current user in the burger menu.
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        TextView burgerMenuName = headerView.findViewById(R.id.textView2);
+        burgerMenuName.setText(p.getCurrrentStudent().getName());
+//        System.out.println("Print! " + p.getCurrrentStudent().getName());
+
+
+
 
         if(savedInstanceState == null) {
             //Pick what fragment to display onCreate
             //DisplaySelectedScreen(6);
 
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.fragmentContent, new frag_Pager());
-            ft.commit();
+            pDialog = new ProgressDialog(this);
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(true);
+                pDialog.show();
+
+            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+            teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+                @Override
+                public void onCallback(List<TeacherProfile> listOfObjects) {
+                    p.getTeacherDummies().clear();
+                    p.getTeacherDummies().addAll(listOfObjects);
+                    //loading bar
+                    if (pDialog.isShowing()){
+                        pDialog.dismiss();
+                    }
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.add(R.id.fragmentContent, new frag_Pager());
+                    ft.commit();
+                }
+            });
+
         }
     }
 
@@ -77,31 +114,30 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_filter_rating) {
-            return true;
-        } else if (id == R.id.action_filter_country) {
-            //Do stuff
-        } else if (id == R.id.action_filter_price) {
-            //do stuff
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_filter_rating) {
+//            return true;
+//        } else if (id == R.id.action_filter_country) {
+//            //Do stuff
+//        } else if (id == R.id.action_filter_price) {
+//            //do stuff
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -151,6 +187,7 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
+                p.setCurrrentStudent(null);
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
                 break;
@@ -172,6 +209,10 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+
+
+
     }
 
     @Override

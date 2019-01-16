@@ -17,8 +17,8 @@ public class TeacherInfoActivity extends AppCompatActivity {
 
     private TextView name, language, rate, price, information, description;
     private ImageView image;
-    private Singleton teacher = Singleton.getInstance();
-    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
+    private Singleton p = Singleton.getInstance();
+//    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
     private int pos, pic, tPrice;
     private RatingBar rating;
     float tRating, tRate;
@@ -43,11 +43,13 @@ public class TeacherInfoActivity extends AppCompatActivity {
         tRate = i.getFloatExtra("rate", 0);
         tLang = i.getStringExtra("language");
 
+        System.out.println(tName + " " + tPrice + " " + tRate + " " + tLang);
+
 
         language.setText(tLang);
         name.setText(tName);
-        rate.setText("" + tRate);
-        price.setText("" + tPrice);
+        rate.setText(Float.toString(tRate));
+        price.setText(Integer.toString(tPrice));
 
 
         information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
