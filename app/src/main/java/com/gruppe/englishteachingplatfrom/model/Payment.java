@@ -11,6 +11,8 @@ public class Payment extends DocumentObject {
     private int price;
     private String requestDate;
     private String paymentDate;
+    private String teacherId;
+    private String studentId;
     private TeacherProfile teacher;
     private StudentProfile student;
     private boolean isPayed;
@@ -154,23 +156,26 @@ public class Payment extends DocumentObject {
         this.setPrice((int) mapOfObject.get("price"));
         this.setRequestDate((String) mapOfObject.get("requestDate"));
         this.setPaymentDate((String) mapOfObject.get("paymentDate"));
-
-        TeacherProfile teacherProfile = new TeacherProfile();
-        Map<String, Object> mapTeacher = new HashMap<>();
-        mapTeacher.put("teacher_fullname",mapOfObject.get("teacher_fullname"));
-        mapTeacher.put("teacher_mail",mapOfObject.get("teacher_mail"));
-        teacherProfile.toObject("1",mapTeacher);
-        this.setTeacher(teacherProfile);
-
-        StudentProfile studentProfile = new StudentProfile();
-        Map<String, Object> mapStudent = new HashMap<>();
-        mapStudent.put("student_fullname",mapOfObject.get("student_fullname"));
-        mapStudent.put("student_mail",mapOfObject.get("student_mail"));
-        teacherProfile.toObject("1",mapStudent);
-        this.setStudent(studentProfile);
-
+        this.setStudentId((String) mapOfObject.get("student_id"));
+        this.setTeacherId((String) mapOfObject.get("teacher_id"));
         this.setPayed((boolean) mapOfObject.get("isPayed"));
         this.setActive((boolean) mapOfObject.get("isActive"));
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
 //    private Payment t1 = new Payment("Thomas", "14.04.2018", 270);

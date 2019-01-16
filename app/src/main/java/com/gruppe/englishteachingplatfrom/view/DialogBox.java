@@ -26,14 +26,14 @@ public class DialogBox extends Fragment implements View.OnClickListener {
     RatingBar ratingBar;
     private int pos;
     private int pic;
-    private Singleton info;
+    private Singleton p = Singleton.getInstance();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View vw = inflater.inflate(R.layout.dialog_box_fragment, container, false);
 
-        info = Singleton.getInstance();
+
 
         cancelButton = vw.findViewById(R.id.CancelButton);
         sendButton = vw.findViewById(R.id.SendButton);
@@ -49,8 +49,8 @@ public class DialogBox extends Fragment implements View.OnClickListener {
         }
 
 
-        teacherInfo.setText(info.getTeacherDummies().get(pos).getName()+ "\nFIXFIXFIX\n180 DKK/hr");
-        confirmationText.setText("Are you sure you want to send a request to " + info.getTeacherDummies().get(pos).getName() + "?");
+        teacherInfo.setText(p.getTeacherDummies().get(pos).getName()+ "\n" + p.getTeacherDummies().get(pos).getLanguage() + "\n" + p.getTeacherDummies().get(pos).getPrice() + " DKK/hr");
+        confirmationText.setText("Are you sure you want to send a request to " + p.getTeacherDummies().get(pos).getName() + "?");
         teacherImage.setImageResource(pic);
 
         cancelButton.setOnClickListener(this);

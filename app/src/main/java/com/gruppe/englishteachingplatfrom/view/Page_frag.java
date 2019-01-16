@@ -24,7 +24,8 @@ public class Page_frag extends Fragment implements View.OnClickListener {
 
 
     private CardView card;
-    private TextView name, bio, Language, Rate, Price;
+    private TextView name, Language, Rate, Price;
+    private RatingBar rateBar;
     private ImageView imageView;
     private Singleton teacher = Singleton.getInstance();
     private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
@@ -32,7 +33,6 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     RatingBar Rating;
     float tRating, tRate;
     private String tName, tLang;
-    private ExpandableLayout expander;
 
     public Page_frag() {
 
@@ -58,11 +58,9 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
 
+        rateBar = rootview.findViewById(R.id.teacherRating);
 //        imageView =  rootview.findViewById(R.id.teacherPic);
 //        imageView.setImageResource(pic);
-
-        expander = rootview.findViewById(R.id.information);
-        bio = rootview.findViewById(R.id.bio);
 
         name = rootview.findViewById(R.id.name);
         tName = contents.get(pos).getName();
@@ -82,8 +80,9 @@ public class Page_frag extends Fragment implements View.OnClickListener {
 
         Price = rootview.findViewById(R.id.price);
         tPrice = contents.get(pos).getPrice();
-        Price.setText(""+tPrice);
-
+        Price.setText(""+tPrice + " DKK/hr");
+        rateBar.setRating(tRate);
+        rateBar.setIsIndicator(true);
      //   txt.setVisibility(View.INVISIBLE);
         return rootview;
     }

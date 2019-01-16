@@ -61,7 +61,9 @@
                         android:id="@+id/info_teacherlanguage"
                         android:layout_width="880dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginRight="26dp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="20dp"
                         android:layout_weight="1"
                         android:gravity="right"
                         android:text="Language" />
@@ -75,26 +77,24 @@
 
                     <RatingBar
                         android:id="@+id/info_teacherratingstars"
-                        android:layout_width="179dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="-40dp"
-                        android:layout_weight="1"
-                        android:scaleX=".6"
-                        android:scaleY=".6" />
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
+                        android:numStars="5" />
 
                     <TextView
                         android:id="@+id/info_teacherrating"
-                        android:layout_width="3dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="-40dp"
                         android:layout_weight="1"
+                        android:textSize="16dp"
                         android:text="Rate" />
 
                     <TextView
                         android:id="@+id/info_teacherprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="80dp"
+                        android:textSize="18dp"
                         android:layout_weight="1"
                         android:text="Price" />
                 </LinearLayout>
