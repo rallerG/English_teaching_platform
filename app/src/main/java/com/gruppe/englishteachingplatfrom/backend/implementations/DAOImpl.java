@@ -88,7 +88,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
         try {
             objectToReturn = getInstance();
         } catch (Exception e) {
-            System.out.println("Could not define subclass of superclass: "+e);
+            System.out.println("DAOImpl.java: Could not define subclass of superclass: "+e);
         }
         collection.document(documentId)
                 .get()
@@ -109,7 +109,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                         teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
                                             @Override
                                             public void onCallback(TeacherProfile object) {
-                                                System.out.println("Magnus: "+object.getEmail());
+                                                System.out.println("DAOImpl.java: "+object.getEmail());
                                             }
                                         });
                                     } else {
@@ -126,7 +126,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     }
                                 }
                                 for (Map.Entry<String, Object> entry: map.entrySet()) {
-                                    System.out.println("TestingKqly: "+entry.getKey()+" : "+entry.getValue());
+                                    System.out.println("DAOImpl.java: "+entry.getKey()+" : "+entry.getValue());
                                 }
                                 objectToReturn.toObject(document.getId(),map);
                                 callback.onCallback(objectToReturn);
@@ -167,7 +167,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                 try {
                                     objectToReturn = getInstance();
                                 } catch (Exception e) {
-                                    System.out.println("Could not define subclass of superclass: "+e);
+                                    System.out.println("DAOImpl.java: Could not define subclass of superclass: "+e);
                                 }
 
                                 final Map<String, Object> map = new HashMap<>();

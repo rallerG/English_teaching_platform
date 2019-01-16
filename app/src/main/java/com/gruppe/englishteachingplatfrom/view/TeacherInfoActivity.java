@@ -43,7 +43,7 @@ public class TeacherInfoActivity extends AppCompatActivity {
         tRate = i.getFloatExtra("rate", 0);
         tLang = i.getStringExtra("language");
 
-        System.out.println(tName + " " + tPrice + " " + tRate + " " + tLang);
+        System.out.println("TeacherInfoActivity.java: " + tName + " " + tPrice + " " + tRate + " " + tLang);
 
 
         language.setText(tLang);

@@ -56,7 +56,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-        System.out.println(list);
+        System.out.println("FeedbackFragment.java: " + list);
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);

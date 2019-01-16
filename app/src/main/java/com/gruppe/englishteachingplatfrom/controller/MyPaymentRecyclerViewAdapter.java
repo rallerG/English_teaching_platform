@@ -48,7 +48,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Knap " + paymentViewHolder.getAdapterPosition());
+                System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
                 Toast.makeText(v.getContext(),"Accept nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getName(), Toast.LENGTH_SHORT).show();
                 Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 notifyDataSetChanged();
@@ -58,7 +58,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         paymentViewHolder.rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Knap " + paymentViewHolder.getAdapterPosition());
+                System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
                 Toast.makeText(v.getContext(),"Reject nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getName(), Toast.LENGTH_SHORT).show();
 
                 Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));

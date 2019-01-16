@@ -80,7 +80,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
                     // code for action on page change
                     if(hm.get(position) != null){
                         if( hm.get(position) == 1){
-                            System.out.println(""+ hm.get(position));
+                            System.out.println("frag_Pager.java: "+ hm.get(position));
                             floating_Fav.setImageResource(R.drawable.favourite_full);
                         }
                         else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);
