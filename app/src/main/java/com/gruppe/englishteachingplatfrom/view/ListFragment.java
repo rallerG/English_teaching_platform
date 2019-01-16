@@ -92,13 +92,7 @@ public class ListFragment extends Fragment {
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-//                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getMatchProfiles().get(position).getName());
-//                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getName());
                                     Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
-//                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-//                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-//                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-//                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
                                     i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
                                     i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
                                     i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
