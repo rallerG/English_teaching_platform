@@ -37,6 +37,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
         private int pic1;
         private int checker = 0;
         private Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
+        public static int favorite = 1;
         public frag_Pager() {
             // Required empty public constructor
         }

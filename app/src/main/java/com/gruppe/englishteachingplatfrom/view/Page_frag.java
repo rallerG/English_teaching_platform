@@ -41,9 +41,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null){
-            expander.collapse();
-        }
+
     }
 
     @Override
@@ -55,6 +53,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         if (bundle != null) {
             pos = bundle.getInt("position", 0);
         }
+        int i = frag_Pager.favorite;
         pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
@@ -106,6 +105,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
                 i.putExtra("price", tPrice);
                 i.putExtra("rate", tRate);
                 i.putExtra("language", tLang);
+                i.putExtra("pos", pos);
                 //remember information and description text (when objects are used)
                 startActivity(i);
                 clicked = true;
