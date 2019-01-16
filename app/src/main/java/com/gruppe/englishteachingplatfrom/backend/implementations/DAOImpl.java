@@ -7,10 +7,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -98,21 +101,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     if (element.getKey().equals("student")) {
                                         DocumentReference studentReference = (DocumentReference) element.getValue();
                                         Log.d(TAG, " --get()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
-                                        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                        studentsDocument.get(studentReference.getId(), new Callback<StudentProfile>() {
-                                            @Override
-                                            public void onCallback(StudentProfile object) {
-                                            }
-                                        });
+                                        map.put("student_id",studentReference.getId());
                                     } else if (element.getKey().equals("teacher")) {
                                         DocumentReference teacherReference = (DocumentReference) element.getValue();
                                         Log.d(TAG, " --get()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
-                                        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                        teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
-                                            @Override
-                                            public void onCallback(TeacherProfile object) {
-                                            }
-                                        });
+                                        map.put("teacher_id", teacherReference.getId());
                                     } else {
                                         Log.d(TAG, " --get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
                                         if (type == StudentProfile.class) {
@@ -125,6 +118,9 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                             map.put(element.getKey(),element.getValue());
                                         }
                                     }
+                                }
+                                for (Map.Entry<String, Object> entry: map.entrySet()) {
+                                    System.out.println("TestingKqly: "+entry.getKey()+" : "+entry.getValue());
                                 }
                                 objectToReturn.toObject(document.getId(),map);
                                 callback.onCallback(objectToReturn);
@@ -173,21 +169,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     if (element.getKey().equals("student")) {
                                         DocumentReference studentReference = (DocumentReference) element.getValue();
                                         Log.d(TAG, " --getAll()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
-                                        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                        studentsDocument.get(studentReference.getId(), new Callback<StudentProfile>() {
-                                            @Override
-                                            public void onCallback(StudentProfile object) {
-                                            }
-                                        });
+                                        map.put("student_id",studentReference.getId());
                                     } else if (element.getKey().equals("teacher")) {
                                         DocumentReference teacherReference = (DocumentReference) element.getValue();
                                         Log.d(TAG, " --getAll()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
-                                        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                                        teachersDocument.get(teacherReference.getId(), new Callback<TeacherProfile>() {
-                                            @Override
-                                            public void onCallback(TeacherProfile object) {
-                                            }
-                                        });
+                                        map.put("teacher_id",teacherReference.getId());
                                     } else {
                                         Log.d(TAG, " --getAll()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
                                         if (type == StudentProfile.class) {

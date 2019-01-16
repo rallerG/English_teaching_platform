@@ -48,7 +48,19 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-        System.out.println(list);
+
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        feedbackDocument.getAll(new CallbackList<Feedback>() {
+            @Override
+            public void onCallback(List<Feedback> listOfObjects) {
+                for (Feedback feedback : listOfObjects) {
+                    list.add(new Feedback(feedback.getStudentProfile(), feedback.getRating(),feedback.getContent()));
+
+                }
+            }
+        });
+        System.out.println("FeedbackFragment.java: " + list);
+
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
