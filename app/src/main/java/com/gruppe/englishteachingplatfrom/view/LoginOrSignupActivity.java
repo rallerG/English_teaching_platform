@@ -50,7 +50,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onCallback(List<Feedback> listOfObjects) {
                 for (Feedback feedback : listOfObjects) {
-                    System.out.println("feedback kqly:"+ feedback.getStudentProfile().getName()+" : "+feedback.getRating());
+                    System.out.println("LoginOrSignupActivity.java: feedback kqly:"+ feedback.getStudentProfile().getName()+" : "+feedback.getRating());
                 }
             }
         });
