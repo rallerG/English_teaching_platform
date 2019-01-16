@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Feedback extends DocumentObject {
     private StudentProfile studentProfile;
+    private String studentId;
     private String id;
     private double rating;
     private String content;
@@ -39,12 +40,7 @@ public class Feedback extends DocumentObject {
 
     @Override
     public void toObject(String documentId, Map<String, Object> mapOfObject) {
-        StudentProfile studentProfile = new StudentProfile();
-        Map<String, Object> mapStudent = new HashMap<>();
-        mapStudent.put("student_fullname",mapOfObject.get("student_fullname"));
-        mapStudent.put("student_mail",mapOfObject.get("student_mail"));
-        studentProfile.toObject("1",mapStudent);
-        this.setStudentProfile(studentProfile);
+        this.setStudentId((String) mapOfObject.get("student_id"));
         this.setId(documentId);
         this.setRating((Double) mapOfObject.get("rating"));
         this.setContent((String) mapOfObject.get("content"));
@@ -80,5 +76,13 @@ public class Feedback extends DocumentObject {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 }
