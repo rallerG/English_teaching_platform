@@ -35,7 +35,7 @@ public class WhatAreYouActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.institute :
                 //startActivity(new Intent(this, LoginActivity.class));
-                System.out.println("not done yet");
+                System.out.println("WhatAreYouActivity.java: not done yet");
                 break;
         }
     }

@@ -76,11 +76,11 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
                 @Override
                 public void onPageSelected(int position) {
-                    System.out.println("page changed " + position);
+                    System.out.println("frag_Pager.java: page changed " + position);
                     // code for action on page change
                     if(hm.get(position) != null){
                         if( hm.get(position) == 1){
-                            System.out.println(""+ hm.get(position));
+                            System.out.println("frag_Pager.java: "+ hm.get(position));
                             floating_Fav.setImageResource(R.drawable.favourite_full);
                         }
                         else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);

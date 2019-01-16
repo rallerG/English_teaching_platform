@@ -86,7 +86,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
 //                ft.replace(R.id.fragmentContent, new RequestFragment());
 //                ft.commit();
 
-                System.out.println("Du trykkede på inbox");
+                System.out.println("Teachers_fragment.java: Du trykkede på inbox");
             }
         });
         return view;

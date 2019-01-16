@@ -31,12 +31,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (username.getText().toString().equals("teacher")) {
                     startActivity(new Intent(this, TeacherMainActivity.class));
                     finishAffinity();
-                    System.out.println("not done yet");
+                    System.out.println("LoginActivity.java: not done yet");
                 }
                 else if (username.getText().toString().equals("student")) {
                     startActivity(new Intent(this, MainActivity.class));
                     finishAffinity();
-                    System.out.println("not done yet");
+                    System.out.println("LoginActivity.java: not done yet");
                 }
                 else {
                     wrongUseranmePasswordError();

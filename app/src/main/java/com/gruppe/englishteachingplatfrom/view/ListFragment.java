@@ -117,7 +117,7 @@ public class ListFragment extends Fragment {
                 studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
-                        System.out.println(listOfObjects);
+                        System.out.println("ListFragment.java: " + listOfObjects);
                         p.getCurrrentStudent().getFavoriteProfiles().clear();
                         p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
                         mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getFavoriteProfiles());
@@ -131,7 +131,7 @@ public class ListFragment extends Fragment {
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
+                                    System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
                                     Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
 //                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
 //                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
@@ -168,7 +168,7 @@ public class ListFragment extends Fragment {
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-                                    System.out.println("Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
+                                    System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
                                     Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
 //                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
 //                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
@@ -188,7 +188,7 @@ public class ListFragment extends Fragment {
                 });
                 break;
             default:
-                System.out.println("Intet valgt i ListFragment.java");
+                System.out.println("ListFragment.java: Intet valgt i ListFragment.java");
                 break;
         }
 
