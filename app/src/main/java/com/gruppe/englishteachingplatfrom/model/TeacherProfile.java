@@ -92,9 +92,14 @@ public class TeacherProfile extends DocumentObject{
 
     @Override
     public void toObject(String documentId,Map<String, Object> mapOfObject) {
-        this.setId(documentId);
-        this.setName((String) mapOfObject.get("teacher_fullname"));
-        this.setEmail((String) mapOfObject.get("teacher_mail"));
+        if(mapOfObject.containsKey("teacher_id")) {
+            this.setId((String) mapOfObject.get("teacher_id"));
+        }
+        else {
+            this.setId(documentId);
+            this.setName((String) mapOfObject.get("teacher_fullname"));
+            this.setEmail((String) mapOfObject.get("teacher_mail"));
+        }
     }
 
     public void setEmail(String email) {

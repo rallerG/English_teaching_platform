@@ -7,7 +7,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -19,8 +18,6 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
@@ -30,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -51,6 +47,27 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     public void add(DocumentObject document) {
        collection.document()
                 .set(document.toMap())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+    @Override
+    public void add(String referenceId) {
+        DocumentReference documentReference = collection.document(referenceId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("",documentReference);
+        collection.document()
+                .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
