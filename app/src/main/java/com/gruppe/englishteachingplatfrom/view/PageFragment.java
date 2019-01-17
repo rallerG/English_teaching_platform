@@ -26,10 +26,12 @@ public class PageFragment extends Fragment implements View.OnClickListener {
     private ImageView imageView;
     private Singleton teacher = Singleton.getInstance();
     private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
+    private RatingBar Rating;
+    public static boolean clicked = false;
     private int pos, pic, tPrice;
-    RatingBar Rating;
-    float tRating, tRate;
-    private String tName, tLang;
+    private float  tRate;
+    private String tName;
+    private String tLang;
 
     public PageFragment() {
 
@@ -83,7 +85,21 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         return rootview;
     }
 
-    public static boolean clicked = false;
+    public int gettPrice() {
+        return tPrice;
+    }
+
+    public float gettRate() {
+        return tRate;
+    }
+
+    public String gettName() {
+        return tName;
+    }
+
+    public String gettLang() {
+        return tLang;
+    }
 
     @Override
     public void onClick(View v) {

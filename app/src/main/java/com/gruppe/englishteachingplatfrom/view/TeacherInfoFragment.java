@@ -43,7 +43,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View rootview = inflater.inflate(R.layout.activity_teacher_info, container, false);
+        View rootview = inflater.inflate(R.layout.fragment_teacher_info, container, false);
 
         name = rootview.findViewById(R.id.info_teachername);
         language = rootview.findViewById(R.id.info_teacherlanguage);
@@ -95,9 +95,15 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
 
         if (v == floating_Send_teacherInfo) {
+            PageFragment.clicked = false;
             Bundle bundle = new Bundle();
+            bundle.putString("name", tName);
+            bundle.putInt("price", tPrice);
+            bundle.putFloat("rate", tRate);
+            bundle.putString("language", tLang);
             bundle.putInt("position", pos);
             bundle.putBoolean("isTeacherInfoFragment", true);
+
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).

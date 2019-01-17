@@ -33,6 +33,12 @@ public class FragPager extends Fragment implements View.OnClickListener {
         private int checker = 0;
         private Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
         public static int favorite = 1;
+        private int tPrice;
+        private float  tRate;
+        private String tName;
+        private String tLang;
+
+
         public FragPager() {
             // Required empty public constructor
         }
@@ -119,6 +125,10 @@ public class FragPager extends Fragment implements View.OnClickListener {
         if (v == floating_Send) {
             position1 = mPager.getCurrentItem();
             Bundle bundle = new Bundle();
+            bundle.putString("name", tName);
+            bundle.putInt("price", tPrice);
+            bundle.putFloat("rate", tRate);
+            bundle.putString("language", tLang);
             bundle.putInt("position", position1);
             bundle.putBoolean("isTeacherInfoFragment", false);
             Fragment F = new DialogBoxFragment();
