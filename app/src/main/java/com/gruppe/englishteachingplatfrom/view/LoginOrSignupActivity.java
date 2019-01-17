@@ -114,7 +114,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.signup :
-                startActivity(new Intent(this, WhatAreYouActivity.class));
+                startActivity(new Intent(this, SignupActivity.class));
                 break;
         }
     }
