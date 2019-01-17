@@ -23,6 +23,7 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
     private int pic;
     private int pos;
     private Singleton info;
+    private boolean calledByTeacherInfoFragment;
 
     public ConfirmationBox(){
 
@@ -38,7 +39,7 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             pos = bundle.getInt("position", 0);
-            pic = bundle.getInt("pic", 0);
+            calledByTeacherInfoFragment = bundle.getBoolean("isTeacherInfoFragment");
         }
 
         teacherImage= vw.findViewById(R.id.TeacherImage2);
@@ -58,6 +59,9 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         getActivity().getSupportFragmentManager().popBackStack();
+        if (calledByTeacherInfoFragment){
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
 
     }
 }

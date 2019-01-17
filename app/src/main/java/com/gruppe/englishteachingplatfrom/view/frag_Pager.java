@@ -125,7 +125,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             position1 = mPager.getCurrentItem();
             Bundle bundle = new Bundle();
             bundle.putInt("position", position1);
-           // bundle.putInt("pic", pic1);
+            bundle.putBoolean("isTeacherInfoFragment", false);
             Fragment F = new DialogBox();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
@@ -134,10 +134,6 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
         if(v == floating_Fav){
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
-            Resources res = getContext().getResources();
-            final int newColor = res.getColor(R.color.Heart);
-
-
             if(checker == 0) {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));

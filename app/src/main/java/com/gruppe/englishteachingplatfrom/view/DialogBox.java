@@ -22,11 +22,15 @@ public class DialogBox extends Fragment implements View.OnClickListener {
 
     Button cancelButton, sendButton;
     ImageView teacherImage;
-    TextView teacherInfo, confirmationText;
+    TextView teacherInfo, confirmationText, rateD;
     RatingBar ratingBar;
     private int pos;
     private int pic;
     private Singleton p = Singleton.getInstance();
+    private String tLang, tName;
+    private int tPrice;
+    private float tRate;
+    private boolean calledByTeacherInfoFragment;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -40,18 +44,29 @@ public class DialogBox extends Fragment implements View.OnClickListener {
         teacherImage = vw.findViewById(R.id.TeacherImage);
         teacherInfo = vw.findViewById(R.id.TeacherInfo);
         confirmationText = vw.findViewById(R.id.ConfirmationMessage);
+        rateD = vw.findViewById(R.id.rateD);
         ratingBar = vw.findViewById(R.id.RatingBar);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            tName = bundle.getString("name");
+            tPrice = bundle.getInt("price", 0);
+            tRate = bundle.getFloat("rate",0);
+            tLang = bundle.getString("language");
             pos = bundle.getInt("position", 0);
-            pic = bundle.getInt("pic", 0);
+            calledByTeacherInfoFragment = bundle.getBoolean("isTeacherInfoFragment");
         }
 
 
-        teacherInfo.setText(p.getTeacherDummies().get(pos).getName()+ "\n" + p.getTeacherDummies().get(pos).getLanguage() + "\n" + p.getTeacherDummies().get(pos).getPrice() + " DKK/hr");
-        confirmationText.setText("Are you sure you want to send a request to " + p.getTeacherDummies().get(pos).getName() + "?");
-        teacherImage.setImageResource(pic);
+        teacherInfo.setText(tName+ "\n" + tLang + "\n" + tPrice + " DKK/hr");
+        confirmationText.setText("Are you sure you want to send a request to " + tName + "?");
+
+
+
+
+        rateD.setText(Float.toString(tRate));
+        ratingBar.setRating(tRate);
+        ratingBar.setIsIndicator(true);
 
         cancelButton.setOnClickListener(this);
 
@@ -72,7 +87,7 @@ public class DialogBox extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", pos);
-                bundle.putInt("pic", pic);
+                bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
                 ConfirmationBox fragment2 = new ConfirmationBox();
                 fragment2.setArguments(bundle);
                 getActivity().getSupportFragmentManager().popBackStack();
