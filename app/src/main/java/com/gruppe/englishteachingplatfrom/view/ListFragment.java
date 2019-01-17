@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import android.widget.Switch;
 
@@ -22,8 +24,10 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
@@ -76,12 +80,21 @@ public class ListFragment extends Fragment {
 
         switch (listId) {
             case R.id.nav_matches:
-                StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl("1");
+                StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl(p.getCurrrentStudent().getId());
                 studentMatchesDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
                         p.getCurrrentStudent().getMatchProfiles().clear();
-                        p.getCurrrentStudent().getMatchProfiles().addAll(listOfObjects);
+                        for (TeacherProfile teacher : listOfObjects) {
+                            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                            teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
+                                @Override
+                                public void onCallback(TeacherProfile object) {
+                                    p.getCurrrentStudent().getMatchProfiles().add(object);
+                                }
+                            });
+                        }
+//                        p.getCurrrentStudent().getMatchProfiles().addAll(listOfObjects);
                         mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
                         mRecyclerView.setHasFixedSize(true);
                         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -111,9 +124,19 @@ public class ListFragment extends Fragment {
                 studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
-                        System.out.println("ListFragment.java: " + listOfObjects);
+//                        System.out.println("ListFragment.java: " + listOfObjects);
                         p.getCurrrentStudent().getFavoriteProfiles().clear();
-                        p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
+                        for (TeacherProfile teacher : listOfObjects) {
+                            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                            teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
+                                @Override
+                                public void onCallback(TeacherProfile object) {
+                                    p.getCurrrentStudent().getFavoriteProfiles().add(object);
+                                }
+                            });
+                        }
+
+//                        p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
                         mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getFavoriteProfiles());
                         mRecyclerView.setHasFixedSize(true);
                         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -150,7 +173,18 @@ public class ListFragment extends Fragment {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
                         p.getCurrrentStudent().getPendingProfiles().clear();
-                        p.getCurrrentStudent().getPendingProfiles().addAll(listOfObjects);
+                        for (TeacherProfile teacher : listOfObjects) {
+                            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                            teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
+                                @Override
+                                public void onCallback(TeacherProfile object) {
+                                    p.getCurrrentStudent().getPendingProfiles().add(object);
+                                }
+                            });
+                        }
+
+
+//                        p.getCurrrentStudent().getPendingProfiles().addAll(listOfObjects);
                         mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
                         mRecyclerView.setHasFixedSize(true);
                         mRecyclerView.setLayoutManager(mLayoutManager);
