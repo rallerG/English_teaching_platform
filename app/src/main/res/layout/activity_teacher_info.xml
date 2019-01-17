@@ -4,14 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.TeacherInfoActivity">
+    tools:context=".view.TeacherInfoFragment"
+    tools:layout_editor_absoluteY="81dp">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_fav_teacherInfo"
+        android:layout_width="54dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:tint="#4B4B4B"
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:elevation="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/favourite_empty" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_send_teacherInfo"
+        android:layout_width="54dp"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:elevation="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/send_queue_90885" />
 
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardView2"
@@ -61,12 +99,12 @@
                         android:id="@+id/info_teacherlanguage"
                         android:layout_width="880dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="26dp"
                         android:layout_marginTop="8dp"
-                        android:textSize="20dp"
+                        android:layout_marginRight="26dp"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="Language" />
+                        android:text="Language"
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -77,9 +115,9 @@
 
                     <RatingBar
                         android:id="@+id/info_teacherratingstars"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:numStars="5" />
 
                     <TextView
@@ -87,16 +125,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16dp"
-                        android:text="Rate" />
+                        android:text="Rate"
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/info_teacherprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18dp"
                         android:layout_weight="1"
-                        android:text="Price" />
+                        android:text="Price"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
                 <Space
@@ -149,42 +187,34 @@
     </ScrollView>
 
     <TableRow
-        android:layout_width="match_parent"
+        android:id="@+id/tableRow"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="508dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floating_fav_teacherInfo"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:clickable="true"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:tint="#4B4B4B"
-            app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
-            app:srcCompat="@drawable/favourite_empty" />
-
         <!--<Space-->
-            <!--android:layout_width="238dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="70dp" />-->
+        <!--android:layout_width="238dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="70dp" />-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floating_send_teacherInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:clickable="true"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
-            app:srcCompat="@drawable/send_queue_90885" />
     </TableRow>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="44dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/tableRow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
