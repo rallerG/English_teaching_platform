@@ -114,11 +114,12 @@ public class TeacherMainActivity extends AppCompatActivity
                 setTitle("Gruppe Magnus");
                 break;
             case R.id.first:
-                fragment = new RequestFragment();
+                fragment = new ListFragment();
                 fragment.setArguments(args);
+
                 break;
             case R.id.nav_favorites:
-                fragment = new ListFragment();
+                fragment = new RequestFragment();
                 fragment.setArguments(args);
                 break;
             case R.id.nav_pending:
