@@ -1,6 +1,5 @@
 package com.gruppe.englishteachingplatfrom.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
-
-import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 
@@ -53,7 +50,6 @@ public class Page_frag extends Fragment implements View.OnClickListener {
         if (bundle != null) {
             pos = bundle.getInt("position", 0);
         }
-        int i = frag_Pager.favorite;
         pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
@@ -99,14 +95,25 @@ public class Page_frag extends Fragment implements View.OnClickListener {
                 } else {
                     expander.expand();
                 }*/
-                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
-                i.putExtra("name", tName);
-                i.putExtra("price", tPrice);
-                i.putExtra("rate", tRate);
-                i.putExtra("language", tLang);
-                i.putExtra("pos", pos);
-                //remember information and description text (when objects are used)
-                startActivity(i);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name", tName);
+                bundle.putInt("price", tPrice);
+                bundle.putFloat("rate", tRate);
+                bundle.putString("language", tLang);
+                bundle.putInt("position", pos);
+                Fragment F = new TeacherInfoFragment();
+                F.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                        addToBackStack(null).commit();
+//                Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
+//                i.putExtra("name", tName);
+//                i.putExtra("price", tPrice);
+//                i.putExtra("rate", tRate);
+//                i.putExtra("language", tLang);
+//                i.putExtra("pos", pos);
+//                //remember information and description text (when objects are used)
+//                startActivity(i);
                 clicked = true;
             }
     }
