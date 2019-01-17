@@ -130,7 +130,7 @@ public class TeacherProfile extends DocumentObject{
     }
 
     public String toString() {
-        return "Name: " + getName() + "\n Email: " + getEmail();
+        return "Name: " + getName() + "\n Email: " + getEmail() + "\n Rating: " + getRating() + "\n Language: " + getLanguage() + "\n Price: " + getPrice();
     }
 
 
