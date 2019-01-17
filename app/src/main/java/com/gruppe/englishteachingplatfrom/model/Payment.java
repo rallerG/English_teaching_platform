@@ -18,9 +18,9 @@ public class Payment extends DocumentObject {
     private boolean isPayed;
     private boolean isActive;
 
-    private Payment(String id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+    private Payment(/*String id,*/ int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
 
-        this.id = id;
+//        this.id = id;
         this.price = price;
         this.requestDate = requestDate;
         this.paymentDate = paymentDate;
@@ -32,12 +32,12 @@ public class Payment extends DocumentObject {
 
     public Payment (){}
 
-    public static void newTransaction(String id, StudentProfile student, TeacherProfile teacher, int price) {
+    public static void newTransaction(/*String id,*/ StudentProfile student, TeacherProfile teacher, int price) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
 
-        Payment obj = new Payment(id, price, theRequestDate, "", teacher, student, false, true);
+        Payment obj = new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
         teacher.getActivePaymentDummies().add(obj);
         student.getActivePaymentDummies().add(obj);
 
@@ -153,7 +153,7 @@ public class Payment extends DocumentObject {
     @Override
     public void toObject(String documentId, Map<String, Object> mapOfObject) {
         this.setId(documentId);
-        this.setPrice((int) mapOfObject.get("price"));
+        this.setPrice(Math.toIntExact((long) mapOfObject.get("price")));
         this.setRequestDate((String) mapOfObject.get("requestDate"));
         this.setPaymentDate((String) mapOfObject.get("paymentDate"));
         this.setStudentId((String) mapOfObject.get("student_id"));

@@ -30,8 +30,6 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        Singleton.downloadAllTeachersProfiles();
-//        Singleton.downloadAllStudentProfiles();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_or_signup);
 
@@ -44,23 +42,6 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         login.setOnClickListener(this);
         Button signup =  findViewById(R.id.signup);
         signup.setOnClickListener(this);
-
-        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
-        feedbackDocument.getAll(new CallbackList<Feedback>() {
-        @Override
-        public void onCallback(List<Feedback> listOfObjects) {
-            for (final Feedback feedback : listOfObjects) {
-                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                studentsDocument.get(feedback.getStudentId(), new Callback<StudentProfile>() {
-                    @Override
-                    public void onCallback(StudentProfile object) {
-                        feedback.setStudentProfile(object);
-                        System.out.println("LoginOrSignupActivity.java: feedback kqly: "+feedback.getStudentProfile().getName()+" : "+feedback.getRating());
-                    }
-                });
-            }
-        }
-    });
 }
     @Override
     public void onClick(View view) {
@@ -114,7 +95,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.signup :
-                startActivity(new Intent(this, WhatAreYouActivity.class));
+                startActivity(new Intent(this, SignupActivity.class));
                 break;
         }
     }

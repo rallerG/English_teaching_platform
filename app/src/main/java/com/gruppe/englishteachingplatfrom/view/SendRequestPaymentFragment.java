@@ -18,6 +18,15 @@ import com.ebanx.swipebtn.OnActiveListener;
 import com.ebanx.swipebtn.OnStateChangeListener;
 import com.ebanx.swipebtn.SwipeButton;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
@@ -27,6 +36,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import gr.escsoft.michaelprimez.searchablespinner.SearchableSpinner;
 
@@ -41,7 +51,6 @@ public class SendRequestPaymentFragment extends Fragment {
     ListAdapter adapter;
     ArrayList<String> names = new ArrayList<>();
     StudentProfile chosenStudent;
-    TeacherProfile currentTeacher;
     int chosenPrice;
 
     public SendRequestPaymentFragment() {
@@ -65,39 +74,45 @@ public class SendRequestPaymentFragment extends Fragment {
         inputPrice = view.findViewById(R.id.AmountEditText);
         enableButton = (SwipeButton) view.findViewById(R.id.swipe_btn);
 
-        //TODO Fix teacher id
+        TeacherMatchesDocument teacherMatchesDocument = new TeacherMatchesDocumentImpl(p.getCurrrentTeacher().getId());
+        teacherMatchesDocument.getAll(new CallbackList<StudentProfile>() {
+            @Override
+            public void onCallback(List<StudentProfile> listOfObjects) {
+                p.getCurrrentTeacher().getMatchProfiles().clear();
+                for (StudentProfile student : listOfObjects) {
+                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                    studentsDocument.get(student.getId(), new Callback<StudentProfile>() {
+                        @Override
+                        public void onCallback(StudentProfile object) {
+                            p.getCurrrentTeacher().getMatchProfiles().add(object);
+                            setUp();
+                        }
+                    });
+                }
+            }
+        });
 
-//        p.createList();
-        currentTeacher = p.getTeacherDummies().get(0);
+        return view;
+    }
+
+
+    private void setUp() {
         names.clear();
-        for (StudentProfile student : p.getTeacherDummies().get(0).getMatchProfiles()) {
+        for (StudentProfile student : p.getCurrrentTeacher().getMatchProfiles()) {
             names.add(student.getName());
         }
-//        names.add("Peter");
-//        names.add("Hans");
-//        names.add("Jens");
-//        names.add("Christian");
-//        names.add("Simon");
-//        names.add("Lars");
-//        names.add("Patrick");
+
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.searchable_spinner_layout_item, R.id.nameView, names){
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView nameRow = view.findViewById(R.id.nameView);
                 nameRow.setText(names.get(position));
-                chosenStudent = p.getTeacherDummies().get(0).getMatchProfiles().get(position);
+                chosenStudent = p.getCurrrentTeacher().getMatchProfiles().get(position);
                 return view;
             }
         };
         ss.setAdapter(adapter);
-        //Add search function?
-
-
-
-
-
-
 
         enableButton.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
@@ -116,17 +131,13 @@ public class SendRequestPaymentFragment extends Fragment {
                     //TODO fix teacher index
 //                    currentTeacher.getActivePaymentDummies().add(Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice));
 //                    chosenStudent.getActivePaymentDummies().add(Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice));
-                    Payment.newTransaction(currentTeacher.getId(),chosenStudent, currentTeacher, chosenPrice);
+                    Payment.newTransaction(chosenStudent, p.getCurrrentTeacher(), chosenPrice);
 
                     //TODO Start intent to teacher payment overview
 
                 }
             }
         });
-
-
-
-        return view;
     }
 
 }
