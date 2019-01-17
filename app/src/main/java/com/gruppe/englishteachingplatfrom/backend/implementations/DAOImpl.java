@@ -62,10 +62,16 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
     }
 
     @Override
-    public void add(String referenceId) {
-        DocumentReference documentReference = collection.document(referenceId);
+    public void add(String referenceId, boolean isTeacher) {
         Map<String, Object> map = new HashMap<>();
-        map.put("",documentReference);
+        if (isTeacher) {
+            DocumentReference documentReference = db.collection("teachers").document(referenceId);
+            map.put("teacher",documentReference);
+        }
+        else {
+            DocumentReference documentReference = db.collection("teachers").document(referenceId);
+            map.put("student", documentReference);
+        }
         collection.document()
                 .set(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
