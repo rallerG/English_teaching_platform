@@ -153,7 +153,7 @@ public class Payment extends DocumentObject {
     @Override
     public void toObject(String documentId, Map<String, Object> mapOfObject) {
         this.setId(documentId);
-        this.setPrice((int) mapOfObject.get("price"));
+        this.setPrice(Math.toIntExact((long) mapOfObject.get("price")));
         this.setRequestDate((String) mapOfObject.get("requestDate"));
         this.setPaymentDate((String) mapOfObject.get("paymentDate"));
         this.setStudentId((String) mapOfObject.get("student_id"));
