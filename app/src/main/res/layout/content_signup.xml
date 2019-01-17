@@ -10,204 +10,82 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Personal and account information"
-            android:textColor="@android:color/holo_blue_light"
-            tools:layout_editor_absoluteX="7dp"
-            tools:layout_editor_absoluteY="42dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="7dp"
-            tools:layout_editor_absoluteY="61dp">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/title_role"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact information"
-                android:textColor="@android:color/holo_blue_light"
-                tools:layout_editor_absoluteX="7dp"
-                tools:layout_editor_absoluteY="307dp" />
+                android:text="Teacher signup"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="90dp" />
 
-            <EditText
-                android:id="@+id/email2"
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:text="Email" />
+                android:layout_height="29dp" />
 
-            <EditText
-                android:id="@+id/phonenumber2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone"
-                android:text="Phone number" />
-
-            <TableLayout
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TableRow
+                <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:hint="Name" />
+            </android.support.design.widget.TextInputLayout>
 
-                    <CheckBox
-                        android:id="@+id/checkBoxWeChat"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:text="WeChat" />
-
-                    <EditText
-                        android:id="@+id/wechatid"
-                        android:layout_width="274dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="WeChat id" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp">
-
-                    <CheckBox
-                        android:id="@+id/checkBoxSkype"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Skype" />
-
-                    <EditText
-                        android:id="@+id/skypeusername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Skype username" />
-                </TableRow>
-            </TableLayout>
-
-            <TableLayout
+            <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="9dp"
-                tools:layout_editor_absoluteY="101dp">
+                android:layout_height="29dp" />
 
-                <TableRow
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Email">
+
+                <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:hint="Email" />
+            </android.support.design.widget.TextInputLayout>
 
-                    <EditText
-                        android:id="@+id/firstname"
-                        android:layout_width="184dp"
-                        android:layout_height="match_parent"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Firstname"
-                        tools:layout_editor_absoluteX="3dp"
-                        tools:layout_editor_absoluteY="110dp" />
-
-                    <EditText
-                        android:id="@+id/lastname"
-                        android:layout_width="184dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Lastname" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </TableLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
 
             <EditText
-                android:id="@+id/birthday"
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date"
-                android:text="Birthday" />
+                android:hint="Price"
+                android:inputType="numberSigned" />
 
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Username" />
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword" />
-
-            <EditText
-                android:id="@+id/confirmpassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Confirm password"
-                android:inputType="textPassword" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/back"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:text="Back"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="519dp" />
-
-        <Button
-            android:id="@+id/signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="Signup"
-            android:textAllCaps="false"
-            tools:layout_editor_absoluteX="218dp"
-            tools:layout_editor_absoluteY="519dp" />
-
     </ScrollView>
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register as [choiceRole]"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/signup_button"
+        style="@android:style/Widget.DeviceDefault.Button.Colored"
+        android:layout_width="134dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

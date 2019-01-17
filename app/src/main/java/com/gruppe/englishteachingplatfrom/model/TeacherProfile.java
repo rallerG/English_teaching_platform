@@ -104,12 +104,17 @@ public class TeacherProfile extends DocumentObject{
 
     @Override
     public void toObject(String documentId,Map<String, Object> mapOfObject) {
-        this.setId(documentId);
-        this.setName((String) mapOfObject.get("teacher_fullname"));
-        this.setEmail((String) mapOfObject.get("teacher_mail"));
-        this.setRating(Double.parseDouble((String) mapOfObject.get("teacher_rating")));
-        this.setLanguage((String) mapOfObject.get("teacher_language"));
-        this.setPrice(Math.toIntExact((long) mapOfObject.get("teacher_price")));
+        if(mapOfObject.containsKey("teacher_id")) {
+            this.setId((String) mapOfObject.get("teacher_id"));
+        }
+        else {
+            this.setId(documentId);
+            this.setName((String) mapOfObject.get("teacher_fullname"));
+            this.setEmail((String) mapOfObject.get("teacher_mail"));
+            this.setRating(Double.parseDouble((String) mapOfObject.get("teacher_rating")));
+            this.setLanguage((String) mapOfObject.get("teacher_language"));
+            this.setPrice(Math.toIntExact((long) mapOfObject.get("teacher_price")));
+        }
     }
 
     public void setEmail(String email) {
@@ -125,7 +130,7 @@ public class TeacherProfile extends DocumentObject{
     }
 
     public String toString() {
-        return "Name: " + getName() + "\n Email: " + getEmail();
+        return "Name: " + getName() + "\n Email: " + getEmail() + "\n Rating: " + getRating() + "\n Language: " + getLanguage() + "\n Price: " + getPrice();
     }
 
 

@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
@@ -18,8 +20,10 @@ import com.gruppe.englishteachingplatfrom.backend.implementations.StudentPending
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
@@ -72,33 +76,42 @@ public class ListFragment extends Fragment {
 
         switch (listId) {
             case R.id.nav_matches:
-                StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl("1");
+                StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl(p.getCurrrentStudent().getId());
                 studentMatchesDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
                         p.getCurrrentStudent().getMatchProfiles().clear();
-                        p.getCurrrentStudent().getMatchProfiles().addAll(listOfObjects);
-                        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
-                        mRecyclerView.setHasFixedSize(true);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+                        for (TeacherProfile teacher : listOfObjects) {
+                            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                            teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
+                                @Override
+                                public void onCallback(TeacherProfile object) {
+                                    p.getCurrrentStudent().getMatchProfiles().add(object);
+                                    mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mRecyclerView.setLayoutManager(mLayoutManager);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                    mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
-                            @Override
-                            public void onItemClick(int position) {
-                                if(!clicked) {
-                                    //What to do in click
-                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-                                    i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
-                                    i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
-                                    i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
-                                    i.putExtra("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
-                                    //remember information and description text (when objects are used)
-                                    startActivity(i);
-                                    clicked = true;
+                                        @Override
+                                        public void onItemClick(int position) {
+                                            if(!clicked) {
+                                                //What to do in click
+                                                System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getMatchProfiles().get(position).getName());
+                                                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                                i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
+                                                i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
+                                                i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
+                                                i.putExtra("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
+                                                //remember information and description text (when objects are used)
+                                                startActivity(i);
+                                                clicked = true;
+                                            }
+                                        }
+                                    });
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 });
                 break;
@@ -107,36 +120,39 @@ public class ListFragment extends Fragment {
                 studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
-                        System.out.println("ListFragment.java: " + listOfObjects);
                         p.getCurrrentStudent().getFavoriteProfiles().clear();
-                        p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
-                        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getFavoriteProfiles());
-                        mRecyclerView.setHasFixedSize(true);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+                        for (TeacherProfile teacher : listOfObjects) {
+                            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                            teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
+                                @Override
+                                public void onCallback(TeacherProfile object) {
+                                    p.getCurrrentStudent().getFavoriteProfiles().add(object);
+                                    mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getFavoriteProfiles());
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mRecyclerView.setLayoutManager(mLayoutManager);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                    mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
 
-                            @Override
-                            public void onItemClick(int position) {
-                                if(!clicked) {
-                                    //What to do in click
-                                    System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
-                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-//                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-//                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-//                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-//                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
-                                    i.putExtra("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
-                                    i.putExtra("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
-                                    i.putExtra("rate", p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
-                                    i.putExtra("language", p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
-                                    //remember information and description text (when objects are used)
-                                    startActivity(i);
-                                    clicked = true;
+                                        @Override
+                                        public void onItemClick(int position) {
+                                            if(!clicked) {
+                                                //What to do in click
+                                                System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
+                                                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                                i.putExtra("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
+                                                i.putExtra("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
+                                                i.putExtra("rate", p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
+                                                i.putExtra("language", p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
+                                                //remember information and description text (when objects are used)
+                                                startActivity(i);
+                                                clicked = true;
+                                            }
+                                        }
+                                    });
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 });
                 break;
@@ -146,34 +162,37 @@ public class ListFragment extends Fragment {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
                         p.getCurrrentStudent().getPendingProfiles().clear();
-                        p.getCurrrentStudent().getPendingProfiles().addAll(listOfObjects);
-                        mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
-                        mRecyclerView.setHasFixedSize(true);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+                        for (TeacherProfile teacher : listOfObjects) {
+                            TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                            teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
+                                @Override
+                                public void onCallback(TeacherProfile object) {
+                                    p.getCurrrentStudent().getPendingProfiles().add(object);
+                                    mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mRecyclerView.setLayoutManager(mLayoutManager);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                    mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
-
-                            @Override
-                            public void onItemClick(int position) {
-                                if(!clicked) {
-                                    //What to do in click
-                                    System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
-                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-//                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
-//                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
-//                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
-//                                    i.putExtra("language", p.getTeacherDummies().get(position).getLanguage());
-                                    i.putExtra("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
-                                    i.putExtra("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
-                                    i.putExtra("rate", p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
-                                    i.putExtra("language", p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
-                                    //remember information and description text (when objects are used)
-                                    startActivity(i);
-                                    clicked = true;
+                                        @Override
+                                        public void onItemClick(int position) {
+                                            if(!clicked) {
+                                                //What to do in click
+                                                System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
+                                                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                                i.putExtra("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
+                                                i.putExtra("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
+                                                i.putExtra("rate", p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
+                                                i.putExtra("language", p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
+                                                //remember information and description text (when objects are used)
+                                                startActivity(i);
+                                                clicked = true;
+                                            }
+                                        }
+                                    });
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 });
                 break;
@@ -274,6 +293,6 @@ public class ListFragment extends Fragment {
 //                    recyclerView.setAdapter(new MyFavoriteRecyclerViewAdapter(p.getTeacherDummies(), mListener));
 //                    break;
 //            }
-        
+
 //        getAc
 //tivity().setTitle("List");

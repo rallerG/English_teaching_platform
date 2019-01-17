@@ -20,22 +20,20 @@ public class WhatAreYouActivity extends AppCompatActivity implements View.OnClic
         teacher.setOnClickListener(this);
         Button student = (Button) findViewById(R.id.student);
         student.setOnClickListener(this);
-        Button institute = (Button) findViewById(R.id.institute);
-        institute.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.teacher :
-                startActivity(new Intent(this, SignupActivity.class));
+                Intent intentTeacher = new Intent(this, SignupActivity.class);
+                intentTeacher.putExtra("role","teacher");
+                startActivity(intentTeacher);
                 break;
             case R.id.student :
-                startActivity(new Intent(this, SignupActivity.class));
-                break;
-            case R.id.institute :
-                //startActivity(new Intent(this, LoginActivity.class));
-                System.out.println("WhatAreYouActivity.java: not done yet");
+                Intent intentStudent = new Intent(this, SignupActivity.class);
+                intentStudent.putExtra("role","teacher");
+                startActivity(intentStudent);
                 break;
         }
     }
