@@ -39,8 +39,14 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     TextView star1, star2, star3, star4, star5, ratings, totalRate;
     LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
-    double totAvgRating;
+    double totAvgRating, totalStar = 0;
     private ProgressBar loader;
+    private MyFeedbackRecyclerViewAdapter recycleAdapter;
+    int totStar1 = 0;
+    int totStar2 = 0;
+    int totStar3 = 0;
+    int totStar4 = 0;
+    int totStar5 = 0;
 
     public FeedbackFragment() {
     }
@@ -51,18 +57,6 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-
-        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
-        feedbackDocument.getAll(new CallbackList<Feedback>() {
-            @Override
-            public void onCallback(List<Feedback> listOfObjects) {
-                for (Feedback feedback : listOfObjects) {
-                    list.add(new Feedback(feedback.getStudentProfile(), feedback.getRating(),feedback.getContent()));
-
-                }
-            }
-        });
-        System.out.println("FeedbackFragment.java: " + list);
 
 
         if (getArguments() != null) {
@@ -76,30 +70,8 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feedback_list, container, false);
 
-      /*  final TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
-        feedbackDocument.getAll(new CallbackList<Feedback>() {
-            @Override
-            public void onCallback(List<Feedback> listOfObjects) {
-                for (final Feedback feedback : listOfObjects) {
-                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                    studentsDocument.get(feedback.getStudentId(), new Callback<StudentProfile>() {
-                        @Override
-                        public void onCallback(StudentProfile object) {
-                            feedback.setStudentProfile(object);
-                            list.add(new Feedback(feedback.getStudentProfile(), feedback.getRating(),feedback.getContent()));
-                        }
-                    });
 
-                }
-                MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
-       //         recycleAdapter.notifyDataSetChanged();
-                feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
-                recycleAdapter.notifyDataSetChanged();
-                feedback.setAdapter(recycleAdapter);
-                loader.setVisibility(View.INVISIBLE);
-            }
-        });*/
-
+        loader = view.findViewById(R.id.loader);
         feedback = view.findViewById(R.id.list);
         star1 = view.findViewById(R.id.star1);
         star2 = view.findViewById(R.id.star2);
@@ -115,7 +87,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         fourStar = view.findViewById(R.id.fourStar);
         fiveStar = view.findViewById(R.id.fiveStar);
         all = view.findViewById(R.id.all);
-        loader = view.findViewById(R.id.loader);
+
         oneStar.setOnClickListener(this);
         twoStar.setOnClickListener(this);
         threeStar.setOnClickListener(this);
@@ -123,51 +95,63 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         fiveStar.setOnClickListener(this);
         all.setOnClickListener(this);
 
-        double totStar1 = 0;
-        double totStar2 = 0;
-        double totStar3 = 0;
-        double totStar4 = 0;
-        double totStar5 = 0;
-        double totalStar = 0;
 
-        for (Feedback feed : list) {
-            if(feed.getRating() < 1) {
-                totStar1++;
-                totalStar += feed.getRating();
-            }
-            else if (1 > feed.getRating() && feed.getRating() < 2) {
-                totStar2++;
-                totalStar += feed.getRating();
-            }
-            else if (2 > feed.getRating() && feed.getRating() < 3) {
-                totStar3++;
-                totalStar += feed.getRating();
-            }
-             else if (3 > feed.getRating() && feed.getRating() < 4) {
-                totStar4++;
-                totalStar += feed.getRating();
-            }
-            else if (4 > feed.getRating() && feed.getRating() <= 5) {
-                totStar5++;
-                totalStar += feed.getRating();
-            }
-        }
-        star1.setText(String.valueOf(totStar1));
-        star2.setText(String.valueOf(totStar2));
-        star3.setText(String.valueOf(totStar3));
-        star4.setText(String.valueOf(totStar4));
-        star5.setText(String.valueOf(totStar5));
+
+
+
         ratings.setText(String.valueOf(list.size()) + " ratings");
-
-        totAvgRating = totalStar / list.size();
-        totalRate.setText(String.valueOf(totAvgRating));
-        totalRating.setRating((float) totAvgRating);
 
 
         all.setBackgroundResource(R.drawable.selectedborder);
         prevBtn = all;
 
+        feedback.setVisibility(View.INVISIBLE);
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        feedbackDocument.getAll(new CallbackList<Feedback>() {
+            @Override
+            public void onCallback(List<Feedback> listOfObjects) {
+                for (Feedback feedback : listOfObjects) {
+                    list.add(feedback);
+                    totalStar += feedback.getRating();
+                }
+                totAvgRating = totalStar / list.size();
+                totalRate.setText(String.valueOf(totAvgRating));
+                totalRating.setRating((float) totAvgRating);
+                ratings.setText(list.size() + " ratings");
+                recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
+                feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
+                feedback.setAdapter(recycleAdapter);
+                loader.setVisibility(View.INVISIBLE);
+                feedback.setVisibility(View.VISIBLE);
 
+                for (int i = 0; i < list.size(); i++) {
+                    if(list.get(i).getRating() <= 1) {
+                        totStar1++;
+                    }
+                    else if (1 < list.get(i).getRating() && list.get(i).getRating() <= 2) {
+                        totStar2++;
+                    }
+                    else if (2 < list.get(i).getRating() && list.get(i).getRating() <= 3) {
+                        totStar3++;
+                    }
+                    else if (3 < list.get(i).getRating() && list.get(i).getRating() <= 4) {
+                        totStar4++;
+                    }
+                    else if (4 < list.get(i).getRating() && list.get(i).getRating() <= 5) {
+                        totStar5++;
+                    }
+                }
+                star1.setText(String.valueOf(totStar1));
+                star2.setText(String.valueOf(totStar2));
+                star3.setText(String.valueOf(totStar3));
+                star4.setText(String.valueOf(totStar4));
+                star5.setText(String.valueOf(totStar5));
+            }
+        });
+        System.out.println("FeedbackFragment.java: " + list);
+
+
+        totAvgRating = totalStar / list.size();
         return view;
     }
 
@@ -210,12 +194,12 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
             prevBtn = fiveStar;
         } else if (v == all) {
             loader.setVisibility(View.VISIBLE);
-            MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
-            feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
+            feedback.setVisibility(View.INVISIBLE);
             feedback.setAdapter(recycleAdapter);
             prevBtn.setBackgroundResource(R.drawable.border);
             all.setBackgroundResource(R.drawable.selectedborder);
             prevBtn = all;
+            feedback.setVisibility(View.VISIBLE);
         }
         loader.setVisibility(View.INVISIBLE);
     }
@@ -229,7 +213,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         btn.setBackgroundResource(R.drawable.selectedborder);
         for (Feedback f : list) {
             if (f.getRating() == rating) {
-                tempList.add(new Feedback(f.getStudentProfile(), f.getRating(), f.getContent()));
+                tempList.add(f);
             }
         }
         MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), tempList);

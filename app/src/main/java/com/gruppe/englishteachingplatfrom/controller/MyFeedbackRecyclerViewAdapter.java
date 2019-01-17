@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.controller;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
 
     private List<Feedback> feedback;
     Context mContext;
+    private ConstraintLayout feedback_element;
 
     public MyFeedbackRecyclerViewAdapter(Context mContext,List<Feedback> feedback) {
         this.mContext = mContext;
@@ -52,6 +54,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
         feedbackDocument.getAll(new CallbackList<Feedback>() {
             @Override
             public void onCallback(List<Feedback> listOfObjects) {
+
                 for (final Feedback feed : listOfObjects) {
                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                     studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
@@ -64,33 +67,9 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
                     holder.mRating.setRating((float) feed.getRating());
                     holder.mContent.setText(feed.getContent());
 
-                    //                holder.mStudName.setText(listOfObjects.get(position).getStudentProfile().getName());
-//                holder.mRating.setRating((float) listOfObjects.get(position).getRating());
-//                holder.mContent.setText(listOfObjects.get(position).getContent());
-                    /*System.out.println("feedback kqly:"+ feedback.getStudentProfile().getName()+" : "+feedback.getRating());
-                    holder.mStudName.setText("" + feedback.getStudentProfile().getName());
-                    holder.mRating.setRating((float) feedback.getRating());
-                    holder.mContent.setText(feedback.getContent());*/
                 }
-          //  feedback.add(feed);
             }
         });
-
-   /*     holder.mFeedback = feedback.get(position);
-        holder.mStudName.setText(feedback.get(position).getStudentProfile().getName());
-        holder.mRating.setRating((float) feedback.get(position).getRating());
-        holder.mContent.setText(feedback.get(position).getContent());
-*/
-   /*     holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mFeedback);
-                }
-            }
-        });*/
     }
 
     @Override
@@ -99,6 +78,7 @@ public class MyFeedbackRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedba
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public final View mView;
         public final TextView mStudName;
         public final RatingBar mRating;
