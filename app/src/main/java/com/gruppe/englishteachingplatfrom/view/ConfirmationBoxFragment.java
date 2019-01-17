@@ -14,7 +14,7 @@ import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 
-public class ConfirmationBox extends Fragment implements View.OnClickListener {
+public class ConfirmationBoxFragment extends Fragment implements View.OnClickListener {
 
     private Button okayButton;
     private ImageView teacherImage;
@@ -25,7 +25,7 @@ public class ConfirmationBox extends Fragment implements View.OnClickListener {
     private Singleton info;
     private boolean calledByTeacherInfoFragment;
 
-    public ConfirmationBox(){
+    public ConfirmationBoxFragment(){
 
     }
 

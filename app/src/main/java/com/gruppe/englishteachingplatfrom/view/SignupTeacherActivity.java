@@ -7,15 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.view.LoginActivity;
-import com.gruppe.englishteachingplatfrom.view.LoginOrSignupActivity;
 
-public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignupTeacherActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup_teacher);
 
         Button signup = (Button) findViewById(R.id.signup);
         signup.setOnClickListener(this);

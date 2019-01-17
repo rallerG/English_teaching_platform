@@ -13,10 +13,9 @@ import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.controller.MyRequestRecyclerViewAdapter;
-import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
 import com.gruppe.englishteachingplatfrom.model.MailProfile;
 
-import static com.gruppe.englishteachingplatfrom.view.request_mail.mail;
+import static com.gruppe.englishteachingplatfrom.view.RequestMailActivity.mail;
 
 
 public class RequestFragment extends Fragment {
@@ -77,11 +76,5 @@ public class RequestFragment extends Fragment {
             recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), mail));
         }
         return view;
-    }
-
-
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
     }
 }

@@ -44,7 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:screenOrientation="portrait"
-            android:name=".view.SignupActivity"
+            android:name=".view.SignupTeacherActivity"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -54,7 +54,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:screenOrientation="portrait"
-            android:name=".view.request_mail" />
+            android:name=".view.RequestMailActivity" />
     </application>
 
 </manifest>

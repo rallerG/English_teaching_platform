@@ -33,7 +33,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 //        Singleton.downloadAllTeachersProfiles();
 //        Singleton.downloadAllStudentProfiles();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_login_or_signup);
+        setContentView(R.layout.activity_login_or_signup);
 
         //Setting ClickListeninger on the buttons
         final Button loginFacebook =  findViewById(R.id.loginFacebook);

@@ -14,18 +14,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
-import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.List;
@@ -95,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                         pDialog.dismiss();
                     }
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.add(R.id.fragmentContent, new frag_Pager());
+                    ft.add(R.id.fragmentContent, new FragPager());
                     ft.commit();
                 }
             });
@@ -106,7 +102,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        Page_frag.clicked = false;
+        PageFragment.clicked = false;
         ListFragment.clicked = false;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -158,7 +154,7 @@ public class MainActivity extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_home:
-                fragment = new frag_Pager();;
+                fragment = new FragPager();;
                 fragment.setArguments(args);
                 setTitle(R.string.app_name);
                 break;
@@ -183,8 +179,8 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Payment");
                 break;
             case R.id.nav_settings:
-                //  fragment = new frag_Pager();
-                fragment = new frag_Pager();
+                //  fragment = new FragPager();
+                fragment = new FragPager();
                 fragment.setArguments(args);
                 setTitle("Settings");
                 break;
@@ -194,7 +190,7 @@ public class MainActivity extends AppCompatActivity
                 finish();
                 break;
             default:
-                fragment = new frag_Pager();
+                fragment = new FragPager();
                 fragment.setArguments(args);
                 setTitle(R.string.app_name);
                 break;
@@ -230,7 +226,7 @@ public class MainActivity extends AppCompatActivity
             Bundle bundle = new Bundle();
             bundle.putInt("position", position);
             bundle.putInt("pic", pic);
-            Fragment F = new DialogBox();
+            Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();

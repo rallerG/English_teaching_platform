@@ -18,7 +18,7 @@ import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 
-public class DialogBox extends Fragment implements View.OnClickListener {
+public class DialogBoxFragment extends Fragment implements View.OnClickListener {
 
     Button cancelButton, sendButton;
     ImageView teacherImage;
@@ -88,7 +88,7 @@ public class DialogBox extends Fragment implements View.OnClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", pos);
                 bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
-                ConfirmationBox fragment2 = new ConfirmationBox();
+                ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
                 fragment2.setArguments(bundle);
                 getActivity().getSupportFragmentManager().popBackStack();
                 FragmentManager fragmentManager = getFragmentManager();

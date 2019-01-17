@@ -17,7 +17,7 @@ import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.MailProfile;
-import com.gruppe.englishteachingplatfrom.view.request_mail;
+import com.gruppe.englishteachingplatfrom.view.RequestMailActivity;
 
 import java.util.List;
 
@@ -74,7 +74,7 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
             public void onClick(View v) {
                 Toast.makeText(mContext, "Clicked on: " + mValues.get(position).getStudName() + "Favorite: " + mValues.get(position).getFavorite() + " Visited: " + mValues.get(position).getVisited(), Toast.LENGTH_SHORT).show();
                 mValues.get(position).setVisited(true);
-                Intent intent = new Intent(mContext, request_mail.class);
+                Intent intent = new Intent(mContext, RequestMailActivity.class);
                 intent.putExtra("studName", mValues.get(position).getStudName());
                 intent.putExtra("favorite", mValues.get(position).getFavorite());
                 intent.putExtra("content", mValues.get(position).getContent());

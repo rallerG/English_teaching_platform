@@ -4,14 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.gruppe.englishteachingplatfrom.model.Singleton;
-import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
-import com.gruppe.englishteachingplatfrom.view.Page_frag;
-
-import java.util.ArrayList;
+import com.gruppe.englishteachingplatfrom.view.PageFragment;
 
 public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnClickListener {
 
@@ -27,7 +23,7 @@ public class FragPagerAdapter extends FragmentPagerAdapter implements View.OnCli
     public Fragment getItem(int position) {
         Bundle bundle = new Bundle();
         bundle.putInt("position", position);
-        Fragment page = new Page_frag();
+        Fragment page = new PageFragment();
         page.setArguments(bundle);
         return page;
     }

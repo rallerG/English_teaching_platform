@@ -17,7 +17,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import java.util.ArrayList;
 
 
-public class Page_frag extends Fragment implements View.OnClickListener {
+public class PageFragment extends Fragment implements View.OnClickListener {
 
 
     private CardView card;
@@ -31,7 +31,7 @@ public class Page_frag extends Fragment implements View.OnClickListener {
     float tRating, tRate;
     private String tName, tLang;
 
-    public Page_frag() {
+    public PageFragment() {
 
     }
 

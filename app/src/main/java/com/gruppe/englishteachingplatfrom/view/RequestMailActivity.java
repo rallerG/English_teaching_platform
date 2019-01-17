@@ -12,7 +12,7 @@ import com.gruppe.englishteachingplatfrom.model.MailProfile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class request_mail extends AppCompatActivity {
+public class RequestMailActivity extends AppCompatActivity {
 
     public static final ArrayList<MailProfile> mail = new ArrayList<MailProfile>();
     TextView name;

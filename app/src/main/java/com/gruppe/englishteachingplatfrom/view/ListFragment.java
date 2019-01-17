@@ -98,7 +98,7 @@ public class ListFragment extends Fragment {
                                             if(!clicked) {
                                                 //What to do in click
                                                 System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getMatchProfiles().get(position).getName());
-                                                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                                Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
                                                 i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
                                                 i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
                                                 i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
@@ -139,7 +139,7 @@ public class ListFragment extends Fragment {
                                             if(!clicked) {
                                                 //What to do in click
                                                 System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
-                                                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                                Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
                                                 i.putExtra("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
                                                 i.putExtra("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
                                                 i.putExtra("rate", p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
@@ -179,7 +179,7 @@ public class ListFragment extends Fragment {
                                             if(!clicked) {
                                                 //What to do in click
                                                 System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
-                                                Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                                Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
                                                 i.putExtra("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
                                                 i.putExtra("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
                                                 i.putExtra("rate", p.getCurrrentStudent().getPendingProfiles().get(position).getRating());

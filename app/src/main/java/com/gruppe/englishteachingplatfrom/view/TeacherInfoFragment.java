@@ -1,11 +1,8 @@
 package com.gruppe.englishteachingplatfrom.view;
 
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +13,6 @@ import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
-import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
-
-import java.util.ArrayList;
 
 public class TeacherInfoFragment extends Fragment implements View.OnClickListener {
 
@@ -104,7 +98,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             Bundle bundle = new Bundle();
             bundle.putInt("position", pos);
             bundle.putBoolean("isTeacherInfoFragment", true);
-            Fragment F = new DialogBox();
+            Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();

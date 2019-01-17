@@ -1,30 +1,25 @@
 package com.gruppe.englishteachingplatfrom.view;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.controller.FragPagerAdapter;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-public class frag_Pager extends Fragment implements View.OnClickListener {
+public class FragPager extends Fragment implements View.OnClickListener {
 
         ViewPager mPager;
         FragPagerAdapter mAdapter;
@@ -38,7 +33,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
         private int checker = 0;
         private Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
         public static int favorite = 1;
-        public frag_Pager() {
+        public FragPager() {
             // Required empty public constructor
         }
 
@@ -77,11 +72,11 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
                 @Override
                 public void onPageSelected(int position) {
-                    System.out.println("frag_Pager.java: page changed " + position);
+                    System.out.println("FragPager.java: page changed " + position);
                     // code for action on page change
                     if(hm.get(position) != null){
                         if( hm.get(position) == 1){
-                            System.out.println("frag_Pager.java: "+ hm.get(position));
+                            System.out.println("FragPager.java: "+ hm.get(position));
                             floating_Fav.setImageResource(R.drawable.favourite_full);
                         }
                         else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);
@@ -126,7 +121,7 @@ public class frag_Pager extends Fragment implements View.OnClickListener {
             Bundle bundle = new Bundle();
             bundle.putInt("position", position1);
             bundle.putBoolean("isTeacherInfoFragment", false);
-            Fragment F = new DialogBox();
+            Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();

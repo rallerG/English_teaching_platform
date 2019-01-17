@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.view.SignupActivity;
 
 public class WhatAreYouActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,12 +25,12 @@ public class WhatAreYouActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.teacher :
-                Intent intentTeacher = new Intent(this, SignupActivity.class);
+                Intent intentTeacher = new Intent(this, SignupTeacherActivity.class);
                 intentTeacher.putExtra("role","teacher");
                 startActivity(intentTeacher);
                 break;
             case R.id.student :
-                Intent intentStudent = new Intent(this, SignupActivity.class);
+                Intent intentStudent = new Intent(this, SignupTeacherActivity.class);
                 intentStudent.putExtra("role","teacher");
                 startActivity(intentStudent);
                 break;

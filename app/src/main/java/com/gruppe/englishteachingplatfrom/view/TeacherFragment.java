@@ -17,7 +17,7 @@ import com.gruppe.englishteachingplatfrom.model.Feedback;
 import java.util.ArrayList;
 
 
-public class Teacher_fragment extends Fragment implements View.OnClickListener {
+public class TeacherFragment extends Fragment implements View.OnClickListener {
 
     public static final ArrayList<Feedback> list = new ArrayList<Feedback>();
     LinearLayout inbox, pay;
@@ -29,7 +29,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     private int mColumnCount = 1;
 
 
-    public Teacher_fragment() {
+    public TeacherFragment() {
         // Required empty public constructor
     }
 
@@ -114,10 +114,5 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(Feedback item);
     }
 }
