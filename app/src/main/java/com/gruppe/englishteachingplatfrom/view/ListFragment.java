@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,13 +12,10 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
-import android.widget.Switch;
 
-import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentPendingsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
@@ -92,7 +88,7 @@ public class ListFragment extends Fragment {
                             public void onItemClick(int position) {
                                 if(!clicked) {
                                     //What to do in click
-                                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
                                     i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
                                     i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
                                     i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
@@ -126,7 +122,7 @@ public class ListFragment extends Fragment {
                                 if(!clicked) {
                                     //What to do in click
                                     System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
-                                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
 //                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
 //                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
 //                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
@@ -163,7 +159,7 @@ public class ListFragment extends Fragment {
                                 if(!clicked) {
                                     //What to do in click
                                     System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
-                                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
 //                                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
 //                                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
 //                                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
@@ -202,7 +198,7 @@ public class ListFragment extends Fragment {
 //                if(!clicked) {
 //                    //What to do in click
 //                    System.out.println("Du har trykket på : " + p.getTeacherDummies().get(position).getName());
-//                    Intent i = new Intent(getActivity(), TeacherInfoActivity.class);
+//                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
 //                    i.putExtra("name", p.getTeacherDummies().get(position).getName());
 //                    i.putExtra("price", p.getTeacherDummies().get(position).getPrice());
 //                    i.putExtra("rate", p.getTeacherDummies().get(position).getRating());
