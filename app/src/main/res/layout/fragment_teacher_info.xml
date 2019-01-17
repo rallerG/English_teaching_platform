@@ -9,8 +9,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating_fav_teacherInfo"
-        android:layout_width="54dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_marginStart="22dp"
         android:layout_marginBottom="16dp"
@@ -26,8 +26,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating_send_teacherInfo"
-        android:layout_width="54dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="16dp"
@@ -185,36 +185,5 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </ScrollView>
-
-    <TableRow
-        android:id="@+id/tableRow"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="508dp"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!--<Space-->
-        <!--android:layout_width="238dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="70dp" />-->
-
-    </TableRow>
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="44dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/tableRow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
