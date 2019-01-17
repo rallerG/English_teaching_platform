@@ -55,9 +55,6 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".view.request_mail" />
-        <activity
-            android:screenOrientation="portrait"
-            android:name=".view.TeacherInfoActivity"></activity>
     </application>
 
 </manifest>
