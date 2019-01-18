@@ -41,6 +41,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     TextView star1, star2, star3, star4, star5, ratings, totalRate;
     LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
+    int totalReviews;
     double totAvgRating, totalStar = 0;
     private ProgressBar loader;
     private MyFeedbackRecyclerViewAdapter recycleAdapter;
@@ -72,7 +73,6 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feedback_list, container, false);
 
-
         loader = view.findViewById(R.id.loader);
         feedback = view.findViewById(R.id.list);
         star1 = view.findViewById(R.id.star1);
@@ -98,13 +98,18 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         all.setOnClickListener(this);
 
 
-
-
         ratings.setText(String.valueOf(list.size()) + " ratings");
 
 
         all.setBackgroundResource(R.drawable.selectedborder);
         prevBtn = all;
+
+ /*       Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            totAvgRating = bundle.getDouble("TotalRate",0);
+             totalReviews = bundle.getInt("Reviews",0);
+        }*/
+
 
         feedback.setVisibility(View.INVISIBLE);
         TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());
@@ -114,15 +119,18 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 for (Feedback feedback : listOfObjects) {
                     list.add(feedback);
                     totalStar += feedback.getRating();
+                    totalReviews ++;
                 }
                 totAvgRating = totalStar / list.size();
-                totalRate.setText(String.valueOf(totAvgRating));
-                totalRating.setRating((float) totAvgRating);
-                if(totAvgRating == 0){
+
+                if(totalReviews == 0){
                     totalRate.setText("" + 0);
+                } else {
+                    totalRate.setText(String.valueOf(totAvgRating));
+                    totalRating.setRating((float) totAvgRating);
                 }
 
-                ratings.setText(list.size() + " ratings");
+                ratings.setText(totalReviews  + " Ratings");
                 recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
                 feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
                 feedback.setAdapter(recycleAdapter);
@@ -156,7 +164,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         System.out.println("FeedbackFragment.java: " + list);
 
 
-        totAvgRating = totalStar / list.size();
+     //   totAvgRating = totalStar / list.size();
         return view;
     }
 

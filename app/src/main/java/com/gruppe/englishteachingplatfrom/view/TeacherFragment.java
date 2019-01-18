@@ -63,13 +63,10 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         pay = view.findViewById(R.id.pay);
         pay.setOnClickListener(this);
 
-
         TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());
         feedbackDocument.getAll(new CallbackList<Feedback>() {
             @Override
             public void onCallback(List<Feedback> listOfObjects) {
-                rate = 0;
-                totalReviews = 0;
                 for (Feedback feedback : listOfObjects) {
                     list.add(feedback);
                     rate += feedback.getRating();
