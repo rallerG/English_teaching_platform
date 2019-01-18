@@ -19,6 +19,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentTeacherRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
@@ -96,15 +97,17 @@ public class PaymentActiveFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
 
+        //If teacher
         if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
             // Set the adapter
             if (view instanceof RecyclerView) {
                 Context context = view.getContext();
                 RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-                mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
+                mRecyclerView.setAdapter(new MyPaymentTeacherRecyclerViewAdapter(p.getCurrrentTeacher().getActivePaymentDummies(), mListener));
             }
         } else {
+            //If student
             // Set the adapter
             if (view instanceof RecyclerView) {
                 Context context = view.getContext();

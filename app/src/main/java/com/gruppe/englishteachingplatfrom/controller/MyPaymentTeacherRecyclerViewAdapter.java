@@ -39,7 +39,7 @@ public class MyPaymentTeacherRecyclerViewAdapter extends RecyclerView.Adapter<My
     public void onBindViewHolder(@NonNull final PaymentViewHolder paymentViewHolder, final int i) {
 //        Singleton.TeacherDummy teacherProfile = activePaymentList.get(i);
 
-        paymentViewHolder.textViewName.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName());
+        paymentViewHolder.textViewName.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getName());
         paymentViewHolder.textViewPrice.setText(Integer.toString(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getPrice()) + " DKK");
         //TODO Make get date again
         paymentViewHolder.textViewDate.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getRequestDate());

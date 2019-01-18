@@ -30,7 +30,7 @@ public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Ada
     @Override
     public PaymentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_payment_history_item, parent, false);
+                .inflate(R.layout.fragment_payment_history_teacher_item, parent, false);
         return new PaymentViewHolder(view);
     }
 
@@ -38,7 +38,7 @@ public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Ada
     public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i) {
 //        Singleton.TeacherDummy teacherProfile = paymentHistoryList.get(i);
 
-        paymentViewHolder.textViewName.setText(paymentHistoryList.get(i).getTeacher().getName());
+        paymentViewHolder.textViewName.setText(paymentHistoryList.get(i).getStudent().getName());
         paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getPrice() + " DKK");
         paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getPaymentDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
