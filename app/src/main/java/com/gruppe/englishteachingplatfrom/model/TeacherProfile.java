@@ -99,6 +99,7 @@ public class TeacherProfile extends DocumentObject{
         Map<String, Object> mapToReturn = new HashMap<>();
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
+        mapToReturn.put("price",this.price);
         return mapToReturn;
     }
 

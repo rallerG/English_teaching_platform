@@ -40,18 +40,18 @@ public class Singleton {
     private TeacherProfile t7 = new TeacherProfile("Peter", 5, 0, "English", 299);
 
     //History list
-    private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0, 0);
-    private StudentProfile h2 = new StudentProfile("Jacob", "jacob@gmail.com", 0, 0);
-    private StudentProfile h3 = new StudentProfile("Christian", "christian@tdcmail.dk", 0, 0);
-    private StudentProfile h4 = new StudentProfile("Nikolaj", "nikolaj@yahoo.com", 0, 0);
-    private StudentProfile h5 = new StudentProfile("Sara", "sara@live.dk", 0, 0);
-    private StudentProfile h6 = new StudentProfile("Line", "line@sol.dk", 0, 0);
-    private StudentProfile h7 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
-    private StudentProfile h8 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
-    private StudentProfile h9 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
-    private StudentProfile h10 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
-    private StudentProfile h11 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
-    private StudentProfile h12 = new StudentProfile("Susan", "susan@jubii.dk", 0, 0);
+    private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0);
+    private StudentProfile h2 = new StudentProfile("Jacob", "jacob@gmail.com", 0);
+    private StudentProfile h3 = new StudentProfile("Christian", "christian@tdcmail.dk", 0);
+    private StudentProfile h4 = new StudentProfile("Nikolaj", "nikolaj@yahoo.com", 0);
+    private StudentProfile h5 = new StudentProfile("Sara", "sara@live.dk", 0);
+    private StudentProfile h6 = new StudentProfile("Line", "line@sol.dk", 0);
+    private StudentProfile h7 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+    private StudentProfile h8 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+    private StudentProfile h9 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+    private StudentProfile h10 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+    private StudentProfile h11 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+    private StudentProfile h12 = new StudentProfile("Susan", "susan@jubii.dk", 0);
 
 
     public void createList(){

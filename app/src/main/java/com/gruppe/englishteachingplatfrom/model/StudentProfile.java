@@ -9,7 +9,6 @@ public class StudentProfile extends DocumentObject{
     private String name;
     private String email;
     private int profilePicture;
-    private double rating;
     private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> MatchProfiles = new ArrayList<TeacherProfile>();
@@ -18,25 +17,22 @@ public class StudentProfile extends DocumentObject{
 
 
     //Constructor with ID
-    public StudentProfile(String id, String name, String email, int profilePicture, double rating) {
+    public StudentProfile(String id, String name, String email, int profilePicture) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
-        this.rating = rating;
     }
 
     public StudentProfile () {
         this.profilePicture = 0;
-        this.rating = 0;
     }
 
     //Constructer without ID for database
-    public StudentProfile(String name, String email, int profilePicture, double rating) {
+    public StudentProfile(String name, String email, int profilePicture) {
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
-        this.rating = rating;
     }
 
     public ArrayList<Payment> getActivePaymentDummies() {
@@ -73,10 +69,6 @@ public class StudentProfile extends DocumentObject{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public double getRating() {
-        return rating;
     }
 
     public ArrayList<TeacherProfile> getPendingProfiles() {
