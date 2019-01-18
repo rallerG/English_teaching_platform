@@ -36,7 +36,7 @@ public class FragPagerAdapter extends FragmentStatePagerAdapter implements View.
 //    public int getItemPosition(@NonNull Object object) {
 //        return POSITION_NONE;
 //    }
-    
+
 
     @Override
     public int getCount() {

@@ -255,7 +255,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
             map.put("teacher",documentReference);
         }
         else {
-            DocumentReference documentReference = db.collection("teachers").document(referenceId);
+            DocumentReference documentReference = db.collection("students").document(referenceId);
             map.put("student", documentReference);
         }
         collection.document()
@@ -282,7 +282,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
             map.put("teacher",documentReference);
         }
         else {
-            DocumentReference documentReference = db.collection("teachers").document(referenceId);
+            DocumentReference documentReference = db.collection("students").document(referenceId);
             map.put("student", documentReference);
         }
         collection.document()
@@ -311,7 +311,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
             map.put("teacher",documentReference);
         }
         else {
-            DocumentReference documentReference = db.collection("teachers").document(referenceId);
+            DocumentReference documentReference = db.collection("students").document(referenceId);
             map.put("student", documentReference);
         }
         collection.document()
