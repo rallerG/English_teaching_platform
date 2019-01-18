@@ -114,9 +114,9 @@ public class SendRequestPaymentFragment extends Fragment {
         };
         ss.setAdapter(adapter);
 
-        enableButton.setOnStateChangeListener(new OnStateChangeListener() {
+        enableButton.setOnActiveListener(new OnActiveListener() {
             @Override
-            public void onStateChange(boolean active) {
+            public void onActive() {
                 if (inputPrice.getText().toString().isEmpty() || Integer.parseInt(inputPrice.getText().toString()) < 1) {
                     Toast.makeText(getContext(), "Please enter a positive price", Toast.LENGTH_LONG).show();
                 } else {
@@ -132,6 +132,8 @@ public class SendRequestPaymentFragment extends Fragment {
 //                    currentTeacher.getActivePaymentDummies().add(Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice));
 //                    chosenStudent.getActivePaymentDummies().add(Payment.newTransaction(chosenStudent, currentTeacher, chosenPrice));
                     Payment.newTransaction(chosenStudent, p.getCurrrentTeacher(), chosenPrice);
+                    inputPrice.setText("");
+//                    enableButton.toggleState();
 
                     //TODO Start intent to teacher payment overview
 

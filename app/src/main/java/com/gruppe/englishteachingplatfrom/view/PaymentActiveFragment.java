@@ -96,93 +96,7 @@ public class PaymentActiveFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
 
-//        if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
-//            PaymentDocument paymentDocument = new PaymentDocumentImpl();
-//            paymentDocument.getAll(new CallbackList<Payment>() {
-//                @Override
-//                public void onCallback(List<Payment> listOfObjects) {
-//                    for (final Payment pay : listOfObjects) {
-//                        if (pay.getTeacherId() == p.getCurrrentTeacher().getId()) {
-//                            if (pay.isActive()) {
-//                                p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
-//                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-//                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
-//                                    @Override
-//                                    public void onCallback(StudentProfile object) {
-//                                        p.getCurrrentTeacher().getActivePaymentDummies().get(p.getCurrrentTeacher().getActivePaymentDummies().indexOf(pay)).setStudent(object);
-//                                        if (view instanceof RecyclerView) {
-//                                            Context context = view.getContext();
-//                                            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-//                                            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                                            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentTeacher().getActivePaymentDummies(), mListener));
-//                                        }
-//                                    }
-//                                });
-//                            } else {
-//                                p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
-//                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-//                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
-//                                    @Override
-//                                    public void onCallback(StudentProfile object) {
-//                                        p.getCurrrentTeacher().getHistoryPaymentDummies().get(p.getCurrrentTeacher().getHistoryPaymentDummies().indexOf(pay)).setStudent(object);
-//                                        if (view instanceof RecyclerView) {
-//                                            Context context = view.getContext();
-//                                            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-//                                            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                                            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentTeacher().getActivePaymentDummies(), mListener));
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    }
-//                }
-//            });
-//
-//        } else {
-//            PaymentDocument paymentDocument = new PaymentDocumentImpl();
-//            paymentDocument.getAll(new CallbackList<Payment>() {
-//                @Override
-//                public void onCallback(List<Payment> listOfObjects) {
-//                    for (final Payment pay : listOfObjects) {
-//                        if (pay.getStudentId() == p.getCurrrentStudent().getId()) {
-//                            if (pay.isActive()) {
-//                                p.getCurrrentStudent().getActivePaymentDummies().add(pay);
-//                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
-//                                teachersDocument.get(pay.getTeacherId(), new Callback<TeacherProfile>() {
-//                                    @Override
-//                                    public void onCallback(TeacherProfile object) {
-//                                        p.getCurrrentStudent().getActivePaymentDummies().get(p.getCurrrentStudent().getActivePaymentDummies().indexOf(pay)).setTeacher(object);
-//                                        if (view instanceof RecyclerView) {
-//                                            Context context = view.getContext();
-//                                            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-//                                            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                                            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
-//                                        }
-//                                    }
-//                                });
-//                            } else {
-//                                p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
-//                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
-//                                teachersDocument.get(pay.getTeacherId(), new Callback<TeacherProfile>() {
-//                                    @Override
-//                                    public void onCallback(TeacherProfile object) {
-//                                        p.getCurrrentStudent().getHistoryPaymentDummies().get(p.getCurrrentStudent().getHistoryPaymentDummies().indexOf(pay)).setTeacher(object);
-//                                        if (view instanceof RecyclerView) {
-//                                            Context context = view.getContext();
-//                                            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-//                                            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-//                                            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    }
-//                }
-//            });
-//        }
-
+        if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
             // Set the adapter
             if (view instanceof RecyclerView) {
                 Context context = view.getContext();
@@ -190,6 +104,15 @@ public class PaymentActiveFragment extends Fragment {
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
                 mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
             }
+        } else {
+            // Set the adapter
+            if (view instanceof RecyclerView) {
+                Context context = view.getContext();
+                RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
+            }
+        }
         return view;
     }
 
