@@ -8,6 +8,7 @@ public class StudentProfile extends DocumentObject{
     private String id;
     private String name;
     private String email;
+    private String password;
     private int profilePicture;
     private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
@@ -88,6 +89,7 @@ public class StudentProfile extends DocumentObject{
         Map<String, Object> mapToReturn = new HashMap<>();
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
+        mapToReturn.put("password",this.password);
         return mapToReturn;
     }
 
@@ -105,5 +107,13 @@ public class StudentProfile extends DocumentObject{
 
     public String toString() {
         return "Name: " + getName() + "\n Email: " + getEmail();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
