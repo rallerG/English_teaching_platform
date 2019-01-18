@@ -1,5 +1,9 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,9 +22,8 @@ public class Payment extends DocumentObject {
     private boolean isPayed;
     private boolean isActive;
 
-    private Payment(/*String id,*/ int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+    private Payment(int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
 
-//        this.id = id;
         this.price = price;
         this.requestDate = requestDate;
         this.paymentDate = paymentDate;
@@ -32,22 +35,25 @@ public class Payment extends DocumentObject {
 
     public Payment (){}
 
-    public static void newTransaction(/*String id,*/ StudentProfile student, TeacherProfile teacher, int price) {
+    public static void newTransaction(final StudentProfile student, final TeacherProfile teacher, int price) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
 
-        Payment obj = new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
-        teacher.getActivePaymentDummies().add(obj);
-        student.getActivePaymentDummies().add(obj);
-
-//        System.out.println(teacher.getActivePaymentDummies().get(0).toString());
-//        System.out.println(student.getActivePaymentDummies().get(0).toString());
-//        return new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
+        final Payment obj = new Payment( price, theRequestDate, "", teacher, student, false, true);
+        
+        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+        paymentDocument.add(obj, new CallbackSuccess() {
+            @Override
+            public void onCallback() {
+                teacher.getActivePaymentDummies().add(obj);
+                student.getActivePaymentDummies().add(obj);
+            }
+        });
     }
 
     //TODO Create pay method that flips booleans and adds payment date
-    public static void payTransaction(Payment payment) {
+    public static void payTransaction(final Payment payment) {
         payment.setActive(false);
         payment.setPayed(true);
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -55,12 +61,17 @@ public class Payment extends DocumentObject {
         String thePaymentDate = (dateFormat.format(date)).toString();
         payment.setPaymentDate(thePaymentDate);
 
-        payment.getStudent().getHistoryPaymentDummies().add(payment);
-        payment.getStudent().getActivePaymentDummies().remove(payment);
+        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+        paymentDocument.update(payment.getId(), payment, new CallbackSuccess() {
+            @Override
+            public void onCallback() {
+                payment.getStudent().getHistoryPaymentDummies().add(payment);
+                payment.getStudent().getActivePaymentDummies().remove(payment);
 
-        payment.getTeacher().getHistoryPaymentDummies().add(payment);
-        payment.getTeacher().getActivePaymentDummies().remove(payment);
-
+                payment.getTeacher().getHistoryPaymentDummies().add(payment);
+                payment.getTeacher().getActivePaymentDummies().remove(payment);
+            }
+        });
     }
 
     public static void deleteTransaction(Payment payment) {
@@ -146,7 +157,7 @@ public class Payment extends DocumentObject {
         mapToReturn.put("teacher_id",this.getTeacher().getId());
         mapToReturn.put("student_id",this.getStudent().getId());
         mapToReturn.put("isPayed",this.isPayed());
-        mapToReturn.put("isActive",this.isPayed());
+        mapToReturn.put("isActive",this.isActive());
         return mapToReturn;
     }
 
