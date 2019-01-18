@@ -83,7 +83,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             super(itemView);
 
             imageView = itemView.findViewById(R.id.imageView4);
-            textViewName = itemView.findViewById(R.id.teacherName);
+            textViewName = itemView.findViewById(R.id.studentName);
             textViewPrice = itemView.findViewById(R.id.amount);
             textViewDate = itemView.findViewById(R.id.date);
 
