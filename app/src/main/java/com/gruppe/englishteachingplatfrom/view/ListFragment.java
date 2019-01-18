@@ -170,7 +170,7 @@ public class ListFragment extends Fragment {
                     });
                     break;
                 case R.id.nav_favorites:
-                    StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl("1");
+                    StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
                     studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
                         @Override
                         public void onCallback(List<TeacherProfile> listOfObjects) {
@@ -215,7 +215,7 @@ public class ListFragment extends Fragment {
                     });
                     break;
                 case R.id.nav_pending:
-                    StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl("1");
+                    StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
                     studentPendingsDocument.getAll(new CallbackList<TeacherProfile>() {
                         @Override
                         public void onCallback(List<TeacherProfile> listOfObjects) {
