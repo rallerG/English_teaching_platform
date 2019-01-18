@@ -106,7 +106,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         prevBtn = all;
 
         feedback.setVisibility(View.INVISIBLE);
-        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("1");
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("3");
         feedbackDocument.getAll(new CallbackList<Feedback>() {
             @Override
             public void onCallback(List<Feedback> listOfObjects) {

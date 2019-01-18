@@ -77,7 +77,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
                 final Intent intent2 = new Intent(this, TeacherMainActivity.class);
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                teachersDocument.get("1", new Callback<TeacherProfile>() {
+                teachersDocument.get("3", new Callback<TeacherProfile>() {
                     @Override
                     public void onCallback(TeacherProfile object) {
                         p.setCurrrentTeacher(object);
