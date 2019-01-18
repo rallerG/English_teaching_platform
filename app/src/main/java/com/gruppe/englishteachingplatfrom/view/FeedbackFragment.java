@@ -100,7 +100,6 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
 
 
 
-
         ratings.setText(String.valueOf(list.size()) + " ratings");
 
 
@@ -119,6 +118,10 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 totAvgRating = totalStar / list.size();
                 totalRate.setText(String.valueOf(totAvgRating));
                 totalRating.setRating((float) totAvgRating);
+                if(totAvgRating == 0){
+                    totalRate.setText("" + 0);
+                }
+
                 ratings.setText(list.size() + " ratings");
                 recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
                 feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
