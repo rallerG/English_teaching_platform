@@ -31,6 +31,7 @@ public class TeacherProfile extends DocumentObject{
         this.profilePic = 0;
         this.rating = 0;
         this.price = 0;
+        this.language = "English";
     }
 
 
@@ -100,6 +101,8 @@ public class TeacherProfile extends DocumentObject{
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
         mapToReturn.put("price",this.price);
+        mapToReturn.put("rating", Double.toString(this.rating));
+        mapToReturn.put("language", this.language);
         return mapToReturn;
     }
 

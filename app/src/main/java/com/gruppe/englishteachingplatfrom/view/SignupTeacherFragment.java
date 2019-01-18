@@ -58,8 +58,6 @@ public class SignupTeacherFragment extends Fragment implements View.OnClickListe
                 teacherProfile.setName(name.getText().toString());
                 teacherProfile.setEmail(email.getText().toString());
                 teacherProfile.setPrice(Integer.parseInt(price.getText().toString()));
-                teacherProfile.setLanguage("English");
-                teacherProfile.setRating(0);
                 teachersDocument.add(teacherProfile, new CallbackSuccess() {
                     @Override
                     public void onCallback() {
