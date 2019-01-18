@@ -21,12 +21,11 @@ public class PageFragment extends Fragment implements View.OnClickListener {
 
 
     private CardView card;
-    private TextView name, Language, Rate, Price;
+    private TextView name, language, Rate, Price;
     private RatingBar rateBar;
     private ImageView imageView;
     private Singleton teacher = Singleton.getInstance();
-    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
-    private RatingBar Rating;
+    private RatingBar rating;
     public static boolean clicked = false;
     private int pos, pic, tPrice;
     private float  tRate;
@@ -43,6 +42,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         if (bundle != null) {
             pos = bundle.getInt("position", 0);
         }
+        ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
         pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
@@ -64,14 +65,16 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         tName = contents.get(pos).getName();
         name.setText(tName);
 
-        Language = rootview.findViewById(R.id.language);
+        language = rootview.findViewById(R.id.language);
         tLang = contents.get(pos).getLanguage();
-        Language.setText(tLang);
+        language.setText(tLang);
 
  /*       Rating = rootview.findViewById(R.id.teacherRating);
         tRating = (float) contents.get(pos).getRating();
         Rating.setRating(tRating);*/
 
+        rating = rootview.findViewById(R.id.teacherRating);
+        rating.setRating(tRate);
         Rate = rootview.findViewById(R.id.rate);
         tRate = (float) contents.get(pos).getRating();
         Rate.setText("" + tRate);
@@ -82,6 +85,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         rateBar.setRating(tRate);
         rateBar.setIsIndicator(true);
      //   txt.setVisibility(View.INVISIBLE);
+        System.out.println("fragment" + tName + "was created");
         return rootview;
     }
 

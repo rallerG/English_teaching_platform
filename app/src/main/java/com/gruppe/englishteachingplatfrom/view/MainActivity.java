@@ -106,7 +106,15 @@ public class MainActivity extends AppCompatActivity
         ListFragment.clicked = false;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+//         else if(FragPager.requestSend){
+//            super.onBackPressed();
+//                getSupportFragmentManager().popBackStack();
+//
+//                getSupportFragmentManager().beginTransaction().add(R.id.fragmentContent, new).commit();
+//        }
+
+        else {
             super.onBackPressed();
             setTitle(R.string.app_name);
         }

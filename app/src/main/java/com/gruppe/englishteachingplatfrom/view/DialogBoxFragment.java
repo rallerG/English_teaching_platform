@@ -86,6 +86,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                FragPager.requestSend = true;
                 bundle.putString("name", tName);
                 bundle.putInt("price", tPrice);
                 bundle.putFloat("rate", tRate);

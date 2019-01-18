@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import com.gruppe.englishteachingplatfrom.controller.FragPagerAdapter;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
@@ -23,20 +26,16 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
         ViewPager mPager;
         FragPagerAdapter mAdapter;
-        private Singleton teacher = Singleton.getInstance();
+        private Singleton p = Singleton.getInstance();
         private FloatingActionButton floating_Send;
         private FloatingActionButton floating_Fav;
         private ImageView imageView;
-        private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
         private int position1;
         private int pic1;
         private int checker = 0;
         private Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
-        public static int favorite = 1;
-        private int tPrice;
-        private float  tRate;
-        private String tName;
-        private String tLang;
+        public static boolean requestSend = false;
+
 
 
         public FragPager() {
@@ -54,9 +53,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view =  inflater.inflate(R.layout.fragment_viewpager_list, container, false);
-
-
-                    teacher = Singleton.getInstance();
 
             floating_Fav = view.findViewById(R.id.floating_fav);
             floating_Send = view.findViewById(R.id.floating_send);
@@ -98,10 +94,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
         return mPager.getCurrentItem();
     }
 
-    public int getCurrentPic(){
-        return teacher.getTeacherDummies().get(getCurrentPosition()).getProfilePic();
-    }
-
     private class ViewPagerStack implements ViewPager.PageTransformer {
 
         @Override
@@ -114,7 +106,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
                 page.setTranslationX(-page.getWidth() * position);
 
-                page.setTranslationY(10 * position);
+                page.setTranslationY(-15 * position);
             }
         }
     }
@@ -124,12 +116,11 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
         if (v == floating_Send) {
             position1 = mPager.getCurrentItem();
-            Singleton singleton = Singleton.getInstance();
             Bundle bundle = new Bundle();
-            bundle.putString("name", singleton.getTeacherDummies().get(position1).getName());
-            bundle.putInt("price", singleton.getTeacherDummies().get(position1).getPrice());
-            bundle.putFloat("rate", (float) singleton.getTeacherDummies().get(position1).getRating());
-            bundle.putString("language", singleton.getTeacherDummies().get(position1).getLanguage());
+            bundle.putString("name", p.getTeacherDummies().get(position1).getName());
+            bundle.putInt("price", p.getTeacherDummies().get(position1).getPrice());
+            bundle.putFloat("rate", (float) p.getTeacherDummies().get(position1).getRating());
+            bundle.putString("language", p.getTeacherDummies().get(position1).getLanguage());
             bundle.putInt("position", position1);
             bundle.putBoolean("isTeacherInfoFragment", false);
             Fragment F = new DialogBoxFragment();
@@ -143,6 +134,18 @@ public class FragPager extends Fragment implements View.OnClickListener {
             if(checker == 0) {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
+//                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+//                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
+//                    @Override
+//                    public void onCallback() {
+//                        p.getTeacherDummies().remove(mPager.getCurrentItem());
+//                        mAdapter.notifyDataSetChanged();
+//                    }
+//                });
+              //  p.getTeacherDummies().remove(mPager.getCurrentItem());
+
+
+
                 if(hm.get(mPager.getCurrentItem()) != null){
                     hm.remove(mPager.getCurrentItem());
                     hm.put(mPager.getCurrentItem(), 1);
