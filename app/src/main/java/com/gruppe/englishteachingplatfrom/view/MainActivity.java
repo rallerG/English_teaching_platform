@@ -159,16 +159,19 @@ public class MainActivity extends AppCompatActivity
                 setTitle(R.string.app_name);
                 break;
             case R.id.nav_matches:
+                ListFragment.clicked = false;
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 setTitle("Matches");
                 break;
             case R.id.nav_favorites:
+                ListFragment.clicked = false;
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 setTitle("Favorites");
                 break;
             case R.id.nav_pending:
+                ListFragment.clicked = false;
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 setTitle("Pending");
