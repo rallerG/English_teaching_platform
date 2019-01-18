@@ -18,6 +18,7 @@ public class TeacherProfile extends DocumentObject{
     private int profilePic;
     private String language;
     private int price;
+    private String password;
 
     public TeacherProfile(String name, double rating, int profilePic, String language, int price) {
         this.name = name;
@@ -25,6 +26,7 @@ public class TeacherProfile extends DocumentObject{
         this.profilePic = profilePic;
         this.language = language;
         this.price = price;
+        this.password = "123";
     }
 
     public TeacherProfile () {
@@ -32,6 +34,7 @@ public class TeacherProfile extends DocumentObject{
         this.rating = 0;
         this.price = 0;
         this.language = "English";
+        this.password = "123";
     }
 
 
@@ -95,6 +98,8 @@ public class TeacherProfile extends DocumentObject{
         this.price = price;
     }
 
+
+
     @Override
     public Map<String, Object> toMap() {
         Map<String, Object> mapToReturn = new HashMap<>();
@@ -103,6 +108,7 @@ public class TeacherProfile extends DocumentObject{
         mapToReturn.put("price",this.price);
         mapToReturn.put("rating", Double.toString(this.rating));
         mapToReturn.put("language", this.language);
+        mapToReturn.put("password", this.password);
         return mapToReturn;
     }
 
@@ -118,6 +124,7 @@ public class TeacherProfile extends DocumentObject{
             this.setRating(Double.parseDouble((String) mapOfObject.get("teacher_rating")));
             this.setLanguage((String) mapOfObject.get("teacher_language"));
             this.setPrice(Math.toIntExact((long) mapOfObject.get("teacher_price")));
+            this.setPassword((String) mapOfObject.get("teacher_password"));
         }
     }
 
@@ -135,6 +142,14 @@ public class TeacherProfile extends DocumentObject{
 
     public String toString() {
         return "Name: " + getName() + "\n Email: " + getEmail() + "\n Rating: " + getRating() + "\n Language: " + getLanguage() + "\n Price: " + getPrice();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 

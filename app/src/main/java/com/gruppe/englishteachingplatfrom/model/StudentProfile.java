@@ -23,10 +23,12 @@ public class StudentProfile extends DocumentObject{
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.password = "123";
     }
 
     public StudentProfile () {
         this.profilePicture = 0;
+        this.password = "123";
     }
 
     //Constructer without ID for database
@@ -34,6 +36,7 @@ public class StudentProfile extends DocumentObject{
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.password = "123";
     }
 
     public ArrayList<Payment> getActivePaymentDummies() {
@@ -102,6 +105,7 @@ public class StudentProfile extends DocumentObject{
             this.setId(documentId);
             this.setName((String) mapOfObject.get("student_fullname"));
             this.setEmail((String) mapOfObject.get("student_mail"));
+            this.setPassword((String) mapOfObject.get("student_password"));
         }
     }
 
