@@ -24,6 +24,7 @@ import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Feedback;
 import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import java.util.List;
 
 public class FeedbackFragment extends Fragment implements View.OnClickListener {
 
+    private Singleton p = Singleton.getInstance();
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     RecyclerView feedback;
@@ -106,7 +108,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         prevBtn = all;
 
         feedback.setVisibility(View.INVISIBLE);
-        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl("3");
+        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());
         feedbackDocument.getAll(new CallbackList<Feedback>() {
             @Override
             public void onCallback(List<Feedback> listOfObjects) {
