@@ -335,60 +335,204 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void update(String documentId, DocumentObject newDocument) {
-        collection.document(documentId)
-                .set(newDocument.toMap())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "--update()--"+"DocumentSnapshot successfully updated!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
+        if (type == Feedback.class) {
+            Map<String, Object> mapFeedback = newDocument.toMap();
+            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
+            mapFeedback.remove("student_id");
+            mapFeedback.put("student",documentReferenceStudent);
+            collection.document(documentId)
+                    .set(mapFeedback)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
+
+        else if (type == Payment.class) {
+            Map<String, Object> mapFeedback = newDocument.toMap();
+            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
+            DocumentReference documentReferenceTeacher = db.collection("teacher").document((String) mapFeedback.get("teacher_id"));
+            mapFeedback.remove("student_id");
+            mapFeedback.remove("teacher_id");
+            mapFeedback.put("student",documentReferenceStudent);
+            mapFeedback.put("teacher",documentReferenceTeacher);
+            collection.document(documentId)
+                    .set(mapFeedback)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
+        else {
+            collection.document(documentId)
+                    .set(newDocument.toMap())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
     }
 
     @Override
     public void update(String documentId, DocumentObject newDocument, final CallbackSuccess callbackSuccess) {
-        collection.document(documentId)
-                .set(newDocument.toMap())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "--update()--"+"DocumentSnapshot successfully updated!");
-                        callbackSuccess.onCallback();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
+        if (type == Feedback.class) {
+            Map<String, Object> mapFeedback = newDocument.toMap();
+            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
+            mapFeedback.remove("student_id");
+            mapFeedback.put("student",documentReferenceStudent);
+            collection.document(documentId)
+                    .set(mapFeedback)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            callbackSuccess.onCallback();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
+
+        else if (type == Payment.class) {
+            Map<String, Object> mapFeedback = newDocument.toMap();
+            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
+            DocumentReference documentReferenceTeacher = db.collection("teacher").document((String) mapFeedback.get("teacher_id"));
+            mapFeedback.remove("student_id");
+            mapFeedback.remove("teacher_id");
+            mapFeedback.put("student",documentReferenceStudent);
+            mapFeedback.put("teacher",documentReferenceTeacher);
+            collection.document(documentId)
+                    .set(mapFeedback)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            callbackSuccess.onCallback();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
+        else {
+            collection.document(documentId)
+                    .set(newDocument.toMap())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            callbackSuccess.onCallback();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                        }
+                    });
+        }
     }
 
 
     @Override
     public void update(String documentId, DocumentObject newDocument, final CallbackSuccess callbackSuccess, final CallbackError callbackError) {
-        collection.document(documentId)
-                .set(newDocument.toMap())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "--update()--"+"DocumentSnapshot successfully updated!");
-                        callbackSuccess.onCallback();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                        callbackError.onCallback();
-                    }
-                });
+        if (type == Feedback.class) {
+            Map<String, Object> mapFeedback = newDocument.toMap();
+            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
+            mapFeedback.remove("student_id");
+            mapFeedback.put("student",documentReferenceStudent);
+            collection.document(documentId)
+                    .set(mapFeedback)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            callbackSuccess.onCallback();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                            callbackError.onCallback();
+                        }
+                    });
+        }
+
+        else if (type == Payment.class) {
+            Map<String, Object> mapFeedback = newDocument.toMap();
+            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
+            DocumentReference documentReferenceTeacher = db.collection("teacher").document((String) mapFeedback.get("teacher_id"));
+            mapFeedback.remove("student_id");
+            mapFeedback.remove("teacher_id");
+            mapFeedback.put("student",documentReferenceStudent);
+            mapFeedback.put("teacher",documentReferenceTeacher);
+            collection.document(documentId)
+                    .set(mapFeedback)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            callbackSuccess.onCallback();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                            callbackError.onCallback();
+                        }
+                    });
+        }
+        else {
+            collection.document(documentId)
+                    .set(newDocument.toMap())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            callbackSuccess.onCallback();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error adding document", e);
+                            callbackError.onCallback();
+                        }
+                    });
+        }
     }
 
     @Override

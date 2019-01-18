@@ -53,7 +53,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 pDialog.setCancelable(true);
                 pDialog.show();
 
-                final Intent intent1 = new Intent(this, MainActivity.class);
+                final Intent intent1 = new Intent(this, IntroductionSlider.class);
                 StudentsDocument studentDocument = new StudentsDocumentImpl();
                 studentDocument.get("1", new Callback<StudentProfile>() {
                     @Override
@@ -77,7 +77,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
                 final Intent intent2 = new Intent(this, TeacherMainActivity.class);
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                teachersDocument.get("3", new Callback<TeacherProfile>() {
+                teachersDocument.get("1", new Callback<TeacherProfile>() {
                     @Override
                     public void onCallback(TeacherProfile object) {
                         p.setCurrrentTeacher(object);
