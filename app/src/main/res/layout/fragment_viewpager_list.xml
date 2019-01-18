@@ -36,7 +36,7 @@
         app:elevation="@dimen/fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/send_queue_90885" />
+        app:srcCompat="@drawable/ic_round_send_24px" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"

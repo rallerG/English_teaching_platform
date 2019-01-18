@@ -124,11 +124,12 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
         if (v == floating_Send) {
             position1 = mPager.getCurrentItem();
+            Singleton singleton = Singleton.getInstance();
             Bundle bundle = new Bundle();
-            bundle.putString("name", tName);
-            bundle.putInt("price", tPrice);
-            bundle.putFloat("rate", tRate);
-            bundle.putString("language", tLang);
+            bundle.putString("name", singleton.getTeacherDummies().get(position1).getName());
+            bundle.putInt("price", singleton.getTeacherDummies().get(position1).getPrice());
+            bundle.putFloat("rate", (float) singleton.getTeacherDummies().get(position1).getRating());
+            bundle.putString("language", singleton.getTeacherDummies().get(position1).getLanguage());
             bundle.putInt("position", position1);
             bundle.putBoolean("isTeacherInfoFragment", false);
             Fragment F = new DialogBoxFragment();
