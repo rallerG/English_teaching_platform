@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
 
 
 /**
@@ -77,8 +93,6 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        p.createList();
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_payment_overview, container, false);
 
@@ -89,10 +103,127 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
         activeButton.setOnClickListener(this);
         historyButton.setOnClickListener(this);
 
-        // Begin the transaction
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.paymentLists, new PaymentActiveFragment());
-        ft.commit();
+
+        if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+            p.getCurrrentTeacher().getActivePaymentDummies().clear();
+            p.getCurrrentTeacher().getHistoryPaymentDummies().clear();
+            System.out.println("PaymentOverviewFragment.java: Teacher part");
+            PaymentDocument paymentDocument = new PaymentDocumentImpl();
+            paymentDocument.getAll(new CallbackList<Payment>() {
+                @Override
+                public void onCallback(final List<Payment> listOfObjects) {
+                    for (final Payment pay : listOfObjects) {
+                        if (pay.getTeacherId().equals(p.getCurrrentTeacher().getId())) {
+                            if (pay.isActive()) {
+//                                p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
+                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
+                                    @Override
+                                    public void onCallback(StudentProfile object) {
+                                        pay.setStudent(object);
+                                        pay.setTeacher(p.getCurrrentTeacher());
+                                        p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
+//                                        p.getCurrrentTeacher().getActivePaymentDummies().get(p.getCurrrentTeacher().getActivePaymentDummies().indexOf(pay)).setStudent(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                            // Begin the transaction
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            ft.commit();
+                                        }
+                                    }
+                                });
+                            } else {
+//                                p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
+                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
+                                    @Override
+                                    public void onCallback(StudentProfile object) {
+                                        pay.setStudent(object);
+                                        pay.setTeacher(p.getCurrrentTeacher());
+                                        p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
+//                                        p.getCurrrentTeacher().getHistoryPaymentDummies().get(p.getCurrrentTeacher().getHistoryPaymentDummies().indexOf(pay)).setStudent(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                            // Begin the transaction
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            ft.commit();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+
+        } else {
+            p.getCurrrentStudent().getActivePaymentDummies().clear();
+            p.getCurrrentStudent().getHistoryPaymentDummies().clear();
+            System.out.println("PaymentOverviewFragment.java: Student part");
+            PaymentDocument paymentDocument = new PaymentDocumentImpl();
+            paymentDocument.getAll(new CallbackList<Payment>() {
+                @Override
+                public void onCallback(final List<Payment> listOfObjects) {
+                    for (final Payment pay : listOfObjects) {
+                        System.out.println("PaymentOverviewFragment.java: Student part - Pay student id: " + pay.getStudentId());
+                        System.out.println("PaymentOverviewFragment.java: Student part - current student id: " + p.getCurrrentStudent().getId());
+                        if (pay.getStudentId().equals(p.getCurrrentStudent().getId())) {
+                            System.out.println("PaymentOverviewFragment.java: Student part - found pay match on id");
+                            if (pay.isActive()) {
+//                                p.getCurrrentStudent().getActivePaymentDummies().add(pay);
+                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                teachersDocument.get(pay.getTeacherId(), new Callback<TeacherProfile>() {
+                                    @Override
+                                    public void onCallback(TeacherProfile object) {
+                                        pay.setTeacher(object);
+                                        pay.setStudent(p.getCurrrentStudent());
+                                        p.getCurrrentStudent().getActivePaymentDummies().add(pay);
+//                                        p.getCurrrentStudent().getActivePaymentDummies().get(p.getCurrrentStudent().getActivePaymentDummies().indexOf(pay)).setTeacher(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                            // Begin the transaction
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            ft.commit();
+                                        }
+                                    }
+                                });
+                            } else {
+//                                p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
+                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                teachersDocument.get(pay.getTeacherId(), new Callback<TeacherProfile>() {
+                                    @Override
+                                    public void onCallback(TeacherProfile object) {
+                                        pay.setTeacher(object);
+                                        pay.setStudent(p.getCurrrentStudent());
+                                        p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
+//                                        p.getCurrrentStudent().getHistoryPaymentDummies().get(p.getCurrrentStudent().getHistoryPaymentDummies().indexOf(pay)).setTeacher(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                            // Begin the transaction
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            ft.commit();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+
+
+
+//        // Begin the transaction
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+//        ft.commit();
 
         return view;
     }
