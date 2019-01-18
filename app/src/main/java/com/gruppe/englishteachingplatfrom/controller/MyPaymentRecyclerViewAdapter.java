@@ -11,10 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
 import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.view.PaymentActiveFragment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPaymentRecyclerViewAdapter.PaymentViewHolder> {
@@ -50,8 +56,28 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             public void onClick(View v) {
                 System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
                 Toast.makeText(v.getContext(),"Accept nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
-                Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
-                notifyDataSetChanged();
+
+//                Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
+                final Payment payment = activePaymentList.get(paymentViewHolder.getAdapterPosition());
+                payment.setActive(false);
+                payment.setPayed(true);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                String thePaymentDate = (dateFormat.format(date)).toString();
+                payment.setPaymentDate(thePaymentDate);
+
+                PaymentDocument paymentDocument = new PaymentDocumentImpl();
+                paymentDocument.update(payment.getId(), payment, new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        payment.getStudent().getHistoryPaymentDummies().add(payment);
+                        payment.getStudent().getActivePaymentDummies().remove(payment);
+
+                        payment.getTeacher().getHistoryPaymentDummies().add(payment);
+                        payment.getTeacher().getActivePaymentDummies().remove(payment);
+                        notifyDataSetChanged();
+                    }
+                });
             }
         });
 
@@ -61,8 +87,17 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
                 System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
                 Toast.makeText(v.getContext(),"Reject nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
 
-                Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
-                notifyDataSetChanged();
+//                Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
+                final Payment payment = activePaymentList.get(paymentViewHolder.getAdapterPosition());
+                PaymentDocument paymentDocument = new PaymentDocumentImpl();
+                paymentDocument.delete(payment.getId(), new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        payment.getStudent().getActivePaymentDummies().remove(payment);
+                        payment.getTeacher().getActivePaymentDummies().remove(payment);
+                        notifyDataSetChanged();
+                    }
+                });
             }
         });
 

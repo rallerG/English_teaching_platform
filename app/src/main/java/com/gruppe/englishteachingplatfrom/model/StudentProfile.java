@@ -8,6 +8,7 @@ public class StudentProfile extends DocumentObject{
     private String id;
     private String name;
     private String email;
+    private String password;
     private int profilePicture;
     private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
@@ -22,10 +23,12 @@ public class StudentProfile extends DocumentObject{
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.password = "123";
     }
 
     public StudentProfile () {
         this.profilePicture = 0;
+        this.password = "123";
     }
 
     //Constructer without ID for database
@@ -33,6 +36,7 @@ public class StudentProfile extends DocumentObject{
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.password = "123";
     }
 
     public ArrayList<Payment> getActivePaymentDummies() {
@@ -88,6 +92,7 @@ public class StudentProfile extends DocumentObject{
         Map<String, Object> mapToReturn = new HashMap<>();
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
+        mapToReturn.put("password",this.password);
         return mapToReturn;
     }
 
@@ -100,10 +105,19 @@ public class StudentProfile extends DocumentObject{
             this.setId(documentId);
             this.setName((String) mapOfObject.get("student_fullname"));
             this.setEmail((String) mapOfObject.get("student_mail"));
+            this.setPassword((String) mapOfObject.get("student_password"));
         }
     }
 
     public String toString() {
         return "Name: " + getName() + "\n Email: " + getEmail();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

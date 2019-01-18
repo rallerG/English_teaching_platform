@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.model;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackError;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
 
@@ -36,6 +37,7 @@ public class Payment extends DocumentObject {
     public Payment (){}
 
     public static void newTransaction(final StudentProfile student, final TeacherProfile teacher, int price) {
+        System.out.println("Payment.java: A NEW PAYMENT WAS CREATED");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
@@ -52,33 +54,33 @@ public class Payment extends DocumentObject {
         });
     }
 
-    //TODO Create pay method that flips booleans and adds payment date
-    public static void payTransaction(final Payment payment) {
-        payment.setActive(false);
-        payment.setPayed(true);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String thePaymentDate = (dateFormat.format(date)).toString();
-        payment.setPaymentDate(thePaymentDate);
+//    public static void payTransaction(final Payment payment) {
+//        payment.setActive(false);
+//        payment.setPayed(true);
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        Date date = new Date();
+//        String thePaymentDate = (dateFormat.format(date)).toString();
+//        payment.setPaymentDate(thePaymentDate);
+//
+//        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+//        paymentDocument.update(payment.getId(), payment, new CallbackSuccess() {
+//            @Override
+//            public void onCallback() {
+//                payment.getStudent().getHistoryPaymentDummies().add(payment);
+//                payment.getStudent().getActivePaymentDummies().remove(payment);
+//
+//                payment.getTeacher().getHistoryPaymentDummies().add(payment);
+//                payment.getTeacher().getActivePaymentDummies().remove(payment);
+//            }
+//        });
+//    }
 
-        PaymentDocument paymentDocument = new PaymentDocumentImpl();
-        paymentDocument.update(payment.getId(), payment, new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                payment.getStudent().getHistoryPaymentDummies().add(payment);
-                payment.getStudent().getActivePaymentDummies().remove(payment);
-
-                payment.getTeacher().getHistoryPaymentDummies().add(payment);
-                payment.getTeacher().getActivePaymentDummies().remove(payment);
-            }
-        });
-    }
-
-    public static void deleteTransaction(Payment payment) {
-        payment.getStudent().getActivePaymentDummies().remove(payment);
-        payment.getTeacher().getActivePaymentDummies().remove(payment);
-        
-    }
+//    public static void deleteTransaction(final Payment payment) {
+//        payment.getStudent().getActivePaymentDummies().remove(payment);
+//        payment.getTeacher().getActivePaymentDummies().remove(payment);
+//        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+//        paymentDocument.delete(payment.getId());
+//    }
 
     public void setId(String id) {
         this.id = id;

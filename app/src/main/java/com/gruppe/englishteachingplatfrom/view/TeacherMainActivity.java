@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,7 +24,9 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import java.util.ArrayList;
 
 public class TeacherMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
+        View.OnClickListener, PaymentHistoryFragment.OnFragmentInteractionListener, PaymentActiveFragment.OnFragmentInteractionListener,
+        PaymentOverviewFragment.OnFragmentInteractionListener {
 
 
     RecyclerView list;
@@ -116,10 +119,11 @@ public class TeacherMainActivity extends AppCompatActivity
             case R.id.first:
                 fragment = new ListFragment();
                 fragment.setArguments(args);
-
                 break;
+                //Todo change nav_favorites to nav_payment.
+                //THIS IS PAYMENT
             case R.id.nav_favorites:
-                fragment = new RequestFragment();
+                fragment = new PaymentOverviewFragment();
                 fragment.setArguments(args);
                 break;
             case R.id.nav_pending:
@@ -155,6 +159,11 @@ public class TeacherMainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
