@@ -86,6 +86,10 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                bundle.putString("name", tName);
+                bundle.putInt("price", tPrice);
+                bundle.putFloat("rate", tRate);
+                bundle.putString("language", tLang);
                 bundle.putInt("position", pos);
                 bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
                 ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();

@@ -18,11 +18,14 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
 
     private Button okayButton;
     private ImageView teacherImage;
-    private TextView teacherInfo, confirmationText;
+    private TextView teacherInfo, confirmationText,rateD;
     private RatingBar ratingBar;
     private int pic;
     private int pos;
     private Singleton info;
+    private String tLang, tName;
+    private int tPrice;
+    private float tRate;
     private boolean calledByTeacherInfoFragment;
 
     public ConfirmationBoxFragment(){
@@ -38,6 +41,10 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            tName = bundle.getString("name");
+            tPrice = bundle.getInt("price", 0);
+            tRate = bundle.getFloat("rate",0);
+            tLang = bundle.getString("language");
             pos = bundle.getInt("position", 0);
             calledByTeacherInfoFragment = bundle.getBoolean("isTeacherInfoFragment");
         }
@@ -46,10 +53,13 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
         teacherInfo = vw.findViewById(R.id.TeacherInfo2);
         confirmationText = vw.findViewById(R.id.ConfirmationMessage2);
         ratingBar = vw.findViewById(R.id.RatingBar2);
+        rateD = vw.findViewById(R.id.rateD2);
 
         okayButton = vw.findViewById(R.id.OkayButton);
-        teacherImage.setImageResource(pic);
-        teacherInfo.setText(info.getTeacherDummies().get(pos).getName()+ "\nPro. Teacher\n180 DKK/hr");
+        rateD.setText(Float.toString(tRate));
+        ratingBar.setRating(tRate);
+        ratingBar.setIsIndicator(true);
+        teacherInfo.setText(tName+ "\n"+tLang +"\n" +tPrice);
         okayButton.setOnClickListener(this);
 
         return vw;
