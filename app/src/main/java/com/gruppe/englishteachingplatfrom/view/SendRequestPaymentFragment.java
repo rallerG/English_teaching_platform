@@ -50,6 +50,7 @@ public class SendRequestPaymentFragment extends Fragment {
 
     ListAdapter adapter;
     ArrayList<String> names = new ArrayList<>();
+    ArrayList<String> email = new ArrayList<>();
     StudentProfile chosenStudent;
     int chosenPrice;
 
@@ -98,8 +99,10 @@ public class SendRequestPaymentFragment extends Fragment {
 
     private void setUp() {
         names.clear();
+        email.clear();
         for (StudentProfile student : p.getCurrrentTeacher().getMatchProfiles()) {
             names.add(student.getName());
+            email.add(student.getEmail());
         }
 
         ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.searchable_spinner_layout_item, R.id.nameView, names){
@@ -107,7 +110,11 @@ public class SendRequestPaymentFragment extends Fragment {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView nameRow = view.findViewById(R.id.nameView);
+                TextView emailRow = view.findViewById(R.id.textView10);
+
                 nameRow.setText(names.get(position));
+                emailRow.setText(email.get(position));
+
                 chosenStudent = p.getCurrrentTeacher().getMatchProfiles().get(position);
                 return view;
             }
