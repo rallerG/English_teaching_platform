@@ -85,22 +85,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         return rootview;
     }
 
-    public int gettPrice() {
-        return tPrice;
-    }
-
-    public float gettRate() {
-        return tRate;
-    }
-
-    public String gettName() {
-        return tName;
-    }
-
-    public String gettLang() {
-        return tLang;
-    }
-
     @Override
     public void onClick(View v) {
         if(!clicked)

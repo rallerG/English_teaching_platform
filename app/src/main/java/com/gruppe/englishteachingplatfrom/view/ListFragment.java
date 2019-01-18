@@ -148,13 +148,17 @@ public class ListFragment extends Fragment {
                                                 if (!clicked) {
                                                     //What to do in click
                                                     System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getMatchProfiles().get(position).getName());
-                                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-                                                    i.putExtra("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
-                                                    i.putExtra("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
-                                                    i.putExtra("rate", p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
-                                                    i.putExtra("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
+                                                    bundle.putInt("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
+                                                    bundle.putFloat("rate",(float) p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
+                                                    bundle.putString("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
+
+                                                    Fragment F = new TeacherInfoFragment();
+                                                    F.setArguments(bundle);
                                                     //remember information and description text (when objects are used)
-                                                    startActivity(i);
+                                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                                                            addToBackStack(null).commit();
                                                     clicked = true;
                                                 }
                                             }
@@ -189,13 +193,17 @@ public class ListFragment extends Fragment {
                                                 if (!clicked) {
                                                     //What to do in click
                                                     System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
-                                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-                                                    i.putExtra("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
-                                                    i.putExtra("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
-                                                    i.putExtra("rate", p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
-                                                    i.putExtra("language", p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
+                                                    bundle.putInt("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
+                                                    bundle.putFloat("rate",(float) p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
+                                                    bundle.putString("language",  p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
+
+                                                    Fragment F = new TeacherInfoFragment();
+                                                    F.setArguments(bundle);
                                                     //remember information and description text (when objects are used)
-                                                    startActivity(i);
+                                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                                                            addToBackStack(null).commit();
                                                     clicked = true;
                                                 }
                                             }
@@ -229,13 +237,17 @@ public class ListFragment extends Fragment {
                                                 if (!clicked) {
                                                     //What to do in click
                                                     System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
-                                                    Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-                                                    i.putExtra("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
-                                                    i.putExtra("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
-                                                    i.putExtra("rate", p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
-                                                    i.putExtra("language", p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
+                                                    bundle.putInt("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
+                                                    bundle.putFloat("rate",(float) p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
+                                                    bundle.putString("language",  p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
+
+                                                    Fragment F = new TeacherInfoFragment();
+                                                    F.setArguments(bundle);
                                                     //remember information and description text (when objects are used)
-                                                    startActivity(i);
+                                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                                                            addToBackStack(null).commit();
                                                     clicked = true;
                                                 }
                                             }
