@@ -143,8 +143,8 @@ public class Payment extends DocumentObject {
         mapToReturn.put("price",this.getPrice());
         mapToReturn.put("requestDate",this.getRequestDate());
         mapToReturn.put("paymentDate", this.getPaymentDate());
-        mapToReturn.put("teacher",this.getTeacher());
-        mapToReturn.put("student",this.getStudent());
+        mapToReturn.put("teacher_id",this.getTeacher().getId());
+        mapToReturn.put("student_id",this.getStudent().getId());
         mapToReturn.put("isPayed",this.isPayed());
         mapToReturn.put("isActive",this.isPayed());
         return mapToReturn;

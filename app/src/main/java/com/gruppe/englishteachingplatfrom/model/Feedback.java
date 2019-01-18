@@ -35,7 +35,11 @@ public class Feedback extends DocumentObject {
 
     @Override
     public Map<String, Object> toMap() {
-        return null;
+        Map<String, Object> mapToReturn = new HashMap<>();
+        mapToReturn.put("content",this.content);
+        mapToReturn.put("rating", Double.toString(this.rating));
+        mapToReturn.put("student_id",this.studentProfile.getId());
+        return mapToReturn;
     }
 
     @Override
