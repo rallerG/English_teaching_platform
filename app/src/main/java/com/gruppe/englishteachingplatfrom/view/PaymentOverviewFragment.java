@@ -1,10 +1,13 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Context;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -127,8 +130,10 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
                                         if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
                                             // Begin the transaction
-                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
                                         }
                                     }
@@ -146,8 +151,10 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
                                         if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
                                             // Begin the transaction
-                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
                                         }
                                     }
@@ -184,8 +191,10 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
                                         if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
                                             // Begin the transaction
-                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
                                         }
                                     }
@@ -203,8 +212,10 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
                                         if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
                                             // Begin the transaction
-                                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
                                         }
                                     }
@@ -231,18 +242,32 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v == activeButton){
-            Toast.makeText(getActivity(),"Activity", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(),"Activity", Toast.LENGTH_SHORT).show();
+
+            //Change test color
+            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            historyButton.setTextColor(ContextCompat.getColor(getContext(), R.color.Black));
+
             // Begin the transaction
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
             ft.commit();
 
         } else if (v == historyButton){
-            Toast.makeText(getActivity(),"History", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(),"History", Toast.LENGTH_SHORT).show();
+
+            //Change text color
+            historyButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.Black));
+
+
             // Begin the transaction
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.paymentLists, new PaymentHistoryFragment());
             ft.commit();
+
         }
     }
 
