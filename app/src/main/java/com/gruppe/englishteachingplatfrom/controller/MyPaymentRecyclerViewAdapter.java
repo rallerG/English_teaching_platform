@@ -51,6 +51,8 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         paymentViewHolder.textViewDate.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getRequestDate());
         paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
 
+
+        //Accept button onClick
         paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +77,13 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
                         payment.getTeacher().getHistoryPaymentDummies().add(payment);
                         payment.getTeacher().getActivePaymentDummies().remove(payment);
-                        notifyDataSetChanged();
+                        notifyItemRemoved(paymentViewHolder.getAdapterPosition());
                     }
                 });
             }
         });
 
+        //Reject button onClick
         paymentViewHolder.rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +98,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
                     public void onCallback() {
                         payment.getStudent().getActivePaymentDummies().remove(payment);
                         payment.getTeacher().getActivePaymentDummies().remove(payment);
-                        notifyDataSetChanged();
+                        notifyItemRemoved(paymentViewHolder.getAdapterPosition());
                     }
                 });
             }
