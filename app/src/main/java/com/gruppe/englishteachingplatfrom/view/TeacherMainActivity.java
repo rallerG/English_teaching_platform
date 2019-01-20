@@ -144,7 +144,7 @@ public class TeacherMainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContent, fragment);
-            ft.addToBackStack(null);
+         //   ft.addToBackStack(null);
             ft.commit();
         }
 

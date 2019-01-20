@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -11,6 +12,8 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,14 +34,14 @@ import com.gruppe.englishteachingplatfrom.view.FragPager;
  */
 //  Our code is modified to work with our own structure
 
-public class IntroductionSlider extends AppCompatActivity {
+public class IntroductionStudent extends AppCompatActivity {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
-    private Button btnSkip;
+    private Button skip,next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,8 @@ public class IntroductionSlider extends AppCompatActivity {
 
         viewPager =  findViewById(R.id.view_pager);
         dotsLayout =  findViewById(R.id.layoutDots);
-        btnSkip =  findViewById(R.id.btn_skip);
+        skip =  findViewById(R.id.skip);
+        next = findViewById(R.id.next);
 
         layouts = new int[]{
                 R.layout.intro_page1,
@@ -62,16 +66,38 @@ public class IntroductionSlider extends AppCompatActivity {
 
         addBottomDots(0);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        btnSkip.setOnClickListener(new View.OnClickListener() {
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getStarted();
             }
         });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // checking for last page
+                // if last page home screen will be launched
+                int current = getItem(+1);
+                if (current < layouts.length) {
+                    // move to next screen
+                    viewPager.setCurrentItem(current);
+                } else {
+                    getStarted();
+                }
+            }
+        });
+
     }
 
     private void addBottomDots(int currentPage) {
@@ -109,10 +135,11 @@ public class IntroductionSlider extends AppCompatActivity {
             addBottomDots(position);
 
             if (position == layouts.length - 1) {
-                btnSkip.setVisibility(View.VISIBLE);
+                skip.setVisibility(View.VISIBLE);
 
             } else {
-                btnSkip.setVisibility(View.INVISIBLE);
+
+                //btnSkip.setVisibility(View.INVISIBLE);
             }
         }
 

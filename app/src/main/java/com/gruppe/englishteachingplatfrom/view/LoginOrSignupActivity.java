@@ -9,20 +9,13 @@ import android.widget.Button;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
-import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
-import com.gruppe.englishteachingplatfrom.model.DocumentObject;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
-
-import java.util.List;
 
 public class LoginOrSignupActivity extends AppCompatActivity implements View.OnClickListener {
     Singleton p = Singleton.getInstance();
@@ -53,7 +46,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 pDialog.setCancelable(true);
                 pDialog.show();
 
-                final Intent intent1 = new Intent(this, IntroductionSlider.class);
+                final Intent intent1 = new Intent(this, IntroductionStudent.class);
                 StudentsDocument studentDocument = new StudentsDocumentImpl();
                 studentDocument.get("1", new Callback<StudentProfile>() {
                     @Override
@@ -75,7 +68,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 pDialog.setCancelable(true);
                 pDialog.show();
 
-                final Intent intent2 = new Intent(this, TeacherMainActivity.class);
+                final Intent intent2 = new Intent(this, IntroductionTeacher.class);
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
                 teachersDocument.get("1", new Callback<TeacherProfile>() {
                     @Override
