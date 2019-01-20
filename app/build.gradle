@@ -59,4 +59,6 @@ dependencies {
 
     //Crash analytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }
