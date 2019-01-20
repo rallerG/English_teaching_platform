@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
-                p.setCurrrentStudent(null);
+                p.logout();
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
                 break;

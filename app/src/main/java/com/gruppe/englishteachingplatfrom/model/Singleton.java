@@ -1,6 +1,8 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
@@ -9,16 +11,17 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.view.LoginOrSignupActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Singleton {
-
-
     private static Singleton Instance = null;
     private TeacherProfile currrentTeacher = null;
     private StudentProfile currrentStudent = null;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     private static ArrayList<TeacherProfile> teacherDummies = new ArrayList<>();
     private static ArrayList<StudentProfile> studentDummies = new ArrayList<>();
@@ -103,6 +106,10 @@ public class Singleton {
         this.currrentTeacher = currrentTeacher;
     }
 
+    public void logout() {
+        editor.clear().commit();
+    }
+
     public StudentProfile getCurrrentStudent() {
         return currrentStudent;
     }
@@ -111,6 +118,22 @@ public class Singleton {
         this.currrentStudent = currrentStudent;
     }
 
+    public void rememberTeacher() {
+        editor.putString("current_teacher_id", currrentTeacher.getId()).commit();
+    }
+
+    public void rememberStudent() {
+        editor.putString("current_student_id", currrentStudent.getId()).commit();
+    }
+
+    public SharedPreferences getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(SharedPreferences preferences) {
+        this.editor = preferences.edit();
+        this.preferences = preferences;
+    }
 
 
 //    public static void downloadAllStudentProfiles() {
