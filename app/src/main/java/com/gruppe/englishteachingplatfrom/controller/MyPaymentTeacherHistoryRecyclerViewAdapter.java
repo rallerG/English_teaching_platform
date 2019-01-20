@@ -59,7 +59,7 @@ public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Ada
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageView4);
+            imageView = itemView.findViewById(R.id.studentProfilePicture);
             textViewName = itemView.findViewById(R.id.studentName);
             textViewPrice = itemView.findViewById(R.id.amount);
             textViewDate = itemView.findViewById(R.id.date);
