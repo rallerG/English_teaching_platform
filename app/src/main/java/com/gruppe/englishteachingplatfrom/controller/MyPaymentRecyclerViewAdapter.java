@@ -18,13 +18,8 @@ import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.view.PaymentActiveFragment;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -126,7 +121,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageView4);
+            imageView = itemView.findViewById(R.id.studentProfilePicture);
             textViewName = itemView.findViewById(R.id.studentName);
             textViewPrice = itemView.findViewById(R.id.amount);
             textViewDate = itemView.findViewById(R.id.date);

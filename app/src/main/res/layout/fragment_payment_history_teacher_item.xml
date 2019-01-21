@@ -25,13 +25,13 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfilePicture"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
             app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+            app:layout_constraintTop_toBottomOf="@+id/studentProfilePicture">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/studentProfilePicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -51,7 +51,7 @@
                 android:text="Student name"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/date"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/studentProfilePicture"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -63,7 +63,7 @@
                 android:text="23.11.2018"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView4" />
+                app:layout_constraintStart_toEndOf="@+id/studentProfilePicture" />
 
             <TextView
                 android:id="@+id/amount"
@@ -76,7 +76,7 @@
                 android:text="270 DKK"
                 app:layout_constraintBottom_toTopOf="@+id/date"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/studentProfilePicture"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
