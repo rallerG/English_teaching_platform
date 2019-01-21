@@ -33,57 +33,57 @@ public class Singleton {
         return Instance;
     }
 
-    //Active list
-    private TeacherProfile t1 = new TeacherProfile("Hans", 2, 0, "English",  299);
-    private TeacherProfile t2 = new TeacherProfile("Mikkel", 4, 0, "English",  299);
-    private TeacherProfile t3 = new TeacherProfile("Julie", 1, 0, "English", 299);
-    private TeacherProfile t4 = new TeacherProfile("Jonas", 2, 0, "English", 299);
-    private TeacherProfile t5 = new TeacherProfile("Christoffer", 0, 0, "English", 299);
-    private TeacherProfile t6 = new TeacherProfile("Knud", 5, 0, "English", 299);
-    private TeacherProfile t7 = new TeacherProfile("Peter", 5, 0, "English", 299);
+//    //Active list
+//    private TeacherProfile t1 = new TeacherProfile("Hans", 2, 0, "English",  299);
+//    private TeacherProfile t2 = new TeacherProfile("Mikkel", 4, 0, "English",  299);
+//    private TeacherProfile t3 = new TeacherProfile("Julie", 1, 0, "English", 299);
+//    private TeacherProfile t4 = new TeacherProfile("Jonas", 2, 0, "English", 299);
+//    private TeacherProfile t5 = new TeacherProfile("Christoffer", 0, 0, "English", 299);
+//    private TeacherProfile t6 = new TeacherProfile("Knud", 5, 0, "English", 299);
+//    private TeacherProfile t7 = new TeacherProfile("Peter", 5, 0, "English", 299);
+//
+//    //History list
+//    private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0);
+//    private StudentProfile h2 = new StudentProfile("Jacob", "jacob@gmail.com", 0);
+//    private StudentProfile h3 = new StudentProfile("Christian", "christian@tdcmail.dk", 0);
+//    private StudentProfile h4 = new StudentProfile("Nikolaj", "nikolaj@yahoo.com", 0);
+//    private StudentProfile h5 = new StudentProfile("Sara", "sara@live.dk", 0);
+//    private StudentProfile h6 = new StudentProfile("Line", "line@sol.dk", 0);
+//    private StudentProfile h7 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+//    private StudentProfile h8 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+//    private StudentProfile h9 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+//    private StudentProfile h10 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+//    private StudentProfile h11 = new StudentProfile("Susan", "susan@jubii.dk", 0);
+//    private StudentProfile h12 = new StudentProfile("Susan", "susan@jubii.dk", 0);
 
-    //History list
-    private StudentProfile h1 = new StudentProfile("Adrian", "adrian@hotmail.com", 0);
-    private StudentProfile h2 = new StudentProfile("Jacob", "jacob@gmail.com", 0);
-    private StudentProfile h3 = new StudentProfile("Christian", "christian@tdcmail.dk", 0);
-    private StudentProfile h4 = new StudentProfile("Nikolaj", "nikolaj@yahoo.com", 0);
-    private StudentProfile h5 = new StudentProfile("Sara", "sara@live.dk", 0);
-    private StudentProfile h6 = new StudentProfile("Line", "line@sol.dk", 0);
-    private StudentProfile h7 = new StudentProfile("Susan", "susan@jubii.dk", 0);
-    private StudentProfile h8 = new StudentProfile("Susan", "susan@jubii.dk", 0);
-    private StudentProfile h9 = new StudentProfile("Susan", "susan@jubii.dk", 0);
-    private StudentProfile h10 = new StudentProfile("Susan", "susan@jubii.dk", 0);
-    private StudentProfile h11 = new StudentProfile("Susan", "susan@jubii.dk", 0);
-    private StudentProfile h12 = new StudentProfile("Susan", "susan@jubii.dk", 0);
 
-
-    public void createList(){
-        teacherDummies.clear();
-        teacherDummies.add(t1);
-        teacherDummies.add(t2);
-        teacherDummies.add(t3);
-        teacherDummies.add(t4);
-        teacherDummies.add(t5);
-        teacherDummies.add(t6);
-        teacherDummies.add(t7);
-
-        studentDummies.clear();
-        studentDummies.add(h1);
-        studentDummies.add(h2);
-        studentDummies.add(h3);
-        studentDummies.add(h4);
-        studentDummies.add(h5);
-        studentDummies.add(h6);
-        studentDummies.add(h7);
-        studentDummies.add(h8);
-        studentDummies.add(h9);
-        studentDummies.add(h10);
-        studentDummies.add(h11);
-        studentDummies.add(h12);
-
-        teacherDummies.get(0).getMatchProfiles().clear();
-        teacherDummies.get(0).getMatchProfiles().addAll(studentDummies);
-    }
+//    public void createList(){
+//        teacherDummies.clear();
+//        teacherDummies.add(t1);
+//        teacherDummies.add(t2);
+//        teacherDummies.add(t3);
+//        teacherDummies.add(t4);
+//        teacherDummies.add(t5);
+//        teacherDummies.add(t6);
+//        teacherDummies.add(t7);
+//
+//        studentDummies.clear();
+//        studentDummies.add(h1);
+//        studentDummies.add(h2);
+//        studentDummies.add(h3);
+//        studentDummies.add(h4);
+//        studentDummies.add(h5);
+//        studentDummies.add(h6);
+//        studentDummies.add(h7);
+//        studentDummies.add(h8);
+//        studentDummies.add(h9);
+//        studentDummies.add(h10);
+//        studentDummies.add(h11);
+//        studentDummies.add(h12);
+//
+//        teacherDummies.get(0).getMatchProfiles().clear();
+//        teacherDummies.get(0).getMatchProfiles().addAll(studentDummies);
+//    }
 
 
     private Singleton() {
