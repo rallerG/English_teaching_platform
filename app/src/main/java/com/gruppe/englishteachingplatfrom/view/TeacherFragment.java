@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -9,15 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
+import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +31,15 @@ import java.util.List;
 
 public class TeacherFragment extends Fragment implements View.OnClickListener {
 
-    public static final ArrayList<Feedback> list = new ArrayList<Feedback>();
-    LinearLayout inbox, pay;
+    public static final ArrayList<Review> list = new ArrayList<Review>();
+    LinearLayout inbox, pay, schedule;
     LinearLayout feed;
     RatingBar rating;
-    TextView reviews;
+    TextView reviews, students;
     Singleton p = Singleton.getInstance();
     int rate = 0;
     int totalReviews = 0;
+    private long mLastClickTime = 0;
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -48,6 +55,8 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            list.clear();
+
         }
     }
 
@@ -58,31 +67,55 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
 
         feed = view.findViewById(R.id.teacher_feedback);
         inbox = view.findViewById(R.id.inbox);
+        schedule = view.findViewById(R.id.schedule);
         rating = view.findViewById(R.id.ratingbar_teacher);
         reviews = view.findViewById(R.id.reviews);
         pay = view.findViewById(R.id.pay);
+        students = view.findViewById(R.id.students);
         pay.setOnClickListener(this);
 
-        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());
-        feedbackDocument.getAll(new CallbackList<Feedback>() {
-            @Override
-            public void onCallback(List<Feedback> listOfObjects) {
-                rate = 0;
-                totalReviews = 0;
-                for (Feedback feedback : listOfObjects) {
-                    list.add(feedback);
-                    rate += feedback.getRating();
-                    totalReviews++;
-                }
-                if (totalReviews == 0) {
-                    rating.setRating(0);
-                    reviews.setText(0 + " Reviews");
-                } else {
-                    rating.setRating((float) rate / totalReviews);
-                    reviews.setText(totalReviews+ " Reviews");
-                }
+            if(savedInstanceState == null) {
+                TeacherMatchesDocument teacherMatchesDocument = new TeacherMatchesDocumentImpl(p.getCurrrentTeacher().getId());
+                teacherMatchesDocument.getAll(new CallbackList<StudentProfile>() {
+                    @Override
+                    public void onCallback(List<StudentProfile> listOfObjects) {
+                        p.getCurrrentTeacher().getMatchProfiles().clear();
+                        for (StudentProfile student : listOfObjects) {
+                            StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                            studentsDocument.get(student.getId(), new Callback<StudentProfile>() {
+                                @Override
+                                public void onCallback(StudentProfile object) {
+                                    p.getCurrrentTeacher().getMatchProfiles().add(object);
+                                }
+                            });
+                        }
+                       // students.setText( p.getCurrrentTeacher().getMatchProfiles().size());
+                    }
+                });
+
+                TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
+                feedbackDocument.getAll(new CallbackList<Review>() {
+                    @Override
+                    public void onCallback(List<Review> listOfObjects) {
+                        rate = 0;
+                        for (Review review : listOfObjects) {
+                            list.clear();
+                            list.add(review);
+                            rate += review.getRating();
+                            totalReviews = list.size();
+                        }
+                        //    students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
+                        if (totalReviews == 0) {
+                            rating.setRating(0);
+                            reviews.setText(0 + " Reviews");
+                        } else {
+                            rating.setRating((float) rate / totalReviews);
+                            reviews.setText(totalReviews + " Reviews");
+                        }
+                    }
+                });
+                //students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
             }
-        });
 
         System.out.println("TeacherFragment.java: Rating is " + p.getCurrrentTeacher().getRating());
 
@@ -93,7 +126,7 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentContent, new FeedbackFragment());
+                ft.replace(R.id.fragmentContent, new ReviewFragment());
                 ft.addToBackStack(null);
                 ft.commit();
             }
@@ -102,15 +135,28 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Preventing multiple clicks, using threshold of 1 second
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-              //  ft.setCustomAnimations(R.anim.left_to_right,R.anim.left_to_right,R.anim.right_to_left,R.anim.left_to_right)
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ft.replace(R.id.fragmentContent, new RequestFragment());
                 ft.addToBackStack(null);
                 ft.commit();
+            }
+        });
 
-
-                System.out.println("Teachers_fragment.java: Du trykkede på inbox");
+        schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.fragmentContent, new ScheduleTeacherFragment());
+                ft.addToBackStack(null);
+                ft.commit();
             }
         });
         return view;

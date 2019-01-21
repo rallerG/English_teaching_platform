@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity
 
     TextView burgerMenuName;
 
+    ImageView profilePicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +74,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
         burgerMenuName = headerView.findViewById(R.id.textView2);
+        profilePicture = headerView.findViewById(R.id.navBarProfilePicture);
         burgerMenuName.setText(p.getCurrrentStudent().getName());
+        profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
         burgerMenuName.setOnClickListener(this);
 //        System.out.println("Print! " + p.getCurrrentStudent().getName());
@@ -197,11 +202,11 @@ public class MainActivity extends AppCompatActivity
                 fragment.setArguments(args);
                 setTitle("Payment");
                 break;
-            case R.id.nav_settings:
+            case R.id.nav_account:
                 //  fragment = new FragPager();
-                fragment = new FragPager();
+                fragment = new ProfilePageFragment();
                 fragment.setArguments(args);
-                setTitle("Settings");
+                setTitle("Account");
                 break;
             case R.id.nav_logout:
                 p.logout();
@@ -250,16 +255,16 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
-        else if (view == burgerMenuName) {
-            Fragment ProfilePageFragment = new ProfilePageFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragmentContent, ProfilePageFragment);
-            ft.addToBackStack(null);
-            ft.commit();
-            setTitle("Profile");
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        }
+//        else if (view == burgerMenuName) {
+//            Fragment ProfilePageFragment = new ProfilePageFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.fragmentContent, ProfilePageFragment);
+//            ft.addToBackStack(null);
+//            ft.commit();
+//            setTitle("Profile");
+//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//            drawer.closeDrawer(GravityCompat.START);
+//        }
     }
 
     @Override

@@ -35,7 +35,7 @@ public class MyTeacherMatchesRecyclerViewAdapter extends RecyclerView.Adapter<My
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mNameView.setText(mProfiles.get(position).getName());
         holder.mEmailView.setText(mProfiles.get(position).getEmail());
-        holder.mImageView.setImageResource(R.mipmap.ic_launcher_student_round);
+        holder.mImageView.setImageResource(mProfiles.get(position).getProfilePicture());
     }
 
     @Override

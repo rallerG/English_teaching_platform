@@ -2,10 +2,9 @@ package com.gruppe.englishteachingplatfrom.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Feedback extends DocumentObject {
+public class Review extends DocumentObject {
     private StudentProfile studentProfile;
     private String studentId;
     private String id;
@@ -13,23 +12,23 @@ public class Feedback extends DocumentObject {
     private String content;
   //  private String date;
 
-    private static ArrayList<Feedback> feedbackProfiles = new ArrayList<Feedback>();
+    private static ArrayList<Review> reviewProfiles = new ArrayList<Review>();
 
-    public Feedback(StudentProfile studentProfile, double rating, String content){
+    public Review(StudentProfile studentProfile, double rating, String content){
         this.studentProfile = studentProfile;
         this.rating = rating;
         this.content = content;
     }
 
-    public Feedback() {}
+    public Review() {}
 
-//    public static ArrayList<Feedback> createFeedback(int numContacts) {
-//        if (feedbackProfiles.isEmpty()) {
+//    public static ArrayList<Review> createFeedback(int numContacts) {
+//        if (reviewProfiles.isEmpty()) {
 //            for (int i = 1; i <= numContacts; i++) {
-//                feedbackProfiles.add(new Feedback("Paul", 4, "Really good teacher"));
+//                reviewProfiles.add(new Review("Paul", 4, "Really good teacher"));
 //            }
 //        }
-//        return feedbackProfiles;
+//        return reviewProfiles;
 //    }
 
 

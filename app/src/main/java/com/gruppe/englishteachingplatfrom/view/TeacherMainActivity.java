@@ -55,7 +55,7 @@ public class TeacherMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Pick what fragment to display oncreate
-        displaySelectedScreen(R.id.nav_settings);
+        displaySelectedScreen(R.id.nav_account);
     }
     
 
@@ -130,7 +130,7 @@ public class TeacherMainActivity extends AppCompatActivity
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 break;
-            case R.id.nav_settings:
+            case R.id.nav_account:
                 fragment = new TeacherFragment();
                 break;
             case R.id.nav_logout:

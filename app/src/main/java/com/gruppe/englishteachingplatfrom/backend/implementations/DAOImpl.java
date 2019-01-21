@@ -20,7 +20,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
@@ -48,7 +48,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void add(final DocumentObject document, final CallbackSuccess callbackSuccess, final CallbackError callbackError) {
-       if (type == Feedback.class) {
+       if (type == Review.class) {
            Map<String, Object> mapFeedback = document.toMap();
            DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
            mapFeedback.remove("student_id");
@@ -118,7 +118,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void add(final DocumentObject document, final CallbackSuccess callbackSuccess) {
-        if (type == Feedback.class) {
+        if (type == Review.class) {
             Map<String, Object> mapFeedback = document.toMap();
             DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
             mapFeedback.remove("student_id");
@@ -185,7 +185,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void add(final DocumentObject document) {
-        if (type == Feedback.class) {
+        if (type == Review.class) {
             Map<String, Object> mapFeedback = document.toMap();
             DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
             mapFeedback.remove("student_id");
@@ -335,7 +335,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void update(String documentId, DocumentObject newDocument) {
-        if (type == Feedback.class) {
+        if (type == Review.class) {
             Map<String, Object> mapFeedback = newDocument.toMap();
             DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
             mapFeedback.remove("student_id");
@@ -399,7 +399,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void update(String documentId, DocumentObject newDocument, final CallbackSuccess callbackSuccess) {
-        if (type == Feedback.class) {
+        if (type == Review.class) {
             Map<String, Object> mapFeedback = newDocument.toMap();
             DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
             mapFeedback.remove("student_id");
@@ -467,7 +467,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
 
     @Override
     public void update(String documentId, DocumentObject newDocument, final CallbackSuccess callbackSuccess, final CallbackError callbackError) {
-        if (type == Feedback.class) {
+        if (type == Review.class) {
             Map<String, Object> mapFeedback = newDocument.toMap();
             DocumentReference documentReferenceStudent = db.collection("student").document((String) mapFeedback.get("student_id"));
             mapFeedback.remove("student_id");

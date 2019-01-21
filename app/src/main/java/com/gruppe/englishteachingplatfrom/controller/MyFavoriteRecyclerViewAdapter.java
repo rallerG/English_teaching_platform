@@ -42,7 +42,7 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
         holder.mRatingBar.setRating((float) (mProfiles.get(position).getRating()));
         holder.mLanguageView.setText(mProfiles.get(position).getLanguage());
         holder.mPriceView.setText(Integer.toString(mProfiles.get(position).getPrice()) + " DKK");
-        holder.mImageView.setImageResource(R.mipmap.ic_launcher_student_round);
+        holder.mImageView.setImageResource(mProfiles.get(position).getProfilePic());
     }
 
     @Override

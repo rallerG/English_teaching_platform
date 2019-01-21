@@ -41,7 +41,7 @@ public class MyPaymentTeacherRecyclerViewAdapter extends RecyclerView.Adapter<My
         paymentViewHolder.textViewPrice.setText(Integer.toString(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getPrice()) + " DKK");
         //TODO Make get date again
         paymentViewHolder.textViewDate.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getRequestDate());
-        paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
+        paymentViewHolder.imageView.setImageResource(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getProfilePicture());
 
 //        paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
 //@Override

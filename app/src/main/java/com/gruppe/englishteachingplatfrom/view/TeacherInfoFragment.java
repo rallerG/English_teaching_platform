@@ -102,7 +102,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         rateBar.setRating(tRate);
         rateBar.setIsIndicator(true);
 
-//        information.setText(p.getCurrrentTeacher().getDescription());
+//        information.setText(p.getTeacherDummies().get(pos).getDescription());
 //        information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
         return rootview;
     }
@@ -136,7 +136,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                     Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
                 }
                 fav = true;
-
         }
     }
 }

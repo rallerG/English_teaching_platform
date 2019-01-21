@@ -41,7 +41,7 @@ public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Ada
         paymentViewHolder.textViewName.setText(paymentHistoryList.get(i).getStudent().getName());
         paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getPrice() + " DKK");
         paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getPaymentDate());
-        paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
+        paymentViewHolder.imageView.setImageResource(paymentHistoryList.get(i).getStudent().getProfilePicture());
         paymentViewHolder.textViewStatus.setText("Payed");
     }
 

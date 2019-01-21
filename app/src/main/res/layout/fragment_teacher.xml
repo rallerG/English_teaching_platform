@@ -95,10 +95,11 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/students"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="46"
+                        android:text="2"
                         android:textColor="@color/Green"
                         android:textStyle="bold" />
 
@@ -106,7 +107,7 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="135"
+                        android:text="3"
                         android:textColor="@color/Green"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -354,7 +355,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
-                android:id="@+id/Schedules"
+                android:id="@+id/schedule"
                 android:layout_width="370dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="18dp"
@@ -469,7 +470,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
-                            android:text="Check your feedback"
+                            android:text="Check your review"
                             android:textColor="#707070"
                             android:textSize="18sp"
                             android:textStyle="bold"

@@ -49,7 +49,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
         paymentViewHolder.textViewPrice.setText(Integer.toString(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getPrice())+" DKK");
         //TODO Make get date again
         paymentViewHolder.textViewDate.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getRequestDate());
-        paymentViewHolder.imageView.setImageResource(R.drawable.teacher_1);
+        paymentViewHolder.imageView.setImageResource(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getProfilePic());
         System.out.println("MyPaymentRecyclerViewAdapter.java:" + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getId());
 
 

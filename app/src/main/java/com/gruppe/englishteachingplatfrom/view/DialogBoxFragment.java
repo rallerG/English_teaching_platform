@@ -96,63 +96,62 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
 
             @Override
             public void onClick(View v) {
-//                StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
-//                studentPendingsDocument.add(p.getTeacherDummies().get(pos).getId(), true, new CallbackSuccess() {
-//                    @Override
-//                    public void onCallback() {
-//                        TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(id);
-//                        teacherPendingsDocument.add(p.getCurrrentStudent().getId(), false, new CallbackSuccess() {
-//                            @Override
-//                            public void onCallback() {
-//                                Bundle bundle = new Bundle();
-//                                FragPager.requestSend = true;
-//                                bundle.putString("name", tName);
-//                                bundle.putInt("price", tPrice);
-//                                bundle.putFloat("rate", tRate);
-//                                bundle.putString("language", tLang);
-//                                bundle.putInt("position", pos);
-//                                bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
-//                                ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
-//                                fragment2.setArguments(bundle);
-//                                if(!fav){
-//                                    FragPager.removeTeacher(FragPager.getFragman());
-//                                    }
-//                                getActivity().getSupportFragmentManager().popBackStack();
-//                                FragmentManager fragmentManager = getFragmentManager();
-//                                FragmentTransaction fragmentTransaction = fragmentManager
-//                                        .beginTransaction();
+                StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
+                studentPendingsDocument.add(p.getTeacherDummies().get(pos).getId(), true, new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(id);
+                        teacherPendingsDocument.add(p.getCurrrentStudent().getId(), false, new CallbackSuccess() {
+                            @Override
+                            public void onCallback() {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("name", tName);
+                                bundle.putInt("price", tPrice);
+                                bundle.putFloat("rate", tRate);
+                                bundle.putString("language", tLang);
+                                bundle.putInt("position", pos);
+                                bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
+                                ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
+                                fragment2.setArguments(bundle);
+                                if(true){
+                                    FragPager.removeTeacher(FragPager.getFragman());
+                                    }
+                                getActivity().getSupportFragmentManager().popBackStack();
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager
+                                        .beginTransaction();
+
+
+                                fragmentTransaction.replace(R.id.fragmentContent, fragment2).addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
+                        });
+                    }
+                });
+
+//                Bundle bundle = new Bundle();
+//                bundle.putString("name", tName);
+//                bundle.putInt("price", tPrice);
+//                bundle.putFloat("rate", tRate);
+//                bundle.putString("language", tLang);
+//                bundle.putInt("position", pos);
+//                bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
+//                if(!fav){
+//                    FragPager.removeTeacher(FragPager.getFragman());
+//                }
+//                ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
+//                fragment2.setArguments(bundle);
+//                getActivity().getSupportFragmentManager().popBackStack();
+//                if (calledByTeacherInfoFragment){
+//                    getActivity().getSupportFragmentManager().popBackStack();
+//                }
+//                FragmentManager fragmentManager = getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager
+//                        .beginTransaction();
 //
 //
-//                                fragmentTransaction.replace(R.id.fragmentContent, fragment2).addToBackStack(null);
-//                                fragmentTransaction.commit();
-//                            }
-//                        });
-//                    }
-//                });
-
-                Bundle bundle = new Bundle();
-                bundle.putString("name", tName);
-                bundle.putInt("price", tPrice);
-                bundle.putFloat("rate", tRate);
-                bundle.putString("language", tLang);
-                bundle.putInt("position", pos);
-                bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
-                if(!fav){
-                    FragPager.removeTeacher(FragPager.getFragman());
-                }
-                ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
-                fragment2.setArguments(bundle);
-                getActivity().getSupportFragmentManager().popBackStack();
-                if (calledByTeacherInfoFragment){
-                    getActivity().getSupportFragmentManager().popBackStack();
-                }
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager
-                        .beginTransaction();
-
-
-                fragmentTransaction.replace(R.id.fragmentContent, fragment2).addToBackStack(null);
-                fragmentTransaction.commit();
+//                fragmentTransaction.replace(R.id.fragmentContent, fragment2).addToBackStack(null);
+//                fragmentTransaction.commit();
             }
         });
 

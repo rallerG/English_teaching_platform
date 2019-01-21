@@ -30,17 +30,20 @@
             app:layout_constraintStart_toStartOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/studentProfilePicture">
 
-            <ImageView
-                android:id="@+id/studentProfilePicture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/studentProfilePicture"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:src="@android:drawable/btn_star"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="1dp"
+                app:civ_circle_background_color="#FFFFFF" />
 
             <TextView
                 android:id="@+id/studentName"
