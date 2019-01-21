@@ -11,7 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,8 +42,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     Singleton p = Singleton.getInstance();
 
-    TextView editPicture, studentName, studentEmail, studentPassword;
-    ImageView editName, editEmail, editPassword;
+    TextView editPicture, studentName, studentEmail, studentPassword, editProfile;
 
     public ProfilePageFragment() {
         // Required empty public constructor
@@ -74,9 +80,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_page, container, false);
 
-        editName = (ImageView) view.findViewById(R.id.editIcon);
-        editEmail = (ImageView) view.findViewById(R.id.editIcon2);
-        editPassword = (ImageView) view.findViewById(R.id.editIcon3);
+        editProfile = (TextView) view.findViewById(R.id.editProfile);
         studentName = (TextView) view.findViewById(R.id.student_profile_name);
         studentEmail = (TextView) view.findViewById(R.id.student_profile_email);
         studentPassword = (TextView) view.findViewById(R.id.student_profile_password);
@@ -85,9 +89,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         studentEmail.setText(p.getCurrrentStudent().getEmail());
         studentPassword.setText(p.getCurrrentStudent().getPassword());
 
-        editName.setOnClickListener(this);
-        editEmail.setOnClickListener(this);
-        editPassword.setOnClickListener(this);
+        editProfile.setOnClickListener(this);
+
 
         return view;
     }
@@ -118,12 +121,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (v == editName) {
-            System.out.println("Edit this name");
-        } else if (v == editEmail) {
-            System.out.println("Edit this email");
-        } else if (v == editPassword) {
-            System.out.println("Edit this password");
+        if (v == editProfile) {
+            System.out.println("Edit this profile");
         }
     }
 
@@ -140,5 +139,26 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    public void test() {
+        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+        teachersDocument.update(p.getCurrrentTeacher().getId(), p.getCurrrentTeacher(), new CallbackSuccess() {
+            @Override
+            public void onCallback() {
+                //callback
+            }
+        });
+
+
+        
+        StudentsDocument studentsDocument = new StudentsDocumentImpl();
+        studentsDocument.update(p.getCurrrentStudent().getId(), p.getCurrrentStudent(), new CallbackSuccess() {
+            @Override
+            public void onCallback() {
+                //callback
+            }
+        });
     }
 }
