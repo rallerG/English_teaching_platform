@@ -47,7 +47,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     TextView studentName, studentEmail, studentPassword, editProfile, editTextName, editTextEmail, editTextPassword;
     ViewSwitcher switcher, switcher2, switcher3;
-    Button confirmEdit;
+    Button confirmEdit, cancelEdit;
     ImageView profilePicture;
 
     public ProfilePageFragment() {
@@ -94,6 +94,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         switcher2 = (ViewSwitcher) view.findViewById(R.id.my_switcher2);
         switcher3 = (ViewSwitcher) view.findViewById(R.id.my_switcher3);
         confirmEdit = (Button) view.findViewById(R.id.confirmEdit);
+        cancelEdit = (Button) view.findViewById(R.id.buttonCancel);
         profilePicture = view.findViewById(R.id.studentProfilePicture);
 
         studentName.setText(p.getCurrrentStudent().getName());
@@ -102,9 +103,11 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
         confirmEdit.setVisibility(View.INVISIBLE);
+        cancelEdit.setVisibility(View.INVISIBLE);
 
         editProfile.setOnClickListener(this);
         confirmEdit.setOnClickListener(this);
+        cancelEdit.setOnClickListener(this);
 
         return view;
     }
@@ -151,6 +154,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             editTextPassword.setText(p.getCurrrentStudent().getPassword());
 
             confirmEdit.setVisibility(View.VISIBLE);
+            cancelEdit.setVisibility(View.VISIBLE);
+            editProfile.setClickable(false);
 
         } else if (v == confirmEdit) {
             System.out.println("Confirm edit");
@@ -185,6 +190,15 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             } else {
                 System.out.println("Alt skal udfyldes");
             }
+        } else if (v == cancelEdit) {
+            switcher.showPrevious();
+            switcher2.showPrevious();
+            switcher3.showPrevious();
+            confirmEdit.setVisibility(View.INVISIBLE);
+            cancelEdit.setVisibility(View.INVISIBLE);
+            editProfile.setClickable(true);
+            Toast.makeText(getContext(), "Edit cancelled!", Toast.LENGTH_SHORT).show();
+
         }
     }
 
