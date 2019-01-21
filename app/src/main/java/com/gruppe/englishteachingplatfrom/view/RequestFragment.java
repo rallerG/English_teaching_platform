@@ -42,6 +42,7 @@ public class RequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mail.clear();
         mail.add(new MailProfile("Chang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
         mail.add(new MailProfile("Huang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
         mail.add(new MailProfile("Zao", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
@@ -54,8 +55,7 @@ public class RequestFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_list, container, false);
         View view1 = inflater.inflate(R.layout.fragment_request, container, false);
         toggleStar = view1.findViewById(R.id.toggleStar);
