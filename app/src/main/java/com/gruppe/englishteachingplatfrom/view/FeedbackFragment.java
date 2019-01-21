@@ -104,12 +104,6 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         all.setBackgroundResource(R.drawable.selectedborder);
         prevBtn = all;
 
- /*       Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            totAvgRating = bundle.getDouble("TotalRate",0);
-             totalReviews = bundle.getInt("Reviews",0);
-        }*/
-
 
         feedback.setVisibility(View.INVISIBLE);
         TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());

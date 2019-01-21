@@ -33,6 +33,14 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
         p.setPreferences(PreferenceManager.getDefaultSharedPreferences(getApplication()));
         preference = Singleton.getInstance().getPreferences();
 
+        System.out.println("Student1: " + R.drawable.student_1);
+        System.out.println("Student2: " + R.drawable.student_2);
+        System.out.println("Student3: " + R.drawable.student_3);
+
+        System.out.println("Teacher1: " + R.drawable.teacher_1);
+        System.out.println("Teacher2: " + R.drawable.teacher_2);
+        System.out.println("Teacher3: " + R.drawable.teacher_3);
+
         if (preference.contains("current_teacher_id")) {
             pDialog = new ProgressDialog(this);
             pDialog.setMessage("Please wait...");

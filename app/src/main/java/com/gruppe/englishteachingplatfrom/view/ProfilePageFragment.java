@@ -160,6 +160,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             p.getCurrrentStudent().setName(String.valueOf(editTextName.getText()));
             p.getCurrrentStudent().setEmail(String.valueOf(editTextEmail.getText()));
             p.getCurrrentStudent().setPassword(String.valueOf(editTextPassword.getText()));
+//            p.getCurrrentStudent().setProfilePicture(p.getCurrrentStudent().getProfilePicture());
 
             //Update backend
             StudentsDocument studentsDocument = new StudentsDocumentImpl();
