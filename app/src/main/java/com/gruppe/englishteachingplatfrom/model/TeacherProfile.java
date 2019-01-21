@@ -33,7 +33,16 @@ public class TeacherProfile extends DocumentObject{
     }
 
     public TeacherProfile () {
-        this.profilePic = R.drawable.unknown;
+//        switch (this.id) {
+//            case "1": this.profilePic = R.drawable.teacher_1;
+//                break;
+//            case "2": this.profilePic = R.drawable.teacher_2;
+//                break;
+//            case "3": this.profilePic = R.drawable.teacher_3;
+//                break;
+//            default: this.profilePic = R.drawable.unknown;
+//                break;
+//        }
         this.rating = 0;
         this.price = 0;
         this.language = "English";
@@ -113,7 +122,6 @@ public class TeacherProfile extends DocumentObject{
         mapToReturn.put("language", this.language);
         mapToReturn.put("password", this.password);
         mapToReturn.put("description", this.description);
-        mapToReturn.put("profilePic", this.profilePic);
         return mapToReturn;
     }
 
@@ -131,7 +139,6 @@ public class TeacherProfile extends DocumentObject{
             this.setPrice(Math.toIntExact((long) mapOfObject.get("teacher_price")));
             this.setPassword((String) mapOfObject.get("teacher_password"));
             this.setDescription((String) mapOfObject.get("teacher_description"));
-            this.setProfilePic(Math.toIntExact((long) mapOfObject.get("teacher_profilePic")));
         }
     }
 

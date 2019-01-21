@@ -29,7 +29,18 @@ public class StudentProfile extends DocumentObject{
     }
 
     public StudentProfile () {
-        this.profilePicture = R.drawable.unknown;
+//        switch (this.id) {
+//            case "1": this.profilePicture = R.drawable.student_1;
+//                break;
+//            case "2": this.profilePicture = R.drawable.student_2;
+//                break;
+//            case "3": this.profilePicture = R.drawable.student_3;
+//                break;
+//                default: this.profilePicture = R.drawable.unknown;
+//                break;
+//        }
+
+//        this.profilePicture = R.drawable.unknown;
         this.password = "123";
     }
 
@@ -95,7 +106,6 @@ public class StudentProfile extends DocumentObject{
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
         mapToReturn.put("password",this.password);
-        mapToReturn.put("profilePic", this.profilePicture);
         return mapToReturn;
     }
 
@@ -109,7 +119,6 @@ public class StudentProfile extends DocumentObject{
             this.setName((String) mapOfObject.get("student_fullname"));
             this.setEmail((String) mapOfObject.get("student_mail"));
             this.setPassword((String) mapOfObject.get("student_password"));
-            this.setProfilePicture(Math.toIntExact((long) mapOfObject.get("student_profilePic")));
         }
     }
 
