@@ -42,6 +42,8 @@ public class IntroductionStudent extends AppCompatActivity {
     private TextView[] dots;
     private int[] layouts;
     private Button skip,next;
+    private Boolean visitedLast = false;
+    private float layoutWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class IntroductionStudent extends AppCompatActivity {
         dotsLayout =  findViewById(R.id.layoutDots);
         skip =  findViewById(R.id.skip);
         next = findViewById(R.id.next);
+        layoutWidth = viewPager.getWidth()/2;
 
         layouts = new int[]{
                 R.layout.intro_page1,
@@ -135,11 +138,14 @@ public class IntroductionStudent extends AppCompatActivity {
             addBottomDots(position);
 
             if (position == layouts.length - 1) {
-                skip.setVisibility(View.VISIBLE);
-
+                next.setVisibility(View.GONE);
+                skip.animate().translationX((viewPager.getWidth()/3)+20).setDuration(300).start();
+                visitedLast = true;
             } else {
-
-                //btnSkip.setVisibility(View.INVISIBLE);
+                next.setVisibility(View.VISIBLE);
+                if(visitedLast == true) {
+                    skip.animate().translationX(0).setDuration(300).start();
+                }
             }
         }
 
