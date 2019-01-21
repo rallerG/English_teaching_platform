@@ -1,5 +1,7 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import com.gruppe.englishteachingplatfrom.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class StudentProfile extends DocumentObject{
     }
 
     public StudentProfile () {
-        this.profilePicture = 0;
+        this.profilePicture = R.drawable.unknown;
         this.password = "123";
     }
 

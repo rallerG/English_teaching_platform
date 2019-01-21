@@ -1,5 +1,7 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import com.gruppe.englishteachingplatfrom.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +33,7 @@ public class TeacherProfile extends DocumentObject{
     }
 
     public TeacherProfile () {
-        this.profilePic = 0;
+        this.profilePic = R.drawable.unknown;
         this.rating = 0;
         this.price = 0;
         this.language = "English";
