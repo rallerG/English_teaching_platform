@@ -274,8 +274,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -287,8 +287,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -300,8 +300,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -313,8 +313,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -326,8 +326,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -339,8 +339,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -352,8 +352,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                         </LinearLayout>
 
@@ -383,8 +383,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -396,8 +396,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -409,8 +409,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -422,8 +422,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -435,8 +435,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -448,8 +448,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -461,8 +461,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                         </LinearLayout>
 
@@ -492,8 +492,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -505,8 +505,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -518,8 +518,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -531,8 +531,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -570,8 +570,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                         </LinearLayout>
 
@@ -653,8 +653,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -666,8 +666,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -763,8 +763,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
@@ -776,8 +776,8 @@
                                 android:layout_width="15dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:background="@color/Green"
-                                tools:background="@color/Green" />
+                                android:background="@color/Heart"
+                                tools:background="@color/Heart" />
 
                             <Space
                                 android:layout_width="10dp"
