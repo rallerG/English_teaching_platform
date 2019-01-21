@@ -103,7 +103,6 @@ public class StudentProfile extends DocumentObject{
     public void toObject(String documentId,Map<String, Object> mapOfObject) {
         if(mapOfObject.containsKey("student_id")) {
             this.setId((String) mapOfObject.get("student_id"));
-            this.setProfilePicture((int) mapOfObject.get("student_profilePic"));
         }
         else {
             this.setId(documentId);
