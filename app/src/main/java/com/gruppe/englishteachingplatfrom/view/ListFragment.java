@@ -153,6 +153,8 @@ public class ListFragment extends Fragment {
                                                     bundle.putInt("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
                                                     bundle.putFloat("rate",(float) p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
                                                     bundle.putString("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
+                                                    bundle.putString("id", p.getCurrrentStudent().getMatchProfiles().get(position).getId());
+                                                    bundle.putString("from", "matches");
 
                                                     Fragment F = new TeacherInfoFragment();
                                                     F.setArguments(bundle);
@@ -198,6 +200,7 @@ public class ListFragment extends Fragment {
                                                     bundle.putInt("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
                                                     bundle.putFloat("rate",(float) p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
                                                     bundle.putString("language",  p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
+                                                    bundle.putString("from", "favorites");
 
                                                     Fragment F = new TeacherInfoFragment();
                                                     F.setArguments(bundle);
@@ -242,6 +245,7 @@ public class ListFragment extends Fragment {
                                                     bundle.putInt("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
                                                     bundle.putFloat("rate",(float) p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
                                                     bundle.putString("language",  p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
+                                                    bundle.putString("from", "pending");
 
                                                     Fragment F = new TeacherInfoFragment();
                                                     F.setArguments(bundle);

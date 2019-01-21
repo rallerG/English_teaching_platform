@@ -27,7 +27,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private float tRating, tRate;
     private String tName, tLang;
     private boolean fav = false;
-    private String id;
+    private String id, from;
     private FloatingActionButton floating_Send_teacherInfo, floating_Fav_teacherInfo;
 
 
@@ -38,6 +38,16 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            tName = bundle.getString("name");
+            tPrice = bundle.getInt("price", 0);
+            tRate = bundle.getFloat("rate",0);
+            tLang = bundle.getString("language");
+            pos = bundle.getInt("position", 0);
+            id = bundle.getString("id", "");
+            from = bundle.getString("from", "swipe");
+        }
 
     }
 
@@ -51,11 +61,21 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         language = rootview.findViewById(R.id.info_teacherlanguage);
         rate = rootview.findViewById(R.id.info_teacherrating);
         price = rootview.findViewById(R.id.info_teacherprice);
-        information = rootview.findViewById(R.id.information_text);
+       // information = rootview.findViewById(R.id.information_text);
         rateBar = rootview.findViewById(R.id.info_teacherratingstars);
 
         floating_Fav_teacherInfo = rootview.findViewById(R.id.floating_fav_teacherInfo);
         floating_Send_teacherInfo = rootview.findViewById(R.id.floating_send_teacherInfo);
+
+        if(from.equals("matches")){
+            floating_Send_teacherInfo.setImageResource(R.drawable.alarm_clock);
+        }
+        if(from.equals("favorites")){
+            floating_Fav_teacherInfo.setImageResource(R.drawable.favourite_full);
+        }
+        if(from.equals("pending")){
+            floating_Send_teacherInfo.hide();
+        }
 
         floating_Send_teacherInfo.setOnClickListener(this);
         floating_Fav_teacherInfo.setOnClickListener(this);
@@ -71,12 +91,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             pos = bundle.getInt("position", 0);
             id = bundle.getString("id", "");
         }
-//        Intent i = getIntent();
-//        tName = i.getStringExtra("name");
-//        tPrice = i.getIntExtra("price", 0);
-//        tRate = i.getFloatExtra("rate", 0);
-//        tLang = i.getStringExtra("language");
-//        pos = i.getIntExtra("pos", 0);
 
         System.out.println("TeacherInfoFragment.java: " + tName + " " + tPrice + " " + tRate + " " + tLang);
 
@@ -88,7 +102,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         rateBar.setRating(tRate);
         rateBar.setIsIndicator(true);
 
-        information.setText(p.getCurrrentTeacher().getDescription());
+//        information.setText(p.getCurrrentTeacher().getDescription());
 //        information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
         return rootview;
     }
@@ -96,7 +110,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
 
-        if (v == floating_Send_teacherInfo) {
+        if (v == floating_Send_teacherInfo && from.equals("swipe")) {
             PageFragment.clicked = false;
             Bundle bundle = new Bundle();
             bundle.putString("name", tName);
@@ -112,7 +126,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
-        if (v == floating_Fav_teacherInfo) {
+        if (v == floating_Fav_teacherInfo && from.equals("swipe")) {
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
                 if(!fav) {
