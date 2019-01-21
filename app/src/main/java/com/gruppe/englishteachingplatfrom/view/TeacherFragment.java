@@ -75,23 +75,7 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         pay.setOnClickListener(this);
 
             if(savedInstanceState == null) {
-                TeacherMatchesDocument teacherMatchesDocument = new TeacherMatchesDocumentImpl(p.getCurrrentTeacher().getId());
-                teacherMatchesDocument.getAll(new CallbackList<StudentProfile>() {
-                    @Override
-                    public void onCallback(List<StudentProfile> listOfObjects) {
-                        p.getCurrrentTeacher().getMatchProfiles().clear();
-                        for (StudentProfile student : listOfObjects) {
-                            StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                            studentsDocument.get(student.getId(), new Callback<StudentProfile>() {
-                                @Override
-                                public void onCallback(StudentProfile object) {
-                                    p.getCurrrentTeacher().getMatchProfiles().add(object);
-                                }
-                            });
-                        }
-                       // students.setText( p.getCurrrentTeacher().getMatchProfiles().size());
-                    }
-                });
+                System.out.println("TeacherFragment.java: Start of savedInstanceState");
 
                 TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
                 feedbackDocument.getAll(new CallbackList<Review>() {

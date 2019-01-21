@@ -18,6 +18,8 @@ import android.view.View;
 
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
