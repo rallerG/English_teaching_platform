@@ -35,8 +35,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     Singleton p = Singleton.getInstance();
 
-    TextView editPicture, studentName, studentEmail, studentPassword;
-    ImageView editName, editEmail, editPassword;
+    TextView editPicture, studentName, studentEmail, studentPassword, editProfile;
 
     public ProfilePageFragment() {
         // Required empty public constructor
@@ -74,9 +73,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_page, container, false);
 
-        editName = (ImageView) view.findViewById(R.id.editIcon);
-        editEmail = (ImageView) view.findViewById(R.id.editIcon2);
-        editPassword = (ImageView) view.findViewById(R.id.editIcon3);
+        editProfile = (TextView) view.findViewById(R.id.editProfile);
         studentName = (TextView) view.findViewById(R.id.student_profile_name);
         studentEmail = (TextView) view.findViewById(R.id.student_profile_email);
         studentPassword = (TextView) view.findViewById(R.id.student_profile_password);
@@ -85,9 +82,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         studentEmail.setText(p.getCurrrentStudent().getEmail());
         studentPassword.setText(p.getCurrrentStudent().getPassword());
 
-        editName.setOnClickListener(this);
-        editEmail.setOnClickListener(this);
-        editPassword.setOnClickListener(this);
+        editProfile.setOnClickListener(this);
+
 
         return view;
     }
@@ -118,12 +114,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (v == editName) {
-            System.out.println("Edit this name");
-        } else if (v == editEmail) {
-            System.out.println("Edit this email");
-        } else if (v == editPassword) {
-            System.out.println("Edit this password");
+        if (v == editProfile) {
+            System.out.println("Edit this profile");
         }
     }
 
