@@ -120,4 +120,8 @@ public class StudentProfile extends DocumentObject{
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public void setProfilePicture(int profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 }
