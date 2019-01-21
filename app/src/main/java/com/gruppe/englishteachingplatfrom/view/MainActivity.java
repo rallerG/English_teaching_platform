@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity
 
     TextView burgerMenuName;
 
+    ImageView profilePicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +74,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
         burgerMenuName = headerView.findViewById(R.id.textView2);
+        profilePicture = headerView.findViewById(R.id.navBarProfilePicture);
         burgerMenuName.setText(p.getCurrrentStudent().getName());
+        profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
         burgerMenuName.setOnClickListener(this);
 //        System.out.println("Print! " + p.getCurrrentStudent().getName());
