@@ -49,9 +49,11 @@
             android:name=".view.SignupActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.IntroductionSlider"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:name=".view.IntroductionStudent"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.IntroductionTeacher"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

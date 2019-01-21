@@ -32,6 +32,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:background="@null"
+        android:gravity="center"
         android:text="Get started"
         android:textColor="@android:color/white"
         android:visibility="visible" />
@@ -44,6 +45,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_weight="1"
         android:background="@null"
         android:text="Next"
         android:textColor="@android:color/white"

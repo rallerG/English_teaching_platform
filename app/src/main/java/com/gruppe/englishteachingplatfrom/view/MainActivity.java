@@ -30,7 +30,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
         PaymentActiveFragment.OnFragmentInteractionListener, PaymentOverviewFragment.OnFragmentInteractionListener,
-        PaymentHistoryFragment.OnFragmentInteractionListener, View.OnClickListener {
+        PaymentHistoryFragment.OnFragmentInteractionListener, View.OnClickListener, ProfilePageFragment.OnFragmentInteractionListener {
 
     private static final String TAG = "MainActivity";
 
@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity
     public int pic;
     Singleton p = Singleton.getInstance();
     private ProgressDialog pDialog;
+
+    NavigationView navigationView;
+
+    View headerView;
+
+    TextView burgerMenuName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +67,13 @@ public class MainActivity extends AppCompatActivity
 
 
         //Set the current user in the burger menu.
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View headerView = navigationView.getHeaderView(0);
-        TextView burgerMenuName = headerView.findViewById(R.id.textView2);
+        headerView = navigationView.getHeaderView(0);
+        burgerMenuName = headerView.findViewById(R.id.textView2);
         burgerMenuName.setText(p.getCurrrentStudent().getName());
+
+        burgerMenuName.setOnClickListener(this);
 //        System.out.println("Print! " + p.getCurrrentStudent().getName());
 
 
@@ -196,7 +204,7 @@ public class MainActivity extends AppCompatActivity
                 setTitle("Settings");
                 break;
             case R.id.nav_logout:
-                p.setCurrrentStudent(null);
+                p.logout();
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
                 break;
@@ -241,6 +249,16 @@ public class MainActivity extends AppCompatActivity
             F.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
+        }
+        else if (view == burgerMenuName) {
+            Fragment ProfilePageFragment = new ProfilePageFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContent, ProfilePageFragment);
+            ft.addToBackStack(null);
+            ft.commit();
+            setTitle("Profile");
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
     }
 

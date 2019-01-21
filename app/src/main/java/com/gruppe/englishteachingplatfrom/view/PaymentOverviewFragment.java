@@ -141,7 +141,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                             } else {
 //                                p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
                                 StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
+                                 studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
                                     @Override
                                     public void onCallback(StudentProfile object) {
                                         pay.setStudent(object);

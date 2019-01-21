@@ -5,10 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Payment;
@@ -83,7 +81,7 @@ public class MyPaymentTeacherRecyclerViewAdapter extends RecyclerView.Adapter<My
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageView4);
+            imageView = itemView.findViewById(R.id.studentProfilePicture);
             textViewName = itemView.findViewById(R.id.studentName);
             textViewPrice = itemView.findViewById(R.id.amount);
             textViewDate = itemView.findViewById(R.id.date);

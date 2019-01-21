@@ -24,8 +24,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/studentProfilePicture">
 
             <TextView
                 android:id="@+id/textView9"
@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/studentProfilePicture"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="16dp"
@@ -59,7 +59,7 @@
                 android:layout_marginTop="45dp"
                 android:text="Teacher name"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/studentProfilePicture"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:layout_marginTop="2dp"
                 android:text="23.11.2018"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/studentProfilePicture"
                 app:layout_constraintTop_toBottomOf="@+id/studentName" />
 
             <TextView

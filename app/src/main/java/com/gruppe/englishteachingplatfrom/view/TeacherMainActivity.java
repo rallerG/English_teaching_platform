@@ -134,7 +134,7 @@ public class TeacherMainActivity extends AppCompatActivity
                 fragment = new TeacherFragment();
                 break;
             case R.id.nav_logout:
-                p.setCurrrentTeacher(null);
+                p.logout();
                 startActivity(new Intent(this, LoginOrSignupActivity.class));
                 finish();
                 break;
@@ -144,7 +144,7 @@ public class TeacherMainActivity extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContent, fragment);
-            ft.addToBackStack(null);
+         //   ft.addToBackStack(null);
             ft.commit();
         }
 
