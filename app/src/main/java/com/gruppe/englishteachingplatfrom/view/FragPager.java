@@ -94,15 +94,15 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
         public static void removeTeacher(FragmentManager fm){
             int pos = mPager.getCurrentItem();
-
-            if(pos < mPager.getChildCount()){
+            System.out.println("child count = " + mPager.getAdapter().getCount());
+            if(pos <  mPager.getAdapter().getCount()){
                 Singleton.getInstance().getTeacherDummies().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
                 mPager.setSaveFromParentEnabled(false);
                 mPager.setCurrentItem(pos, true);
             }
-            else if(pos == mPager.getChildCount() && pos!=0 ){
+            else if(pos ==  mPager.getAdapter().getCount() && pos!=0 ){
                 Singleton.getInstance().getTeacherDummies().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
@@ -114,7 +114,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
                 mPager.setAdapter(mAdapt);
                 mPager.setCurrentItem(pos, true);
             }
-
+            else System.out.println("Shit error " + pos);
 
         }
 
@@ -152,6 +152,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
             bundle.putFloat("rate", (float) p.getTeacherDummies().get(position1).getRating());
             bundle.putString("language", p.getTeacherDummies().get(position1).getLanguage());
             bundle.putInt("position", position1);
+            bundle.putString("id", p.getTeacherDummies().get(position1).getId());
             bundle.putBoolean("isTeacherInfoFragment", false);
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
