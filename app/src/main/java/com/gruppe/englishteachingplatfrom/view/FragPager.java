@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
@@ -143,10 +144,10 @@ public class FragPager extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         position1 = mPager.getCurrentItem();
-
+        String name =  p.getTeacherDummies().get(position1).getName();
         if (v == floating_Send) {
             Bundle bundle = new Bundle();
-            bundle.putString("name", p.getTeacherDummies().get(position1).getName());
+            bundle.putString("name", name);
             bundle.putInt("price", p.getTeacherDummies().get(position1).getPrice());
             bundle.putFloat("rate", (float) p.getTeacherDummies().get(position1).getRating());
             bundle.putString("language", p.getTeacherDummies().get(position1).getLanguage());
@@ -171,7 +172,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
 //                    }
 //                });
                 removeTeacher(getFragman());
-
+                Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
 
 
 //                if(hm.get(mPager.getCurrentItem()) != null){

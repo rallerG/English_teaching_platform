@@ -143,6 +143,9 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
                 ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
                 fragment2.setArguments(bundle);
                 getActivity().getSupportFragmentManager().popBackStack();
+                if (calledByTeacherInfoFragment){
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager
                         .beginTransaction();

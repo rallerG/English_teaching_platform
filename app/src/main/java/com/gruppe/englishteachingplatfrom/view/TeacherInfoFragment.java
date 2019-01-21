@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
@@ -22,7 +23,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private Singleton p = Singleton.getInstance();
     //    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
     private int pos, tPrice;
-    private int checker = 0;
     private RatingBar rating;
     private float tRating, tRate;
     private String tName, tLang;
@@ -116,11 +116,13 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         if (v == floating_Fav_teacherInfo) {
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
+                if(!fav) {
+                    ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
+                    ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
+                    FragPager.removeTeacher(FragPager.getFragman());
+                    Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+                }
                 fav = true;
-                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
-                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-                FragPager.removeTeacher(FragPager.getFragman());
-
 
         }
     }
