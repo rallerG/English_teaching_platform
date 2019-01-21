@@ -19,6 +19,7 @@ public class TeacherProfile extends DocumentObject{
     private String language;
     private int price;
     private String password;
+    private String description;
 
     public TeacherProfile(String name, double rating, int profilePic, String language, int price) {
         this.name = name;
@@ -109,6 +110,8 @@ public class TeacherProfile extends DocumentObject{
         mapToReturn.put("rating", Double.toString(this.rating));
         mapToReturn.put("language", this.language);
         mapToReturn.put("password", this.password);
+        mapToReturn.put("description", this.description);
+        mapToReturn.put("profilePic", this.profilePic);
         return mapToReturn;
     }
 
@@ -125,6 +128,8 @@ public class TeacherProfile extends DocumentObject{
             this.setLanguage((String) mapOfObject.get("teacher_language"));
             this.setPrice(Math.toIntExact((long) mapOfObject.get("teacher_price")));
             this.setPassword((String) mapOfObject.get("teacher_password"));
+            this.setDescription((String) mapOfObject.get("teacher_description"));
+            this.setProfilePic(Math.toIntExact((long) mapOfObject.get("teacher_profilePic")));
         }
     }
 
@@ -152,6 +157,17 @@ public class TeacherProfile extends DocumentObject{
         this.password = password;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setProfilePic(int profilePic) {
+        this.profilePic = profilePic;
+    }
 
 
 
