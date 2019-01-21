@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
     TextView studName, content;
     ToggleButton star;
     ConstraintLayout itemHolder;
+    private long mLastClickTime = 0;
 
     public MyRequestRecyclerViewAdapter(Context mContext, List<MailProfile> items) {
         this.mContext = mContext;
@@ -72,6 +74,11 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
         holder.itemHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 Toast.makeText(mContext, "Clicked on: " + mValues.get(position).getStudName() + "Favorite: " + mValues.get(position).getFavorite() + " Visited: " + mValues.get(position).getVisited(), Toast.LENGTH_SHORT).show();
                 mValues.get(position).setVisited(true);
                 Intent intent = new Intent(mContext, RequestMailActivity.class);
@@ -92,6 +99,10 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
     }
 
 
