@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.fragmentContent, ProfilePageFragment);
             ft.addToBackStack(null);
             ft.commit();
+            setTitle("Profile");
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         }
