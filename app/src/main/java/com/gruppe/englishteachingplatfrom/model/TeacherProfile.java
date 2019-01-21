@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class TeacherProfile extends DocumentObject{
     private static ArrayList<StudentProfile> pendingProfiles = new ArrayList<>();
-    private static ArrayList<Feedback> feedbackList = new ArrayList<>();
+    private static ArrayList<Review> reviewList = new ArrayList<>();
     private static ArrayList<StudentProfile> MatchProfiles = new ArrayList<>();
     private static ArrayList<Payment> activePaymentDummies = new ArrayList<>();
     private static ArrayList<Payment> historyPaymentDummies = new ArrayList<>();
@@ -53,8 +53,8 @@ public class TeacherProfile extends DocumentObject{
         return pendingProfiles;
     }
 
-    public ArrayList<Feedback> getFeedbackList() {
-        return feedbackList;
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
     }
 
     public ArrayList<StudentProfile> getMatchProfiles() {

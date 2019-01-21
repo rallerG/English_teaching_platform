@@ -1,11 +1,11 @@
 package com.gruppe.englishteachingplatfrom.backend.implementations;
 
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
+import com.gruppe.englishteachingplatfrom.model.Review;
 
-public class TeacherFeedbackDocumentImpl extends DAOImpl<Feedback> implements TeacherFeedbackDocument {
+public class TeacherReviewDocumentImpl extends DAOImpl<Review> implements TeacherReviewDocument {
     private String parentTeacherDocumentId;
-    public TeacherFeedbackDocumentImpl(String parentTeacherDocumentId) {
+    public TeacherReviewDocumentImpl(String parentTeacherDocumentId) {
         super("teachers/"+parentTeacherDocumentId+"/feedback");
         this.parentTeacherDocumentId = parentTeacherDocumentId;
     }

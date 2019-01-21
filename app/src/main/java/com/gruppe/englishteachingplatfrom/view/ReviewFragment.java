@@ -14,44 +14,39 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
-import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
-import com.gruppe.englishteachingplatfrom.model.DocumentObject;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
-import com.gruppe.englishteachingplatfrom.controller.MyFeedbackRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
+import com.gruppe.englishteachingplatfrom.model.Review;
+import com.gruppe.englishteachingplatfrom.controller.MyReviewRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
-import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FeedbackFragment extends Fragment implements View.OnClickListener {
+public class ReviewFragment extends Fragment implements View.OnClickListener {
 
     private Singleton p = Singleton.getInstance();
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
-    RecyclerView feedback;
-    ArrayList<Feedback> list;
+    RecyclerView review;
+    ArrayList<Review> list;
     TextView star1, star2, star3, star4, star5, ratings, totalRate;
     LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
     int totalReviews;
     double totAvgRating, totalStar = 0;
     private ProgressBar loader;
-    private MyFeedbackRecyclerViewAdapter recycleAdapter;
+    private MyReviewRecyclerViewAdapter recycleAdapter;
     int totStar1 = 0;
     int totStar2 = 0;
     int totStar3 = 0;
     int totStar4 = 0;
     int totStar5 = 0;
 
-    public FeedbackFragment() {
+    public ReviewFragment() {
     }
 
 
@@ -71,10 +66,10 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feedback_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_review_list, container, false);
 
         loader = view.findViewById(R.id.loader);
-        feedback = view.findViewById(R.id.list);
+        review = view.findViewById(R.id.list);
         star1 = view.findViewById(R.id.star1);
         star2 = view.findViewById(R.id.star2);
         star3 = view.findViewById(R.id.star3);
@@ -105,14 +100,14 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         prevBtn = all;
 
 
-        feedback.setVisibility(View.INVISIBLE);
-        TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());
-        feedbackDocument.getAll(new CallbackList<Feedback>() {
+        review.setVisibility(View.INVISIBLE);
+        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
+        feedbackDocument.getAll(new CallbackList<Review>() {
             @Override
-            public void onCallback(List<Feedback> listOfObjects) {
-                for (Feedback feedback : listOfObjects) {
-                    list.add(feedback);
-                    totalStar += feedback.getRating();
+            public void onCallback(List<Review> listOfObjects) {
+                for (Review review : listOfObjects) {
+                    list.add(review);
+                    totalStar += review.getRating();
                     totalReviews ++;
                 }
                 totAvgRating = totalStar / list.size();
@@ -125,11 +120,11 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 }
 
                 ratings.setText(totalReviews  + " Ratings");
-                recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), list);
-                feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
-                feedback.setAdapter(recycleAdapter);
+                recycleAdapter = new MyReviewRecyclerViewAdapter(getContext(), list);
+                review.setLayoutManager(new LinearLayoutManager(getActivity()));
+                review.setAdapter(recycleAdapter);
                 loader.setVisibility(View.INVISIBLE);
-                feedback.setVisibility(View.VISIBLE);
+                review.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < list.size(); i++) {
                     if(list.get(i).getRating() <= 1) {
@@ -155,7 +150,7 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
                 star5.setText(String.valueOf(totStar5));
             }
         });
-        System.out.println("FeedbackFragment.java: " + list);
+        System.out.println("ReviewFragment.java: " + list);
 
 
      //   totAvgRating = totalStar / list.size();
@@ -173,11 +168,11 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
         super.onDetach();
     }
 
-    public ArrayList<Feedback> getFeedbackList() {
+    public ArrayList<Review> getReviewList() {
         return list;
     }
 
-    public void setFeedbackList(ArrayList<Feedback> list) {
+    public void setReviewList(ArrayList<Review> list) {
         this.list = list;
     }
 
@@ -201,30 +196,30 @@ public class FeedbackFragment extends Fragment implements View.OnClickListener {
             prevBtn = fiveStar;
         } else if (v == all) {
             loader.setVisibility(View.VISIBLE);
-            feedback.setVisibility(View.INVISIBLE);
-            feedback.setAdapter(recycleAdapter);
+            review.setVisibility(View.INVISIBLE);
+            review.setAdapter(recycleAdapter);
             prevBtn.setBackgroundResource(R.drawable.border);
             all.setBackgroundResource(R.drawable.selectedborder);
             prevBtn = all;
-            feedback.setVisibility(View.VISIBLE);
+            review.setVisibility(View.VISIBLE);
         }
         loader.setVisibility(View.INVISIBLE);
     }
 
     public void sortList(int rating, LinearLayout btn, LinearLayout prevBtn) {
-        ArrayList<Feedback> tempList = new ArrayList<Feedback>();
+        ArrayList<Review> tempList = new ArrayList<Review>();
         tempList.clear();
 
         this.prevBtn = prevBtn;
         prevBtn.setBackgroundResource(R.drawable.border);
         btn.setBackgroundResource(R.drawable.selectedborder);
-        for (Feedback f : list) {
+        for (Review f : list) {
             if (f.getRating() == rating) {
                 tempList.add(f);
             }
         }
-        MyFeedbackRecyclerViewAdapter recycleAdapter = new MyFeedbackRecyclerViewAdapter(getContext(), tempList);
-        feedback.setLayoutManager(new LinearLayoutManager(getActivity()));
-        feedback.setAdapter(recycleAdapter);
+        MyReviewRecyclerViewAdapter recycleAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
+        review.setLayoutManager(new LinearLayoutManager(getActivity()));
+        review.setAdapter(recycleAdapter);
     }
 }

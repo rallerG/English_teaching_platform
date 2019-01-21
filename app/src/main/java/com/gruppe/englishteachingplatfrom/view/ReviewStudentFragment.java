@@ -11,13 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
+import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
@@ -100,15 +99,15 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.send_review :
                 StudentProfile studentProfile = p.getCurrrentStudent();
-                Feedback feedback = new Feedback(studentProfile,((double) ratingBar.getRating()),content.getText().toString());
+                Review review = new Review(studentProfile,((double) ratingBar.getRating()),content.getText().toString());
 
                 pDialog = new ProgressDialog(getActivity());
                 pDialog.setMessage("Please wait...");
                 pDialog.setCancelable(true);
                 pDialog.show();
 
-                TeacherFeedbackDocument teacherFeedbackDocument = new TeacherFeedbackDocumentImpl(teacherid);
-                teacherFeedbackDocument.add(feedback, new CallbackSuccess() {
+                TeacherReviewDocument teacherReviewDocument = new TeacherReviewDocumentImpl(teacherid);
+                teacherReviewDocument.add(review, new CallbackSuccess() {
                     @Override
                     public void onCallback() {
                         if (pDialog.isShowing()){
