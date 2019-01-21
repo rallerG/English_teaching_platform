@@ -100,6 +100,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 pDialog.setCancelable(true);
                 pDialog.show();
 
+
                 final Intent intent1 = new Intent(this, IntroductionStudent.class);
                 StudentsDocument studentDocument = new StudentsDocumentImpl();
                 studentDocument.get("1", new Callback<StudentProfile>() {

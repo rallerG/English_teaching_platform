@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
@@ -21,7 +22,8 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText username, password;
+    private EditText email, password;
+    private TextView signup;
     private Singleton p = Singleton.getInstance();
     private ProgressDialog pDialog;
 
@@ -30,10 +32,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-
-        Button signup = (Button) findViewById(R.id.login);
+        Button login = (Button) findViewById(R.id.login);
+        login.setOnClickListener(this);
+        signup = (TextView) findViewById(R.id.signup);
         signup.setOnClickListener(this);
     }
 
@@ -46,16 +49,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 pDialog.setCancelable(true);
                 pDialog.show();
 
-                final Intent intentTeacher = new Intent(this, TeacherMainActivity.class);
-                final Intent intentStudent = new Intent(this, MainActivity.class);
+                final Intent intentTeacher = new Intent(this, IntroductionTeacher.class);
+                final Intent intentStudent = new Intent(this, IntroductionStudent.class);
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
                 teachersDocument.getAll(new CallbackList<TeacherProfile>() {
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
                         for (TeacherProfile teacherProfile : listOfObjects) {
-                            if (teacherProfile.getEmail().equals(username.getText().toString())) {
+                            if (teacherProfile.getEmail().equals(email.getText().toString())) {
                                 if (teacherProfile.getPassword().equals(password.getText().toString())) {
                                     p.setCurrrentTeacher(teacherProfile);
+                                    p.rememberTeacher();
 
                                     if (pDialog.isShowing()){
                                         pDialog.dismiss();
@@ -76,9 +80,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     @Override
                                     public void onCallback(List<StudentProfile> listOfObjects) {
                                         for (StudentProfile studentProfile : listOfObjects) {
-                                            if (studentProfile.getEmail().equals(username.getText().toString())) {
+                                            if (studentProfile.getEmail().equals(email.getText().toString())) {
                                                 if (studentProfile.getPassword().equals(password.getText().toString())) {
                                                     p.setCurrrentStudent(studentProfile);
+                                                    p.rememberStudent();
 
                                                     if (pDialog.isShowing()){
                                                         pDialog.dismiss();
@@ -107,11 +112,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
                 break;
+            case R.id.signup :
+                startActivity(new Intent(this, SignupActivity.class));
+                break;
         }
     }
 
     private void wrongUseranmePasswordError() {
-        username.setError("Username and/or password is incorrect");
+        email.setError("Username and/or password is incorrect");
         password.setError("Username and/or password is incorrect");
     }
 }
