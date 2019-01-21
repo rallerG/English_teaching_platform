@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
@@ -42,7 +45,9 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     Singleton p = Singleton.getInstance();
 
-    TextView editPicture, studentName, studentEmail, studentPassword, editProfile;
+    TextView studentName, studentEmail, studentPassword, editProfile, editTextName, editTextEmail, editTextPassword;
+    ViewSwitcher switcher, switcher2, switcher3;
+    Button confirmEdit;
 
     public ProfilePageFragment() {
         // Required empty public constructor
@@ -84,13 +89,19 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         studentName = (TextView) view.findViewById(R.id.student_profile_name);
         studentEmail = (TextView) view.findViewById(R.id.student_profile_email);
         studentPassword = (TextView) view.findViewById(R.id.student_profile_password);
+        switcher = (ViewSwitcher) view.findViewById(R.id.my_switcher);
+        switcher2 = (ViewSwitcher) view.findViewById(R.id.my_switcher2);
+        switcher3 = (ViewSwitcher) view.findViewById(R.id.my_switcher3);
+        confirmEdit = (Button) view.findViewById(R.id.confirmEdit);
 
         studentName.setText(p.getCurrrentStudent().getName());
         studentEmail.setText(p.getCurrrentStudent().getEmail());
         studentPassword.setText(p.getCurrrentStudent().getPassword());
 
-        editProfile.setOnClickListener(this);
+        confirmEdit.setVisibility(View.INVISIBLE);
 
+        editProfile.setOnClickListener(this);
+        confirmEdit.setOnClickListener(this);
 
         return view;
     }
@@ -123,6 +134,53 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v == editProfile) {
             System.out.println("Edit this profile");
+
+            switcher.showNext(); //or switcher.showPrevious();
+            editTextName = (TextView) switcher.findViewById(R.id.hidden_edit_view);
+            editTextName.setText(p.getCurrrentStudent().getName());
+
+            switcher2.showNext(); //or switcher.showPrevious();
+            editTextEmail = (TextView) switcher2.findViewById(R.id.hidden_edit_view2);
+            editTextEmail.setText(p.getCurrrentStudent().getEmail());
+
+            switcher3.showNext(); //or switcher.showPrevious();
+            editTextPassword = (TextView) switcher3.findViewById(R.id.hidden_edit_view3);
+            editTextPassword.setText(p.getCurrrentStudent().getPassword());
+
+            confirmEdit.setVisibility(View.VISIBLE);
+
+        } else if (v == confirmEdit) {
+            System.out.println("Confirm edit");
+
+            if (editTextName.getText() != null && editTextEmail.getText() != null && editTextPassword.getText() != null) {
+            //Update singleton
+            p.getCurrrentStudent().setName(String.valueOf(editTextName.getText()));
+            p.getCurrrentStudent().setEmail(String.valueOf(editTextEmail.getText()));
+            p.getCurrrentStudent().setPassword(String.valueOf(editTextPassword.getText()));
+
+            //Update backend
+            StudentsDocument studentsDocument = new StudentsDocumentImpl();
+            studentsDocument.update(p.getCurrrentStudent().getId(), p.getCurrrentStudent(), new CallbackSuccess() {
+                @Override
+                public void onCallback() {
+                    //callback
+                    studentName.setText(p.getCurrrentStudent().getName());
+                    studentEmail.setText(p.getCurrrentStudent().getEmail());
+                    studentPassword.setText(p.getCurrrentStudent().getPassword());
+
+                    switcher.showPrevious();
+                    switcher2.showPrevious();
+                    switcher3.showPrevious();
+
+                    confirmEdit.setVisibility(View.INVISIBLE);
+
+                    Toast.makeText(getContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            } else {
+                System.out.println("Alt skal udfyldes");
+            }
         }
     }
 

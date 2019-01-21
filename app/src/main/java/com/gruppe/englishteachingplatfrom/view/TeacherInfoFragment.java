@@ -17,7 +17,7 @@ import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 public class TeacherInfoFragment extends Fragment implements View.OnClickListener {
 
-    private TextView name, language, rate, price, information, description;
+    private TextView name, language, rate, price, information;
     private RatingBar rateBar;
     private ImageView image;
     private Singleton p = Singleton.getInstance();
@@ -52,7 +52,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         rate = rootview.findViewById(R.id.info_teacherrating);
         price = rootview.findViewById(R.id.info_teacherprice);
         information = rootview.findViewById(R.id.information_text);
-        description = rootview.findViewById(R.id.description_text);
         rateBar = rootview.findViewById(R.id.info_teacherratingstars);
 
         floating_Fav_teacherInfo = rootview.findViewById(R.id.floating_fav_teacherInfo);
