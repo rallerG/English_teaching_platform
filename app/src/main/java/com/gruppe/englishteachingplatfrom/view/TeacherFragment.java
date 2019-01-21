@@ -10,24 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
-import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherMatchesDocumentImpl;
-import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
-import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
-import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +31,7 @@ import java.util.List;
 
 public class TeacherFragment extends Fragment implements View.OnClickListener {
 
-    public static final ArrayList<Feedback> list = new ArrayList<Feedback>();
+    public static final ArrayList<Review> list = new ArrayList<Review>();
     LinearLayout inbox, pay, schedule;
     LinearLayout feed;
     RatingBar rating;
@@ -97,15 +93,15 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-                TeacherFeedbackDocument feedbackDocument = new TeacherFeedbackDocumentImpl(p.getCurrrentTeacher().getId());
-                feedbackDocument.getAll(new CallbackList<Feedback>() {
+                TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
+                feedbackDocument.getAll(new CallbackList<Review>() {
                     @Override
-                    public void onCallback(List<Feedback> listOfObjects) {
+                    public void onCallback(List<Review> listOfObjects) {
                         rate = 0;
-                        for (Feedback feedback : listOfObjects) {
+                        for (Review review : listOfObjects) {
                             list.clear();
-                            list.add(feedback);
-                            rate += feedback.getRating();
+                            list.add(review);
+                            rate += review.getRating();
                             totalReviews = list.size();
                         }
                         //    students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
@@ -130,7 +126,7 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentContent, new FeedbackFragment());
+                ft.replace(R.id.fragmentContent, new ReviewFragment());
                 ft.addToBackStack(null);
                 ft.commit();
             }
