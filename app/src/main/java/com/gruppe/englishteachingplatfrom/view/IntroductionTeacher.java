@@ -62,6 +62,7 @@ public class IntroductionTeacher extends AppCompatActivity {
         dotsLayout =  findViewById(R.id.layoutDots);
         skip =  findViewById(R.id.skip);
         next = findViewById(R.id.next);
+        layoutWidth = viewPager.getWidth()/2;
 
         layouts = new int[]{
                 R.layout.intro_page_teacher1,
@@ -71,9 +72,6 @@ public class IntroductionTeacher extends AppCompatActivity {
 
         addBottomDots(0);
 
-        //layoutWidth = viewPager.getWidth();
-        layoutWidth = viewPager.getWidth()/2;
-        //layoutWidth = ( layoutWidth / 2) - (skip.getWidth() / 2) ;
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -139,35 +137,13 @@ public class IntroductionTeacher extends AppCompatActivity {
 
             if (position == layouts.length - 1) {
                 next.setVisibility(View.GONE);
-
-
-                skip.animate().translationX(viewPager.getWidth()/3).start();
-         /*       Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.to_middle);
-                anim.setInterpolator((new AccelerateDecelerateInterpolator()));
-                anim.setFillAfter(true);
-                next.animate().translationY(50).start();
-                skip.setAnimation(anim);*/
+                skip.animate().translationX((viewPager.getWidth()/3)+20).setDuration(300).start();
                 visitedLast = true;
-
             } else {
-                //btnSkip.setVisibility(View.INVISIBLE);
                 next.setVisibility(View.VISIBLE);
 
                 if(visitedLast == true) {
-                    skip.animate().translationX(layoutWidth).start();
-                /*    skip.animate()
-                            .translationX((viewPager.getWidth() - ((skip.getWidth()) / 2)+5))
-                           // .translationY((viewPager.getHeight() - skip.getHeight()) / 2)
-                            .setInterpolator(new AccelerateInterpolator())
-                            .setDuration(500);*/
-
-
-
-                   /* Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.to_left);
-                    anim.setInterpolator((new AccelerateDecelerateInterpolator()));
-                    anim.setFillAfter(true);
-                    skip.setAnimation(anim);
-                    visitedLast = false;*/
+                    skip.animate().translationX(0).setDuration(300).start();
                 }
             }
         }

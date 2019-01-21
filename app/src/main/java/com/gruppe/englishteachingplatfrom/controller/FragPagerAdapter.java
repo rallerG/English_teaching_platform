@@ -25,11 +25,8 @@ public class FragPagerAdapter extends FragmentStatePagerAdapter implements View.
 
     @Override
     public Fragment getItem(int position) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("position", position);
-        Fragment page = new PageFragment();
-        page.setArguments(bundle);
-        return page;
+
+        return PageFragment.newInstance(position);
     }
 
 //    @Override
@@ -37,6 +34,12 @@ public class FragPagerAdapter extends FragmentStatePagerAdapter implements View.
 //        return POSITION_NONE;
 //    }
 
+
+//    @Override
+//    public long getItemId(int position){
+//
+//        return position;
+//    }
 
     @Override
     public int getCount() {
