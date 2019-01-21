@@ -11,7 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +41,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     TextView editPicture, studentName, studentEmail, studentPassword;
     ImageView editName, editEmail, editPassword;
+    TeacherProfile updatedProfile;
 
     public ProfilePageFragment() {
         // Required empty public constructor
@@ -140,5 +145,16 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    public void test() {
+        TeachersDocument teachersDocument = new TeachersDocumentImpl();
+        teachersDocument.update(p.getCurrrentTeacher().getId(), updatedProfile, new CallbackSuccess() {
+            @Override
+            public void onCallback() {
+                //callback
+            }
+        });
     }
 }
