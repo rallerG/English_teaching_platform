@@ -1,5 +1,6 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,18 +8,28 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherFeedbackDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherFeedbackDocument;
+import com.gruppe.englishteachingplatfrom.model.Feedback;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link FeedbackStudent.OnFragmentInteractionListener} interface
+ * {@link ReviewStudentFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FeedbackStudent#newInstance} factory method to
+ * Use the {@link ReviewStudentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FeedbackStudent extends Fragment {
+public class ReviewStudentFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,9 +39,18 @@ public class FeedbackStudent extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Singleton p = Singleton.getInstance();
+    private ProgressDialog pDialog;
+
+    private RatingBar ratingBar;
+    private EditText content;
+    private Button send;
+
+    private String teacherid;
+
     private OnFragmentInteractionListener mListener;
 
-    public FeedbackStudent() {
+    public ReviewStudentFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +60,11 @@ public class FeedbackStudent extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment FeedbackStudent.
+     * @return A new instance of fragment ReviewStudentFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FeedbackStudent newInstance(String param1, String param2) {
-        FeedbackStudent fragment = new FeedbackStudent();
+    public static ReviewStudentFragment newInstance(String param1, String param2) {
+        ReviewStudentFragment fragment = new ReviewStudentFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,8 +84,41 @@ public class FeedbackStudent extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feedback_student, container, false);
+        View view = inflater.inflate(R.layout.fragment_review_student, container, false);
+        ratingBar = view.findViewById(R.id.ratingbar);
+        content = view.findViewById(R.id.content);
+        send = view.findViewById(R.id.send_review);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null)
+            teacherid = bundle.getString("id");
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.send_review :
+                StudentProfile studentProfile = p.getCurrrentStudent();
+                Feedback feedback = new Feedback(studentProfile,((double) ratingBar.getRating()),content.getText().toString());
+
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage("Please wait...");
+                pDialog.setCancelable(true);
+                pDialog.show();
+
+                TeacherFeedbackDocument teacherFeedbackDocument = new TeacherFeedbackDocumentImpl(teacherid);
+                teacherFeedbackDocument.add(feedback, new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        if (pDialog.isShowing()){
+                            pDialog.dismiss();
+                        }
+                        getActivity().getSupportFragmentManager().popBackStack();
+                    }
+                });
+                break;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
