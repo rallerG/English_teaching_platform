@@ -95,6 +95,7 @@ public class StudentProfile extends DocumentObject{
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
         mapToReturn.put("password",this.password);
+        mapToReturn.put("profilePic", this.profilePicture);
         return mapToReturn;
     }
 
@@ -108,6 +109,7 @@ public class StudentProfile extends DocumentObject{
             this.setName((String) mapOfObject.get("student_fullname"));
             this.setEmail((String) mapOfObject.get("student_mail"));
             this.setPassword((String) mapOfObject.get("student_password"));
+            this.setProfilePicture(Math.toIntExact((long) mapOfObject.get("student_profilePic")));
         }
     }
 

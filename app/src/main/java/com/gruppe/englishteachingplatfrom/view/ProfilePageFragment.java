@@ -48,6 +48,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     TextView studentName, studentEmail, studentPassword, editProfile, editTextName, editTextEmail, editTextPassword;
     ViewSwitcher switcher, switcher2, switcher3;
     Button confirmEdit;
+    ImageView profilePicture;
 
     public ProfilePageFragment() {
         // Required empty public constructor
@@ -93,10 +94,12 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         switcher2 = (ViewSwitcher) view.findViewById(R.id.my_switcher2);
         switcher3 = (ViewSwitcher) view.findViewById(R.id.my_switcher3);
         confirmEdit = (Button) view.findViewById(R.id.confirmEdit);
+        profilePicture = view.findViewById(R.id.studentProfilePicture);
 
         studentName.setText(p.getCurrrentStudent().getName());
         studentEmail.setText(p.getCurrrentStudent().getEmail());
         studentPassword.setText(p.getCurrrentStudent().getPassword());
+        profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
         confirmEdit.setVisibility(View.INVISIBLE);
 
@@ -157,6 +160,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             p.getCurrrentStudent().setName(String.valueOf(editTextName.getText()));
             p.getCurrrentStudent().setEmail(String.valueOf(editTextEmail.getText()));
             p.getCurrrentStudent().setPassword(String.valueOf(editTextPassword.getText()));
+//            p.getCurrrentStudent().setProfilePicture(p.getCurrrentStudent().getProfilePicture());
 
             //Update backend
             StudentsDocument studentsDocument = new StudentsDocumentImpl();
