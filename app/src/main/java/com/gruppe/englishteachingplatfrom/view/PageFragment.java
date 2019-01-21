@@ -22,7 +22,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
 
     private CardView card;
     private TextView name, language, Rate, Price;
-    private RatingBar rateBar;
     private ImageView imageView;
     private Singleton teacher = Singleton.getInstance();
     private RatingBar rating;
@@ -31,15 +30,27 @@ public class PageFragment extends Fragment implements View.OnClickListener {
     private float  tRate;
     private String tName;
     private String tLang;
+    private String id;
 
     public PageFragment() {
 
     }
 
+    public static PageFragment newInstance(int num) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", num);
+        PageFragment page = new PageFragment();
+        page.setArguments(bundle);
+        return page;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (getArguments() != null) {
+            pos = getArguments().getInt("position", 0);
+        }
+        System.out.println("fragment " + pos + " created");
     }
 
 
@@ -48,16 +59,18 @@ public class PageFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_page_frag, container, false);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            pos = bundle.getInt("position", 0);
-        }
+//        Bundle bundle = this.getArguments();
+//        if (bundle != null) {
+//            pos = bundle.getInt("position", 0);
+//        }
+
         ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
         pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
 
-        rateBar = rootview.findViewById(R.id.teacherRating);
+        id = contents.get(pos).getId();
+
 //        imageView =  rootview.findViewById(R.id.teacherPic);
 //        imageView.setImageResource(pic);
 
@@ -78,12 +91,13 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         Rate = rootview.findViewById(R.id.rate);
         tRate = (float) contents.get(pos).getRating();
         Rate.setText("" + tRate);
+        System.out.println("rating for "+ tName+ " " + tRate);
 
         Price = rootview.findViewById(R.id.price);
         tPrice = contents.get(pos).getPrice();
         Price.setText(""+tPrice + " DKK/hr");
-        rateBar.setRating(tRate);
-        rateBar.setIsIndicator(true);
+        rating.setRating(tRate);
+        rating.setIsIndicator(true);
      //   txt.setVisibility(View.INVISIBLE);
         System.out.println("fragment" + tName + "was created");
         return rootview;
@@ -106,6 +120,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
                 bundle.putFloat("rate", tRate);
                 bundle.putString("language", tLang);
                 bundle.putInt("position", pos);
+                bundle.putString("id", id);
                 Fragment F = new TeacherInfoFragment();
                 F.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).

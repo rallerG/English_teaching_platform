@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,17 +25,13 @@ import java.util.Map;
 
 public class FragPager extends Fragment implements View.OnClickListener {
 
-        ViewPager mPager;
-        FragPagerAdapter mAdapter;
+        private static ViewPager mPager;
+        private FragPagerAdapter mAdapter;
         private Singleton p = Singleton.getInstance();
         private FloatingActionButton floating_Send;
         private FloatingActionButton floating_Fav;
-        private ImageView imageView;
         private int position1;
-        private int pic1;
-        private int checker = 0;
-        private Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
-        public static boolean requestSend = false;
+        private static FragmentManager fragmentMan;
 
 
 
@@ -42,10 +39,14 @@ public class FragPager extends Fragment implements View.OnClickListener {
             // Required empty public constructor
         }
 
+        public static FragmentManager getFragman(){
+            return fragmentMan;
+        }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            fragmentMan = getChildFragmentManager();
 
         }
 
@@ -53,10 +54,9 @@ public class FragPager extends Fragment implements View.OnClickListener {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view =  inflater.inflate(R.layout.fragment_viewpager_list, container, false);
-
+            fragmentMan = getChildFragmentManager();
             floating_Fav = view.findViewById(R.id.floating_fav);
             floating_Send = view.findViewById(R.id.floating_send);
-
             floating_Send.setOnClickListener(this);
             floating_Fav.setOnClickListener(this);
 
@@ -66,23 +66,24 @@ public class FragPager extends Fragment implements View.OnClickListener {
             mPager.setOffscreenPageLimit(3);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
             mPager.setAdapter(mAdapter);
+            mPager.setSaveFromParentEnabled(false);
 
-            for(int i = 0; i < mAdapter.getCount(); i++){
-                hm.put(i,0);
-            }
+//            for(int i = 0; i < mAdapter.getCount(); i++){
+//                hm.put(i,0);
+//            }
 
             mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
                 @Override
                 public void onPageSelected(int position) {
                     System.out.println("FragPager.java: page changed " + position);
                     // code for action on page change
-                    if(hm.get(position) != null){
-                        if( hm.get(position) == 1){
-                            System.out.println("FragPager.java: "+ hm.get(position));
-                            floating_Fav.setImageResource(R.drawable.favourite_full);
-                        }
-                        else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);
-                    }
+//                    if(hm.get(position) != null){
+//                        if( hm.get(position) == 1){
+//                            System.out.println("FragPager.java: "+ hm.get(position));
+//                            floating_Fav.setImageResource(R.drawable.favourite_full);
+//                        }
+//                        else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);
+//                    }
 
                 }
             });
@@ -90,7 +91,34 @@ public class FragPager extends Fragment implements View.OnClickListener {
             return view;
         }
 
-    public int getCurrentPosition(){
+        public static void removeTeacher(FragmentManager fm){
+            int pos = mPager.getCurrentItem();
+
+            if(pos < mPager.getChildCount()){
+                Singleton.getInstance().getTeacherDummies().remove(pos);
+                FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
+                mPager.setAdapter(mAdapt);
+                mPager.setSaveFromParentEnabled(false);
+                mPager.setCurrentItem(pos, true);
+            }
+            else if(pos == mPager.getChildCount() && pos!=0 ){
+                Singleton.getInstance().getTeacherDummies().remove(pos);
+                FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
+                mPager.setAdapter(mAdapt);
+                mPager.setCurrentItem(pos-1, true);
+            }
+            else if(pos == 0) {
+                Singleton.getInstance().getTeacherDummies().remove(pos);
+                FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
+                mPager.setAdapter(mAdapt);
+                mPager.setCurrentItem(pos, true);
+            }
+
+
+        }
+
+
+         public int getCurrentPosition(){
         return mPager.getCurrentItem();
     }
 
@@ -114,8 +142,9 @@ public class FragPager extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
+        position1 = mPager.getCurrentItem();
+
         if (v == floating_Send) {
-            position1 = mPager.getCurrentItem();
             Bundle bundle = new Bundle();
             bundle.putString("name", p.getTeacherDummies().get(position1).getName());
             bundle.putInt("price", p.getTeacherDummies().get(position1).getPrice());
@@ -131,9 +160,8 @@ public class FragPager extends Fragment implements View.OnClickListener {
         if(v == floating_Fav){
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
-            if(checker == 0) {
-                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
-                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
+//                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
+//                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
 //                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
 //                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
 //                    @Override
@@ -142,25 +170,25 @@ public class FragPager extends Fragment implements View.OnClickListener {
 //                        mAdapter.notifyDataSetChanged();
 //                    }
 //                });
-              //  p.getTeacherDummies().remove(mPager.getCurrentItem());
+                removeTeacher(getFragman());
 
 
 
-                if(hm.get(mPager.getCurrentItem()) != null){
-                    hm.remove(mPager.getCurrentItem());
-                    hm.put(mPager.getCurrentItem(), 1);
-                } else{ hm.put(mPager.getCurrentItem(), 1); }
+//                if(hm.get(mPager.getCurrentItem()) != null){
+//                    hm.remove(mPager.getCurrentItem());
+//                    hm.put(mPager.getCurrentItem(), 1);
+//                } else{ hm.put(mPager.getCurrentItem(), 1); }
+//
+//                checker = 1;
+//            } else  {
+//                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
+//                if(hm.get(mPager.getCurrentItem()) != null){
+//                    hm.remove(mPager.getCurrentItem());
+//                    hm.put(mPager.getCurrentItem(), 0);
+//                } else{ hm.put(mPager.getCurrentItem(), 0); }
 
-                checker = 1;
-            } else  {
-                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
-                if(hm.get(mPager.getCurrentItem()) != null){
-                    hm.remove(mPager.getCurrentItem());
-                    hm.put(mPager.getCurrentItem(), 0);
-                } else{ hm.put(mPager.getCurrentItem(), 0); }
 
-                checker = 0;
-            }
+
         }
 
     }

@@ -26,6 +26,8 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private RatingBar rating;
     private float tRating, tRate;
     private String tName, tLang;
+    private boolean fav = false;
+    private String id;
     private FloatingActionButton floating_Send_teacherInfo, floating_Fav_teacherInfo;
 
 
@@ -68,6 +70,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             tRate = bundle.getFloat("rate",0);
             tLang = bundle.getString("language");
             pos = bundle.getInt("position", 0);
+            id = bundle.getString("id", "");
         }
 //        Intent i = getIntent();
 //        tName = i.getStringExtra("name");
@@ -103,7 +106,8 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putString("language", tLang);
             bundle.putInt("position", pos);
             bundle.putBoolean("isTeacherInfoFragment", true);
-
+            bundle.putBoolean("isFav", fav);
+            bundle.putString("id",id);
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
@@ -112,15 +116,12 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         if (v == floating_Fav_teacherInfo) {
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
-
-            if (checker == 0) {
+                fav = true;
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-                checker = 1;
-            } else {
-                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
-                checker = 0;
-            }
+                FragPager.removeTeacher(FragPager.getFragman());
+
+
         }
     }
 }
