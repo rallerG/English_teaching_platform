@@ -95,6 +95,7 @@ public class StudentProfile extends DocumentObject{
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
         mapToReturn.put("password",this.password);
+        mapToReturn.put("profilePic", this.profilePicture);
         return mapToReturn;
     }
 
