@@ -141,11 +141,6 @@ public class TeacherMainActivity extends AppCompatActivity
                 fragment.setArguments(args);
                 setTitle("Payment");
                 break;
-            case R.id.nav_pending:
-                fragment = new ListFragment();
-                fragment.setArguments(args);
-                setTitle("Pending");
-                break;
             case R.id.nav_account:
                 fragment = new TeacherProfilePageFragment();
                 setTitle("Account");
