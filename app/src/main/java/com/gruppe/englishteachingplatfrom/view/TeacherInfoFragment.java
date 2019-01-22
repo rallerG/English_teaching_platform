@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private boolean fav = false;
     private String id, from;
     private FloatingActionButton floating_Send_teacherInfo, floating_Fav_teacherInfo;
-
+    private long mLastClickTime = 0;
 
     public TeacherInfoFragment(){
 
@@ -112,6 +113,10 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
 
         if (v == floating_Send_teacherInfo && from.equals("swipe")) {
             PageFragment.clicked = false;

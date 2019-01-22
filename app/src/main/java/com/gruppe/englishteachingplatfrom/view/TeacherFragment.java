@@ -66,13 +66,16 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_teacher, container, false);
 
         feed = view.findViewById(R.id.teacher_feedback);
+        feed.setOnClickListener(this);
         inbox = view.findViewById(R.id.inbox);
+        inbox.setOnClickListener(this);
         schedule = view.findViewById(R.id.schedule);
+        schedule.setOnClickListener(this);
+        pay = view.findViewById(R.id.pay);
+        pay.setOnClickListener(this);
         rating = view.findViewById(R.id.ratingbar_teacher);
         reviews = view.findViewById(R.id.reviews);
-        pay = view.findViewById(R.id.pay);
         students = view.findViewById(R.id.students);
-        pay.setOnClickListener(this);
 
             if(savedInstanceState == null) {
                 System.out.println("TeacherFragment.java: Start of savedInstanceState");
@@ -103,9 +106,7 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
 
         System.out.println("TeacherFragment.java: Rating is " + p.getCurrrentTeacher().getRating());
 
-
         Context context = view.getContext();
-
 
         return view;
     }
@@ -130,22 +131,21 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
                 ft.replace(R.id.fragmentContent, new ReviewFragment());
                 ft.addToBackStack(null);
                 ft.commit();
-            }
+        }
         else if (v == inbox) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ft.replace(R.id.fragmentContent, new RequestFragment());
                 ft.addToBackStack(null);
                 ft.commit();
-            }
-
-            else if (v == schedule) {
+        }
+        else if (v == schedule) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ft.replace(R.id.fragmentContent, new ScheduleTeacherFragment());
                 ft.addToBackStack(null);
                 ft.commit();
-            }
+        }
     }
 
     @Override
