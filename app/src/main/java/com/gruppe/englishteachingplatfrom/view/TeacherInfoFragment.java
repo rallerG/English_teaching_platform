@@ -15,8 +15,16 @@ import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentPendingsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherPendingsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherPendingsDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 public class TeacherInfoFragment extends Fragment implements View.OnClickListener {
@@ -75,7 +83,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
 
         if(from.equals("matches")){
             floating_Send_teacherInfo.setImageResource(R.drawable.ic_baseline_feedback_24px);
-            floating_Fav_teacherInfo.hide();
+            floating_Fav_teacherInfo.setImageResource(R.drawable.baseline2x_close_black_18dp);
         }
         if(from.equals("favorites")){
             floating_Fav_teacherInfo.setImageResource(R.drawable.favourite_full);
@@ -83,6 +91,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         }
         if(from.equals("pending")){
             floating_Send_teacherInfo.hide();
+            floating_Fav_teacherInfo.setImageResource(R.drawable.baseline2x_close_black_18dp);
         }
 
         floating_Send_teacherInfo.setOnClickListener(this);
@@ -144,6 +153,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putString("from", from);
             bundle.putInt("pic", picture);
             bundle.putString("id",id);
+            // remove from favorite when send is clicked
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
@@ -164,10 +174,16 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                 if(!fav) {
                     ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
                     ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-                    FragPager.removeTeacher(FragPager.getFragman());
+                    StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+                    studentFavoritesDocument.add(id, true, new CallbackSuccess() {
+                        @Override
+                        public void onCallback() {
+                            FragPager.removeTeacher(FragPager.getFragman());
+                            getActivity().getSupportFragmentManager().popBackStack();
+                        }
+                    });
                     Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
                 }
-                fav = true;
         }
 
         if (v == floating_Fav_teacherInfo && from.equals("favorites")) {
@@ -185,10 +201,36 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         fav = false;
                     }
                 });
-
-
             }
-            fav = true;
+        }
+
+        if (v == floating_Fav_teacherInfo && from.equals("pending")) {
+            // checker whether the teacher is favorited by the student and set the image accordingly
+            // should have the standard heart images for favorite (empty and filled)
+            StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
+            studentPendingsDocument.deleteEqualTo(id, true, new CallbackSuccess() {
+                @Override
+                public void onCallback() {
+                    Toast.makeText(getContext(),"removed from pending", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
+            });
+
+            TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(id);
+            teacherPendingsDocument.deleteEqualTo(p.getCurrrentStudent().getId(), false);
+        }
+
+        if (v == floating_Fav_teacherInfo && from.equals("matches")) {
+            StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl(p.getCurrrentStudent().getId());
+            studentMatchesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
+                @Override
+                public void onCallback() {
+
+                }
+            });
+
+            TeacherMatchesDocument teacherMatchesDocument = new TeacherMatchesDocumentImpl(id);
+            teacherMatchesDocument.deleteEqualTo(p.getCurrrentStudent().getId(), false);
         }
 
     }
