@@ -3,6 +3,7 @@ package com.gruppe.englishteachingplatfrom.view;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     ViewSwitcher switcher, switcher2, switcher3;
     Button confirmEdit, cancelEdit;
     ImageView profilePicture;
+    private long mLastClickTime = 0;
 
     public ProfilePageFragment() {
         // Required empty public constructor
@@ -138,6 +140,10 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         if (v == editProfile) {
             System.out.println("Edit this profile");
 

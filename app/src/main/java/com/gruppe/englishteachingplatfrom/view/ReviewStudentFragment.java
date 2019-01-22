@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,9 +35,9 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private long mLastClickTime = 0;
 
     private Singleton p = Singleton.getInstance();
     private ProgressDialog pDialog;
@@ -96,6 +97,10 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         switch (view.getId()) {
             case R.id.send_review :
                 StudentProfile studentProfile = p.getCurrrentStudent();

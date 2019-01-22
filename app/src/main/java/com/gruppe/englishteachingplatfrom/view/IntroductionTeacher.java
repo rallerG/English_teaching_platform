@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,7 @@ import com.gruppe.englishteachingplatfrom.view.FragPager;
  */
 //  Our code is modified to work with our own structure
 
-public class IntroductionTeacher extends AppCompatActivity {
+public class IntroductionTeacher extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -46,6 +47,7 @@ public class IntroductionTeacher extends AppCompatActivity {
     private Button skip,next;
     private Boolean visitedLast = false;
     private float layoutWidth;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,9 @@ public class IntroductionTeacher extends AppCompatActivity {
         viewPager =  findViewById(R.id.view_pager);
         dotsLayout =  findViewById(R.id.layoutDots);
         skip =  findViewById(R.id.skip);
+        skip.setOnClickListener(this);
         next = findViewById(R.id.next);
+        next.setOnClickListener(this);
         layoutWidth = viewPager.getWidth()/2;
 
         layouts = new int[]{
@@ -76,29 +80,6 @@ public class IntroductionTeacher extends AppCompatActivity {
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getStarted();
-            }
-        });
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // checking for last page
-                // if last page home screen will be launched
-                int current = getItem(+1);
-                if (current < layouts.length) {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                } else {
-                    getStarted();
-                }
-            }
-        });
-
     }
 
     private void addBottomDots(int currentPage) {
@@ -155,6 +136,30 @@ public class IntroductionTeacher extends AppCompatActivity {
         public void onPageScrollStateChanged(int arg0) { }
     };
 
+    @Override
+    public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
+            if(v == skip) {
+                getStarted();
+            }
+
+            else if (v == next) {
+                // checking for last page
+                // if last page home screen will be launched
+                int current = getItem(+1);
+                if (current < layouts.length) {
+                    // move to next screen
+                    viewPager.setCurrentItem(current);
+                } else {
+                    getStarted();
+                }
+            }
+    }
+
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 
@@ -179,7 +184,6 @@ public class IntroductionTeacher extends AppCompatActivity {
         public boolean isViewFromObject(View view, Object obj) {
             return view == obj;
         }
-
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {

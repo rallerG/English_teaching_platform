@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -42,14 +43,13 @@ public class MainActivity extends AppCompatActivity
     public int pic;
     Singleton p = Singleton.getInstance();
     private ProgressDialog pDialog;
+    private long mLastClickTime = 0;
 
     NavigationView navigationView;
-
     View headerView;
-
     TextView burgerMenuName;
-
     ImageView profilePicture;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,6 +247,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         if (view == fab) {
             Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
 

@@ -702,9 +702,12 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
+                            System.out.println("--delete-- "+document.getId());
                         }
+                        System.out.println("--delete-- done");
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
+                        System.out.println("RASMUS ER EN NOOB");
                     }
                 }
             });
@@ -718,9 +721,12 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
+                            System.out.println("--delete-- "+document.getId());
                         }
+                        System.out.println("--delete-- done");
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
+                        System.out.println("RASMUS ER EN NOOB");
                     }
                 }
             });
@@ -738,10 +744,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
+                            System.out.println("--delete-- "+document.getId());
                         }
+                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
+                        System.out.println("RASMUS ER EN NOOB");
                     }
                 }
             });
@@ -755,10 +764,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
+                            System.out.println("--delete-- "+document.getId());
                         }
+                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
+                        System.out.println("RASMUS ER EN NOOB");
                     }
                 }
             });
@@ -776,10 +788,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
+                            System.out.println("--delete-- "+document.getId());
                         }
+                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
+                        System.out.println("RASMUS ER EN NOOB");
                         callbackError.onCallback();
                     }
                 }
@@ -795,9 +810,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
                         }
+                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
+                        System.out.println("RASMUS ER EN NOOB");
                         callbackError.onCallback();
                     }
                 }

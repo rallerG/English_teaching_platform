@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 public class SignupTeacherFragment extends Fragment implements View.OnClickListener {
     private ProgressDialog pDialog;
     private EditText name, email, price;
+    private long mLastClickTime = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,10 @@ public class SignupTeacherFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         switch (view.getId()) {
             case R.id.signup_button_teacher :
                 pDialog = new ProgressDialog(getActivity());

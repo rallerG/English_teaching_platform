@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +34,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
         private FloatingActionButton floating_Fav;
         private int position1;
         private static FragmentManager fragmentMan;
-
+        private long mLastClickTime = 0;
 
 
         public FragPager() {
@@ -142,7 +143,10 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         position1 = mPager.getCurrentItem();
         String name =  p.getTeacherDummies().get(position1).getName();
         if (v == floating_Send) {
@@ -164,14 +168,14 @@ public class FragPager extends Fragment implements View.OnClickListener {
             // should have the standard heart images for favorite (empty and filled)
 //                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
 //                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-//                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
-//                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
-//                    @Override
-//                    public void onCallback() {
-//                        p.getTeacherDummies().remove(mPager.getCurrentItem());
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-//                });
+                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        p.getTeacherDummies().remove(mPager.getCurrentItem());
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
                 removeTeacher(getFragman());
                 Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
 

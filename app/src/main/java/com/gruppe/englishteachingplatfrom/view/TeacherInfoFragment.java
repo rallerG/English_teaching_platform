@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 public class TeacherInfoFragment extends Fragment implements View.OnClickListener {
@@ -29,7 +33,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private boolean fav = false;
     private String id, from;
     private FloatingActionButton floating_Send_teacherInfo, floating_Fav_teacherInfo;
-
+    private long mLastClickTime = 0;
 
     public TeacherInfoFragment(){
 
@@ -109,6 +113,10 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
 
         if (v == floating_Send_teacherInfo && from.equals("swipe")) {
             PageFragment.clicked = false;
@@ -126,6 +134,25 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
+
+        if (v == floating_Send_teacherInfo && from.equals("favorites")) {
+            PageFragment.clicked = false;
+            Bundle bundle = new Bundle();
+            bundle.putString("name", tName);
+            bundle.putInt("price", tPrice);
+            bundle.putFloat("rate", tRate);
+            bundle.putString("language", tLang);
+            bundle.putInt("position", pos);
+            bundle.putBoolean("isTeacherInfoFragment", true);
+            bundle.putBoolean("isFav", fav);
+            bundle.putString("from", from);
+            bundle.putString("id",id);
+            Fragment F = new DialogBoxFragment();
+            F.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                    addToBackStack(null).commit();
+        }
+
         if (v == floating_Fav_teacherInfo && from.equals("swipe")) {
             // checker whether the teacher is favorited by the student and set the image accordingly
             // should have the standard heart images for favorite (empty and filled)
@@ -137,5 +164,27 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                 }
                 fav = true;
         }
+
+        if (v == floating_Fav_teacherInfo && from.equals("favorites")) {
+            // checker whether the teacher is favorited by the student and set the image accordingly
+            // should have the standard heart images for favorite (empty and filled)
+            if(fav) {
+                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
+                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
+                //FragPager.removeTeacher(FragPager.getFragman());
+                //Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+                studentFavoritesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        fav = false;
+                    }
+                });
+
+
+            }
+            fav = true;
+        }
+
     }
 }

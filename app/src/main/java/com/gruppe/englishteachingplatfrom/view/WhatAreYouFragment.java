@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import com.gruppe.englishteachingplatfrom.R;
 
 public class WhatAreYouFragment extends Fragment implements View.OnClickListener {
+
+    private long mLastClickTime = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,11 @@ public class WhatAreYouFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
         switch (view.getId()) {
             case R.id.teacher :
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, new SignupTeacherFragment()).addToBackStack(null).commit();
