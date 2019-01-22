@@ -172,12 +172,11 @@ public class FragPager extends Fragment implements View.OnClickListener {
                 studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
                     @Override
                     public void onCallback() {
-                        p.getTeacherDummies().remove(mPager.getCurrentItem());
-                        mAdapter.notifyDataSetChanged();
+                        removeTeacher(getFragman());
                     }
                 });
-                removeTeacher(getFragman());
-                Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+
 
 
 //                if(hm.get(mPager.getCurrentItem()) != null){
