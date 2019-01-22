@@ -219,6 +219,12 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         prevBtn.setBackgroundResource(R.drawable.border);
         btn.setBackgroundResource(R.drawable.selectedborder);
 
+
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getRating() == rating) {
+                tempList.add(list.get(i));
+            }
+        }
 //        for(int i = 0; i < list.size(); i++){
 //            if(list.get(i).getRating() == rating){
 //                tempList.add(list.get(i));
@@ -244,8 +250,9 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
 //            }
 //        }
 
-        MyReviewRecyclerViewAdapter recycleAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
+        MyReviewRecyclerViewAdapter recAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
         review.setLayoutManager(new LinearLayoutManager(getActivity()));
-        review.setAdapter(recycleAdapter);
+        review.setAdapter(recAdapter);
+
     }
 }

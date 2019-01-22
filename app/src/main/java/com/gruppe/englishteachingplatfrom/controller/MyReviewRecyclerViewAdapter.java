@@ -15,6 +15,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
@@ -56,20 +57,28 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
             @Override
             public void onCallback(List<Review> listOfObjects) {
                 review.clear();
-                for (Review feed : listOfObjects) {
-                    review.add(feed);
+                for (final Review feed : listOfObjects) {
                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                     studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
                         @Override
                         public void onCallback(StudentProfile object) {
-                           // feed.setStudentProfile(object);
-                        //    holder.mStudName.setText(object.getName());
+                            feed.setStudentProfile(object);
+                            holder.mStudName.setText(feed.getStudentProfile().getName());
+                            holder.mRating.setRating((float) review.get(position).getRating());
+                            holder.mContent.setText(review.get(position).getContent());
                         }
                     });
+                    review.add(feed);
+//                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+//                    studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
+//                        @Override
+//                        public void onCallback(StudentProfile object) {
+//                            //feed.setStudentProfile(object);
+//                            holder.mStudName.setText(object.getName());
+//                        }
+//                    });
                 }
-       //         holder.mStudName.setText(review.get(position));
-                holder.mRating.setRating((float) review.get(position).getRating());
-                holder.mContent.setText(review.get(position).getContent());
+
             }
         });
     }
