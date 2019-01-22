@@ -46,7 +46,7 @@ public class FragPagerAdapter extends FragmentStatePagerAdapter implements View.
 
     @Override
     public int getCount() {
-        return p.getTeacherDummies().size();
+        return p.getSwipeTeachers().size();
     }
 
 

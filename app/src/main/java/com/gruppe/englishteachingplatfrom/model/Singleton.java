@@ -25,6 +25,7 @@ public class Singleton {
 
     private static ArrayList<TeacherProfile> teacherDummies = new ArrayList<>();
     private static ArrayList<StudentProfile> studentDummies = new ArrayList<>();
+    private static ArrayList<TeacherProfile> swipeTeachers = new ArrayList<>();
 
     public static Singleton getInstance() {
         if(Instance == null){
@@ -104,6 +105,10 @@ public class Singleton {
 
     public void setCurrrentTeacher(TeacherProfile currrentTeacher) {
         this.currrentTeacher = currrentTeacher;
+    }
+
+    public  ArrayList<TeacherProfile> getSwipeTeachers() {
+        return swipeTeachers;
     }
 
     public void logout() {

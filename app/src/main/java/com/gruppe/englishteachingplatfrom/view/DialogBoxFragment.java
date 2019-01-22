@@ -1,8 +1,10 @@
 package com.gruppe.englishteachingplatfrom.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,12 +15,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentPendingsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherPendingsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherPendingsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
@@ -96,6 +101,12 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
             }
 
             if(v == sendButton){
+
+                if(fav) {
+                    StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+                    studentFavoritesDocument.deleteEqualTo(id, true);
+                }
+
                 StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
                 studentPendingsDocument.add(p.getTeacherDummies().get(pos).getId(), true, new CallbackSuccess() {
                     @Override
