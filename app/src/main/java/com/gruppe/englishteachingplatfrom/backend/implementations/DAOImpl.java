@@ -67,7 +67,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                    .addOnFailureListener(new OnFailureListener() {
                        @Override
                        public void onFailure(@NonNull Exception e) {
-                           Log.w(TAG, "Error adding document", e);
+                           Log.w(TAG, "--add()-- Error adding document", e);
                            callbackError.onCallback();
                        }
                    });
@@ -93,7 +93,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                    .addOnFailureListener(new OnFailureListener() {
                        @Override
                        public void onFailure(@NonNull Exception e) {
-                           Log.w(TAG, "Error adding document", e);
+                           Log.w(TAG, "--add()-- Error adding document", e);
                            callbackError.onCallback();
                        }
                    });
@@ -111,7 +111,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                    .addOnFailureListener(new OnFailureListener() {
                        @Override
                        public void onFailure(@NonNull Exception e) {
-                           Log.w(TAG, "Error adding document", e);
+                           Log.w(TAG, "--add()-- Error adding document", e);
                            callbackError.onCallback();
                        }
                    });
@@ -137,7 +137,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--add()-- Error adding document", e);
                         }
                     });
         }
@@ -162,7 +162,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--add()-- Error adding document", e);
                         }
                     });
         }
@@ -179,7 +179,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--add()-- Error adding document", e);
                         }
                     });
         }
@@ -203,7 +203,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--add()-- Error adding document", e);
                         }
                     });
         }
@@ -227,7 +227,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--add()-- Error adding document", e);
                         }
                     });
         }
@@ -243,7 +243,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--add()-- Error adding document", e);
                         }
                     });
         }
@@ -271,7 +271,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "--add()-- Error adding document", e);
                     }
                 });
     }
@@ -299,7 +299,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "--add()-- Error adding document", e);
                     }
                 });
     }
@@ -328,7 +328,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                        Log.w(TAG, "--add()-- Error adding document", e);
                         callbackError.onCallback();
                     }
                 });
@@ -347,13 +347,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                         }
                     });
         }
@@ -371,13 +371,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                         }
                     });
         }
@@ -387,13 +387,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                         }
                     });
         }
@@ -411,14 +411,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                             callbackSuccess.onCallback();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                         }
                     });
         }
@@ -436,14 +436,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                             callbackSuccess.onCallback();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                         }
                     });
         }
@@ -453,14 +453,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                             callbackSuccess.onCallback();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                         }
                     });
         }
@@ -479,14 +479,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                             callbackSuccess.onCallback();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                             callbackError.onCallback();
                         }
                     });
@@ -505,14 +505,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                             callbackSuccess.onCallback();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                             callbackError.onCallback();
                         }
                     });
@@ -523,14 +523,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, " --add()-- DocumentSnapshot successfully added!");
+                            Log.d(TAG, "--update()-- DocumentSnapshot successfully added!");
                             callbackSuccess.onCallback();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
+                            Log.w(TAG, "--update()-- Error adding document", e);
                             callbackError.onCallback();
                         }
                     });
@@ -554,14 +554,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                 for (Map.Entry<String, Object> element: document.getData().entrySet()) {
                                     if (element.getKey().equals("student")) {
                                         DocumentReference studentReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --get()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, "--get()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
                                         map.put("student_id",studentReference.getId());
                                     } else if (element.getKey().equals("teacher")) {
                                         DocumentReference teacherReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --get()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, "--get()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
                                         map.put("teacher_id", teacherReference.getId());
                                     } else {
-                                        Log.d(TAG, " --get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
+                                        Log.d(TAG, "--get()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
                                         if (type == StudentProfile.class) {
                                             map.put("student_"+element.getKey(),element.getValue());
                                         }
@@ -573,13 +573,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                         }
                                     }
                                 }
-                                for (Map.Entry<String, Object> entry: map.entrySet()) {
-                                    System.out.println("TestingKqly: "+entry.getKey()+" : "+entry.getValue());
-                                }
                                 objectToReturn.toObject(document.getId(),map);
                                 callback.onCallback(objectToReturn);
                             } else {
-                                Log.d(TAG, "No such document");
+                                Log.d(TAG, "--get()-- No such document");
                             }
                     }
         });
@@ -621,13 +618,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                     }
                                 }
                             }
-                            for (Map.Entry<String, Object> entry: map.entrySet()) {
-                                System.out.println("TestingKqly: "+entry.getKey()+" : "+entry.getValue());
-                            }
                             objectToReturn.toObject(document.getId(),map);
                             callback.onCallback(objectToReturn);
                         } else {
-                            Log.d(TAG, "No such document");
+                            Log.d(TAG, "--get()-- No such document");
                             callbackError.onCallback();
                         }
                     }
@@ -641,13 +635,13 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, " --delete()-- DocumentSnapshot successfully deleted!");
+                        Log.d(TAG, "--delete()-- DocumentSnapshot successfully deleted!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
+                        Log.w(TAG, "--delete()-- Error deleting document", e);
                     }
                 });
     }
@@ -666,7 +660,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
+                        Log.w(TAG, "--delete()-- Error deleting document", e);
                         callbackError.onCallback();
                     }
                 });
@@ -686,7 +680,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error deleting document", e);
+                        Log.w(TAG, "--delete()-- Error deleting document", e);
                     }
                 });
     }
@@ -702,12 +696,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
-                            System.out.println("--delete-- "+document.getId());
+                            System.out.println("--deleteEqualTo()-- element: "+document.getId());
                         }
-                        System.out.println("--delete-- done");
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                        System.out.println("RASMUS ER EN NOOB");
+                        Log.d(TAG, "--deleteEqualTo()-- Error getting documents: ", task.getException());
                     }
                 }
             });
@@ -721,12 +713,10 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
-                            System.out.println("--delete-- "+document.getId());
+                            System.out.println("--deleteEqualTo()-- element: "+document.getId());
                         }
-                        System.out.println("--delete-- done");
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                        System.out.println("RASMUS ER EN NOOB");
+                        Log.d(TAG, "--deleteEqualTo()-- Error getting documents: ", task.getException());
                     }
                 }
             });
@@ -744,13 +734,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
-                            System.out.println("--delete-- "+document.getId());
+                            System.out.println("--deleteEqualTo()-- element: "+document.getId());
                         }
-                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                        System.out.println("RASMUS ER EN NOOB");
+                        Log.d(TAG, "--deleteEqualTo()-- Error getting documents: ", task.getException());
                     }
                 }
             });
@@ -764,13 +752,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
-                            System.out.println("--delete-- "+document.getId());
+                            System.out.println("--deleteEqualTo()-- element: "+document.getId());
                         }
-                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                        System.out.println("RASMUS ER EN NOOB");
+                        Log.d(TAG, "--deleteEqualTo()-- Error getting documents: ", task.getException());
                     }
                 }
             });
@@ -788,13 +774,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
-                            System.out.println("--delete-- "+document.getId());
+                            System.out.println("--deleteEqualTo()-- element: "+document.getId());
                         }
-                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                        System.out.println("RASMUS ER EN NOOB");
+                        Log.d(TAG, "--deleteEqualTo()-- Error getting documents: ", task.getException());
                         callbackError.onCallback();
                     }
                 }
@@ -809,12 +793,11 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot document : task.getResult()) {
                             collection.document(document.getId()).delete();
+                            System.out.println("--deleteEqualTo()-- element: "+document.getId());
                         }
-                        System.out.println("--delete-- done");
                         callbackSuccess.onCallback();
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                        System.out.println("RASMUS ER EN NOOB");
+                        Log.d(TAG, "--deleteEqualTo()-- Error getting documents: ", task.getException());
                         callbackError.onCallback();
                     }
                 }
@@ -842,14 +825,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                 for (Map.Entry<String, Object> element: document.getData().entrySet()) {
                                     if (element.getKey().equals("student")) {
                                         DocumentReference studentReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --getAll()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, "--getAll()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
                                         map.put("student_id",studentReference.getId());
                                     } else if (element.getKey().equals("teacher")) {
                                         DocumentReference teacherReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --getAll()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, "--getAll()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
                                         map.put("teacher_id",teacherReference.getId());
                                     } else {
-                                        Log.d(TAG, " --getAll()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
+                                        Log.d(TAG, "--getAll()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
                                         if (type == StudentProfile.class) {
                                             map.put("student_"+element.getKey(),element.getValue());
                                         }
@@ -866,7 +849,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                             }
                             callbackList.onCallback(listOfObjectsToReturn);
                         } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
+                            Log.w(TAG, "--getAll()-- Error getting documents.", task.getException());
                         }
                     }
                 });
@@ -891,14 +874,14 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                                 for (Map.Entry<String, Object> element: document.getData().entrySet()) {
                                     if (element.getKey().equals("student")) {
                                         DocumentReference studentReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --getAll()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, "--getAll()-- " + "Reference data " + studentReference.getId() + " " + element.getValue());
                                         map.put("student_id",studentReference.getId());
                                     } else if (element.getKey().equals("teacher")) {
                                         DocumentReference teacherReference = (DocumentReference) element.getValue();
-                                        Log.d(TAG, " --getAll()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
+                                        Log.d(TAG, "--getAll()-- " + "Reference data " + teacherReference.getId() + " " + element.getValue());
                                         map.put("teacher_id",teacherReference.getId());
                                     } else {
-                                        Log.d(TAG, " --getAll()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
+                                        Log.d(TAG, "--getAll()-- " +""+element.getKey()+ " DocumentSnapshot data: " + element.getValue());
                                         if (type == StudentProfile.class) {
                                             map.put("student_"+element.getKey(),element.getValue());
                                         }
@@ -915,7 +898,7 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                             }
                             callbackList.onCallback(listOfObjectsToReturn);
                         } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
+                            Log.w(TAG, "--getAll()-- Error getting documents.", task.getException());
                             callbackError.onCallback();
                         }
                     }
