@@ -11,6 +11,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
@@ -19,6 +20,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Collection;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Document;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.DocumentQuery;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Payment;
@@ -33,7 +35,7 @@ import java.util.Map;
 
 import static android.support.constraint.Constraints.TAG;
 
-public abstract class DAOImpl <T extends DocumentObject> implements Document, Collection {
+public abstract class DAOImpl <T extends DocumentObject> implements Document, Collection, DocumentQuery {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collection;
     private DocumentObject objectToReturn;
@@ -688,6 +690,121 @@ public abstract class DAOImpl <T extends DocumentObject> implements Document, Co
                     }
                 });
     }
+
+    @Override
+    public void deleteEqualTo (String equalToId, boolean isTeacher) {
+        if (isTeacher) {
+            final DocumentReference documentReference = db.collection("teachers").document(equalToId);
+            Query query = collection.whereEqualTo("teacher", documentReference);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            collection.document(document.getId()).delete();
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+        }
+        else {
+            DocumentReference documentReference = db.collection("students").document(equalToId);
+            Query query = collection.whereEqualTo("student", documentReference);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            collection.document(document.getId()).delete();
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void deleteEqualTo(String equalToId, boolean isTeacher, final CallbackSuccess callbackSuccess) {
+        if (isTeacher) {
+            final DocumentReference documentReference = db.collection("teachers").document(equalToId);
+            Query query = collection.whereEqualTo("teacher", documentReference);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            collection.document(document.getId()).delete();
+                        }
+                        callbackSuccess.onCallback();
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+        }
+        else {
+            DocumentReference documentReference = db.collection("students").document(equalToId);
+            Query query = collection.whereEqualTo("student", documentReference);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            collection.document(document.getId()).delete();
+                        }
+                        callbackSuccess.onCallback();
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public void deleteEqualTo(String equalToId, boolean isTeacher, final CallbackSuccess callbackSuccess, final CallbackError callbackError) {
+        if (isTeacher) {
+            final DocumentReference documentReference = db.collection("teachers").document(equalToId);
+            Query query = collection.whereEqualTo("teacher", documentReference);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            collection.document(document.getId()).delete();
+                        }
+                        callbackSuccess.onCallback();
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                        callbackError.onCallback();
+                    }
+                }
+            });
+        }
+        else {
+            DocumentReference documentReference = db.collection("students").document(equalToId);
+            Query query = collection.whereEqualTo("student", documentReference);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            collection.document(document.getId()).delete();
+                        }
+                        callbackSuccess.onCallback();
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                        callbackError.onCallback();
+                    }
+                }
+            });
+        }
+    }
+
 
     @Override
     public void getAll(final CallbackList callbackList) {
