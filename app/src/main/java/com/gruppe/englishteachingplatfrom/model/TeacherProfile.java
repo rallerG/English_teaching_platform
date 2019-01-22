@@ -190,10 +190,14 @@ public class TeacherProfile extends DocumentObject{
                 break;
         }
     }
+    @Override
+    public boolean equals(Object teach) {
+        TeacherProfile teacherProfile = (TeacherProfile) teach;
+        return id.equals(teacherProfile.getId());
+    }
 
 
-
-/*    public int getmPicture() {
+    /*    public int getmPicture() {
         return profilePic;
     }
     public void setmPicture(int profilePic) {
