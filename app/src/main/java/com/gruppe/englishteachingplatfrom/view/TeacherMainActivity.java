@@ -48,6 +48,8 @@ public class TeacherMainActivity extends AppCompatActivity
     TextView burgerMenuName;
     ImageView profilePicture;
 
+    MenuItem item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,10 @@ public class TeacherMainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        if (item != null) {
+            item.setChecked(false);
+        }
     }
 
 //    @Override
@@ -110,9 +116,8 @@ public class TeacherMainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-            displaySelectedScreen(item.getItemId());
-
-
+        this.item = item;
+        displaySelectedScreen(item.getItemId());
         return true;
     }
 
@@ -161,8 +166,10 @@ public class TeacherMainActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_teacher);
-        burgerMenuName.setText(p.getCurrrentTeacher().getName());
         drawer.closeDrawer(GravityCompat.START);
+        if (p.getCurrrentTeacher() != null){
+            burgerMenuName.setText(p.getCurrrentTeacher().getName());
+        }
     }
 
     @Override

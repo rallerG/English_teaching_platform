@@ -89,8 +89,8 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onCallback(List<Review> listOfObjects) {
                         rate = 0;
+                        list.clear();
                         for (Review review : listOfObjects) {
-                            list.clear();
                             list.add(review);
                             rate += review.getRating();
                             totalReviews = list.size();

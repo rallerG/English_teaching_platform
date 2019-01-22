@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class RequestMailActivity extends AppCompatActivity implements View.OnCli
     ImageView profilePic;
     TextView name;
     Button accept, delete;
-
+    private long mLastClickTime = 0;
     String studId;
     private ProgressDialog pDialog;
 
@@ -60,6 +61,10 @@ public class RequestMailActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         switch(v.getId()) {
             case R.id.accept:
                 pDialog = new ProgressDialog(this);

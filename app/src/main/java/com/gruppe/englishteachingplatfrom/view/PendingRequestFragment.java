@@ -99,7 +99,6 @@ public class PendingRequestFragment extends Fragment implements View.OnClickList
                                     pDialog.dismiss();
                                 }
                                 getFragmentManager().popBackStack();
-                            //    finish();
                             }
                         });
                     }
@@ -128,7 +127,6 @@ public class PendingRequestFragment extends Fragment implements View.OnClickList
                             pDialog.dismiss();
                         }
                         getFragmentManager().popBackStack();
-                      //  finish();
                     }
                 });
 

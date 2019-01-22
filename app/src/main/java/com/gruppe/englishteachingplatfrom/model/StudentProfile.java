@@ -147,7 +147,7 @@ public class StudentProfile extends DocumentObject{
                 break;
             case "3": this.profilePicture = R.drawable.student_3;
                 break;
-                default: this.profilePicture = R.drawable.unknown;
+            default: this.profilePicture = R.drawable.unknown;
                 break;
         }
     }
