@@ -26,7 +26,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private ImageView image;
     private Singleton p = Singleton.getInstance();
     //    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
-    private int pos, tPrice;
+    private int pos, tPrice, picture;
     private RatingBar rating;
     private float tRating, tRate;
     private String tName, tLang;
@@ -50,6 +50,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             tLang = bundle.getString("language");
             pos = bundle.getInt("position", 0);
             id = bundle.getString("id", "");
+            picture = bundle.getInt("pic");
             from = bundle.getString("from", "swipe");
         }
 
@@ -67,6 +68,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         price = rootview.findViewById(R.id.info_teacherprice);
        // information = rootview.findViewById(R.id.information_text);
         rateBar = rootview.findViewById(R.id.info_teacherratingstars);
+        image = rootview.findViewById(R.id.info_teacherpicture);
 
         floating_Fav_teacherInfo = rootview.findViewById(R.id.floating_fav_teacherInfo);
         floating_Send_teacherInfo = rootview.findViewById(R.id.floating_send_teacherInfo);
@@ -88,16 +90,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
 
         rating = rootview.findViewById(R.id.info_teacherratingstars);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            tName = bundle.getString("name");
-            tPrice = bundle.getInt("price", 0);
-            tRate = bundle.getFloat("rate",0);
-            tLang = bundle.getString("language");
-            pos = bundle.getInt("position", 0);
-            id = bundle.getString("id", "");
-        }
-
         System.out.println("TeacherInfoFragment.java: " + tName + " " + tPrice + " " + tRate + " " + tLang);
 
 
@@ -107,6 +99,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         price.setText(Integer.toString(tPrice) + " DKK/hr");
         rateBar.setRating(tRate);
         rateBar.setIsIndicator(true);
+        image.setImageResource(picture);
 
 //        information.setText(p.getTeacherDummies().get(pos).getDescription());
 //        information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
@@ -130,6 +123,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putInt("position", pos);
             bundle.putBoolean("isTeacherInfoFragment", true);
             bundle.putBoolean("isFav", fav);
+            bundle.putInt("pic", picture);
             bundle.putString("id",id);
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
@@ -148,6 +142,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putBoolean("isTeacherInfoFragment", true);
             bundle.putBoolean("isFav", fav);
             bundle.putString("from", from);
+            bundle.putInt("pic", picture);
             bundle.putString("id",id);
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);

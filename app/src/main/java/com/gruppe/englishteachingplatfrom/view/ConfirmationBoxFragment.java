@@ -20,7 +20,7 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
     private ImageView teacherImage;
     private TextView teacherInfo, confirmationText,rateD;
     private RatingBar ratingBar;
-    private int pic;
+    private int picture;
     private int pos;
     private Singleton info;
     private String tLang, tName;
@@ -45,6 +45,7 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
             tPrice = bundle.getInt("price", 0);
             tRate = bundle.getFloat("rate",0);
             tLang = bundle.getString("language");
+            picture = bundle.getInt("pic");
             pos = bundle.getInt("position", 0);
             calledByTeacherInfoFragment = bundle.getBoolean("isTeacherInfoFragment");
         }
@@ -61,6 +62,7 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
         ratingBar.setIsIndicator(true);
         teacherInfo.setText(tName+ "\n"+tLang +"\n" +tPrice);
         okayButton.setOnClickListener(this);
+        teacherImage.setImageResource(picture);
 
         return vw;
     }

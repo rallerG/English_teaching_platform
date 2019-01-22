@@ -27,6 +27,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocum
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.controller.MyStudentMatchesRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.controller.MyTeacherMatchesRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
@@ -45,6 +46,7 @@ public class ListFragment extends Fragment {
 
     RecyclerView mRecyclerView;
     MyFavoriteRecyclerViewAdapter mAdapter;
+    MyStudentMatchesRecyclerViewAdapter mStudentMatchesAdapter;
     MyTeacherMatchesRecyclerViewAdapter mTeacherAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     Singleton p = Singleton.getInstance();
@@ -142,11 +144,11 @@ public class ListFragment extends Fragment {
                                         p.getCurrrentStudent().getMatchProfiles().add(object);
                                         object.setProfilePictures();
                                         if (listOfObjects.indexOf(teacher) == (listOfObjects.size()-1)) {
-                                            mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
+                                            mStudentMatchesAdapter = new MyStudentMatchesRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
-                                            mRecyclerView.setAdapter(mAdapter);
-                                            mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+                                            mRecyclerView.setAdapter(mStudentMatchesAdapter);
+                                            mStudentMatchesAdapter.setOnItemClickListener(new MyStudentMatchesRecyclerViewAdapter.OnItemClickListener() {
 
                                                 @Override
                                                 public void onItemClick(int position) {
@@ -160,6 +162,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putString("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
                                                         bundle.putString("id", p.getCurrrentStudent().getMatchProfiles().get(position).getId());
                                                         bundle.putString("from", "matches");
+                                                        bundle.putInt("pic", p.getCurrrentStudent().getMatchProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getMatchProfiles().get(position).getId());
 
                                                         Fragment F = new TeacherInfoFragment();
@@ -210,6 +213,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putFloat("rate", (float) p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
                                                         bundle.putString("language", p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
                                                         bundle.putString("from", "favorites");
+                                                        bundle.putInt("pic", p.getCurrrentStudent().getFavoriteProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getFavoriteProfiles().get(position).getId());
 
                                                         Fragment F = new TeacherInfoFragment();
@@ -259,6 +263,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putFloat("rate", (float) p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
                                                         bundle.putString("language", p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());
                                                         bundle.putString("from", "pending");
+                                                        bundle.putInt("pic", p.getCurrrentStudent().getPendingProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getPendingProfiles().get(position).getId());
 
                                                         Fragment F = new TeacherInfoFragment();

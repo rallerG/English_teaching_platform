@@ -32,7 +32,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
     TextView teacherInfo, confirmationText, rateD;
     RatingBar ratingBar;
     private int pos;
-    private int pic;
+    private int picture;
     private Singleton p = Singleton.getInstance();
     private String tLang, tName;
     private int tPrice;
@@ -64,6 +64,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
             tLang = bundle.getString("language");
             pos = bundle.getInt("position", 0);
             fav = bundle.getBoolean("isFav",false);
+            picture = bundle.getInt("pic");
             id = bundle.getString("id","");
             calledByTeacherInfoFragment = bundle.getBoolean("isTeacherInfoFragment");
         }
@@ -80,6 +81,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
         ratingBar.setIsIndicator(true);
         sendButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
+        teacherImage.setImageResource(picture);
 
 
 
@@ -108,6 +110,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
                                 bundle.putFloat("rate", tRate);
                                 bundle.putString("language", tLang);
                                 bundle.putInt("position", pos);
+                                bundle.putInt("pic", picture);
                                 bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
                                 ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
                                 fragment2.setArguments(bundle);
