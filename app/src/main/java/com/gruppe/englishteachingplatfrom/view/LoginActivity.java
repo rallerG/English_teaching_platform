@@ -50,73 +50,74 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mLastClickTime = SystemClock.elapsedRealtime();
         switch (view.getId()) {
             case R.id.login :
-                pDialog = new ProgressDialog(this);
-                pDialog.setMessage("Logging in...");
-                pDialog.setCancelable(true);
-                pDialog.show();
+                if (email.getText().toString().equals("") || password.getText().toString().equals("")) {
+                    emptyFields();
+                }
+                else {
+                    pDialog = new ProgressDialog(this);
+                    pDialog.setMessage("Logging in...");
+                    pDialog.setCancelable(true);
+                    pDialog.show();
 
-                final Intent intentTeacher = new Intent(this, IntroductionTeacher.class);
-                final Intent intentStudent = new Intent(this, IntroductionStudent.class);
-                TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                teachersDocument.getAll(new CallbackList<TeacherProfile>() {
-                    @Override
-                    public void onCallback(List<TeacherProfile> listOfObjects) {
-                        for (TeacherProfile teacherProfile : listOfObjects) {
-                            if (teacherProfile.getEmail().equals(email.getText().toString())) {
-                                if (teacherProfile.getPassword().equals(password.getText().toString())) {
-                                    p.setCurrrentTeacher(teacherProfile);
-                                    p.rememberTeacher();
+                    final Intent intentTeacher = new Intent(this, IntroductionTeacher.class);
+                    final Intent intentStudent = new Intent(this, IntroductionStudent.class);
+                    TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                    teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+                        @Override
+                        public void onCallback(List<TeacherProfile> listOfObjects) {
+                            for (TeacherProfile teacherProfile : listOfObjects) {
+                                if (teacherProfile.getEmail().equals(email.getText().toString())) {
+                                    if (teacherProfile.getPassword().equals(password.getText().toString())) {
+                                        p.setCurrrentTeacher(teacherProfile);
+                                        p.rememberTeacher();
 
-                                    if (pDialog.isShowing()){
-                                        pDialog.dismiss();
+                                        if (pDialog.isShowing()) {
+                                            pDialog.dismiss();
+                                        }
+                                        startActivity(intentTeacher);
+                                        finishAffinity();
+                                    } else {
+                                        if (pDialog.isShowing()) {
+                                            pDialog.dismiss();
+                                        }
+                                        wrongUseranmePasswordError();
                                     }
-                                    startActivity(intentTeacher);
-                                    finishAffinity();
-                                }
-                                else {
-                                    if (pDialog.isShowing()){
-                                        pDialog.dismiss();
-                                    }
-                                    wrongUseranmePasswordError();
-                                }
-                            }
-                            else {
-                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                studentsDocument.getAll(new CallbackList<StudentProfile>() {
-                                    @Override
-                                    public void onCallback(List<StudentProfile> listOfObjects) {
-                                        for (StudentProfile studentProfile : listOfObjects) {
-                                            if (studentProfile.getEmail().equals(email.getText().toString())) {
-                                                if (studentProfile.getPassword().equals(password.getText().toString())) {
-                                                    p.setCurrrentStudent(studentProfile);
-                                                    p.rememberStudent();
+                                } else {
+                                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                    studentsDocument.getAll(new CallbackList<StudentProfile>() {
+                                        @Override
+                                        public void onCallback(List<StudentProfile> listOfObjects) {
+                                            for (StudentProfile studentProfile : listOfObjects) {
+                                                if (studentProfile.getEmail().equals(email.getText().toString())) {
+                                                    if (studentProfile.getPassword().equals(password.getText().toString())) {
+                                                        p.setCurrrentStudent(studentProfile);
+                                                        p.rememberStudent();
 
-                                                    if (pDialog.isShowing()){
-                                                        pDialog.dismiss();
+                                                        if (pDialog.isShowing()) {
+                                                            pDialog.dismiss();
+                                                        }
+                                                        startActivity(intentStudent);
+                                                        finishAffinity();
+                                                    } else {
+                                                        if (pDialog.isShowing()) {
+                                                            pDialog.dismiss();
+                                                        }
+                                                        wrongUseranmePasswordError();
                                                     }
-                                                    startActivity(intentStudent);
-                                                    finishAffinity();
-                                                }
-                                                else {
-                                                    if (pDialog.isShowing()){
+                                                } else {
+                                                    if (pDialog.isShowing()) {
                                                         pDialog.dismiss();
                                                     }
                                                     wrongUseranmePasswordError();
                                                 }
                                             }
-                                            else {
-                                                if (pDialog.isShowing()){
-                                                    pDialog.dismiss();
-                                                }
-                                                wrongUseranmePasswordError();
-                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
                 break;
             case R.id.signup :
                 startActivity(new Intent(this, SignupActivity.class));
@@ -127,5 +128,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void wrongUseranmePasswordError() {
         email.setError("Username and/or password is incorrect");
         password.setError("Username and/or password is incorrect");
+    }
+
+    private void emptyFields() {
+        email.setError("You need to insert your email to login");
+        password.setError("You need to insert your password to login");
     }
 }

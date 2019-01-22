@@ -21,7 +21,7 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 public class SignupTeacherFragment extends Fragment implements View.OnClickListener {
     private ProgressDialog pDialog;
-    private EditText name, email, price;
+    private EditText name, email, price, password;
     private long mLastClickTime = 0;
 
     @Override
@@ -39,6 +39,7 @@ public class SignupTeacherFragment extends Fragment implements View.OnClickListe
 
         name = view.findViewById(R.id.name_input);
         email = view.findViewById(R.id.email_input);
+        password = view.findViewById(R.id.password_input);
         price = view.findViewById(R.id.price_input);
 
         return view;
@@ -50,38 +51,50 @@ public class SignupTeacherFragment extends Fragment implements View.OnClickListe
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
+
         switch (view.getId()) {
             case R.id.signup_button_teacher :
-                pDialog = new ProgressDialog(getActivity());
-                pDialog.setMessage("Please wait...");
-                pDialog.setCancelable(true);
-                pDialog.show();
+                if (email.getText().toString().equals("") || password.getText().toString().equals("")|| name.getText().toString().equals("") || price.getText().toString().equals(""))
+                    emptyFields();
+                else {
+                    pDialog = new ProgressDialog(getActivity());
+                    pDialog.setMessage("Please wait...");
+                    pDialog.setCancelable(true);
+                    pDialog.show();
 
-                final Activity activity = getActivity();
-                final Intent intent = new Intent(getActivity(), LoginActivity.class);
-                TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                final TeacherProfile teacherProfile = new TeacherProfile();
-                teacherProfile.setName(name.getText().toString());
-                teacherProfile.setEmail(email.getText().toString());
-                teacherProfile.setPrice(Integer.parseInt(price.getText().toString()));
-                teachersDocument.add(teacherProfile, new CallbackSuccess() {
-                    @Override
-                    public void onCallback() {
-                        //loading bar
-                        if (pDialog.isShowing())
-                            pDialog.dismiss();
-                        activity.finish();
-                        startActivity(intent);
-                    }
+                    final Activity activity = getActivity();
+                    final Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                    final TeacherProfile teacherProfile = new TeacherProfile();
+                    teacherProfile.setName(name.getText().toString());
+                    teacherProfile.setEmail(email.getText().toString());
+                    teacherProfile.setPassword(password.getText().toString());
+                    teacherProfile.setPrice(Integer.parseInt(price.getText().toString()));
+                    teachersDocument.add(teacherProfile, new CallbackSuccess() {
+                        @Override
+                        public void onCallback() {
+                            //loading bar
+                            if (pDialog.isShowing())
+                                pDialog.dismiss();
+                            activity.finish();
+                            startActivity(intent);
+                        }
 
-                }, new CallbackError() {
-                    @Override
-                    public void onCallback() {
-                        System.out.println("error adding teacher");
-                    }
-                });
-                break;
+                    }, new CallbackError() {
+                        @Override
+                        public void onCallback() {
+                            System.out.println("error adding teacher");
+                        }
+                    });
+                }
+            break;
         }
     }
 
+    private void emptyFields() {
+        email.setError("You need to insert your email to sign up");
+        name.setError("You need to insert your name to sign up");
+        password.setError("You need to insert your password to sign up");
+        price.setError("You need to insert price to sign up");
+    }
 }

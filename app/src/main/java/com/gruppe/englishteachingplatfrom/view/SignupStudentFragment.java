@@ -22,7 +22,7 @@ import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 public class SignupStudentFragment extends Fragment implements View.OnClickListener {
 
     private ProgressDialog pDialog;
-    private EditText name, email;
+    private EditText name, email, password;
     private long mLastClickTime = 0;
 
     @Override
@@ -40,6 +40,7 @@ public class SignupStudentFragment extends Fragment implements View.OnClickListe
 
         name = view.findViewById(R.id.name_input);
         email = view.findViewById(R.id.email_input);
+        password = view.findViewById(R.id.password_input);
 
         return view;
     }
@@ -49,38 +50,49 @@ public class SignupStudentFragment extends Fragment implements View.OnClickListe
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
             return;
         }
+
         mLastClickTime = SystemClock.elapsedRealtime();
         switch (view.getId()) {
-            case R.id.signup_button_student :
-                pDialog = new ProgressDialog(getActivity());
-                pDialog.setMessage("Please wait...");
-                pDialog.setCancelable(true);
-                pDialog.show();
+            case R.id.signup_button_student:
+                if (email.getText().toString().equals("") || password.getText().toString().equals("")|| name.getText().toString().equals(""))
+                    emptyFields();
+                else {
+                    pDialog = new ProgressDialog(getActivity());
+                    pDialog.setMessage("Please wait...");
+                    pDialog.setCancelable(true);
+                    pDialog.show();
 
-                final Activity activity = getActivity();
-                final Intent intent = new Intent(getActivity(), LoginActivity.class);
-                StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                final StudentProfile studentProfile = new StudentProfile();
-                studentProfile.setName(name.getText().toString());
-                studentProfile.setEmail(email.getText().toString());
-                studentsDocument.add(studentProfile, new CallbackSuccess() {
-                    @Override
-                    public void onCallback() {
-                        //loading bar
-                        if (pDialog.isShowing())
-                            pDialog.dismiss();
-                        activity.finish();
-                        startActivity(intent);
-                    }
+                    final Activity activity = getActivity();
+                    final Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                    final StudentProfile studentProfile = new StudentProfile();
+                    studentProfile.setName(name.getText().toString());
+                    studentProfile.setEmail(email.getText().toString());
+                    studentProfile.setPassword(password.getText().toString());
+                    studentsDocument.add(studentProfile, new CallbackSuccess() {
+                        @Override
+                        public void onCallback() {
+                            //loading bar
+                            if (pDialog.isShowing())
+                                pDialog.dismiss();
+                            activity.finish();
+                            startActivity(intent);
+                        }
 
-                }, new CallbackError() {
-                    @Override
-                    public void onCallback() {
-                        System.out.println("error adding teacher");
-                    }
-                });
-                break;
+                    }, new CallbackError() {
+                        @Override
+                        public void onCallback() {
+                            System.out.println("error adding teacher");
+                        }
+                    });
+                }
+            break;
         }
+    }
+    private void emptyFields() {
+        email.setError("You need to insert your email to sign up");
+        name.setError("You need to insert your name to sign up");
+        password.setError("You need to insert your password to sign up");
     }
 
 }
