@@ -129,6 +129,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                     @Override
                                     public void onCallback(StudentProfile object) {
                                         pay.setStudent(object);
+                                        object.setProfilePictures();
                                         pay.setTeacher(p.getCurrrentTeacher());
                                         p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
 //                                        p.getCurrrentTeacher().getActivePaymentDummies().get(p.getCurrrentTeacher().getActivePaymentDummies().indexOf(pay)).setStudent(object);
@@ -153,6 +154,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                     @Override
                                     public void onCallback(StudentProfile object) {
                                         pay.setStudent(object);
+                                        object.setProfilePictures();
                                         pay.setTeacher(p.getCurrrentTeacher());
                                         p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
 //                                        p.getCurrrentTeacher().getHistoryPaymentDummies().get(p.getCurrrentTeacher().getHistoryPaymentDummies().indexOf(pay)).setStudent(object);
@@ -197,6 +199,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                     @Override
                                     public void onCallback(TeacherProfile object) {
                                         pay.setTeacher(object);
+                                        object.setProfilePictures();
                                         pay.setStudent(p.getCurrrentStudent());
                                         p.getCurrrentStudent().getActivePaymentDummies().add(pay);
 //                                        p.getCurrrentStudent().getActivePaymentDummies().get(p.getCurrrentStudent().getActivePaymentDummies().indexOf(pay)).setTeacher(object);
@@ -221,6 +224,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                     @Override
                                     public void onCallback(TeacherProfile object) {
                                         pay.setTeacher(object);
+                                        object.setProfilePictures();
                                         pay.setStudent(p.getCurrrentStudent());
                                         p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
 //                                        p.getCurrrentStudent().getHistoryPaymentDummies().get(p.getCurrrentStudent().getHistoryPaymentDummies().indexOf(pay)).setTeacher(object);

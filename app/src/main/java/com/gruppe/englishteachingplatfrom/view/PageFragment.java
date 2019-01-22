@@ -80,6 +80,9 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         tName = contents.get(pos).getName();
         name.setText(tName);
 
+        imageView = rootview.findViewById(R.id.teacherPic);
+        imageView.setImageResource(contents.get(pos).getProfilePic());
+
         language = rootview.findViewById(R.id.language);
         tLang = contents.get(pos).getLanguage();
         language.setText(tLang);

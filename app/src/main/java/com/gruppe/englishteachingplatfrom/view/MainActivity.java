@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity
                 public void onCallback(List<TeacherProfile> listOfObjects) {
                     p.getTeacherDummies().clear();
                     p.getTeacherDummies().addAll(listOfObjects);
+                    for (TeacherProfile teacher : listOfObjects) {
+                        teacher.setProfilePictures();
+                    }
                     //loading bar
                     if (pDialog.isShowing()){
                         pDialog.dismiss();

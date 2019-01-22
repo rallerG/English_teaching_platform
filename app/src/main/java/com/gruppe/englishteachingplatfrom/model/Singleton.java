@@ -108,6 +108,10 @@ public class Singleton {
 
     public void logout() {
         editor.clear().commit();
+        currrentStudent = null;
+        currrentTeacher = null;
+        studentDummies.clear();
+        teacherDummies.clear();
     }
 
     public StudentProfile getCurrrentStudent() {

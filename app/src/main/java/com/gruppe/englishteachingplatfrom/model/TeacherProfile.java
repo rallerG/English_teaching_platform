@@ -178,6 +178,19 @@ public class TeacherProfile extends DocumentObject{
         this.profilePic = profilePic;
     }
 
+    public void setProfilePictures() {
+                switch (this.id) {
+            case "1": this.profilePic = R.drawable.teacher_1;
+                break;
+            case "2": this.profilePic = R.drawable.teacher_2;
+                break;
+            case "3": this.profilePic = R.drawable.teacher_3;
+                break;
+            default: this.profilePic = R.drawable.unknown;
+                break;
+        }
+    }
+
 
 
 /*    public int getmPicture() {
