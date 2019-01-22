@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class TeacherMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ListFragment.OnListFragmentInteractionListener,
         View.OnClickListener, PaymentHistoryFragment.OnFragmentInteractionListener, PaymentActiveFragment.OnFragmentInteractionListener,
-        PaymentOverviewFragment.OnFragmentInteractionListener {
+        PaymentOverviewFragment.OnFragmentInteractionListener, TeacherProfilePageFragment.OnFragmentInteractionListener {
 
 
     RecyclerView list;
@@ -64,7 +64,7 @@ public class TeacherMainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view_teacher);
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
-        burgerMenuName = headerView.findViewById(R.id.textView2);
+        burgerMenuName = headerView.findViewById(R.id.teacher_name_nav);
         profilePicture = headerView.findViewById(R.id.navBarProfilePicture);
         burgerMenuName.setText(p.getCurrrentTeacher().getName());
         profilePicture.setImageResource(p.getCurrrentTeacher().getProfilePic());
@@ -147,7 +147,7 @@ public class TeacherMainActivity extends AppCompatActivity
                 setTitle("Pending");
                 break;
             case R.id.nav_account:
-                fragment = new TeacherFragment();
+                fragment = new TeacherProfilePageFragment();
                 setTitle("Account");
                 break;
             case R.id.nav_logout:
@@ -166,6 +166,7 @@ public class TeacherMainActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_teacher);
+        burgerMenuName.setText(p.getCurrrentTeacher().getName());
         drawer.closeDrawer(GravityCompat.START);
     }
 

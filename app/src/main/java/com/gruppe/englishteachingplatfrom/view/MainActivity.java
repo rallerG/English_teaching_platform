@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         burgerMenuName.setText(p.getCurrrentStudent().getName());
         profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
-        burgerMenuName.setOnClickListener(this);
+//        burgerMenuName.setOnClickListener(this);
 //        System.out.println("Print! " + p.getCurrrentStudent().getName());
 
 
@@ -234,6 +234,7 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        burgerMenuName.setText(p.getCurrrentStudent().getName());
 
 
 
