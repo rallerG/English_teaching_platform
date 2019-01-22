@@ -66,7 +66,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
 //            pos = bundle.getInt("position", 0);
 //        }
         Singleton teacher = Singleton.getInstance();
-        ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
+        ArrayList<TeacherProfile> contents = teacher.getSwipeTeachers();
 //        pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
