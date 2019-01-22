@@ -141,9 +141,9 @@ public class StudentProfile extends DocumentObject{
 
     public void setProfilePictures() {
                 switch (this.id) {
-            case "1": this.profilePicture = R.drawable.student_1;
+            case "1": this.profilePicture = R.drawable.student_2;
                 break;
-            case "2": this.profilePicture = R.drawable.student_2;
+            case "2": this.profilePicture = R.drawable.student_1;
                 break;
             case "3": this.profilePicture = R.drawable.student_3;
                 break;
