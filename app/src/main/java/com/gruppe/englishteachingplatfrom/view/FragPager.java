@@ -164,14 +164,14 @@ public class FragPager extends Fragment implements View.OnClickListener {
             // should have the standard heart images for favorite (empty and filled)
 //                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
 //                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-//                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
-//                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
-//                    @Override
-//                    public void onCallback() {
-//                        p.getTeacherDummies().remove(mPager.getCurrentItem());
-//                        mAdapter.notifyDataSetChanged();
-//                    }
-//                });
+                StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
+                    @Override
+                    public void onCallback() {
+                        p.getTeacherDummies().remove(mPager.getCurrentItem());
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
                 removeTeacher(getFragman());
                 Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
 
