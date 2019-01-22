@@ -27,7 +27,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
     private Singleton teacher = Singleton.getInstance();
     private RatingBar rating;
     public static boolean clicked = false;
-    private int pos, pic, tPrice;
+    private int pos, picture, tPrice;
     private float  tRate;
     private String tName;
     private String tLang;
@@ -81,7 +81,8 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         name.setText(tName);
 
         imageView = rootview.findViewById(R.id.teacherPic);
-        imageView.setImageResource(contents.get(pos).getProfilePic());
+        picture = contents.get(pos).getProfilePic();
+        imageView.setImageResource(picture);
 
         language = rootview.findViewById(R.id.language);
         tLang = contents.get(pos).getLanguage();
@@ -130,6 +131,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("language", tLang);
                 bundle.putInt("position", pos);
                 bundle.putString("id", id);
+                bundle.putInt("pic", picture);
                 Fragment F = new TeacherInfoFragment();
                 F.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
