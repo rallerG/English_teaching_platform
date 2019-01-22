@@ -15,9 +15,12 @@ import android.widget.EditText;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackError;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+
+import java.util.List;
 
 public class SignupStudentFragment extends Fragment implements View.OnClickListener {
 
@@ -62,27 +65,45 @@ public class SignupStudentFragment extends Fragment implements View.OnClickListe
                     pDialog.setCancelable(true);
                     pDialog.show();
 
-                    final Activity activity = getActivity();
-                    final Intent intent = new Intent(getActivity(), LoginActivity.class);
                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                    final StudentProfile studentProfile = new StudentProfile();
-                    studentProfile.setName(name.getText().toString());
-                    studentProfile.setEmail(email.getText().toString());
-                    studentProfile.setPassword(password.getText().toString());
-                    studentsDocument.add(studentProfile, new CallbackSuccess() {
+                    studentsDocument.getAll(new CallbackList<StudentProfile>() {
                         @Override
-                        public void onCallback() {
-                            //loading bar
-                            if (pDialog.isShowing())
-                                pDialog.dismiss();
-                            activity.finish();
-                            startActivity(intent);
-                        }
+                        public void onCallback(List<StudentProfile> listOfObjects) {
+                            boolean exits = false;
+                            for (StudentProfile studentProfile : listOfObjects) {
+                                if (studentProfile.getEmail().equals(email.getText().toString()))
+                                    exits = true;
+                            }
+                            if (exits) {
+                                emailAlreadyExits();
+                                if (pDialog.isShowing())
+                                    pDialog.dismiss();
+                            }
+                            else {
+                                final Activity activity = getActivity();
+                                final Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                final StudentProfile newStudentProfile = new StudentProfile();
+                                newStudentProfile.setName(name.getText().toString());
+                                newStudentProfile.setEmail(email.getText().toString());
+                                newStudentProfile.setPassword(password.getText().toString());
+                                StudentsDocument studentsDocument2 = new StudentsDocumentImpl();
+                                studentsDocument2.add(newStudentProfile, new CallbackSuccess() {
+                                    @Override
+                                    public void onCallback() {
+                                        //loading bar
+                                        if (pDialog.isShowing())
+                                            pDialog.dismiss();
+                                        activity.finish();
+                                        startActivity(intent);
+                                    }
 
-                    }, new CallbackError() {
-                        @Override
-                        public void onCallback() {
-                            System.out.println("error adding teacher");
+                                }, new CallbackError() {
+                                    @Override
+                                    public void onCallback() {
+                                        System.out.println("error adding teacher");
+                                    }
+                                });
+                            }
                         }
                     });
                 }
@@ -93,6 +114,10 @@ public class SignupStudentFragment extends Fragment implements View.OnClickListe
         email.setError("You need to insert your email to sign up");
         name.setError("You need to insert your name to sign up");
         password.setError("You need to insert your password to sign up");
+    }
+
+    private void emailAlreadyExits () {
+        email.setError("The inserted Email already exits");
     }
 
 }
