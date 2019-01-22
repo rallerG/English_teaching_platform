@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity
     TextView burgerMenuName;
     ImageView profilePicture;
 
+    MenuItem item;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,16 +125,20 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
+
+        else {
+            super.onBackPressed();
+            setTitle(R.string.app_name);
+        }
+
 //         else if(FragPager.requestSend){
 //            super.onBackPressed();
 //                getSupportFragmentManager().popBackStack();
 //
 //                getSupportFragmentManager().beginTransaction().add(R.id.fragmentContent, new).commit();
 //        }
-
-        else {
-            super.onBackPressed();
-            setTitle(R.string.app_name);
+        if (item != null) {
+            item.setChecked(false);
         }
     }
 
@@ -164,6 +170,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        this.item = item;
         displaySelectedScreen(item.getItemId());
         return true;
     }
@@ -234,7 +241,10 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        burgerMenuName.setText(p.getCurrrentStudent().getName());
+
+        if (p.getCurrrentStudent() != null){
+            burgerMenuName.setText(p.getCurrrentStudent().getName());
+        }
 
 
 
