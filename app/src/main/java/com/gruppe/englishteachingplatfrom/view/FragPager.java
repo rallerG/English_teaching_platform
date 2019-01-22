@@ -157,6 +157,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
             bundle.putString("language", p.getTeacherDummies().get(position1).getLanguage());
             bundle.putInt("position", position1);
             bundle.putString("id", p.getTeacherDummies().get(position1).getId());
+            bundle.putInt("pic", p.getTeacherDummies().get(position1).getProfilePic());
             bundle.putBoolean("isTeacherInfoFragment", false);
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
