@@ -225,7 +225,8 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             studentMatchesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                 @Override
                 public void onCallback() {
-
+                    Toast.makeText(getContext(),"removed from matches", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().popBackStack();
                 }
             });
 
