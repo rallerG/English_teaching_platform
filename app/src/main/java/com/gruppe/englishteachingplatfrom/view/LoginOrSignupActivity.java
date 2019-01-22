@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
     Singleton p = Singleton.getInstance();
     private ProgressDialog pDialog;
     private SharedPreferences preference;
+    private long mLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,10 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 }
     @Override
     public void onClick(View view) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         switch (view.getId()) {
             case R.id.loginFacebook :
                 // Showing progress dialog to user

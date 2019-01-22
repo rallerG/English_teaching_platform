@@ -106,49 +106,18 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
 
         Context context = view.getContext();
 
-        feed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragmentContent, new ReviewFragment());
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
 
-        inbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Preventing multiple clicks, using threshold of 1 second
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
-
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.fragmentContent, new RequestFragment());
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
-
-        schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.replace(R.id.fragmentContent, new ScheduleTeacherFragment());
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
         return view;
     }
 
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
         if(v == pay){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -156,6 +125,27 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
             ft.addToBackStack(null);
             ft.commit();
         }
+        else if (v == feed) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragmentContent, new ReviewFragment());
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        else if (v == inbox) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.fragmentContent, new RequestFragment());
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+
+            else if (v == schedule) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.replace(R.id.fragmentContent, new ScheduleTeacherFragment());
+                ft.addToBackStack(null);
+                ft.commit();
+            }
     }
 
     @Override

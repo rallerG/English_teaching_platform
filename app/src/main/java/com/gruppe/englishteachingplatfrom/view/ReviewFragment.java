@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +46,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
     int totStar3 = 0;
     int totStar4 = 0;
     int totStar5 = 0;
+    private long mLastClickTime = 0;
 
     public ReviewFragment() {
     }
@@ -178,7 +180,10 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         if (v == oneStar) {
             sortList(1, oneStar, prevBtn);
             prevBtn = oneStar;

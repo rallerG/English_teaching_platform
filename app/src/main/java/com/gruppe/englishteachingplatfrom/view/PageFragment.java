@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
     private String tName;
     private String tLang;
     private String id;
+    private long mLastClickTime = 0;
 
     public PageFragment() {
 
@@ -105,6 +107,10 @@ public class PageFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         if(!clicked)
             if(v == card) {
                 //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
