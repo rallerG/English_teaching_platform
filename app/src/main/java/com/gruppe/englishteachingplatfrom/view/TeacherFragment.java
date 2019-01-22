@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
     LinearLayout inbox, pay, schedule;
     LinearLayout feed;
     RatingBar rating;
+    ImageView profilePic;
     TextView reviews, students;
     Singleton p = Singleton.getInstance();
     int rate = 0;
@@ -76,6 +78,8 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         rating = view.findViewById(R.id.ratingbar_teacher);
         reviews = view.findViewById(R.id.reviews);
         students = view.findViewById(R.id.students);
+        profilePic = view.findViewById(R.id.imageView8);
+        profilePic.setImageResource(p.getCurrrentTeacher().getProfilePic());
 
             if(savedInstanceState == null) {
                 System.out.println("TeacherFragment.java: Start of savedInstanceState");

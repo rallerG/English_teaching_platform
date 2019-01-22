@@ -9,11 +9,11 @@
             android:icon="@drawable/ic_menu_home_24px"
             android:title="Home" />
         <item
-            android:id="@+id/first"
+            android:id="@+id/yourStudents"
             android:icon="@drawable/ic_menu_matches_24px"
             android:title="Your students" />
         <item
-            android:id="@+id/nav_favorites"
+            android:id="@+id/yourPayments"
             android:icon="@drawable/ic_menu_money"
             android:title="Payments" />
         <item
@@ -22,8 +22,8 @@
             android:title="Pending" />
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/ic_menu_settings_20px"
-            android:title="Settings" />
+            android:icon="@drawable/ic_menu_account_24px"
+            android:title="Account" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_menu_logout_24px"
