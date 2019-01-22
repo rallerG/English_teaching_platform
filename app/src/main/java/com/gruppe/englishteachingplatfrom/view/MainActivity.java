@@ -20,9 +20,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentMatchesDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentPendingsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentFavoritesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentMatchesDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.controller.MyStudentMatchesRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
@@ -38,7 +47,6 @@ public class MainActivity extends AppCompatActivity
 
     //vars
     public FloatingActionButton fab;
-    public FloatingActionButton floatingActionButton;
     public int position;
     public int pic;
     Singleton p = Singleton.getInstance();
@@ -93,26 +101,72 @@ public class MainActivity extends AppCompatActivity
                 pDialog.setCancelable(true);
                 pDialog.show();
 
-            TeachersDocument teachersDocument = new TeachersDocumentImpl();
-            teachersDocument.getAll(new CallbackList<TeacherProfile>() {
-                @Override
-                public void onCallback(List<TeacherProfile> listOfObjects) {
-                    p.getTeacherDummies().clear();
-                    p.getTeacherDummies().addAll(listOfObjects);
-                    for (TeacherProfile teacher : listOfObjects) {
-                        teacher.setProfilePictures();
-                    }
-                    //loading bar
-                    if (pDialog.isShowing()){
-                        pDialog.dismiss();
-                    }
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.add(R.id.fragmentContent, new FragPager());
-                    ft.commit();
-                }
-            });
 
         }
+
+        StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
+        studentPendingsDocument.getAll(new CallbackList<TeacherProfile>() {
+            @Override
+            public void onCallback(final List<TeacherProfile> listOfObjects) {
+                p.getCurrrentStudent().getPendingProfiles().clear();
+                p.getCurrrentStudent().getPendingProfiles().addAll(listOfObjects);
+                StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl(p.getCurrrentStudent().getId());
+                studentMatchesDocument.getAll(new CallbackList<TeacherProfile>() {
+                    @Override
+                    public void onCallback(final List<TeacherProfile> listOfObjects) {
+                        p.getCurrrentStudent().getMatchProfiles().clear();
+                        p.getCurrrentStudent().getMatchProfiles().addAll(listOfObjects);
+                        StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
+                        studentFavoritesDocument.getAll(new CallbackList<TeacherProfile>() {
+                            @Override
+                            public void onCallback(final List<TeacherProfile> listOfObjects) {
+                                p.getCurrrentStudent().getFavoriteProfiles().clear();
+                                p.getCurrrentStudent().getFavoriteProfiles().addAll(listOfObjects);
+
+                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                teachersDocument.getAll(new CallbackList<TeacherProfile>() {
+                                    @Override
+                                    public void onCallback(List<TeacherProfile> listOfObjects) {
+                                        p.getTeacherDummies().clear();
+                                        p.getTeacherDummies().addAll(listOfObjects);
+                                        for (TeacherProfile teacher : listOfObjects) {
+                                            teacher.setProfilePictures();
+                                        }
+                                        p.getSwipeTeachers().addAll(listOfObjects);
+                                        p.getSwipeTeachers().removeAll(p.getCurrrentStudent().getFavoriteProfiles());
+                                        p.getSwipeTeachers().removeAll(p.getCurrrentStudent().getPendingProfiles());
+                                        p.getSwipeTeachers().removeAll(p.getCurrrentStudent().getMatchProfiles());
+//                                        for (TeacherProfile teacherProfile : listOfObjects) {
+//                                            for (TeacherProfile teacherProfile1: p.getCurrrentStudent().getPendingProfiles()) {
+//                                                if (!(teacherProfile.getId().equals(teacherProfile1.getId()))) {
+//                                                    for (TeacherProfile teacherProfile2 : p.getCurrrentStudent().getFavoriteProfiles()) {
+//                                                        if (!(teacherProfile.getId().equals(teacherProfile2.getId()))) {
+//                                                            for (TeacherProfile teacherProfile3 : p.getCurrrentStudent().getMatchProfiles()) {
+//                                                                if (!(teacherProfile.getId().equals(teacherProfile3.getId())))
+//                                                                    p.getSwipeTeachers().add(teacherProfile);
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+
+                                        // loading bar
+                                        if (pDialog.isShowing()){
+                                            pDialog.dismiss();
+                                        }
+                                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                        ft.add(R.id.fragmentContent, new FragPager());
+                                        ft.commit();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
