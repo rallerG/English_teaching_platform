@@ -57,8 +57,6 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
     TextView noActivePayment;
 
-    int i;
-
     private OnFragmentInteractionListener mListener;
 
     private Singleton p = Singleton.getInstance();
@@ -262,11 +260,8 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         if (v == activeButton) {
 
-            System.out.println(p.getCurrrentStudent().getName());
-            System.out.println(p.getCurrrentTeacher().getName());
-
-            i = 0;
-            SetEmptyListText(i);
+            //Set the text if list empty or full
+            SetEmptyListText(v);
 
             //Change test color
             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
@@ -281,15 +276,12 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
         } else if (v == historyButton) {
 
-            System.out.println(p.getCurrrentStudent().getName());
-            System.out.println(p.getCurrrentTeacher().getName());
+            //Set the text if list empty or full
+            SetEmptyListText(v);
 
             //Change text color
             historyButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.Black));
-
-            i = 1;
-            SetEmptyListText(i);
 
             // Begin the transaction
             FragmentTransaction ft = getFragmentManager().beginTransaction()
@@ -333,52 +325,44 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     }
 
     //Method for setting the "Yoo have no payments" text
-    public void SetEmptyListText(int i) {
+    public void SetEmptyListText(View v) {
 
-        if (i == 0) {
+        if (v == activeButton) {
             //If student
             if (p.getCurrrentStudent() != null && p.getCurrrentTeacher() == null) {
 
                 if (p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
                     noActivePayment.setVisibility(View.INVISIBLE);
-                    System.out.println("lollol");
                 } else {
                     noActivePayment.setVisibility(View.VISIBLE);
-                    System.out.println("lol");
                     noActivePayment.setText("You have no active payments");
                 }
                 //If teacher
             } else if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
                 if (p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
                     noActivePayment.setVisibility(View.INVISIBLE);
-                    System.out.println("lollol1");
                 } else {
                     noActivePayment.setVisibility(View.VISIBLE);
-                    System.out.println("lol1");
                     noActivePayment.setText("You have no active payments");
                 }
             }
 
-        } else if (i == 1) {
+        } else if (v == historyButton) {
             //If student
             if (p.getCurrrentStudent() != null && p.getCurrrentTeacher() == null) {
 
                 if (p.getCurrrentStudent().getHistoryPaymentDummies().size() != 0) {
                     noActivePayment.setVisibility(View.INVISIBLE);
-                    System.out.println("lollol2");
                 } else {
                     noActivePayment.setVisibility(View.VISIBLE);
-                    System.out.println("lol2");
                     noActivePayment.setText("You have no previous payments");
                 }
                 //If teacher
             } else if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
                 if (p.getCurrrentTeacher().getHistoryPaymentDummies().size() != 0) {
                     noActivePayment.setVisibility(View.INVISIBLE);
-                    System.out.println("lollol3");
                 } else {
                     noActivePayment.setVisibility(View.VISIBLE);
-                    System.out.println("lol3");
                     noActivePayment.setText("You have no previous payments");
                 }
             }
