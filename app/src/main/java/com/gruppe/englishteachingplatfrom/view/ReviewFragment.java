@@ -47,6 +47,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
     int totStar4 = 0;
     int totStar5 = 0;
     private long mLastClickTime = 0;
+    ArrayList<Review> tempList ;
 
     public ReviewFragment() {
     }
@@ -57,7 +58,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         list = new ArrayList<>();
-
+        tempList = new ArrayList<>();
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
@@ -211,18 +212,38 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         loader.setVisibility(View.INVISIBLE);
     }
 
-    public void sortList(int rating, LinearLayout btn, LinearLayout prevBtn) {
-        ArrayList<Review> tempList = new ArrayList<Review>();
+    public void sortList(final int rating, LinearLayout btn, LinearLayout prevBtn) {
         tempList.clear();
 
         this.prevBtn = prevBtn;
         prevBtn.setBackgroundResource(R.drawable.border);
         btn.setBackgroundResource(R.drawable.selectedborder);
-        for (Review f : list) {
-            if (f.getRating() == rating) {
-                tempList.add(f);
-            }
-        }
+
+//        for(int i = 0; i < list.size(); i++){
+//            if(list.get(i).getRating() == rating){
+//                tempList.add(list.get(i));
+//            }
+//        }
+
+//        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
+//        feedbackDocument.getAll(new CallbackList<Review>() {
+//            @Override
+//            public void onCallback(List<Review> listOfObjects) {
+//                for (Review review : listOfObjects) {
+//                    if(review.getRating() == rating) {
+//                        list.add(review);
+//                    }
+//                }
+//            }
+//        });
+
+//
+//        for (Review f : list) {
+//            if ((int) f.getRating() == rating) {
+//                tempList.add(f);
+//            }
+//        }
+
         MyReviewRecyclerViewAdapter recycleAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
         review.setLayoutManager(new LinearLayoutManager(getActivity()));
         review.setAdapter(recycleAdapter);

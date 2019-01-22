@@ -47,24 +47,29 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
 
         final Review feed = review.get(position);
 
+        System.out.println("review name: " + review.get(position).getStudentId());
+//       holder.mRating.setRating((float) review.get(position).getRating());
+//       holder.mContent.setText(review.get(position).getContent());
+
         TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl("1");
         feedbackDocument.getAll(new CallbackList<Review>() {
             @Override
             public void onCallback(List<Review> listOfObjects) {
-
-                for (final Review feed : listOfObjects) {
+                review.clear();
+                for (Review feed : listOfObjects) {
+                    review.add(feed);
                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
                     studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
                         @Override
                         public void onCallback(StudentProfile object) {
-                            //feed.setStudentProfile(object);
-                            holder.mStudName.setText(object.getName());
+                           // feed.setStudentProfile(object);
+                        //    holder.mStudName.setText(object.getName());
                         }
                     });
-                    holder.mRating.setRating((float) feed.getRating());
-                    holder.mContent.setText(feed.getContent());
-
                 }
+       //         holder.mStudName.setText(review.get(position));
+                holder.mRating.setRating((float) review.get(position).getRating());
+                holder.mContent.setText(review.get(position).getContent());
             }
         });
     }

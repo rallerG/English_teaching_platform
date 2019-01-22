@@ -22,13 +22,12 @@
             android:id="@+id/studName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/background_dark" />
+            android:text="Anonymous" />
 
         <TextView
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

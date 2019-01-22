@@ -5,6 +5,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -48,6 +49,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private long mLastClickTime = 0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -258,6 +260,11 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
         if (v == activeButton) {
 
             //Set the text if list empty or full
