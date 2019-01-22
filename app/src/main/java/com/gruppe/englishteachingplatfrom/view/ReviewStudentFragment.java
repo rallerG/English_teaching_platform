@@ -72,6 +72,7 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
         ratingBar = view.findViewById(R.id.ratingbar);
         content = view.findViewById(R.id.content);
         send = view.findViewById(R.id.send_review);
+        send.setOnClickListener(this);
         teacherid = mParam1;
 
         return view;
