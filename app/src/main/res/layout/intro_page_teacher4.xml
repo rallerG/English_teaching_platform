@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Request a payment"
+                android:text="Get paid for your work"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_title"
                 android:textStyle="bold" />
