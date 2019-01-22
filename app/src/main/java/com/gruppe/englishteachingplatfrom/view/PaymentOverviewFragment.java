@@ -57,6 +57,8 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
     TextView noActivePayment;
 
+    int i;
+
     private OnFragmentInteractionListener mListener;
 
     private Singleton p = Singleton.getInstance();
@@ -101,12 +103,15 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
         activeButton = (Button) view.findViewById(R.id.activeButton);
         historyButton = (Button) view.findViewById(R.id.historyButton);
-        noActivePayment = (TextView) view.findViewById(R.id.textView13);
+        noActivePayment = (TextView) view.findViewById(R.id.noActivePayment);
+        noActivePayment.setVisibility(View.INVISIBLE);
 
         activeButton.setOnClickListener(this);
         historyButton.setOnClickListener(this);
 
+        activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
 
+        //Teacher
         if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
             p.getCurrrentTeacher().getActivePaymentDummies().clear();
             p.getCurrrentTeacher().getHistoryPaymentDummies().clear();
@@ -128,20 +133,23 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                         p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
 //                                        p.getCurrrentTeacher().getActivePaymentDummies().get(p.getCurrrentTeacher().getActivePaymentDummies().indexOf(pay)).setStudent(object);
 
-                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
                                             // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
                                             FragmentTransaction ft = getFragmentManager().beginTransaction()
                                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
                                             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
                             } else {
 //                                p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
                                 StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                 studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
+                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
                                     @Override
                                     public void onCallback(StudentProfile object) {
                                         pay.setStudent(object);
@@ -149,13 +157,16 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                         p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
 //                                        p.getCurrrentTeacher().getHistoryPaymentDummies().get(p.getCurrrentTeacher().getHistoryPaymentDummies().indexOf(pay)).setStudent(object);
 
-                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
                                             // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
                                             FragmentTransaction ft = getFragmentManager().beginTransaction()
                                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
                                             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -165,6 +176,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                 }
             });
 
+            //Student
         } else {
             p.getCurrrentStudent().getActivePaymentDummies().clear();
             p.getCurrrentStudent().getHistoryPaymentDummies().clear();
@@ -189,13 +201,16 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                         p.getCurrrentStudent().getActivePaymentDummies().add(pay);
 //                                        p.getCurrrentStudent().getActivePaymentDummies().get(p.getCurrrentStudent().getActivePaymentDummies().indexOf(pay)).setTeacher(object);
 
-                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
                                             // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
                                             FragmentTransaction ft = getFragmentManager().beginTransaction()
                                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
                                             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -210,13 +225,16 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                         p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
 //                                        p.getCurrrentStudent().getHistoryPaymentDummies().get(p.getCurrrentStudent().getHistoryPaymentDummies().indexOf(pay)).setTeacher(object);
 
-                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size()-1)) {
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
                                             // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
                                             FragmentTransaction ft = getFragmentManager().beginTransaction()
                                                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
                                             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -226,9 +244,6 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                 }
             });
         }
-
-
-
 
 
 //        // Begin the transaction
@@ -241,8 +256,13 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (v == activeButton){
-//            Toast.makeText(getActivity(),"Activity", Toast.LENGTH_SHORT).show();
+        if (v == activeButton) {
+
+            System.out.println(p.getCurrrentStudent().getName());
+            System.out.println(p.getCurrrentTeacher().getName());
+
+            i = 0;
+            SetEmptyListText(i);
 
             //Change test color
             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
@@ -254,20 +274,24 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
             ft.commit();
 
-        } else if (v == historyButton){
-//            Toast.makeText(getActivity(),"History", Toast.LENGTH_SHORT).show();
+
+        } else if (v == historyButton) {
+
+            System.out.println(p.getCurrrentStudent().getName());
+            System.out.println(p.getCurrrentTeacher().getName());
 
             //Change text color
             historyButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.Black));
 
+            i = 1;
+            SetEmptyListText(i);
 
             // Begin the transaction
             FragmentTransaction ft = getFragmentManager().beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.paymentLists, new PaymentHistoryFragment());
             ft.commit();
-
         }
     }
 
@@ -302,5 +326,58 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    //Method for setting the "Yoo have no payments" text
+    public void SetEmptyListText(int i) {
+
+        if (i == 0) {
+            //If student
+            if (p.getCurrrentStudent() != null && p.getCurrrentTeacher() == null) {
+
+                if (p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                    System.out.println("lollol");
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    System.out.println("lol");
+                    noActivePayment.setText("You have no active payments");
+                }
+                //If teacher
+            } else if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+                if (p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                    System.out.println("lollol1");
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    System.out.println("lol1");
+                    noActivePayment.setText("You have no active payments");
+                }
+            }
+
+        } else if (i == 1) {
+            //If student
+            if (p.getCurrrentStudent() != null && p.getCurrrentTeacher() == null) {
+
+                if (p.getCurrrentStudent().getHistoryPaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                    System.out.println("lollol2");
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    System.out.println("lol2");
+                    noActivePayment.setText("You have no previous payments");
+                }
+                //If teacher
+            } else if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+                if (p.getCurrrentTeacher().getHistoryPaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                    System.out.println("lollol3");
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    System.out.println("lol3");
+                    noActivePayment.setText("You have no previous payments");
+                }
+            }
+        }
     }
 }

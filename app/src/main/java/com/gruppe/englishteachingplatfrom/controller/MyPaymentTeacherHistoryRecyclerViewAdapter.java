@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.controller;
 
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Ada
         paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getPrice() + " DKK");
         paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getPaymentDate());
         paymentViewHolder.imageView.setImageResource(paymentHistoryList.get(i).getStudent().getProfilePicture());
+
         paymentViewHolder.textViewStatus.setText("Payed");
     }
 

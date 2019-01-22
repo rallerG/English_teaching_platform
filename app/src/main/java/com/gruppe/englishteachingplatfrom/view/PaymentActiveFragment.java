@@ -109,11 +109,13 @@ public class PaymentActiveFragment extends Fragment {
         } else {
             //If student
             // Set the adapter
-            if (view instanceof RecyclerView) {
+            if (view instanceof RecyclerView && p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
                 Context context = view.getContext();
                 RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
                 mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
+            } else {
+
             }
         }
         return view;
