@@ -45,7 +45,9 @@ public class RequestMailActivity extends AppCompatActivity implements View.OnCli
         profilePic = findViewById(R.id.imageView);
         name = findViewById(R.id.name);
         accept = findViewById(R.id.accept);
+        accept.setOnClickListener(this);
         delete = findViewById(R.id.delete);
+        delete.setOnClickListener(this);
 
         Intent intent = getIntent();
         Bundle intentData = intent.getExtras();
