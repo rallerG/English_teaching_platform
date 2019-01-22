@@ -57,18 +57,22 @@ public class FragPager extends Fragment implements View.OnClickListener {
                                  Bundle savedInstanceState) {
             View view =  inflater.inflate(R.layout.fragment_viewpager_list, container, false);
             fragmentMan = getChildFragmentManager();
-            floating_Fav = view.findViewById(R.id.floating_fav);
-            floating_Send = view.findViewById(R.id.floating_send);
-            floating_Send.setOnClickListener(this);
-            floating_Fav.setOnClickListener(this);
-
-
             mPager = view.findViewById(R.id.ViewPager);
             mPager.setPageTransformer(true, new ViewPagerStack());
             mPager.setOffscreenPageLimit(3);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
             mPager.setAdapter(mAdapter);
             mPager.setSaveFromParentEnabled(false);
+            floating_Fav = view.findViewById(R.id.floating_fav);
+            floating_Send = view.findViewById(R.id.floating_send);
+            floating_Send.setOnClickListener(this);
+            floating_Fav.setOnClickListener(this);
+
+            if(mPager.getAdapter().getCount()==0){
+                floating_Fav.hide();
+                floating_Send.hide();
+            }
+
 
 //            for(int i = 0; i < mAdapter.getCount(); i++){
 //                hm.put(i,0);
@@ -97,28 +101,50 @@ public class FragPager extends Fragment implements View.OnClickListener {
             int pos = mPager.getCurrentItem();
             System.out.println("child count = " + mPager.getAdapter().getCount());
             if(pos <  mPager.getAdapter().getCount()){
-                Singleton.getInstance().getTeacherDummies().remove(pos);
+                Singleton.getInstance().getSwipeTeachers().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
                 mPager.setSaveFromParentEnabled(false);
                 mPager.setCurrentItem(pos, true);
             }
             else if(pos ==  mPager.getAdapter().getCount() && pos!=0 ){
-                Singleton.getInstance().getTeacherDummies().remove(pos);
+                Singleton.getInstance().getSwipeTeachers().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
                 mPager.setCurrentItem(pos-1, true);
             }
             else if(pos == 0) {
-                Singleton.getInstance().getTeacherDummies().remove(pos);
+                Singleton.getInstance().getSwipeTeachers().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
                 mPager.setCurrentItem(pos, true);
             }
-            else System.out.println("Shit error " + pos);
+            else System.out.println("There was an error in fragpager remove teacher " + pos);
 
         }
 
+
+    public static void addTeacher(FragmentManager fm, int pos){
+
+        System.out.println("child count = " + mPager.getAdapter().getCount());
+        if(pos <  mPager.getAdapter().getCount()){
+            Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
+            FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
+            mPager.setAdapter(mAdapt);
+        }
+        else if(pos ==  mPager.getAdapter().getCount() && pos!=0 ){
+            Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
+            FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
+            mPager.setAdapter(mAdapt);
+        }
+        else if(pos == 0) {
+            Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
+            FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
+            mPager.setAdapter(mAdapt);
+        }
+        else System.out.println("There was an error in fragpager add teacher " + pos);
+
+    }
 
          public int getCurrentPosition(){
         return mPager.getCurrentItem();
@@ -148,7 +174,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
         }
         mLastClickTime = SystemClock.elapsedRealtime();
         position1 = mPager.getCurrentItem();
-        String name =  p.getTeacherDummies().get(position1).getName();
+        String name =  p.getSwipeTeachers().get(position1).getName();
         if (v == floating_Send) {
             Bundle bundle = new Bundle();
             bundle.putString("name", name);
@@ -177,7 +203,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
                     }
                 });
             Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
-
 
 
 //                if(hm.get(mPager.getCurrentItem()) != null){
