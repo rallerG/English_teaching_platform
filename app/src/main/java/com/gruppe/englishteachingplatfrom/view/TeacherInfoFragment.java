@@ -158,10 +158,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         if (v == floating_Send_teacherInfo && from.equals("matches")) {
             // Review button
             PageFragment.clicked = false;
-            Bundle bundle = new Bundle();
-            bundle.putString("id",id);
-            Fragment F = new ReviewStudentFragment();
-            F.setArguments(bundle);
+            Fragment F = ReviewStudentFragment.newInstance(id,id);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
