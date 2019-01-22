@@ -24,8 +24,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+            app:layout_constraintBottom_toBottomOf="@+id/studentProfilePicture"
+            app:layout_constraintTop_toBottomOf="@+id/studentProfilePicture">
 
             <TextView
                 android:id="@+id/textView9"
@@ -37,27 +37,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/studentProfilePicture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="54dp"
                 android:layout_marginBottom="32dp"
-                android:src="@android:drawable/btn_star"
+                android:src="@drawable/teacher_1"
+                app:civ_border_color="#E0E0E0"
+                app:civ_border_width="1dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/teacherName"
+                android:id="@+id/studentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="45dp"
                 android:text="Teacher name"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/studentProfilePicture"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -68,8 +70,8 @@
                 android:layout_marginTop="2dp"
                 android:text="23.11.2018"
                 android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toBottomOf="@+id/teacherName" />
+                app:layout_constraintStart_toEndOf="@+id/studentProfilePicture"
+                app:layout_constraintTop_toBottomOf="@+id/studentName" />
 
             <TextView
                 android:id="@+id/amount"
@@ -77,10 +79,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
+                android:textColor="@color/Green"
                 android:text="270 DKK"
                 app:layout_constraintBottom_toBottomOf="@+id/date"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/teacherName" />
+                app:layout_constraintTop_toTopOf="@+id/studentName" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"

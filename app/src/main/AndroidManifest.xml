@@ -14,10 +14,12 @@
         <activity
             android:name=".view.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.TeacherMainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
@@ -27,6 +29,7 @@
         <activity
             android:name=".view.LoginOrSignupActivity"
             android:label="@string/title_activity_loginOrSignup"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,20 +38,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.WhatAreYouActivity"
-            android:label="@string/title_activity_whatAreYou"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.SignupActivity"
-            android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.clickCard_Activity" />
-        <activity android:name=".view.request_mail" />
-        <activity android:name=".view.TeacherInfoActivity"></activity>
+        <activity
+            android:name=".view.RequestMailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.IntroductionStudent"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".view.IntroductionTeacher"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".view.SignupActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Teacher signup"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="26dp"
+                tools:layout_editor_absoluteY="90dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
+
+            <EditText
+                android:id="@+id/name_input"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="40dp"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
+
+            <EditText
+                android:id="@+id/email_input"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="40dp"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
+
+            <EditText
+                android:id="@+id/password_input"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="40dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="29dp" />
+
+            <EditText
+                android:id="@+id/price_input"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="40dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="numberSigned" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/signup_button_teacher"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="340dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="80dp"
+        android:text="Signup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

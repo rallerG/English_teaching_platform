@@ -8,26 +8,31 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="65dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp" />
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="210dp"
             android:orientation="horizontal"
-            android:layout_marginTop="160dp"
-            android:layout_gravity="center">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <EditText
                 android:id="@+id/AmountEditText"
@@ -50,10 +55,7 @@
             android:id="@+id/swipe_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="210dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="40dp"
             app:button_background="@drawable/shape_button"
             app:button_bottom_padding="20dp"
             app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24px_"
@@ -71,8 +73,10 @@
             app:inner_text_color="@android:color/white"
             app:inner_text_left_padding="48dp"
             app:inner_text_size="20sp"
-            app:inner_text_top_padding="14dp" />
+            app:inner_text_top_padding="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

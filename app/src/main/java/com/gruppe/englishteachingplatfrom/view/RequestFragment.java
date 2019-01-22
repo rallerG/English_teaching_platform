@@ -9,24 +9,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherPendingsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherPendingsDocument;
+import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.controller.MyRequestRecyclerViewAdapter;
-import com.gruppe.englishteachingplatfrom.dummy.DummyContent.DummyItem;
-import com.gruppe.englishteachingplatfrom.model.MailProfile;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
+import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
-import static com.gruppe.englishteachingplatfrom.view.request_mail.mail;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class RequestFragment extends Fragment {
 
     private RecyclerView.LayoutManager layoutManager;
+    private MyRequestRecyclerViewAdapter myRequestRecyclerViewAdapter;
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private RecyclerView recycler;
-
-    ToggleButton toggleStar;
+    private Singleton p = Singleton.getInstance();
+    MyRequestRecyclerViewAdapter mReqAdapter;
+    public static boolean clicked = false;
 
     public RequestFragment() {
     }
@@ -43,45 +52,91 @@ public class RequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mail.add(new MailProfile("Chang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
-        mail.add(new MailProfile("Huang", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
-        mail.add(new MailProfile("Zao", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
-        mail.add(new MailProfile("Jin", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
-        mail.add(new MailProfile("Xin", "Hello, I would like you to teach me English. Can we schedule time and date?", false, false));
-
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_request_list, container, false);
-        View view1 = inflater.inflate(R.layout.fragment_request, container, false);
-        toggleStar = view1.findViewById(R.id.toggleStar);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_request_list, container, false);
+
         recycler = view.findViewById(R.id.list);
-
         layoutManager = new LinearLayoutManager(getContext());
-        recycler.setLayoutManager(layoutManager);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+      //  mAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
+/*        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnClickListener(new MyRequestRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Fragment F = new PendingRequestFragment();
+                Bundle bundle = new Bundle();
+                F.setArguments(bundle);
+                //remember information and description text (when objects are used)
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, F).
+                        addToBackStack(null).commit();
             }
-            recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), mail));
-        }
+        });*/
+
+
+
+        TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(p.getCurrrentTeacher().getId());
+        teacherPendingsDocument.getAll(new CallbackList<StudentProfile>() {
+            @Override
+            public void onCallback(final List<StudentProfile> listOfObjects) {
+                p.getCurrrentTeacher().getPendingProfiles().clear();
+                for (final StudentProfile studentProfile : listOfObjects) {
+                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                    studentsDocument.get(studentProfile.getId(), new Callback<StudentProfile>() {
+                        @Override
+                        public void onCallback(StudentProfile object) {
+                            p.getCurrrentTeacher().getPendingProfiles().add(object);
+                            object.setProfilePictures();
+                            if (listOfObjects.indexOf(studentProfile) == (listOfObjects.size()-1)) {
+                                mReqAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentTeacher().getPendingProfiles());
+                                recycler.setHasFixedSize(true);
+                                recycler.setLayoutManager(layoutManager);
+                                recycler.setAdapter(mReqAdapter);
+                                mReqAdapter.setOnItemClickListener(new MyRequestRecyclerViewAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(int position) {
+                                        if (!clicked) {
+                                            System.out.println("You clicked on " + position);
+                                            Fragment F = new PendingRequestFragment();
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("id", p.getCurrrentTeacher().getPendingProfiles().get(position).getId());
+                                            bundle.putString("name", p.getCurrrentTeacher().getPendingProfiles().get(position).getName());
+                                            bundle.putInt("picture", p.getCurrrentTeacher().getPendingProfiles().get(position).getProfilePicture());
+                                            F.setArguments(bundle);
+                                            //remember information and description text (when objects are used)
+                                            getActivity().getSupportFragmentManager()
+                                                    .beginTransaction()
+                                                    .replace(R.id.fragmentContent, F)
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // Set the adapter
+               /* if (view instanceof RecyclerView) {
+                    Context context = view.getContext();
+                    RecyclerView recyclerView = (RecyclerView) view;
+                    if (mColumnCount <= 1) {
+                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    } else {
+                        recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+                    }
+                    recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), studentProfiles));
+                }*/
+            }
+        });
         return view;
-    }
-
-
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
     }
 }

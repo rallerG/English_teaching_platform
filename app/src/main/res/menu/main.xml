@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_filter_rating"
         android:orderInCategory="100"
         android:title="@string/action_filter_AZ"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_filter_country"
         android:orderInCategory="100"
         android:title="@string/action_filter_country"
+        android:visible="false"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_filter_price"
         android:orderInCategory="100"
         android:title="@string/action_filter_price"
+        android:visible="false"
         app:showAsAction="never" />
 </menu>

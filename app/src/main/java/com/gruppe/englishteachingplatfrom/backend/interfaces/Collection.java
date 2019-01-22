@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface Collection <T extends DocumentObject> {
     void getAll(CallbackList callbackList);
+    void getAll(CallbackList callbackList, CallbackError callbackError);
 }

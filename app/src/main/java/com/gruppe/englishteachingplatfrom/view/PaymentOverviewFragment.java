@@ -1,10 +1,16 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.content.Context;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +19,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
 
 
 /**
@@ -29,6 +49,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private long mLastClickTime = 0;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,39 +98,201 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        p.createList();
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_payment_overview, container, false);
 
         activeButton = (Button) view.findViewById(R.id.activeButton);
         historyButton = (Button) view.findViewById(R.id.historyButton);
-        noActivePayment = (TextView) view.findViewById(R.id.textView13);
+        noActivePayment = (TextView) view.findViewById(R.id.noActivePayment);
+        noActivePayment.setVisibility(View.INVISIBLE);
 
         activeButton.setOnClickListener(this);
         historyButton.setOnClickListener(this);
 
-        // Begin the transaction
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.paymentLists, new PaymentActiveFragment());
-        ft.commit();
+        activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+
+        //Teacher
+        if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+            p.getCurrrentTeacher().getActivePaymentDummies().clear();
+            p.getCurrrentTeacher().getHistoryPaymentDummies().clear();
+            System.out.println("PaymentOverviewFragment.java: Teacher part");
+            PaymentDocument paymentDocument = new PaymentDocumentImpl();
+            paymentDocument.getAll(new CallbackList<Payment>() {
+                @Override
+                public void onCallback(final List<Payment> listOfObjects) {
+                    for (final Payment pay : listOfObjects) {
+                        if (pay.getTeacherId().equals(p.getCurrrentTeacher().getId())) {
+                            if (pay.isActive()) {
+//                                p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
+                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
+                                    @Override
+                                    public void onCallback(StudentProfile object) {
+                                        pay.setStudent(object);
+                                        object.setProfilePictures();
+                                        pay.setTeacher(p.getCurrrentTeacher());
+                                        p.getCurrrentTeacher().getActivePaymentDummies().add(pay);
+//                                        p.getCurrrentTeacher().getActivePaymentDummies().get(p.getCurrrentTeacher().getActivePaymentDummies().indexOf(pay)).setStudent(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
+                                            // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                                            ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
+                            } else {
+//                                p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
+                                StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                                studentsDocument.get(pay.getStudentId(), new Callback<StudentProfile>() {
+                                    @Override
+                                    public void onCallback(StudentProfile object) {
+                                        pay.setStudent(object);
+                                        object.setProfilePictures();
+                                        pay.setTeacher(p.getCurrrentTeacher());
+                                        p.getCurrrentTeacher().getHistoryPaymentDummies().add(pay);
+//                                        p.getCurrrentTeacher().getHistoryPaymentDummies().get(p.getCurrrentTeacher().getHistoryPaymentDummies().indexOf(pay)).setStudent(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
+                                            // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                                            ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+
+            //Student
+        } else {
+            p.getCurrrentStudent().getActivePaymentDummies().clear();
+            p.getCurrrentStudent().getHistoryPaymentDummies().clear();
+            System.out.println("PaymentOverviewFragment.java: Student part");
+            PaymentDocument paymentDocument = new PaymentDocumentImpl();
+            paymentDocument.getAll(new CallbackList<Payment>() {
+                @Override
+                public void onCallback(final List<Payment> listOfObjects) {
+                    for (final Payment pay : listOfObjects) {
+                        System.out.println("PaymentOverviewFragment.java: Student part - Pay student id: " + pay.getStudentId());
+                        System.out.println("PaymentOverviewFragment.java: Student part - current student id: " + p.getCurrrentStudent().getId());
+                        if (pay.getStudentId().equals(p.getCurrrentStudent().getId())) {
+                            System.out.println("PaymentOverviewFragment.java: Student part - found pay match on id");
+                            if (pay.isActive()) {
+//                                p.getCurrrentStudent().getActivePaymentDummies().add(pay);
+                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                teachersDocument.get(pay.getTeacherId(), new Callback<TeacherProfile>() {
+                                    @Override
+                                    public void onCallback(TeacherProfile object) {
+                                        pay.setTeacher(object);
+                                        object.setProfilePictures();
+                                        pay.setStudent(p.getCurrrentStudent());
+                                        p.getCurrrentStudent().getActivePaymentDummies().add(pay);
+//                                        p.getCurrrentStudent().getActivePaymentDummies().get(p.getCurrrentStudent().getActivePaymentDummies().indexOf(pay)).setTeacher(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
+                                            // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                                            ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
+                            } else {
+//                                p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
+                                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                                teachersDocument.get(pay.getTeacherId(), new Callback<TeacherProfile>() {
+                                    @Override
+                                    public void onCallback(TeacherProfile object) {
+                                        pay.setTeacher(object);
+                                        object.setProfilePictures();
+                                        pay.setStudent(p.getCurrrentStudent());
+                                        p.getCurrrentStudent().getHistoryPaymentDummies().add(pay);
+//                                        p.getCurrrentStudent().getHistoryPaymentDummies().get(p.getCurrrentStudent().getHistoryPaymentDummies().indexOf(pay)).setTeacher(object);
+
+                                        if (listOfObjects.indexOf(pay) == (listOfObjects.size() - 1) && p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
+                                            // Begin the transaction
+                                            noActivePayment.setVisibility(View.INVISIBLE);
+                                            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                                            ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+                                            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+                                            ft.commit();
+                                        } else {
+                                            noActivePayment.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+
+//        // Begin the transaction
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.paymentLists, new PaymentActiveFragment());
+//        ft.commit();
 
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        if (v == activeButton){
-            Toast.makeText(getActivity(),"Activity", Toast.LENGTH_SHORT).show();
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
+        if (v == activeButton) {
+
+            //Set the text if list empty or full
+            SetEmptyListText(v);
+
+            //Change test color
+            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            historyButton.setTextColor(ContextCompat.getColor(getContext(), R.color.Black));
+
             // Begin the transaction
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
             ft.commit();
 
-        } else if (v == historyButton){
-            Toast.makeText(getActivity(),"History", Toast.LENGTH_SHORT).show();
+
+        } else if (v == historyButton) {
+
+            //Set the text if list empty or full
+            SetEmptyListText(v);
+
+            //Change text color
+            historyButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.Black));
+
             // Begin the transaction
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            FragmentTransaction ft = getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.replace(R.id.paymentLists, new PaymentHistoryFragment());
             ft.commit();
         }
@@ -146,5 +329,50 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    //Method for setting the "Yoo have no payments" text
+    public void SetEmptyListText(View v) {
+
+        if (v == activeButton) {
+            //If student
+            if (p.getCurrrentStudent() != null && p.getCurrrentTeacher() == null) {
+
+                if (p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    noActivePayment.setText("You have no active payments");
+                }
+                //If teacher
+            } else if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+                if (p.getCurrrentTeacher().getActivePaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    noActivePayment.setText("You have no active payments");
+                }
+            }
+
+        } else if (v == historyButton) {
+            //If student
+            if (p.getCurrrentStudent() != null && p.getCurrrentTeacher() == null) {
+
+                if (p.getCurrrentStudent().getHistoryPaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    noActivePayment.setText("You have no previous payments");
+                }
+                //If teacher
+            } else if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+                if (p.getCurrrentTeacher().getHistoryPaymentDummies().size() != 0) {
+                    noActivePayment.setVisibility(View.INVISIBLE);
+                } else {
+                    noActivePayment.setVisibility(View.VISIBLE);
+                    noActivePayment.setText("You have no previous payments");
+                }
+            }
+        }
     }
 }

@@ -41,7 +41,7 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
         paymentViewHolder.textViewName.setText(paymentHistoryList.get(i).getTeacher().getName());
         paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getPrice() +" DKK");
         paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getPaymentDate());
-        paymentViewHolder.imageView.setImageResource(R.mipmap.ic_launcher_student_round);
+        paymentViewHolder.imageView.setImageResource(paymentHistoryList.get(i).getTeacher().getProfilePic());
         paymentViewHolder.textViewStatus.setText("Payed");
     }
 
@@ -58,8 +58,8 @@ public class MyPaymentHistoryRecyclerViewAdapter extends RecyclerView.Adapter<My
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageView4);
-            textViewName = itemView.findViewById(R.id.teacherName);
+            imageView = itemView.findViewById(R.id.studentProfilePicture);
+            textViewName = itemView.findViewById(R.id.studentName);
             textViewPrice = itemView.findViewById(R.id.amount);
             textViewDate = itemView.findViewById(R.id.date);
             textViewStatus = itemView.findViewById(R.id.statusTextView);

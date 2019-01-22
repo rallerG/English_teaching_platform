@@ -1,4 +1,4 @@
 package com.gruppe.englishteachingplatfrom.backend.interfaces;
 
-public interface StudentPendingsDocument extends Collection, Document {
+public interface StudentPendingsDocument extends Collection, Document, DocumentQuery {
 }

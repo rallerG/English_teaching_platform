@@ -10,12 +10,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentTeacherRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Payment;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -37,9 +50,7 @@ public class PaymentActiveFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private int mColumnCount = 10;
-
-
-
+    private View view;
     Singleton p = Singleton.getInstance();
 
 
@@ -84,25 +95,28 @@ public class PaymentActiveFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        View view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
-//
-//        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        MyPaymentRecyclerViewAdapter mAdapter = new MyPaymentRecyclerViewAdapter(teacherPaymentRequestList, mListener);
-//        mRecyclerView.setAdapter(mAdapter);
-//        return view;
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_payment_request_list, container, false);
-        View view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
+        view = inflater.inflate(R.layout.fragment_payment_request_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getStudentDummies().get(0).getActivePaymentDummies(), mListener));
+        //If teacher
+        if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+            // Set the adapter
+            if (view instanceof RecyclerView) {
+                Context context = view.getContext();
+                RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                mRecyclerView.setAdapter(new MyPaymentTeacherRecyclerViewAdapter(p.getCurrrentTeacher().getActivePaymentDummies(), mListener));
+            }
+        } else {
+            //If student
+            // Set the adapter
+            if (view instanceof RecyclerView && p.getCurrrentStudent().getActivePaymentDummies().size() != 0) {
+                Context context = view.getContext();
+                RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                mRecyclerView.setAdapter(new MyPaymentRecyclerViewAdapter(p.getCurrrentStudent().getActivePaymentDummies(), mListener));
+            } else {
+
+            }
         }
         return view;
     }

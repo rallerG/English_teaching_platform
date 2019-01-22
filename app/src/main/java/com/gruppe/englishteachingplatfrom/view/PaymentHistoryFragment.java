@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 
 import com.gruppe.englishteachingplatfrom.controller.MyPaymentHistoryRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentTeacherHistoryRecyclerViewAdapter;
+import com.gruppe.englishteachingplatfrom.controller.MyPaymentTeacherRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
 public class PaymentHistoryFragment extends Fragment {
@@ -73,12 +76,31 @@ public class PaymentHistoryFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_payment_history_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(p.getStudentDummies().get(0).getHistoryPaymentDummies(), mListener));
+//        // Set the adapter
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
+//            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(p.getCurrrentStudent().getHistoryPaymentDummies(), mListener));
+
+            //If teacher
+            if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
+                // Set the adapter
+                if (view instanceof RecyclerView) {
+                    Context context = view.getContext();
+                    RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    mRecyclerView.setAdapter(new MyPaymentTeacherHistoryRecyclerViewAdapter(p.getCurrrentTeacher().getHistoryPaymentDummies(), mListener));
+                }
+            } else {
+                //If student
+                // Set the adapter
+                if (view instanceof RecyclerView) {
+                    Context context = view.getContext();
+                    RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(p.getCurrrentStudent().getHistoryPaymentDummies(), mListener));
+                }
         }
         return view;
     }

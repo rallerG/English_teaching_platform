@@ -6,53 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_fav"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:tint="#4B4B4B"
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:elevation="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/favourite_empty" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:elevation="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_round_send_24px" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/ViewPager"
             android:layout_width="match_parent"
-            android:layout_height="700dp"
+            android:layout_height="0dp"
+            android:layout_weight="90"
             app:layout_constraintTop_toTopOf="parent">
 
         </android.support.v4.view.ViewPager>
 
     </LinearLayout>
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="508dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <!--<TableRow-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_marginTop="508dp"-->
+    <!--android:gravity="center"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="1.0"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent">-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floating_fav"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"
-            android:clickable="true"
-            app:srcCompat="@drawable/ic_menu_favorite_24px" />
+    <!--<Space-->
+    <!--android:layout_width="238dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="70dp" />-->
 
-        <Space
-            android:layout_width="238dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floating_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/ic_menu_send" />
-    </TableRow>
+    <!--</TableRow>-->
 
 </android.support.constraint.ConstraintLayout>

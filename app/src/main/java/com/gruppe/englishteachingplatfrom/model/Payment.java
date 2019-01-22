@@ -1,5 +1,10 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.PaymentDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackError;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.PaymentDocument;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,14 +16,15 @@ public class Payment extends DocumentObject {
     private int price;
     private String requestDate;
     private String paymentDate;
+    private String teacherId;
+    private String studentId;
     private TeacherProfile teacher;
     private StudentProfile student;
     private boolean isPayed;
     private boolean isActive;
 
-    private Payment(String id, int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
+    private Payment(int price, String requestDate, String paymentDate, TeacherProfile teacher, StudentProfile student, boolean isPayed, boolean isActive) {
 
-        this.id = id;
         this.price = price;
         this.requestDate = requestDate;
         this.paymentDate = paymentDate;
@@ -30,42 +36,51 @@ public class Payment extends DocumentObject {
 
     public Payment (){}
 
-    public static void newTransaction(String id, StudentProfile student, TeacherProfile teacher, int price) {
+    public static void newTransaction(final StudentProfile student, final TeacherProfile teacher, int price) {
+        System.out.println("Payment.java: A NEW PAYMENT WAS CREATED");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         String theRequestDate = (dateFormat.format(date)).toString();
 
-        Payment obj = new Payment(id, price, theRequestDate, "", teacher, student, false, true);
-        teacher.getActivePaymentDummies().add(obj);
-        student.getActivePaymentDummies().add(obj);
-
-//        System.out.println(teacher.getActivePaymentDummies().get(0).toString());
-//        System.out.println(student.getActivePaymentDummies().get(0).toString());
-//        return new Payment(/*id,*/ price, theRequestDate, "", teacher, student, false, true);
-    }
-
-    //TODO Create pay method that flips booleans and adds payment date
-    public static void payTransaction(Payment payment) {
-        payment.setActive(false);
-        payment.setPayed(true);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String thePaymentDate = (dateFormat.format(date)).toString();
-        payment.setPaymentDate(thePaymentDate);
-
-        payment.getStudent().getHistoryPaymentDummies().add(payment);
-        payment.getStudent().getActivePaymentDummies().remove(payment);
-
-        payment.getTeacher().getHistoryPaymentDummies().add(payment);
-        payment.getTeacher().getActivePaymentDummies().remove(payment);
-
-    }
-
-    public static void deleteTransaction(Payment payment) {
-        payment.getStudent().getActivePaymentDummies().remove(payment);
-        payment.getTeacher().getActivePaymentDummies().remove(payment);
+        final Payment obj = new Payment( price, theRequestDate, "", teacher, student, false, true);
         
+        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+        paymentDocument.add(obj, new CallbackSuccess() {
+            @Override
+            public void onCallback() {
+                teacher.getActivePaymentDummies().add(obj);
+                student.getActivePaymentDummies().add(obj);
+            }
+        });
     }
+
+//    public static void payTransaction(final Payment payment) {
+//        payment.setActive(false);
+//        payment.setPayed(true);
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        Date date = new Date();
+//        String thePaymentDate = (dateFormat.format(date)).toString();
+//        payment.setPaymentDate(thePaymentDate);
+//
+//        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+//        paymentDocument.update(payment.getId(), payment, new CallbackSuccess() {
+//            @Override
+//            public void onCallback() {
+//                payment.getStudent().getHistoryPaymentDummies().add(payment);
+//                payment.getStudent().getActivePaymentDummies().remove(payment);
+//
+//                payment.getTeacher().getHistoryPaymentDummies().add(payment);
+//                payment.getTeacher().getActivePaymentDummies().remove(payment);
+//            }
+//        });
+//    }
+
+//    public static void deleteTransaction(final Payment payment) {
+//        payment.getStudent().getActivePaymentDummies().remove(payment);
+//        payment.getTeacher().getActivePaymentDummies().remove(payment);
+//        PaymentDocument paymentDocument = new PaymentDocumentImpl();
+//        paymentDocument.delete(payment.getId());
+//    }
 
     public void setId(String id) {
         this.id = id;
@@ -141,23 +156,39 @@ public class Payment extends DocumentObject {
         mapToReturn.put("price",this.getPrice());
         mapToReturn.put("requestDate",this.getRequestDate());
         mapToReturn.put("paymentDate", this.getPaymentDate());
-        mapToReturn.put("teacher",this.getTeacher());
-        mapToReturn.put("student",this.getStudent());
+        mapToReturn.put("teacher_id",this.getTeacher().getId());
+        mapToReturn.put("student_id",this.getStudent().getId());
         mapToReturn.put("isPayed",this.isPayed());
-        mapToReturn.put("isActive",this.isPayed());
+        mapToReturn.put("isActive",this.isActive());
         return mapToReturn;
     }
 
     @Override
     public void toObject(String documentId, Map<String, Object> mapOfObject) {
         this.setId(documentId);
-        this.setPrice((int) mapOfObject.get("price"));
+        this.setPrice(Math.toIntExact((long) mapOfObject.get("price")));
         this.setRequestDate((String) mapOfObject.get("requestDate"));
         this.setPaymentDate((String) mapOfObject.get("paymentDate"));
-        this.setTeacher((TeacherProfile) mapOfObject.get("teacher"));
-        this.setStudent((StudentProfile) mapOfObject.get("student"));
+        this.setStudentId((String) mapOfObject.get("student_id"));
+        this.setTeacherId((String) mapOfObject.get("teacher_id"));
         this.setPayed((boolean) mapOfObject.get("isPayed"));
         this.setActive((boolean) mapOfObject.get("isActive"));
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
 //    private Payment t1 = new Payment("Thomas", "14.04.2018", 270);

@@ -9,11 +9,14 @@
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="8dp"
         android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,55 +28,10 @@
             android:text="Name"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/FeedContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='"Hello, I would like you to teach me English. Can we schedule a date and time?'
-            android:textSize="12sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/star"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/holder"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_toggle_star_color" />
-
-        <ToggleButton
-            android:id="@+id/toggleStar"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:background="@drawable/fav_checkbox"
-            android:checked="false"
-            android:textOff="@null"
-            android:textOn="@null" />
-
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textAlignment="textStart"
-            tools:layout_editor_absoluteX="308dp"
-            tools:layout_editor_absoluteY="63dp" />
     </LinearLayout>
 
     <View
+        android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="center"
@@ -83,5 +41,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view7"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/student_2" />
 
 </android.support.constraint.ConstraintLayout>

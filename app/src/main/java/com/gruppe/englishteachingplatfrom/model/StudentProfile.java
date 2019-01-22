@@ -1,5 +1,7 @@
 package com.gruppe.englishteachingplatfrom.model;
 
+import com.gruppe.englishteachingplatfrom.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +10,8 @@ public class StudentProfile extends DocumentObject{
     private String id;
     private String name;
     private String email;
+    private String password;
     private int profilePicture;
-    private double rating;
     private static ArrayList<TeacherProfile> pendingProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> favoriteProfiles = new ArrayList<TeacherProfile>();
     private static ArrayList<TeacherProfile> MatchProfiles = new ArrayList<TeacherProfile>();
@@ -18,25 +20,36 @@ public class StudentProfile extends DocumentObject{
 
 
     //Constructor with ID
-    public StudentProfile(String id, String name, String email, int profilePicture, double rating) {
+    public StudentProfile(String id, String name, String email, int profilePicture) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
-        this.rating = rating;
+        this.password = "123";
     }
 
     public StudentProfile () {
-        this.profilePicture = 0;
-        this.rating = 0;
+//        switch (this.id) {
+//            case "1": this.profilePicture = R.drawable.student_1;
+//                break;
+//            case "2": this.profilePicture = R.drawable.student_2;
+//                break;
+//            case "3": this.profilePicture = R.drawable.student_3;
+//                break;
+//                default: this.profilePicture = R.drawable.unknown;
+//                break;
+//        }
+
+//        this.profilePicture = R.drawable.unknown;
+        this.password = "123";
     }
 
     //Constructer without ID for database
-    public StudentProfile(String name, String email, int profilePicture, double rating) {
+    public StudentProfile(String name, String email, int profilePicture) {
         this.name = name;
         this.email = email;
         this.profilePicture = profilePicture;
-        this.rating = rating;
+        this.password = "123";
     }
 
     public ArrayList<Payment> getActivePaymentDummies() {
@@ -75,19 +88,15 @@ public class StudentProfile extends DocumentObject{
         this.email = email;
     }
 
-    public double getRating() {
-        return rating;
-    }
-
-    public static ArrayList<TeacherProfile> getPendingProfiles() {
+    public ArrayList<TeacherProfile> getPendingProfiles() {
         return pendingProfiles;
     }
 
-    public static ArrayList<TeacherProfile> getFavoriteProfiles() {
+    public ArrayList<TeacherProfile> getFavoriteProfiles() {
         return favoriteProfiles;
     }
 
-    public static ArrayList<TeacherProfile> getMatchProfiles() {
+    public ArrayList<TeacherProfile> getMatchProfiles() {
         return MatchProfiles;
     }
 
@@ -96,17 +105,50 @@ public class StudentProfile extends DocumentObject{
         Map<String, Object> mapToReturn = new HashMap<>();
         mapToReturn.put("fullname",this.name);
         mapToReturn.put("mail", this.email);
+        mapToReturn.put("password",this.password);
         return mapToReturn;
     }
 
     @Override
     public void toObject(String documentId,Map<String, Object> mapOfObject) {
-        this.setId(documentId);
-        this.setName((String) mapOfObject.get("fullname"));
-        this.setEmail((String) mapOfObject.get("mail"));
+        if(mapOfObject.containsKey("student_id")) {
+            this.setId((String) mapOfObject.get("student_id"));
+        }
+        else {
+            this.setId(documentId);
+            this.setName((String) mapOfObject.get("student_fullname"));
+            this.setEmail((String) mapOfObject.get("student_mail"));
+            this.setPassword((String) mapOfObject.get("student_password"));
+        }
     }
 
     public String toString() {
         return "Name: " + getName() + "\n Email: " + getEmail();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public void setProfilePicture(int profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+
+    public void setProfilePictures() {
+                switch (this.id) {
+            case "1": this.profilePicture = R.drawable.student_2;
+                break;
+            case "2": this.profilePicture = R.drawable.student_1;
+                break;
+            case "3": this.profilePicture = R.drawable.student_3;
+                break;
+            default: this.profilePicture = R.drawable.unknown;
+                break;
+        }
     }
 }

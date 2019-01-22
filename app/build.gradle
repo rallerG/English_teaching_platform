@@ -52,9 +52,13 @@ dependencies {
 
     //Searchable spinner
     implementation 'gr.escsoft.michaelprimez.searchablespinner:SearchableSpinner:1.0.9'
+
+    //Firebase
     implementation 'com.google.firebase:firebase-firestore:17.1.5'
     implementation 'com.google.firebase:firebase-core:16.0.6'
 
     //Crash analytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 }
