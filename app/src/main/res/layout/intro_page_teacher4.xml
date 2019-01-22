@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Request a teacher"
+                android:text="Request a payment"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_title"
                 android:textStyle="bold" />
@@ -43,7 +43,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="@dimen/desc_padding"
                 android:paddingRight="@dimen/desc_padding"
-                android:text="Sent a request to a teacher that can help you"
+                android:text="Sent a payment request to one of your students"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/slide_desc" />
