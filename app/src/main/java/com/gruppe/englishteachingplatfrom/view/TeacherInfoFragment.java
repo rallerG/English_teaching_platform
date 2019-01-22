@@ -72,10 +72,12 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         floating_Send_teacherInfo = rootview.findViewById(R.id.floating_send_teacherInfo);
 
         if(from.equals("matches")){
-            floating_Send_teacherInfo.setImageResource(R.drawable.alarm_clock);
+            floating_Send_teacherInfo.setImageResource(R.drawable.ic_baseline_feedback_24px);
+            floating_Fav_teacherInfo.hide();
         }
         if(from.equals("favorites")){
             floating_Fav_teacherInfo.setImageResource(R.drawable.favourite_full);
+            fav = true;
         }
         if(from.equals("pending")){
             floating_Send_teacherInfo.hide();
@@ -148,6 +150,17 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putString("from", from);
             bundle.putString("id",id);
             Fragment F = new DialogBoxFragment();
+            F.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
+                    addToBackStack(null).commit();
+        }
+
+        if (v == floating_Send_teacherInfo && from.equals("matches")) {
+            // Review button
+            PageFragment.clicked = false;
+            Bundle bundle = new Bundle();
+            bundle.putString("id",id);
+            Fragment F = new ReviewStudentFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();

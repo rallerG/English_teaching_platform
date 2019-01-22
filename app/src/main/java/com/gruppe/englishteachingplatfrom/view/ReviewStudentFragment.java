@@ -66,8 +66,7 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
     public static ReviewStudentFragment newInstance(String param1, String param2) {
         ReviewStudentFragment fragment = new ReviewStudentFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("id", param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,8 +75,7 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getString("id","");
         }
     }
 
@@ -88,10 +86,8 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
         ratingBar = view.findViewById(R.id.ratingbar);
         content = view.findViewById(R.id.content);
         send = view.findViewById(R.id.send_review);
+        teacherid = mParam1;
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null)
-            teacherid = bundle.getString("id");
         return view;
     }
 
