@@ -74,6 +74,7 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.studName.setText(mValues.get(position).getName());
+        holder.imageView.setImageResource(mValues.get(position).getProfilePicture());
 
    /*     holder.itemHolder.setOnClickListener(new View.OnClickListener() {
             @Override

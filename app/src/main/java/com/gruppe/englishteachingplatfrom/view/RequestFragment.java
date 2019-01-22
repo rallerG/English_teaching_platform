@@ -85,7 +85,7 @@ public class RequestFragment extends Fragment {
         TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(p.getCurrrentTeacher().getId());
         teacherPendingsDocument.getAll(new CallbackList<StudentProfile>() {
             @Override
-            public void onCallback(List<StudentProfile> listOfObjects) {
+            public void onCallback(final List<StudentProfile> listOfObjects) {
                 p.getCurrrentTeacher().getPendingProfiles().clear();
                 for (final StudentProfile studentProfile : listOfObjects) {
                     StudentsDocument studentsDocument = new StudentsDocumentImpl();
@@ -93,30 +93,33 @@ public class RequestFragment extends Fragment {
                         @Override
                         public void onCallback(StudentProfile object) {
                             p.getCurrrentTeacher().getPendingProfiles().add(object);
-                            mReqAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentTeacher().getPendingProfiles());
-                            recycler.setHasFixedSize(true);
-                            recycler.setLayoutManager(layoutManager);
-                            recycler.setAdapter(mReqAdapter);
-                            mReqAdapter.setOnItemClickListener(new MyRequestRecyclerViewAdapter.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(int position) {
-                                    if (!clicked) {
-                                        System.out.println("You clicked on " + position);
-                                        Fragment F = new PendingRequestFragment();
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("id", p.getCurrrentTeacher().getPendingProfiles().get(position).getId());
-                                        bundle.putString("name", p.getCurrrentTeacher().getPendingProfiles().get(position).getName());
-                                        bundle.putInt("picture", p.getCurrrentTeacher().getPendingProfiles().get(position).getProfilePicture());
-                                        F.setArguments(bundle);
-                                        //remember information and description text (when objects are used)
-                                        getActivity().getSupportFragmentManager()
-                                                .beginTransaction()
-                                                .replace(R.id.fragmentContent, F)
-                                                .addToBackStack(null)
-                                                .commit();
+                            object.setProfilePictures();
+                            if (listOfObjects.indexOf(studentProfile) == (listOfObjects.size()-1)) {
+                                mReqAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentTeacher().getPendingProfiles());
+                                recycler.setHasFixedSize(true);
+                                recycler.setLayoutManager(layoutManager);
+                                recycler.setAdapter(mReqAdapter);
+                                mReqAdapter.setOnItemClickListener(new MyRequestRecyclerViewAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(int position) {
+                                        if (!clicked) {
+                                            System.out.println("You clicked on " + position);
+                                            Fragment F = new PendingRequestFragment();
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("id", p.getCurrrentTeacher().getPendingProfiles().get(position).getId());
+                                            bundle.putString("name", p.getCurrrentTeacher().getPendingProfiles().get(position).getName());
+                                            bundle.putInt("picture", p.getCurrrentTeacher().getPendingProfiles().get(position).getProfilePicture());
+                                            F.setArguments(bundle);
+                                            //remember information and description text (when objects are used)
+                                            getActivity().getSupportFragmentManager()
+                                                    .beginTransaction()
+                                                    .replace(R.id.fragmentContent, F)
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
                     });
                 }
