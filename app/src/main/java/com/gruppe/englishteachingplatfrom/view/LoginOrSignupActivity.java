@@ -54,6 +54,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 @Override
                 public void onCallback(TeacherProfile object) {
                     p.setCurrrentTeacher(object);
+                    object.setProfilePictures();
                     p.rememberTeacher();
                     //loading bar
                     if (pDialog.isShowing()){
@@ -77,6 +78,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                 @Override
                 public void onCallback(StudentProfile object) {
                     p.setCurrrentStudent(object);
+                    object.setProfilePictures();
                     p.rememberStudent();
                     //loading bar
                     if (pDialog.isShowing()){
@@ -115,6 +117,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onCallback(StudentProfile object) {
                         p.setCurrrentStudent(object);
+                        object.setProfilePictures();
                         p.rememberStudent();
                         //loading bar
                         if (pDialog.isShowing()){
@@ -138,6 +141,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void onCallback(TeacherProfile object) {
                         p.setCurrrentTeacher(object);
+                        object.setProfilePictures();
                         p.rememberTeacher();
 
                         //loading bar
