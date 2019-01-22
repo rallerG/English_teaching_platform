@@ -27,6 +27,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocum
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.controller.MyFavoriteRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
+import com.gruppe.englishteachingplatfrom.controller.MyStudentMatchesRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.controller.MyTeacherMatchesRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
@@ -45,6 +46,7 @@ public class ListFragment extends Fragment {
 
     RecyclerView mRecyclerView;
     MyFavoriteRecyclerViewAdapter mAdapter;
+    MyStudentMatchesRecyclerViewAdapter mStudentMatchesAdapter;
     MyTeacherMatchesRecyclerViewAdapter mTeacherAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     Singleton p = Singleton.getInstance();
@@ -142,11 +144,11 @@ public class ListFragment extends Fragment {
                                         p.getCurrrentStudent().getMatchProfiles().add(object);
                                         object.setProfilePictures();
                                         if (listOfObjects.indexOf(teacher) == (listOfObjects.size()-1)) {
-                                            mAdapter = new MyFavoriteRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
+                                            mStudentMatchesAdapter = new MyStudentMatchesRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
-                                            mRecyclerView.setAdapter(mAdapter);
-                                            mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
+                                            mRecyclerView.setAdapter(mStudentMatchesAdapter);
+                                            mStudentMatchesAdapter.setOnItemClickListener(new MyStudentMatchesRecyclerViewAdapter.OnItemClickListener() {
 
                                                 @Override
                                                 public void onItemClick(int position) {
