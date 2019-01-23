@@ -125,6 +125,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         System.out.println("teacherinfo clicked");
         if(v == card){
             PageFragment.clicked = false;
+            ListFragment.clicked = false;
             getActivity().getSupportFragmentManager().popBackStack();
         }
 
