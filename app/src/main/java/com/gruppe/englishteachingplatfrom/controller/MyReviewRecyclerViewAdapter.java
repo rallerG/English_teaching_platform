@@ -49,10 +49,9 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
         final Review feed = review.get(position);
 
         System.out.println("review name: " + review.get(position).getStudentId());
-//       holder.mRating.setRating((float) review.get(position).getRating());
-//       holder.mContent.setText(review.get(position).getContent());
 
-        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl("1");
+
+        final TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl("1");
         feedbackDocument.getAll(new CallbackList<Review>() {
             @Override
             public void onCallback(List<Review> listOfObjects) {
@@ -64,22 +63,12 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
                         public void onCallback(StudentProfile object) {
                             feed.setStudentProfile(object);
                             holder.mStudName.setText(feed.getStudentProfile().getName());
-                            holder.mRating.setRating((float) feed.getRating());
-        //                    holder.mRating.setRating((float) review.get(position).getRating());
-                            holder.mContent.setText(feed.getContent());
-          //                  holder.mContent.setText(review.get(position).getContent());
                         }
                     });
                     review.add(feed);
-//                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
-//                    studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
-//                        @Override
-//                        public void onCallback(StudentProfile object) {
-//                            //feed.setStudentProfile(object);
-//                            holder.mStudName.setText(object.getName());
-//                        }
-//                    });
                 }
+                holder.mContent.setText(feed.getContent());
+                holder.mRating.setRating((float)feed.getRating());
 
             }
         });

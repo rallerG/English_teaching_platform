@@ -115,9 +115,10 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onCallback(List<Review> listOfObjects) {
                 list.clear();
-                for (Review review : listOfObjects) {
-                    list.add(review);
-                    totalStar += review.getRating();
+
+                for (Review rev : listOfObjects) {
+                    list.add(rev);
+                    totalStar += rev.getRating();
                     totalReviews++;
                 }
                 totAvgRating = totalStar / list.size();
