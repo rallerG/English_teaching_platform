@@ -180,9 +180,9 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         public void onCallback() {
                             FragPager.removeTeacher(FragPager.getFragman());
                             getActivity().getSupportFragmentManager().popBackStack();
+                            Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
                         }
                     });
-                    Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
                 }
         }
 
@@ -199,14 +199,17 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onCallback() {
                         fav = false;
+                        p.getSwipeTeachers().add(p.getCurrrentStudent().getFavoriteProfiles().get(pos));
+                        p.getCurrrentStudent().getFavoriteProfiles().remove(pos);
+                        Toast.makeText(getContext(), "fjernet " + name + " fra dine favoriter", Toast.LENGTH_SHORT).show();
+                        getActivity().getSupportFragmentManager().popBackStack();
                     }
                 });
             }
         }
 
         if (v == floating_Fav_teacherInfo && from.equals("pending")) {
-            // checker whether the teacher is favorited by the student and set the image accordingly
-            // should have the standard heart images for favorite (empty and filled)
+           // remove button
             StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
             studentPendingsDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                 @Override
@@ -221,6 +224,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         }
 
         if (v == floating_Fav_teacherInfo && from.equals("matches")) {
+            //remove button
             StudentMatchesDocument studentMatchesDocument = new StudentMatchesDocumentImpl(p.getCurrrentStudent().getId());
             studentMatchesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                 @Override
