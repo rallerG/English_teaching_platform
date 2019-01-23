@@ -15,11 +15,19 @@ import android.widget.RatingBar;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
+import com.gruppe.englishteachingplatfrom.model.DocumentObject;
 import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
+
+import java.util.List;
 
 public class ReviewStudentFragment extends Fragment implements View.OnClickListener {
 
@@ -102,6 +110,34 @@ public class ReviewStudentFragment extends Fragment implements View.OnClickListe
                             pDialog.dismiss();
                         }
                         getActivity().getSupportFragmentManager().popBackStack();
+                    }
+                });
+
+                TeachersDocument teachersDocument = new TeachersDocumentImpl();
+                teachersDocument.get(teacherid, new Callback<TeacherProfile>() {
+                    @Override
+                    public void onCallback(final TeacherProfile object) {
+                        TeacherReviewDocument teacherReviewDocument1 = new TeacherReviewDocumentImpl(teacherid);
+                        teacherReviewDocument1.getAll(new CallbackList<Review>() {
+                            @Override
+                            public void onCallback(List<Review> listOfObjects) {
+                                double totalRating = 0;
+                                for (Review review : listOfObjects) {
+                                    totalRating += review.getRating();
+                                }
+
+                                if (listOfObjects.size() == 0) {
+                                    object.setRating((totalRating/1));
+                                }
+                                else {
+                                    object.setRating((totalRating/listOfObjects.size()));
+                                }
+                                TeachersDocument teachersDocument2 = new TeachersDocumentImpl();
+                                teachersDocument2.update(teacherid,object);
+                            }
+                        });
+
+
                     }
                 });
                 break;
