@@ -222,11 +222,12 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         Bundle args = new Bundle();
         args.putInt("id", itemId);
+        args.putInt("position", FragPager.getPos());
 
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_home:
-                fragment = new FragPager();;
+                fragment = new FragPager();
                 fragment.setArguments(args);
                 setTitle(R.string.app_name);
                 break;

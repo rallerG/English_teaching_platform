@@ -28,7 +28,6 @@ public class FragPagerAdapter extends FragmentStatePagerAdapter implements View.
     @Override
     public Fragment getItem(int position) {
         Fragment page = PageFragment.newInstance(position);
-        fragmentSparseArray.append(position,page);
         return page;
     }
 

@@ -45,6 +45,10 @@ public class FragPager extends Fragment implements View.OnClickListener {
             return fragmentMan;
         }
 
+        public static int getPos(){
+            return mPager.getCurrentItem();
+        }
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -60,6 +64,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
             mPager = view.findViewById(R.id.ViewPager);
             mPager.setPageTransformer(true, new ViewPagerStack());
             mPager.setOffscreenPageLimit(3);
+            mPager.setSaveFromParentEnabled(false);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
             mPager.setAdapter(mAdapter);
             floating_Fav = view.findViewById(R.id.floating_fav);
@@ -110,12 +115,14 @@ public class FragPager extends Fragment implements View.OnClickListener {
                 Singleton.getInstance().getSwipeTeachers().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
+                mPager.setSaveFromParentEnabled(false);
                 mPager.setCurrentItem(pos-1, true);
             }
             else if(pos == 0) {
                 Singleton.getInstance().getSwipeTeachers().remove(pos);
                 FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapt);
+                mPager.setSaveFromParentEnabled(false);
                 mPager.setCurrentItem(pos, true);
             }
             else System.out.println("There was an error in fragpager remove teacher " + pos);
@@ -130,23 +137,22 @@ public class FragPager extends Fragment implements View.OnClickListener {
             Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
             FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
             mPager.setAdapter(mAdapt);
+            mPager.setSaveFromParentEnabled(false);
         }
         else if(pos ==  mPager.getAdapter().getCount() && pos!=0 ){
             Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
             FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
             mPager.setAdapter(mAdapt);
+            mPager.setSaveFromParentEnabled(false);
         }
         else if(pos == 0) {
             Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
             FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
             mPager.setAdapter(mAdapt);
+            mPager.setSaveFromParentEnabled(false);
         }
         else System.out.println("There was an error in fragpager add teacher " + pos);
 
-    }
-
-         public int getCurrentPosition(){
-        return mPager.getCurrentItem();
     }
 
     private class ViewPagerStack implements ViewPager.PageTransformer {
@@ -177,18 +183,19 @@ public class FragPager extends Fragment implements View.OnClickListener {
         if (v == floating_Send) {
             Bundle bundle = new Bundle();
             bundle.putString("name", name);
-            bundle.putInt("price", p.getTeacherDummies().get(position1).getPrice());
-            bundle.putFloat("rate", (float) p.getTeacherDummies().get(position1).getRating());
-            bundle.putString("language", p.getTeacherDummies().get(position1).getLanguage());
+            bundle.putInt("price", p.getSwipeTeachers().get(position1).getPrice());
+            bundle.putFloat("rate", (float) p.getSwipeTeachers().get(position1).getRating());
+            bundle.putString("language", p.getSwipeTeachers().get(position1).getLanguage());
             bundle.putInt("position", position1);
-            bundle.putString("id", p.getTeacherDummies().get(position1).getId());
-            bundle.putInt("pic", p.getTeacherDummies().get(position1).getProfilePic());
+            bundle.putString("id", p.getSwipeTeachers().get(position1).getId());
+            bundle.putInt("pic", p.getSwipeTeachers().get(position1).getProfilePic());
             bundle.putBoolean("isTeacherInfoFragment", false);
+            bundle.putString("information",p.getSwipeTeachers().get(position1).getDescription());
             bundle.putString("from", "swipe");
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
-                    addToBackStack(null).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).addToBackStack(null).commit();
+
         }
         if(v == floating_Fav){
                 StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());

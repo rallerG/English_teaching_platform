@@ -130,8 +130,8 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
                                 if(from.equals("swipe")){
                                     FragPager.removeTeacher(FragPager.getFragman());
                                 }
-                                getActivity().getSupportFragmentManager().popBackStack();
-                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                fragmentManager.popBackStack();
                                 FragmentTransaction fragmentTransaction = fragmentManager
                                         .beginTransaction();
 
