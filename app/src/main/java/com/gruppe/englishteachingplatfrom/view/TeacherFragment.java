@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,19 @@ import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherPendingsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherMatchesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherPendingsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
 import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
+import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,7 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
     int rate = 0;
     int totalReviews = 0;
     private long mLastClickTime = 0;
+    View notification;
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -80,9 +85,27 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
         students = view.findViewById(R.id.students);
         profilePic = view.findViewById(R.id.imageView8);
         profilePic.setImageResource(p.getCurrrentTeacher().getProfilePic());
+        notification = view.findViewById(R.id.notification);
+
 
             if(savedInstanceState == null) {
                 System.out.println("TeacherFragment.java: Start of savedInstanceState");
+
+                TeacherPendingsDocument pendingsDocument = new TeacherPendingsDocumentImpl(p.getCurrrentTeacher().getId());
+                pendingsDocument.getAll(new CallbackList<TeacherProfile>() {
+//                    int pendings = 0;
+                    @Override
+                    public void onCallback(List<TeacherProfile> listOfObjects) {
+//                        for(TeacherProfile prof : listOfObjects){
+//                            pendings += prof.getPendingProfiles().size();
+//                        }
+                        if(listOfObjects.size() != 0){
+                            notification.setVisibility(View.VISIBLE);
+                        } else {
+                            notification.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
 
                 TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
                 feedbackDocument.getAll(new CallbackList<Review>() {

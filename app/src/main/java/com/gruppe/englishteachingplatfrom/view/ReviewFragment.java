@@ -113,6 +113,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         feedbackDocument.getAll(new CallbackList<Review>() {
             @Override
             public void onCallback(List<Review> listOfObjects) {
+                list.clear();
                 for (Review review : listOfObjects) {
                     list.add(review);
                     totalStar += review.getRating();
