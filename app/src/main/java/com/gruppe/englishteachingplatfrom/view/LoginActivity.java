@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 if (teacherProfile.getEmail().equals(email.getText().toString())) {
                                     if (teacherProfile.getPassword().equals(password.getText().toString())) {
                                         p.setCurrrentTeacher(teacherProfile);
+                                        teacherProfile.setProfilePictures();
                                         p.rememberTeacher();
 
                                         if (pDialog.isShowing()) {
@@ -91,6 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 if (studentProfile.getEmail().equals(email.getText().toString())) {
                                                     if (studentProfile.getPassword().equals(password.getText().toString())) {
                                                         p.setCurrrentStudent(studentProfile);
+                                                        studentProfile.setProfilePictures();
                                                         p.rememberStudent();
 
                                                         if (pDialog.isShowing()) {
