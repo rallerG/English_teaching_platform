@@ -164,6 +164,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putString("from", "matches");
                                                         bundle.putInt("pic", p.getCurrrentStudent().getMatchProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getMatchProfiles().get(position).getId());
+                                                        bundle.putString("information", p.getCurrrentStudent().getMatchProfiles().get(position).getDescription());
 
                                                         Fragment F = new TeacherInfoFragment();
                                                         F.setArguments(bundle);
@@ -215,6 +216,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putString("from", "favorites");
                                                         bundle.putInt("pic", p.getCurrrentStudent().getFavoriteProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getFavoriteProfiles().get(position).getId());
+                                                        bundle.putString("information", p.getCurrrentStudent().getFavoriteProfiles().get(position).getDescription());
 
                                                         Fragment F = new TeacherInfoFragment();
                                                         F.setArguments(bundle);
@@ -265,6 +267,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putString("from", "pending");
                                                         bundle.putInt("pic", p.getCurrrentStudent().getPendingProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getPendingProfiles().get(position).getId());
+                                                        bundle.putString("information", p.getCurrrentStudent().getPendingProfiles().get(position).getDescription());
 
                                                         Fragment F = new TeacherInfoFragment();
                                                         F.setArguments(bundle);

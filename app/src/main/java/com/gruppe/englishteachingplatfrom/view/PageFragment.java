@@ -31,6 +31,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
     private float  tRate;
     private String tName;
     private String tLang;
+    private String tInformation;
     private String id;
     private long mLastClickTime = 0;
 
@@ -61,20 +62,14 @@ public class PageFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_page_frag, container, false);
 
-//        Bundle bundle = this.getArguments();
-//        if (bundle != null) {
-//            pos = bundle.getInt("position", 0);
-//        }
         Singleton teacher = Singleton.getInstance();
         ArrayList<TeacherProfile> contents = teacher.getSwipeTeachers();
-//        pic = contents.get(pos).getProfilePic();
         card = rootview.findViewById(R.id.card);
         card.setOnClickListener(this);
 
         id = contents.get(pos).getId();
 
-//        imageView =  rootview.findViewById(R.id.teacherPic);
-//        imageView.setImageResource(pic);
+        tInformation = contents.get(pos).getDescription();
 
         name = rootview.findViewById(R.id.name);
         tName = contents.get(pos).getName();
@@ -88,10 +83,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         tLang = contents.get(pos).getLanguage();
         language.setText(tLang);
 
- /*       Rating = rootview.findViewById(R.id.teacherRating);
-        tRating = (float) contents.get(pos).getRating();
-        Rating.setRating(tRating);*/
-
         rating = rootview.findViewById(R.id.teacherRating);
         rating.setRating(tRate);
         Rate = rootview.findViewById(R.id.rate);
@@ -104,7 +95,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         Price.setText(""+tPrice + " DKK/hr");
         rating.setRating(tRate);
         rating.setIsIndicator(true);
-     //   txt.setVisibility(View.INVISIBLE);
         System.out.println("fragment" + tName + "was created");
         return rootview;
     }
@@ -117,12 +107,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         mLastClickTime = SystemClock.elapsedRealtime();
         if(!clicked)
             if(v == card) {
-                //getChildFragmentManager().beginTransaction().replace(R.id.fragmentContent, new InfoCardTest()).addToBackStack(null).commit();
-                /*if(expander.isExpanded()) {
-                    expander.collapse();
-                } else {
-                    expander.expand();
-                }*/
 
                 Bundle bundle = new Bundle();
                 bundle.putString("name", tName);
@@ -132,6 +116,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
                 bundle.putInt("position", pos);
                 bundle.putString("id", id);
                 bundle.putInt("pic", picture);
+                bundle.putString("information", tInformation);
                 Fragment F = new TeacherInfoFragment();
                 F.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).

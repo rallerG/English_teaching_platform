@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,8 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private Singleton p = Singleton.getInstance();
     //    private ArrayList<TeacherProfile> contents = teacher.getTeacherDummies();
     private int pos, tPrice, picture;
-    private RatingBar rating;
-    private float tRating, tRate;
+    private CardView card;
+    private float tRate;
     private String tName, tLang, tInformation;
     private boolean fav = false;
     private String id, from;
@@ -71,14 +72,16 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         super.onCreate(savedInstanceState);
         View rootview = inflater.inflate(R.layout.fragment_teacher_info, container, false);
 
+        card = rootview.findViewById(R.id.info_card);
         name = rootview.findViewById(R.id.info_teachername);
         language = rootview.findViewById(R.id.info_teacherlanguage);
         rate = rootview.findViewById(R.id.info_teacherrating);
         price = rootview.findViewById(R.id.info_teacherprice);
-       // information = rootview.findViewById(R.id.information_text);
+        information = rootview.findViewById(R.id.information_text);
         rateBar = rootview.findViewById(R.id.info_teacherratingstars);
         image = rootview.findViewById(R.id.info_teacherpicture);
 
+        card.setOnClickListener(this);
         floating_Fav_teacherInfo = rootview.findViewById(R.id.floating_fav_teacherInfo);
         floating_Send_teacherInfo = rootview.findViewById(R.id.floating_send_teacherInfo);
 
@@ -98,8 +101,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         floating_Send_teacherInfo.setOnClickListener(this);
         floating_Fav_teacherInfo.setOnClickListener(this);
 
-        rating = rootview.findViewById(R.id.info_teacherratingstars);
-
         System.out.println("TeacherInfoFragment.java: " + tName + " " + tPrice + " " + tRate + " " + tLang);
 
 
@@ -112,8 +113,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         image.setImageResource(picture);
         information.setText(tInformation);
 
-//        information.setText(p.getTeacherDummies().get(pos).getDescription());
-//        information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
         return rootview;
     }
 
@@ -123,6 +122,10 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
+        System.out.println("teacherinfo clicked");
+        if(v == card){
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
 
         if (v == floating_Send_teacherInfo && from.equals("swipe")) {
             PageFragment.clicked = false;
@@ -137,6 +140,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putBoolean("isFav", fav);
             bundle.putInt("pic", picture);
             bundle.putString("id",id);
+            bundle.putString("from", from);
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
@@ -157,6 +161,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putString("from", from);
             bundle.putInt("pic", picture);
             bundle.putString("id",id);
+            bundle.putString("from", from);
             // remove from favorite when send is clicked
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
@@ -203,7 +208,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onCallback() {
                         fav = false;
-                        p.getSwipeTeachers().add(p.getCurrrentStudent().getFavoriteProfiles().get(pos));
+                        FragPager.addTeacher(FragPager.getFragman(),pos);
                         p.getCurrrentStudent().getFavoriteProfiles().remove(pos);
                         Toast.makeText(getContext(), "fjernet " + name + " fra dine favoriter", Toast.LENGTH_SHORT).show();
                         getActivity().getSupportFragmentManager().popBackStack();
