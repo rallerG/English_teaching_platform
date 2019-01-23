@@ -60,7 +60,7 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
         rateD.setText(Float.toString(tRate));
         ratingBar.setRating(tRate);
         ratingBar.setIsIndicator(true);
-        teacherInfo.setText(tName+ "\n"+tLang +"\n" +tPrice);
+        teacherInfo.setText(tName+ "\n" + tLang + "\n" + tPrice + " DKK/hr");
         okayButton.setOnClickListener(this);
         teacherImage.setImageResource(picture);
 
