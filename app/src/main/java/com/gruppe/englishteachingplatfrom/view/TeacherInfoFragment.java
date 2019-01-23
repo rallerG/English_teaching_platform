@@ -75,7 +75,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         language = rootview.findViewById(R.id.info_teacherlanguage);
         rate = rootview.findViewById(R.id.info_teacherrating);
         price = rootview.findViewById(R.id.info_teacherprice);
-       // information = rootview.findViewById(R.id.information_text);
+        information = rootview.findViewById(R.id.information_text);
         rateBar = rootview.findViewById(R.id.info_teacherratingstars);
         image = rootview.findViewById(R.id.info_teacherpicture);
 
