@@ -15,13 +15,17 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeacherReviewDocumentImpl;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.Callback;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackList;
+import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherReviewDocument;
 import com.gruppe.englishteachingplatfrom.model.Review;
 import com.gruppe.englishteachingplatfrom.controller.MyReviewRecyclerViewAdapter;
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
+import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +38,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
     private int mColumnCount = 1;
     RecyclerView review;
     ArrayList<Review> list;
-    TextView star1, star2, star3, star4, star5, ratings, totalRate;
+    TextView star1, star2, star3, star4, star5, ratings, totalRate, NoList;
     LinearLayout oneStar, twoStar, threeStar, fourStar, fiveStar, all, prevBtn;
     RatingBar totalRating;
     int totalReviews;
@@ -47,7 +51,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
     int totStar4 = 0;
     int totStar5 = 0;
     private long mLastClickTime = 0;
-    ArrayList<Review> tempList ;
+    ArrayList<Review> tempList;
 
     public ReviewFragment() {
     }
@@ -87,6 +91,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         fourStar = view.findViewById(R.id.fourStar);
         fiveStar = view.findViewById(R.id.fiveStar);
         all = view.findViewById(R.id.all);
+        NoList = view.findViewById(R.id.NoList);
 
         oneStar.setOnClickListener(this);
         twoStar.setOnClickListener(this);
@@ -111,18 +116,21 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
                 for (Review review : listOfObjects) {
                     list.add(review);
                     totalStar += review.getRating();
-                    totalReviews ++;
+                    totalReviews++;
                 }
                 totAvgRating = totalStar / list.size();
 
-                if(totalReviews == 0){
+                if (totalReviews == 0) {
                     totalRate.setText("" + 0);
                 } else {
                     totalRate.setText(String.valueOf(totAvgRating));
                     totalRating.setRating((float) totAvgRating);
                 }
 
-                ratings.setText(totalReviews  + " Ratings");
+                ratings.setText(totalReviews + " Ratings");
+                if(list.size()==0){
+                    NoList.setVisibility(View.VISIBLE);
+                }
                 recycleAdapter = new MyReviewRecyclerViewAdapter(getContext(), list);
                 review.setLayoutManager(new LinearLayoutManager(getActivity()));
                 review.setAdapter(recycleAdapter);
@@ -130,19 +138,15 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
                 review.setVisibility(View.VISIBLE);
 
                 for (int i = 0; i < list.size(); i++) {
-                    if(list.get(i).getRating() <= 1) {
+                    if (list.get(i).getRating() <= 1) {
                         totStar1++;
-                    }
-                    else if (1 < list.get(i).getRating() && list.get(i).getRating() <= 2) {
+                    } else if (1 < list.get(i).getRating() && list.get(i).getRating() <= 2) {
                         totStar2++;
-                    }
-                    else if (2 < list.get(i).getRating() && list.get(i).getRating() <= 3) {
+                    } else if (2 < list.get(i).getRating() && list.get(i).getRating() <= 3) {
                         totStar3++;
-                    }
-                    else if (3 < list.get(i).getRating() && list.get(i).getRating() <= 4) {
+                    } else if (3 < list.get(i).getRating() && list.get(i).getRating() <= 4) {
                         totStar4++;
-                    }
-                    else if (4 < list.get(i).getRating() && list.get(i).getRating() <= 5) {
+                    } else if (4 < list.get(i).getRating() && list.get(i).getRating() <= 5) {
                         totStar5++;
                     }
                 }
@@ -156,7 +160,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         System.out.println("ReviewFragment.java: " + list);
 
 
-     //   totAvgRating = totalStar / list.size();
+        //   totAvgRating = totalStar / list.size();
         return view;
     }
 
@@ -201,6 +205,11 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
             sortList(5, fiveStar, prevBtn);
             prevBtn = fiveStar;
         } else if (v == all) {
+            if(list.size() == 0){
+                NoList.setVisibility(View.VISIBLE);
+            } else {
+                NoList.setVisibility(View.INVISIBLE);
+            }
             loader.setVisibility(View.VISIBLE);
             review.setVisibility(View.INVISIBLE);
             review.setAdapter(recycleAdapter);
@@ -213,11 +222,33 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
     }
 
     public void sortList(final int rating, LinearLayout btn, LinearLayout prevBtn) {
-        tempList.clear();
+        // tempList.clear();
 
+        NoList.setVisibility(View.INVISIBLE);
         this.prevBtn = prevBtn;
         prevBtn.setBackgroundResource(R.drawable.border);
         btn.setBackgroundResource(R.drawable.selectedborder);
+
+
+        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl("1");
+        feedbackDocument.getAll(new CallbackList<Review>() {
+            @Override
+            public void onCallback(List<Review> listOfObjects) {
+                tempList.clear();
+/*                for (final Review feed : listOfObjects) {
+                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                    studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
+                        @Override
+                        public void onCallback(StudentProfile object) {
+                            feed.setStudentProfile(object);
+                            if (feed.getRating() == rating) {
+                                tempList.add(feed);
+                            } else if (tempList.size() == 0){
+                                NoList.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+                }*/
 
 
         for (int i = 0; i < list.size(); i++) {
@@ -225,13 +256,11 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
                 tempList.add(list.get(i));
             }
         }
-//        for(int i = 0; i < list.size(); i++){
-//            if(list.get(i).getRating() == rating){
-//                tempList.add(list.get(i));
-//            }
-//        }
+        if (tempList.size() == 0){
+            NoList.setVisibility(View.VISIBLE);
+                }
 
-//        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
+                //        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
 //        feedbackDocument.getAll(new CallbackList<Review>() {
 //            @Override
 //            public void onCallback(List<Review> listOfObjects) {
@@ -250,9 +279,11 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
 //            }
 //        }
 
-        MyReviewRecyclerViewAdapter recAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
-        review.setLayoutManager(new LinearLayoutManager(getActivity()));
-        review.setAdapter(recAdapter);
+                MyReviewRecyclerViewAdapter recAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
+                review.setLayoutManager(new LinearLayoutManager(getActivity()));
+                review.setAdapter(recAdapter);
 
+            }
+        });
     }
 }
