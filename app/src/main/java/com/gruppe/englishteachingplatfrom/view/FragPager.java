@@ -62,7 +62,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
             mPager.setOffscreenPageLimit(3);
             mAdapter = new FragPagerAdapter(getChildFragmentManager() );
             mPager.setAdapter(mAdapter);
-            mPager.setSaveFromParentEnabled(false);
             floating_Fav = view.findViewById(R.id.floating_fav);
             floating_Send = view.findViewById(R.id.floating_send);
             floating_Send.setOnClickListener(this);
