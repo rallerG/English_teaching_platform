@@ -196,6 +196,11 @@ public class TeacherProfile extends DocumentObject{
         return id.equals(teacherProfile.getId());
     }
 
+    public String getFirstName() {
+        String name = this.getName();
+        String[] parts = name.split(" ");
+        return parts[0];
+    }
 
     /*    public int getmPicture() {
         return profilePic;
