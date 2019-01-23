@@ -17,6 +17,8 @@ import com.gruppe.englishteachingplatfrom.model.TeacherProfile;
 
 import java.util.ArrayList;
 
+import static com.gruppe.englishteachingplatfrom.view.ReviewFragment.round;
+
 
 public class PageFragment extends Fragment implements View.OnClickListener {
 
@@ -86,7 +88,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         rating = rootview.findViewById(R.id.teacherRating);
         rating.setRating(tRate);
         Rate = rootview.findViewById(R.id.rate);
-        tRate = (float) contents.get(pos).getRating();
+        tRate = round((float) contents.get(pos).getRating(),2);
         Rate.setText("" + tRate);
         System.out.println("rating for "+ tName+ " " + tRate);
 
