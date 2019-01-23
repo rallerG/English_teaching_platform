@@ -193,7 +193,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
         }
         if(v == floating_Fav){
                 StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
-                studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
+                studentFavoritesDocument.add((p.getSwipeTeachers().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
                     @Override
                     public void onCallback() {
                         removeTeacher(getFragman());
