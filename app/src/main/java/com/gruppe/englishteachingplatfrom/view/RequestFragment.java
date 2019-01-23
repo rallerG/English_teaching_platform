@@ -107,7 +107,7 @@ public class RequestFragment extends Fragment {
                                             Fragment F = new PendingRequestFragment();
                                             Bundle bundle = new Bundle();
                                             bundle.putString("id", p.getCurrrentTeacher().getPendingProfiles().get(position).getId());
-                                            bundle.putString("name", p.getCurrrentTeacher().getPendingProfiles().get(position).getName());
+                                            bundle.putString("name", p.getCurrrentTeacher().getPendingProfiles().get(position).getFirstName());
                                             bundle.putInt("picture", p.getCurrrentTeacher().getPendingProfiles().get(position).getProfilePicture());
                                             F.setArguments(bundle);
                                             //remember information and description text (when objects are used)
