@@ -101,7 +101,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         all.setOnClickListener(this);
 
 
-        ratings.setText(String.valueOf(list.size()) + " ratings");
+        ratings.setText(String.valueOf(list.size()) + "");
 
 
         all.setBackgroundResource(R.drawable.selectedborder);
@@ -271,13 +271,6 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
 //                }
 //            }
 //        });
-
-//
-//        for (Review f : list) {
-//            if ((int) f.getRating() == rating) {
-//                tempList.add(f);
-//            }
-//        }
 
                 MyReviewRecyclerViewAdapter recAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
                 review.setLayoutManager(new LinearLayoutManager(getActivity()));
