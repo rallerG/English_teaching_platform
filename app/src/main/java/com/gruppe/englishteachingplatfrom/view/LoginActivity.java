@@ -83,40 +83,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         }
                                         wrongUseranmePasswordError();
                                     }
-                                } else {
-                                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                                    studentsDocument.getAll(new CallbackList<StudentProfile>() {
-                                        @Override
-                                        public void onCallback(List<StudentProfile> listOfObjects) {
-                                            for (StudentProfile studentProfile : listOfObjects) {
-                                                if (studentProfile.getEmail().equals(email.getText().toString())) {
-                                                    if (studentProfile.getPassword().equals(password.getText().toString())) {
-                                                        p.setCurrrentStudent(studentProfile);
-                                                        studentProfile.setProfilePictures();
-                                                        p.rememberStudent();
-
-                                                        if (pDialog.isShowing()) {
-                                                            pDialog.dismiss();
-                                                        }
-                                                        startActivity(intentStudent);
-                                                        finishAffinity();
-                                                    } else {
-                                                        if (pDialog.isShowing()) {
-                                                            pDialog.dismiss();
-                                                        }
-                                                        wrongUseranmePasswordError();
-                                                    }
-                                                } else {
-                                                    if (pDialog.isShowing()) {
-                                                        pDialog.dismiss();
-                                                    }
-                                                    wrongUseranmePasswordError();
-                                                }
-                                            }
-                                        }
-                                    });
                                 }
                             }
+                            StudentsDocument studentsDocument = new StudentsDocumentImpl();
+                            studentsDocument.getAll(new CallbackList<StudentProfile>() {
+                                @Override
+                                public void onCallback(List<StudentProfile> listOfObjects) {
+                                    for (StudentProfile studentProfile : listOfObjects) {
+                                        if (studentProfile.getEmail().equals(email.getText().toString())) {
+                                            if (studentProfile.getPassword().equals(password.getText().toString())) {
+                                                p.setCurrrentStudent(studentProfile);
+                                                studentProfile.setProfilePictures();
+                                                p.rememberStudent();
+
+                                                if (pDialog.isShowing()) {
+                                                    pDialog.dismiss();
+                                                }
+                                                startActivity(intentStudent);
+                                                finishAffinity();
+                                            } else {
+                                                if (pDialog.isShowing()) {
+                                                    pDialog.dismiss();
+                                                }
+                                                wrongUseranmePasswordError();
+                                            }
+                                        } else {
+                                            if (pDialog.isShowing()) {
+                                                pDialog.dismiss();
+                                            }
+                                            wrongUseranmePasswordError();
+                                        }
+                                    }
+                                }
+                            });
                         }
                     });
                 }
