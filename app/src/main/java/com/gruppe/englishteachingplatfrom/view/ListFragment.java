@@ -156,7 +156,7 @@ public class ListFragment extends Fragment {
                                                         //What to do in click
                                                         System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getMatchProfiles().get(position).getName());
                                                         Bundle bundle = new Bundle();
-                                                        bundle.putString("name", p.getCurrrentStudent().getMatchProfiles().get(position).getName());
+                                                        bundle.putString("name", p.getCurrrentStudent().getMatchProfiles().get(position).getFirstName());
                                                         bundle.putInt("price", p.getCurrrentStudent().getMatchProfiles().get(position).getPrice());
                                                         bundle.putFloat("rate",(float) p.getCurrrentStudent().getMatchProfiles().get(position).getRating());
                                                         bundle.putString("language", p.getCurrrentStudent().getMatchProfiles().get(position).getLanguage());
@@ -210,7 +210,7 @@ public class ListFragment extends Fragment {
                                                         //What to do in click
                                                         System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
                                                         Bundle bundle = new Bundle();
-                                                        bundle.putString("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getName());
+                                                        bundle.putString("name", p.getCurrrentStudent().getFavoriteProfiles().get(position).getFirstName());
                                                         bundle.putInt("price", p.getCurrrentStudent().getFavoriteProfiles().get(position).getPrice());
                                                         bundle.putFloat("rate", (float) p.getCurrrentStudent().getFavoriteProfiles().get(position).getRating());
                                                         bundle.putString("language", p.getCurrrentStudent().getFavoriteProfiles().get(position).getLanguage());
@@ -262,7 +262,7 @@ public class ListFragment extends Fragment {
                                                         //What to do in click
                                                         System.out.println("ListFragment.java: Du har trykket på : " + p.getCurrrentStudent().getPendingProfiles().get(position).getName());
                                                         Bundle bundle = new Bundle();
-                                                        bundle.putString("name", p.getCurrrentStudent().getPendingProfiles().get(position).getName());
+                                                        bundle.putString("name", p.getCurrrentStudent().getPendingProfiles().get(position).getFirstName());
                                                         bundle.putInt("price", p.getCurrrentStudent().getPendingProfiles().get(position).getPrice());
                                                         bundle.putFloat("rate", (float) p.getCurrrentStudent().getPendingProfiles().get(position).getRating());
                                                         bundle.putString("language", p.getCurrrentStudent().getPendingProfiles().get(position).getLanguage());

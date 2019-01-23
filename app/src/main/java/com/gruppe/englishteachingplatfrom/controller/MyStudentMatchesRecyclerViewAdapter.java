@@ -34,7 +34,7 @@ public class MyStudentMatchesRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mNameView.setText(mProfiles.get(position).getName());
+        holder.mNameView.setText(mProfiles.get(position).getFirstName());
         holder.mRatingNum.setText(Double.toString(mProfiles.get(position).getRating()));
         holder.mRatingBar.setRating((float) (mProfiles.get(position).getRating()));
         holder.mLanguageView.setText(mProfiles.get(position).getLanguage());

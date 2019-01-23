@@ -33,7 +33,7 @@ public class MyTeacherMatchesRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mNameView.setText(mProfiles.get(position).getName());
+        holder.mNameView.setText(mProfiles.get(position).getFirstName());
         holder.mEmailView.setText(mProfiles.get(position).getEmail());
         holder.mImageView.setImageResource(mProfiles.get(position).getProfilePicture());
     }
