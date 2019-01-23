@@ -185,16 +185,13 @@ public class FragPager extends Fragment implements View.OnClickListener {
             bundle.putString("id", p.getTeacherDummies().get(position1).getId());
             bundle.putInt("pic", p.getTeacherDummies().get(position1).getProfilePic());
             bundle.putBoolean("isTeacherInfoFragment", false);
+            bundle.putString("from", "swipe");
             Fragment F = new DialogBoxFragment();
             F.setArguments(bundle);
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
         if(v == floating_Fav){
-            // checker whether the teacher is favorited by the student and set the image accordingly
-            // should have the standard heart images for favorite (empty and filled)
-//                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_full);
-//                ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
                 StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
                 studentFavoritesDocument.add((p.getTeacherDummies().get(mPager.getCurrentItem())).getId(), true, new CallbackSuccess() {
                     @Override
@@ -203,23 +200,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
                     }
                 });
             Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
-
-
-//                if(hm.get(mPager.getCurrentItem()) != null){
-//                    hm.remove(mPager.getCurrentItem());
-//                    hm.put(mPager.getCurrentItem(), 1);
-//                } else{ hm.put(mPager.getCurrentItem(), 1); }
-//
-//                checker = 1;
-//            } else  {
-//                ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
-//                if(hm.get(mPager.getCurrentItem()) != null){
-//                    hm.remove(mPager.getCurrentItem());
-//                    hm.put(mPager.getCurrentItem(), 0);
-//                } else{ hm.put(mPager.getCurrentItem(), 0); }
-
-
-
         }
 
     }

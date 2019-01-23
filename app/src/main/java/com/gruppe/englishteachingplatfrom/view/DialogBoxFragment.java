@@ -45,6 +45,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
     private boolean calledByTeacherInfoFragment;
     private boolean fav;
     private String id;
+    private String from;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -72,6 +73,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
             picture = bundle.getInt("pic");
             id = bundle.getString("id","");
             calledByTeacherInfoFragment = bundle.getBoolean("isTeacherInfoFragment");
+            from = bundle.getString("from", "");
         }
 
 
@@ -108,7 +110,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
                 }
 
                 StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
-                studentPendingsDocument.add(p.getTeacherDummies().get(pos).getId(), true, new CallbackSuccess() {
+                studentPendingsDocument.add(p.getSwipeTeachers().get(pos).getId(), true, new CallbackSuccess() {
                     @Override
                     public void onCallback() {
                         TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(id);
@@ -125,10 +127,10 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
                                 bundle.putBoolean("isTeacherInfoFragment", calledByTeacherInfoFragment);
                                 ConfirmationBoxFragment fragment2 = new ConfirmationBoxFragment();
                                 fragment2.setArguments(bundle);
-                                if(true){
+                                if(from.equals("swipe")){
                                     FragPager.removeTeacher(FragPager.getFragman());
                                 }
-                                getActivity().getSupportFragmentManager().popBackStack();
+                                getFragmentManager().popBackStack();
                                 FragmentManager fragmentManager = getFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager
                                         .beginTransaction();
