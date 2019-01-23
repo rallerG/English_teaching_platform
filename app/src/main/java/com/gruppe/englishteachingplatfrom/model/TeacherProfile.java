@@ -179,14 +179,53 @@ public class TeacherProfile extends DocumentObject{
     }
 
     public void setProfilePictures() {
-                switch (this.id) {
+        switch (this.id) {
             case "1": this.profilePic = R.drawable.teacher_1;
                 break;
             case "1BPfvnxtguzYoGle3LwJ": this.profilePic = R.drawable.teacher_2;
                 break;
             case "2N4Hy3hLnugCWr61vT2Y": this.profilePic = R.drawable.teacher_3;
                 break;
-            default: this.profilePic = R.drawable.unknown;
+            case "B7Vp1799P0DIc7GZf98T": this.profilePic = R.drawable.teacher_4;
+                break;
+            case "EMRY1fYSmNY7dh5TK7XJ": this.profilePic = R.drawable.teacher_5;
+                break;
+            case "FB9PUlmuE39cflrtBYP3": this.profilePic = R.drawable.teacher_6;
+                break;
+            case "G6dZNQnivN9ohZSxrOaY": this.profilePic = R.drawable.teacher_7;
+                break;
+            case "GxJUH6qMi3AebW9ZKCoq": this.profilePic = R.drawable.teacher_8;
+                break;
+            case "Q2TOLFzu2HWrCwUjQSG4": this.profilePic = R.drawable.teacher_9;
+                break;
+            case "Q8i3k7o3e8G0UcWvbV3Y": this.profilePic = R.drawable.teacher_10;
+                break;
+            case "SF8k3CHjfgOziZniMiLV": this.profilePic = R.drawable.teacher_11;
+                break;
+            case "WG4TyBj0REgegpTDTnpr": this.profilePic = R.drawable.teacher_12;
+                break;
+            case "a0UTA2Z664O84v3FFMlS": this.profilePic = R.drawable.teacher_13;
+                break;
+            case "aFE5TS6hPLhGFFsGP2G0": this.profilePic = R.drawable.teacher_14;
+                break;
+            case "dPMtYv4c8jYXNkE4G6e9": this.profilePic = R.drawable.teacher_15;
+                break;
+            case "iRjjd0UbFFfmKFzfy5M5": this.profilePic = R.drawable.teacher_16;
+                break;
+            case "idq324F2gBtk0Czcg0vh": this.profilePic = R.drawable.teacher_17;
+                break;
+            case "leV07PeMwHmHvn8nNI6m": this.profilePic = R.drawable.teacher_18;
+                break;
+            case "nTYh2YdI8Il09JOPapKv": this.profilePic = R.drawable.teacher_19;
+                break;
+            case "pczPCGEmgCIZ4ct6gZAu": this.profilePic = R.drawable.teacher_20;
+                break;
+            case "qyAzA5Y3h4TgYkxEa0gx": this.profilePic = R.drawable.teacher_21;
+                break;
+            case "yvHvGQArtiC1jeAMSGAa": this.profilePic = R.drawable.teacher_22;
+                break;
+
+                default: this.profilePic = R.drawable.unknown;
                 break;
         }
     }
