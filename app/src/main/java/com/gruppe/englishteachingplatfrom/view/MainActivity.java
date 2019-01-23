@@ -134,24 +134,11 @@ public class MainActivity extends AppCompatActivity
                                         for (TeacherProfile teacher : listOfObjects) {
                                             teacher.setProfilePictures();
                                         }
-                                        p.getSwipeTeachers().addAll(listOfObjects);
+                                        p.getSwipeTeachers().clear();
+                                        p.getSwipeTeachers().addAll(p.getTeacherDummies());
                                         p.getSwipeTeachers().removeAll(p.getCurrrentStudent().getFavoriteProfiles());
                                         p.getSwipeTeachers().removeAll(p.getCurrrentStudent().getPendingProfiles());
                                         p.getSwipeTeachers().removeAll(p.getCurrrentStudent().getMatchProfiles());
-//                                        for (TeacherProfile teacherProfile : listOfObjects) {
-//                                            for (TeacherProfile teacherProfile1: p.getCurrrentStudent().getPendingProfiles()) {
-//                                                if (!(teacherProfile.getId().equals(teacherProfile1.getId()))) {
-//                                                    for (TeacherProfile teacherProfile2 : p.getCurrrentStudent().getFavoriteProfiles()) {
-//                                                        if (!(teacherProfile.getId().equals(teacherProfile2.getId()))) {
-//                                                            for (TeacherProfile teacherProfile3 : p.getCurrrentStudent().getMatchProfiles()) {
-//                                                                if (!(teacherProfile.getId().equals(teacherProfile3.getId())))
-//                                                                    p.getSwipeTeachers().add(teacherProfile);
-//                                                            }
-//                                                        }
-//                                                    }
-//                                                }
-//                                            }
-//                                        }
 
                                         // loading bar
                                         if (pDialog.isShowing()){
