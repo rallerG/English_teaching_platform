@@ -56,7 +56,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
             android:text="You have no active payments"
-            android:textAppearance="/TextAppearance.AppCompat.Display1"
+            android:textAlignment="center"
             android:textSize="24sp" />
     </FrameLayout>
 
