@@ -74,7 +74,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         tInformation = contents.get(pos).getDescription();
 
         name = rootview.findViewById(R.id.name);
-        tName = contents.get(pos).getName();
+        tName = contents.get(pos).getFirstName();
         name.setText(tName);
 
         imageView = rootview.findViewById(R.id.teacherPic);
