@@ -227,35 +227,44 @@ public class MainActivity extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_home:
+                PageFragment.clicked = false;
+                ListFragment.clicked = false;
                 fragment = new FragPager();
                 fragment.setArguments(args);
                 setTitle(R.string.app_name);
                 break;
             case R.id.nav_matches:
+                PageFragment.clicked = false;
                 ListFragment.clicked = false;
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 setTitle("Matches");
                 break;
             case R.id.nav_favorites:
+                PageFragment.clicked = false;
                 ListFragment.clicked = false;
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 setTitle("Favorites");
                 break;
             case R.id.nav_pending:
+                PageFragment.clicked = false;
                 ListFragment.clicked = false;
                 fragment = new ListFragment();
                 fragment.setArguments(args);
                 setTitle("Pending");
                 break;
             case R.id.nav_money:
+                PageFragment.clicked = false;
+                ListFragment.clicked = false;
                 fragment = new PaymentOverviewFragment();
                 fragment.setArguments(args);
                 setTitle("Payment");
                 break;
             case R.id.nav_account:
                 //  fragment = new FragPager();
+                PageFragment.clicked = false;
+                ListFragment.clicked = false;
                 fragment = new ProfilePageFragment();
                 fragment.setArguments(args);
                 setTitle("Account");
@@ -266,6 +275,8 @@ public class MainActivity extends AppCompatActivity
                 finish();
                 break;
             default:
+                PageFragment.clicked = false;
+                ListFragment.clicked = false;
                 fragment = new FragPager();
                 fragment.setArguments(args);
                 setTitle(R.string.app_name);
