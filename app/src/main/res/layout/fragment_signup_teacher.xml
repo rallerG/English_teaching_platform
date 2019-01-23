@@ -93,10 +93,11 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="340dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="420dp"
         android:text="Signup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView2" />
 
 </android.support.constraint.ConstraintLayout>
