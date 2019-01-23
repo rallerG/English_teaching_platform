@@ -64,6 +64,7 @@ public class PendingRequestFragment extends Fragment implements View.OnClickList
         }
 
         profilePic = view.findViewById(R.id.imageView);
+        profilePic.setImageResource(studPicture);
         name = view.findViewById(R.id.name);
         name.setText(studName);
         accept = view.findViewById(R.id.accept);

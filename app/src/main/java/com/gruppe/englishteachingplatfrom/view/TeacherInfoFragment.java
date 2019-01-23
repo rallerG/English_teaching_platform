@@ -118,13 +118,14 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
         System.out.println("teacherinfo clicked");
         if(v == card){
             PageFragment.clicked = false;
+            ListFragment.clicked = false;
             getActivity().getSupportFragmentManager().popBackStack();
         }
 
