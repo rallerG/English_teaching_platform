@@ -41,6 +41,7 @@ public class ListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private int listId;
+    private int pos;
     public static boolean clicked = false;
 //    private OnListFragmentInteractionListener mListener;
 
@@ -72,6 +73,7 @@ public class ListFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             listId = getArguments().getInt("id");
+            pos = getArguments().getInt("position",0);
         }
     }
 
@@ -165,7 +167,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putInt("pic", p.getCurrrentStudent().getMatchProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getMatchProfiles().get(position).getId());
                                                         bundle.putString("information", p.getCurrrentStudent().getMatchProfiles().get(position).getDescription());
-                                                        bundle.putInt("position", position);
+                                                        bundle.putInt("position", pos);
 
                                                         Fragment F = new TeacherInfoFragment();
                                                         F.setArguments(bundle);
@@ -218,7 +220,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putInt("pic", p.getCurrrentStudent().getFavoriteProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getFavoriteProfiles().get(position).getId());
                                                         bundle.putString("information", p.getCurrrentStudent().getFavoriteProfiles().get(position).getDescription());
-                                                        bundle.putInt("position", position);
+                                                        bundle.putInt("position", pos);
 
                                                         Fragment F = new TeacherInfoFragment();
                                                         F.setArguments(bundle);
@@ -270,7 +272,7 @@ public class ListFragment extends Fragment {
                                                         bundle.putInt("pic", p.getCurrrentStudent().getPendingProfiles().get(position).getProfilePic());
                                                         bundle.putString("id", p.getCurrrentStudent().getPendingProfiles().get(position).getId());
                                                         bundle.putString("information", p.getCurrrentStudent().getPendingProfiles().get(position).getDescription());
-                                                        bundle.putInt("position", position);
+                                                        bundle.putInt("position", pos);
 
                                                         Fragment F = new TeacherInfoFragment();
                                                         F.setArguments(bundle);
