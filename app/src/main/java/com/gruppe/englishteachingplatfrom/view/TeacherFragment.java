@@ -98,14 +98,14 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
                         //    students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
                         if (totalReviews == 0) {
                             rating.setRating(0);
-                            reviews.setText(0 + " Reviews");
+                            reviews.setText(0 + "");
                         } else {
                             rating.setRating((float) rate / totalReviews);
-                            reviews.setText(totalReviews + " Reviews");
+                            reviews.setText(totalReviews + "");
                         }
                     }
                 });
-                //students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
+                students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
             }
 
         System.out.println("TeacherFragment.java: Rating is " + p.getCurrrentTeacher().getRating());
