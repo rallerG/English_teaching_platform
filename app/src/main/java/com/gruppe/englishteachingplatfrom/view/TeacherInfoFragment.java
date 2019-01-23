@@ -37,7 +37,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
     private int pos, tPrice, picture;
     private RatingBar rating;
     private float tRating, tRate;
-    private String tName, tLang;
+    private String tName, tLang, tInformation;
     private boolean fav = false;
     private String id, from;
     private FloatingActionButton floating_Send_teacherInfo, floating_Fav_teacherInfo;
@@ -60,6 +60,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             id = bundle.getString("id", "");
             picture = bundle.getInt("pic");
             from = bundle.getString("from", "swipe");
+            tInformation = bundle.getString("information", "No information provided");
         }
 
     }
@@ -109,6 +110,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         rateBar.setRating(tRate);
         rateBar.setIsIndicator(true);
         image.setImageResource(picture);
+        information.setText(tInformation);
 
 //        information.setText(p.getTeacherDummies().get(pos).getDescription());
 //        information.setText("I am available every monday and thursday from 15pm to 20 pm UTC+1. I primarily use Skype videochat, but can also use Discord if necessary. I have been tutoring for the last 3 years, and have 1 year left of my masters degree in Business studies.");
@@ -129,6 +131,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putInt("price", tPrice);
             bundle.putFloat("rate", tRate);
             bundle.putString("language", tLang);
+            bundle.putString("information",tInformation);
             bundle.putInt("position", pos);
             bundle.putBoolean("isTeacherInfoFragment", true);
             bundle.putBoolean("isFav", fav);
@@ -147,6 +150,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             bundle.putInt("price", tPrice);
             bundle.putFloat("rate", tRate);
             bundle.putString("language", tLang);
+            bundle.putString("information",tInformation);
             bundle.putInt("position", pos);
             bundle.putBoolean("isTeacherInfoFragment", true);
             bundle.putBoolean("isFav", fav);
