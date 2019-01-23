@@ -110,7 +110,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
                 }
 
                 StudentPendingsDocument studentPendingsDocument = new StudentPendingsDocumentImpl(p.getCurrrentStudent().getId());
-                studentPendingsDocument.add(p.getSwipeTeachers().get(pos).getId(), true, new CallbackSuccess() {
+                studentPendingsDocument.add(id, true, new CallbackSuccess() {
                     @Override
                     public void onCallback() {
                         TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(id);
