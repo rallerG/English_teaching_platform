@@ -182,9 +182,9 @@ public class TeacherProfile extends DocumentObject{
                 switch (this.id) {
             case "1": this.profilePic = R.drawable.teacher_1;
                 break;
-            case "2": this.profilePic = R.drawable.teacher_2;
+            case "1BPfvnxtguzYoGle3LwJ": this.profilePic = R.drawable.teacher_2;
                 break;
-            case "3": this.profilePic = R.drawable.teacher_3;
+            case "2N4Hy3hLnugCWr61vT2Y": this.profilePic = R.drawable.teacher_3;
                 break;
             default: this.profilePic = R.drawable.unknown;
                 break;
