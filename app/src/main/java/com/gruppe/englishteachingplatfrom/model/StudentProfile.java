@@ -151,4 +151,11 @@ public class StudentProfile extends DocumentObject{
                 break;
         }
     }
+
+    public String getFirstName() {
+        String name = getName();
+        String[] parts = name.split(" ");
+        return parts[0];
+    }
+
 }
