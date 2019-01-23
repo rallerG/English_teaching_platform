@@ -27,7 +27,7 @@ import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentPendingsDocu
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherMatchesDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeacherPendingsDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
-
+import java.math.BigDecimal;
 public class TeacherInfoFragment extends Fragment implements View.OnClickListener {
 
     private TextView name, language, rate, price, information;
@@ -108,7 +108,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
         name.setText(tName);
         rate.setText(Float.toString(tRate));
         price.setText(Integer.toString(tPrice) + " DKK/hr");
-        rateBar.setRating(tRate);
+        rateBar.setRating(round(tRate,2));
         rateBar.setIsIndicator(true);
         image.setImageResource(picture);
         information.setText(tInformation);
@@ -247,5 +247,10 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             teacherMatchesDocument.deleteEqualTo(p.getCurrrentStudent().getId(), false);
         }
 
+    }
+    public static float round(float number, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 }

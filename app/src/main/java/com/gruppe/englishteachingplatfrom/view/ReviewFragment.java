@@ -29,6 +29,7 @@ import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
 
 
 public class ReviewFragment extends Fragment implements View.OnClickListener {
@@ -125,7 +126,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
                     totalRate.setText("" + 0);
                 } else {
                     totalRate.setText(String.valueOf(totAvgRating));
-                    totalRating.setRating((float) totAvgRating);
+                    totalRating.setRating(round((float) totAvgRating,2));
                 }
 
                 ratings.setText(totalReviews + " Ratings");
@@ -279,5 +280,11 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
 
             }
         });
+    }
+
+    public static float round(float number, int decimalPlace) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
+        return bd.floatValue();
     }
 }
