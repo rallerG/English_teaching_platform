@@ -36,7 +36,7 @@
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="110dp"
+                    android:layout_height="100dp"
                     app:cardBackgroundColor="#E5E2E2"
                     app:cardElevation="10dp">
 
@@ -55,19 +55,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="-15dp"
+                            android:isIndicator="true"
                             android:numStars="5"
                             android:rating="3"
                             android:scaleX=".7"
                             android:scaleY=".7"
-                            android:theme="@style/RatingBar"
-                            android:isIndicator="true"
-                            />
+                            android:theme="@style/RatingBar" />
 
-                        <TextView
-                            android:id="@+id/reviews"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Reviews" />
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
@@ -107,6 +101,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/reviews"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -129,11 +124,10 @@
                         android:text="Students" />
 
                     <TextView
-                        android:id="@+id/textView15"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Lectures" />
+                        android:text="Reviews" />
                 </LinearLayout>
 
             </LinearLayout>

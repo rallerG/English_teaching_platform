@@ -425,6 +425,15 @@
                     style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/NoList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="No reviews"
+                    android:textSize="18sp"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView

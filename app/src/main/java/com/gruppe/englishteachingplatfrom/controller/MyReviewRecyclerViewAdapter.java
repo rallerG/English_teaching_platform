@@ -64,8 +64,10 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
                         public void onCallback(StudentProfile object) {
                             feed.setStudentProfile(object);
                             holder.mStudName.setText(feed.getStudentProfile().getName());
-                            holder.mRating.setRating((float) review.get(position).getRating());
-                            holder.mContent.setText(review.get(position).getContent());
+                            holder.mRating.setRating((float) feed.getRating());
+        //                    holder.mRating.setRating((float) review.get(position).getRating());
+                            holder.mContent.setText(feed.getContent());
+          //                  holder.mContent.setText(review.get(position).getContent());
                         }
                     });
                     review.add(feed);
