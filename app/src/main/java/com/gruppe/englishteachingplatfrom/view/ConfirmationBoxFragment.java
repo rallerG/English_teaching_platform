@@ -1,6 +1,7 @@
 package com.gruppe.englishteachingplatfrom.view;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
     private int tPrice;
     private float tRate;
     private boolean calledByTeacherInfoFragment;
+    private long mLastClickTime = 0;
 
     public ConfirmationBoxFragment(){
 
@@ -70,6 +72,10 @@ public class ConfirmationBoxFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 500) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
         getActivity().getSupportFragmentManager().popBackStack();
         if (calledByTeacherInfoFragment){
             getActivity().getSupportFragmentManager().popBackStack();

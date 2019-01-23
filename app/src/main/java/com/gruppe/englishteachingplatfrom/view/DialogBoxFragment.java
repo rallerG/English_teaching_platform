@@ -2,6 +2,7 @@ package com.gruppe.englishteachingplatfrom.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -46,6 +47,7 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
     private boolean fav;
     private String id;
     private String from;
+    private long mLastClickTime = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -97,7 +99,10 @@ public class DialogBoxFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
             if(v == cancelButton){
                 getActivity().getSupportFragmentManager().popBackStack();
             }
