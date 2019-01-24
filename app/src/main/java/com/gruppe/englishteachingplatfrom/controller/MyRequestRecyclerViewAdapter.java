@@ -28,7 +28,6 @@ import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.view.PendingRequestFragment;
 import com.gruppe.englishteachingplatfrom.view.RequestFragment;
-import com.gruppe.englishteachingplatfrom.view.RequestMailActivity;
 import com.gruppe.englishteachingplatfrom.view.TeacherMainActivity;
 
 import java.util.List;

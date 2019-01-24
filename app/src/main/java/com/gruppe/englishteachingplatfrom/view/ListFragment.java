@@ -84,6 +84,7 @@ public class ListFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mLayoutManager = new LinearLayoutManager(getContext());
+        final View fragmentFavorite = view.findViewById(R.id.emptyList);
 
         if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
             TeacherMatchesDocument teacherMatchesDocument = new TeacherMatchesDocumentImpl(p.getCurrrentTeacher().getId());
@@ -103,6 +104,8 @@ public class ListFragment extends Fragment {
                                     mRecyclerView.setHasFixedSize(true);
                                     mRecyclerView.setLayoutManager(mLayoutManager);
                                     mRecyclerView.setAdapter(mTeacherAdapter);
+                                    fragmentFavorite.setVisibility(View.GONE);
+
                                 }
 //                                mTeacherAdapter.setOnItemClickListener(new MyTeacherMatchesRecyclerViewAdapter.OnItemClickListener() {
 //
@@ -150,6 +153,7 @@ public class ListFragment extends Fragment {
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
                                             mRecyclerView.setAdapter(mStudentMatchesAdapter);
+                                            fragmentFavorite.setVisibility(View.GONE);
                                             mStudentMatchesAdapter.setOnItemClickListener(new MyStudentMatchesRecyclerViewAdapter.OnItemClickListener() {
 
                                                 @Override
@@ -203,6 +207,7 @@ public class ListFragment extends Fragment {
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
                                             mRecyclerView.setAdapter(mAdapter);
+                                            fragmentFavorite.setVisibility(View.GONE);
                                             mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
 
@@ -256,6 +261,7 @@ public class ListFragment extends Fragment {
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
                                             mRecyclerView.setAdapter(mAdapter);
+                                            fragmentFavorite.setVisibility(View.GONE);
                                             mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
                                                 @Override
