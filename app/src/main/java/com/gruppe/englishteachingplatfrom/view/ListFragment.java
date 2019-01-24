@@ -142,6 +142,7 @@ public class ListFragment extends Fragment {
                         });
 
                     }
+                    loader.setVisibility(View.INVISIBLE);
                 }
             });
         } else {

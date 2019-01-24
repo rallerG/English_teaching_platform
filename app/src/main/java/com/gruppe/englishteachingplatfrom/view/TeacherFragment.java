@@ -96,9 +96,6 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
 //                    int pendings = 0;
                     @Override
                     public void onCallback(List<TeacherProfile> listOfObjects) {
-//                        for(TeacherProfile prof : listOfObjects){
-//                            pendings += prof.getPendingProfiles().size();
-//                        }
                         if(listOfObjects.size() != 0){
                             notification.setVisibility(View.VISIBLE);
                         } else {
@@ -118,7 +115,6 @@ public class TeacherFragment extends Fragment implements View.OnClickListener {
                             rate += review.getRating();
                             totalReviews = list.size();
                         }
-                        //    students.setText("" + p.getCurrrentTeacher().getMatchProfiles().size());
                         if (totalReviews == 0) {
                             rating.setRating(0);
                             reviews.setText(0 + "");

@@ -140,6 +140,7 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
                 loader.setVisibility(View.INVISIBLE);
                 review.setVisibility(View.VISIBLE);
 
+                //Counting overall for different stars
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).getRating() <= 1) {
                         totStar1++;
@@ -162,8 +163,6 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         });
         System.out.println("ReviewFragment.java: " + list);
 
-
-        //   totAvgRating = totalStar / list.size();
         return view;
     }
 
@@ -238,20 +237,6 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onCallback(List<Review> listOfObjects) {
                 tempList.clear();
-/*                for (final Review feed : listOfObjects) {
-                    StudentsDocument studentsDocument = new StudentsDocumentImpl();
-                    studentsDocument.get(feed.getStudentId(), new Callback<StudentProfile>() {
-                        @Override
-                        public void onCallback(StudentProfile object) {
-                            feed.setStudentProfile(object);
-                            if (feed.getRating() == rating) {
-                                tempList.add(feed);
-                            } else if (tempList.size() == 0){
-                                NoList.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    });
-                }*/
 
 
         for (int i = 0; i < list.size(); i++) {
@@ -262,18 +247,6 @@ public class ReviewFragment extends Fragment implements View.OnClickListener {
         if (tempList.size() == 0){
             NoList.setVisibility(View.VISIBLE);
                 }
-
-                //        TeacherReviewDocument feedbackDocument = new TeacherReviewDocumentImpl(p.getCurrrentTeacher().getId());
-//        feedbackDocument.getAll(new CallbackList<Review>() {
-//            @Override
-//            public void onCallback(List<Review> listOfObjects) {
-//                for (Review review : listOfObjects) {
-//                    if(review.getRating() == rating) {
-//                        list.add(review);
-//                    }
-//                }
-//            }
-//        });
 
                 MyReviewRecyclerViewAdapter recAdapter = new MyReviewRecyclerViewAdapter(getContext(), tempList);
                 review.setLayoutManager(new LinearLayoutManager(getActivity()));

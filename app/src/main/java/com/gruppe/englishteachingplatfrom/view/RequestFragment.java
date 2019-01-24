@@ -70,23 +70,6 @@ public class RequestFragment extends Fragment {
         emptyList = view.findViewById(R.id.emptyList);
         loader = view.findViewById(R.id.loader3);
 
-      //  mAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
-/*        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnClickListener(new MyRequestRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Fragment F = new PendingRequestFragment();
-                Bundle bundle = new Bundle();
-                F.setArguments(bundle);
-                //remember information and description text (when objects are used)
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, F).
-                        addToBackStack(null).commit();
-            }
-        });*/
-
-
 
         TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(p.getCurrrentTeacher().getId());
         teacherPendingsDocument.getAll(new CallbackList<StudentProfile>() {
@@ -136,17 +119,7 @@ public class RequestFragment extends Fragment {
                 if(p.getCurrrentTeacher().getPendingProfiles().size() == 0){
                     emptyList.setVisibility(View.VISIBLE);
                 }
-                // Set the adapter
-               /* if (view instanceof RecyclerView) {
-                    Context context = view.getContext();
-                    RecyclerView recyclerView = (RecyclerView) view;
-                    if (mColumnCount <= 1) {
-                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                    } else {
-                        recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-                    }
-                    recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), studentProfiles));
-                }*/
+
             }
         });
         return view;
