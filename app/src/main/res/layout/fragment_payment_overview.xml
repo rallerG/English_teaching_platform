@@ -72,7 +72,8 @@
             android:layout_marginTop="100dp"
             android:text="You have no active payments"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:visibility="visible" />
     </FrameLayout>
 
 </LinearLayout>

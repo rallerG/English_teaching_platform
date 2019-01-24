@@ -104,7 +104,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
         activeButton = (Button) view.findViewById(R.id.activeButton);
         historyButton = (Button) view.findViewById(R.id.historyButton);
         noActivePayment = (TextView) view.findViewById(R.id.noActivePayment);
-        noActivePayment.setVisibility(View.INVISIBLE);
+        noActivePayment.setVisibility(View.VISIBLE);
 
         activeButton.setOnClickListener(this);
         historyButton.setOnClickListener(this);
