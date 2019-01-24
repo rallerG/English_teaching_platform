@@ -85,6 +85,8 @@ public class FragPager extends Fragment implements View.OnClickListener {
             if(mPager.getAdapter().getCount()==0){
                 floating_Fav.hide();
                 floating_Send.hide();
+                View emptyView = inflater.inflate(R.layout.empty_swipe, container, false);
+                return emptyView;
             }
 
 //            for(int i = 0; i < mAdapter.getCount(); i++){
@@ -229,7 +231,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
                         swipeFav();
                     }
                 });
-            Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),name + " has been added to favorites",Toast.LENGTH_SHORT).show();
         }
 
     }

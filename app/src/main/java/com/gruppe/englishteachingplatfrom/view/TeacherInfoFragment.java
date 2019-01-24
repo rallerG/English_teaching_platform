@@ -191,7 +191,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         public void onCallback() {
                             FragPager.removeTeacher(FragPager.getFragman());
                             getActivity().getSupportFragmentManager().popBackStack();
-                            Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),name + " has been added to favorites",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -212,7 +212,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         fav = false;
                         FragPager.addTeacher(FragPager.getFragman(),pos);
                         p.getCurrrentStudent().getFavoriteProfiles().remove(pos);
-                        Toast.makeText(getContext(), "fjernet " + name + " fra dine favoriter", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "removed " + name + " from your favorites", Toast.LENGTH_SHORT).show();
                         getActivity().getSupportFragmentManager().popBackStack();
                     }
                 });
