@@ -272,22 +272,11 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                 }
             });
         }
-
-
-//        // Begin the transaction
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.replace(R.id.paymentLists, new PaymentActiveFragment());
-//        ft.commit();
-
         return view;
     }
 
     @Override
     public void onClick(View v) {
-//        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-//            return;
-//        }
-//        mLastClickTime = SystemClock.elapsedRealtime();
 
         if (v == activeButton) {
 
@@ -355,7 +344,7 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
         void onFragmentInteraction(Uri uri);
     }
 
-    //Method for setting the "Yoo have no payments" text
+    //Method for setting the "Yoo have no payments" text upon clicking the "active" and "history" buttons
     public void SetEmptyListText(View v) {
 
         if (v == activeButton) {
