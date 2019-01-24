@@ -229,8 +229,6 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
                                             probar.setVisibility(View.INVISIBLE);
-                                        } else {
-//                                            noActivePayment.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
@@ -254,10 +252,10 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
                                             ft.replace(R.id.paymentLists, new PaymentActiveFragment());
                                             activeButton.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
                                             ft.commit();
-                                            noActivePayment.setVisibility(View.VISIBLE);
+                                            if (p.getCurrrentStudent().getActivePaymentDummies().size() == 0) {
+                                                noActivePayment.setVisibility(View.VISIBLE);
+                                            }
                                             probar.setVisibility(View.INVISIBLE);
-                                        } else {
-//                                            noActivePayment.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 });
