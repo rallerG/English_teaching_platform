@@ -155,12 +155,12 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
             cancelEdit.setVisibility(View.VISIBLE);
             profilePicture.setVisibility(View.GONE);
             greenBox.setVisibility(View.GONE);
-            editProfile.setClickable(false);
+            editProfile.setVisibility(View.INVISIBLE);
 
         } else if (v == confirmEdit) {
             System.out.println("Confirm edit");
 
-            if (editTextName.getText() != null && editTextEmail.getText() != null && editTextPassword.getText() != null) {
+            if (!editTextName.getText().toString().equals("") && !editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
                 //Update singleton
                 p.getCurrrentTeacher().setName(String.valueOf(editTextName.getText()));
                 p.getCurrrentTeacher().setEmail(String.valueOf(editTextEmail.getText()));
@@ -189,7 +189,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
                         greenBox.setVisibility(View.VISIBLE);
 
                         Toast.makeText(getContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
-                        editProfile.setClickable(true);
+                        editProfile.setVisibility(View.VISIBLE);
 
 
                     }
@@ -197,7 +197,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
             } else {
                 System.out.println("Alt skal udfyldes");
                 Toast.makeText(getContext(), "All fields must be entered! Try again", Toast.LENGTH_SHORT).show();
-                editProfile.setClickable(true);
+                editProfile.setVisibility(View.VISIBLE);
             }
         } else if (v == cancelEdit) {
             switcher.showPrevious();
@@ -210,7 +210,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
             Toast.makeText(getContext(), "Edit cancelled!", Toast.LENGTH_SHORT).show();
             profilePicture.setVisibility(View.VISIBLE);
             greenBox.setVisibility(View.VISIBLE);
-
+            editProfile.setVisibility(View.VISIBLE);
         }
     }
 

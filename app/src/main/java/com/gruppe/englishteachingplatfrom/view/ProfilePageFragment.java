@@ -147,6 +147,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         if (v == editProfile) {
             System.out.println("Edit this profile");
 
+            editProfile.setVisibility(View.INVISIBLE);
+
             switcher.showNext(); //or switcher.showPrevious();
             editTextName = (TextView) switcher.findViewById(R.id.hidden_edit_view);
             editTextName.setText(p.getCurrrentStudent().getName());
@@ -161,12 +163,12 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
             confirmEdit.setVisibility(View.VISIBLE);
             cancelEdit.setVisibility(View.VISIBLE);
-            editProfile.setClickable(false);
+//            editProfile.setClickable(false);
 
         } else if (v == confirmEdit) {
             System.out.println("Confirm edit");
 
-            if (editTextName.getText() != null && editTextEmail.getText() != null && editTextPassword.getText() != null) {
+            if (!editTextName.getText().toString().equals("") && !editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
             //Update singleton
             p.getCurrrentStudent().setName(String.valueOf(editTextName.getText()));
             p.getCurrrentStudent().setEmail(String.valueOf(editTextEmail.getText()));
@@ -188,13 +190,15 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
                     switcher3.showPrevious();
 
                     confirmEdit.setVisibility(View.INVISIBLE);
+                    cancelEdit.setVisibility(View.INVISIBLE);
+                    editProfile.setVisibility(View.VISIBLE);
 
                     Toast.makeText(getContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
 
                 }
             });
             } else {
-                System.out.println("Alt skal udfyldes");
+                Toast.makeText(getContext(), "All fields must be entered!", Toast.LENGTH_SHORT).show();
             }
         } else if (v == cancelEdit) {
             switcher.showPrevious();
@@ -202,7 +206,9 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             switcher3.showPrevious();
             confirmEdit.setVisibility(View.INVISIBLE);
             cancelEdit.setVisibility(View.INVISIBLE);
-            editProfile.setClickable(true);
+//            editProfile.setClickable(true);
+            editProfile.setVisibility(View.VISIBLE);
+
             Toast.makeText(getContext(), "Edit cancelled!", Toast.LENGTH_SHORT).show();
 
         }
