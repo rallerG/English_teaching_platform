@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:layout_marginBottom="117dp"
-        android:text="App name"
+        android:text="TeachENG"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
