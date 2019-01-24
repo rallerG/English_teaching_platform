@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentFavoritesDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
@@ -52,6 +54,8 @@ public class ListFragment extends Fragment {
     RecyclerView.LayoutManager mLayoutManager;
     Singleton p = Singleton.getInstance();
     private OnListFragmentInteractionListener mListener;
+    private ProgressBar loader;
+    private TextView emptyList;
 
 
     public ListFragment() {
@@ -77,6 +81,8 @@ public class ListFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -85,6 +91,10 @@ public class ListFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mLayoutManager = new LinearLayoutManager(getContext());
         final View fragmentFavorite = view.findViewById(R.id.emptyList);
+        loader = view.findViewById(R.id.loader3);
+        emptyList = view.findViewById(R.id.emptyList);
+
+        loader.setVisibility(View.VISIBLE);
 
         if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {
             TeacherMatchesDocument teacherMatchesDocument = new TeacherMatchesDocumentImpl(p.getCurrrentTeacher().getId());
@@ -183,8 +193,13 @@ public class ListFragment extends Fragment {
                                                 }
                                             });
                                         }
+
                                     }
                                 });
+                            }
+                            loader.setVisibility(View.GONE);
+                            if(p.getCurrrentStudent().getMatchProfiles().size() == 0){
+                                emptyList.setVisibility(View.VISIBLE);
                             }
                         }
                     });
@@ -236,9 +251,14 @@ public class ListFragment extends Fragment {
                                                     }
                                                 }
                                             });
+                                         //   loader.setVisibility(View.GONE);
                                         }
                                     }
                                 });
+                            }
+                            loader.setVisibility(View.GONE);
+                            if(p.getCurrrentStudent().getFavoriteProfiles().size() == 0){
+                                emptyList.setVisibility(View.VISIBLE);
                             }
                         }
                     });
@@ -289,6 +309,10 @@ public class ListFragment extends Fragment {
                                                     }
                                                 }
                                             });
+                                            loader.setVisibility(View.GONE);
+                                            if(p.getCurrrentStudent().getPendingProfiles().size() == 0){
+                                                emptyList.setVisibility(View.VISIBLE);
+                                            }
                                         }
                                     }
                                 });
