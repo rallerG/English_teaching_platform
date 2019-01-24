@@ -83,8 +83,9 @@ public class SignupStudentFragment extends Fragment implements View.OnClickListe
                                 final Activity activity = getActivity();
                                 final Intent intent = new Intent(getActivity(), LoginActivity.class);
                                 final StudentProfile newStudentProfile = new StudentProfile();
+                                String emailInput = (email.getText().toString()).toLowerCase();
                                 newStudentProfile.setName(name.getText().toString());
-                                newStudentProfile.setEmail(email.getText().toString());
+                                newStudentProfile.setEmail(emailInput);
                                 newStudentProfile.setPassword(password.getText().toString());
                                 StudentsDocument studentsDocument2 = new StudentsDocumentImpl();
                                 studentsDocument2.add(newStudentProfile, new CallbackSuccess() {
