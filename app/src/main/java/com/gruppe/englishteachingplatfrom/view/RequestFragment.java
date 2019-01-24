@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
@@ -36,6 +38,8 @@ public class RequestFragment extends Fragment {
     private Singleton p = Singleton.getInstance();
     MyRequestRecyclerViewAdapter mReqAdapter;
     public static boolean clicked = false;
+    private ProgressBar loader;
+    private TextView emptyList;
 
     public RequestFragment() {
     }
@@ -63,6 +67,8 @@ public class RequestFragment extends Fragment {
 
         recycler = view.findViewById(R.id.list);
         layoutManager = new LinearLayoutManager(getContext());
+        emptyList = view.findViewById(R.id.emptyList);
+        loader = view.findViewById(R.id.loader3);
 
       //  mAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
 /*        mRecyclerView.setHasFixedSize(true);
@@ -120,10 +126,16 @@ public class RequestFragment extends Fragment {
                                     }
                                 });
                             }
-                        }
-                    });
-                }
 
+                        }
+
+                    });
+
+                }
+                loader.setVisibility(View.INVISIBLE);
+                if(p.getCurrrentTeacher().getPendingProfiles().size() == 0){
+                    emptyList.setVisibility(View.VISIBLE);
+                }
                 // Set the adapter
                /* if (view instanceof RecyclerView) {
                     Context context = view.getContext();

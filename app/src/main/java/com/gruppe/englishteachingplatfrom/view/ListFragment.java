@@ -190,6 +190,7 @@ public class ListFragment extends Fragment {
                                                                 addToBackStack(null).commit();
                                                         clicked = true;
                                                     }
+
                                                 }
                                             });
                                         }
@@ -249,9 +250,9 @@ public class ListFragment extends Fragment {
                                                                 addToBackStack(null).commit();
                                                         clicked = true;
                                                     }
+
                                                 }
                                             });
-                                         //   loader.setVisibility(View.GONE);
                                         }
                                     }
                                 });
@@ -306,6 +307,9 @@ public class ListFragment extends Fragment {
                                                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                                                                 addToBackStack(null).commit();
                                                         clicked = true;
+                                                    }
+                                                    if(p.getCurrrentStudent().getFavoriteProfiles().size() == 0){
+                                                        emptyList.setVisibility(View.VISIBLE);
                                                     }
                                                 }
                                             });
