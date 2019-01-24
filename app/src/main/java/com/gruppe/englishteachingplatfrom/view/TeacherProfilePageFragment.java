@@ -93,8 +93,14 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
         teacherName.setText(p.getCurrrentTeacher().getName());
         teacherEmail.setText(p.getCurrrentTeacher().getEmail());
         teacherPassword.setText(p.getCurrrentTeacher().getPassword());
-        description.setText(p.getCurrrentTeacher().getDescription());
         profilePicture.setImageResource(p.getCurrrentTeacher().getProfilePic());
+
+        description.setText(p.getCurrrentTeacher().getDescription());
+
+        if (description.getText().toString().equals("")) {
+            description.setText("You have no description... Make one!");
+        }
+
 
         confirmEdit.setVisibility(View.INVISIBLE);
         cancelEdit.setVisibility(View.INVISIBLE);
@@ -166,6 +172,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
                 p.getCurrrentTeacher().setEmail(String.valueOf(editTextEmail.getText()));
                 p.getCurrrentTeacher().setPassword(String.valueOf(editTextPassword.getText()));
                 p.getCurrrentTeacher().setDescription(String.valueOf(editDescription.getText()));
+
 //            p.getCurrrentStudent().setProfilePicture(p.getCurrrentStudent().getProfilePicture());
 
                 //Update backend
