@@ -140,12 +140,30 @@ public class StudentProfile extends DocumentObject{
 
 
     public void setProfilePictures() {
-                switch (this.id) {
+        switch (this.id) {
             case "1": this.profilePicture = R.drawable.student_2;
                 break;
             case "2": this.profilePicture = R.drawable.student_1;
                 break;
             case "3": this.profilePicture = R.drawable.student_3;
+                break;
+            case "6mNdoUsjxY3kOy4UzXRE": this.profilePicture = R.drawable.student_4;
+                break;
+            case "9tjJYykAYic3Kdclaoch": this.profilePicture = R.drawable.student_5;
+                break;
+            case "DcCadrswTacgCOHMuOxN": this.profilePicture = R.drawable.student_6;
+                break;
+            case "LTELj1lEb56xUdzeW28I": this.profilePicture = R.drawable.student_7;
+                break;
+            case "SBbSFiI9BSKJHTI0kOXj": this.profilePicture = R.drawable.student_8;
+                break;
+            case "lnipcGhVIQbCpD4GF1CH": this.profilePicture = R.drawable.student_9;
+                break;
+            case "vQbuEBdR5dR6uSpuSECk": this.profilePicture = R.drawable.student_10;
+                break;
+            case "vfaKJzNUM3QYzahhqbNv": this.profilePicture = R.drawable.student_11;
+                break;
+            case "1eWuxAJ43lustIJMfT8D": this.profilePicture = R.drawable.student_12;
                 break;
             default: this.profilePicture = R.drawable.unknown;
                 break;
