@@ -58,7 +58,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             @Override
             public void onClick(View v) {
                 System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
-                Toast.makeText(v.getContext(),"Accept nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"You accepted " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
 
 //                Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 final Payment payment = activePaymentList.get(paymentViewHolder.getAdapterPosition());
@@ -89,8 +89,8 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             @Override
             public void onClick(View v) {
                 System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
-                Toast.makeText(v.getContext(),"Reject nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(v.getContext(),"You rejected: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
+                v.setClickable(false);
 //                Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 final Payment payment = activePaymentList.get(paymentViewHolder.getAdapterPosition());
                 PaymentDocument paymentDocument = new PaymentDocumentImpl();

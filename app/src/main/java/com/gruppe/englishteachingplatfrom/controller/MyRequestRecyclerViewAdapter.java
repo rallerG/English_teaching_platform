@@ -23,12 +23,10 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.model.MailProfile;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
 import com.gruppe.englishteachingplatfrom.view.PendingRequestFragment;
 import com.gruppe.englishteachingplatfrom.view.RequestFragment;
-import com.gruppe.englishteachingplatfrom.view.RequestMailActivity;
 import com.gruppe.englishteachingplatfrom.view.TeacherMainActivity;
 
 import java.util.List;
