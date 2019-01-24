@@ -85,7 +85,8 @@ public class SignupTeacherFragment extends Fragment implements View.OnClickListe
                                 TeachersDocument teachersDocument2 = new TeachersDocumentImpl();
                                 final TeacherProfile newTeacherProfile = new TeacherProfile();
                                 newTeacherProfile.setName(name.getText().toString());
-                                newTeacherProfile.setEmail(email.getText().toString());
+                                String emailInput = (email.getText().toString()).toLowerCase();
+                                newTeacherProfile.setEmail(emailInput);
                                 newTeacherProfile.setPassword(password.getText().toString());
                                 newTeacherProfile.setPrice(Integer.parseInt(price.getText().toString()));
                                 teachersDocument2.add(newTeacherProfile, new CallbackSuccess() {
