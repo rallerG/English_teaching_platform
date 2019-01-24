@@ -45,6 +45,7 @@ public class ListFragment extends Fragment {
     private int listId;
     private int pos;
     public static boolean clicked = false;
+    private int checker = 0;
 //    private OnListFragmentInteractionListener mListener;
 
     RecyclerView mRecyclerView;
@@ -90,9 +91,10 @@ public class ListFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
         mLayoutManager = new LinearLayoutManager(getContext());
-        final View fragmentFavorite = view.findViewById(R.id.emptyList);
+      //  final View fragmentFavorite = view.findViewById(R.id.emptyList);
         loader = view.findViewById(R.id.loader3);
         emptyList = view.findViewById(R.id.emptyList);
+        emptyList.setVisibility(View.INVISIBLE);
 
         loader.setVisibility(View.VISIBLE);
 
@@ -114,7 +116,7 @@ public class ListFragment extends Fragment {
                                     mRecyclerView.setHasFixedSize(true);
                                     mRecyclerView.setLayoutManager(mLayoutManager);
                                     mRecyclerView.setAdapter(mTeacherAdapter);
-                                    fragmentFavorite.setVisibility(View.GONE);
+                                //    fragmentFavorite.setVisibility(View.GONE);
 
                                 }
 //                                mTeacherAdapter.setOnItemClickListener(new MyTeacherMatchesRecyclerViewAdapter.OnItemClickListener() {
@@ -151,19 +153,24 @@ public class ListFragment extends Fragment {
                         @Override
                         public void onCallback(final List<TeacherProfile> listOfObjects) {
                             p.getCurrrentStudent().getMatchProfiles().clear();
+                            checker = 0;
                             for (final TeacherProfile teacher : listOfObjects) {
+                                System.out.println("for loop");
                                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
                                 teachersDocument.get(teacher.getId(), new Callback<TeacherProfile>() {
                                     @Override
                                     public void onCallback(TeacherProfile object) {
                                         p.getCurrrentStudent().getMatchProfiles().add(object);
+                                        System.out.println("callback 1");
+                                        checker++;
+
                                         object.setProfilePictures();
                                         if (listOfObjects.indexOf(teacher) == (listOfObjects.size()-1)) {
                                             mStudentMatchesAdapter = new MyStudentMatchesRecyclerViewAdapter(p.getCurrrentStudent().getMatchProfiles());
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
                                             mRecyclerView.setAdapter(mStudentMatchesAdapter);
-                                            fragmentFavorite.setVisibility(View.GONE);
+                                       //     fragmentFavorite.setVisibility(View.GONE);
                                             mStudentMatchesAdapter.setOnItemClickListener(new MyStudentMatchesRecyclerViewAdapter.OnItemClickListener() {
 
                                                 @Override
@@ -195,13 +202,19 @@ public class ListFragment extends Fragment {
                                             });
                                         }
 
+
+                            System.out.println(p.getCurrrentStudent().getMatchProfiles().size());
+                            System.out.println("Checker: " + checker);
+                            if(checker == 0){
+                                emptyList.setVisibility(View.VISIBLE);
+                            } else {
+                                emptyList.setVisibility(View.INVISIBLE);
+                            }
                                     }
+
                                 });
                             }
-                            loader.setVisibility(View.GONE);
-                            if(p.getCurrrentStudent().getMatchProfiles().size() == 0){
-                                emptyList.setVisibility(View.VISIBLE);
-                            }
+                                loader.setVisibility(View.GONE);
                         }
                     });
                     break;
@@ -223,7 +236,7 @@ public class ListFragment extends Fragment {
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
                                             mRecyclerView.setAdapter(mAdapter);
-                                            fragmentFavorite.setVisibility(View.GONE);
+                                          //  fragmentFavorite.setVisibility(View.GONE);
                                             mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
 
@@ -282,7 +295,7 @@ public class ListFragment extends Fragment {
                                             mRecyclerView.setHasFixedSize(true);
                                             mRecyclerView.setLayoutManager(mLayoutManager);
                                             mRecyclerView.setAdapter(mAdapter);
-                                            fragmentFavorite.setVisibility(View.GONE);
+                                        //    fragmentFavorite.setVisibility(View.GONE);
                                             mAdapter.setOnItemClickListener(new MyFavoriteRecyclerViewAdapter.OnItemClickListener() {
 
                                                 @Override
