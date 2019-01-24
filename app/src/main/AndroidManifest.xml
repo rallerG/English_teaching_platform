@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +29,7 @@
 
         <activity
             android:name=".view.LoginOrSignupActivity"
-            android:label="@string/title_activity_loginOrSignup"
+            android:label="GrMagnus"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -42,9 +43,6 @@
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.RequestMailActivity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".view.SignupActivity"
             android:theme="@style/AppTheme.NoActionBar" />

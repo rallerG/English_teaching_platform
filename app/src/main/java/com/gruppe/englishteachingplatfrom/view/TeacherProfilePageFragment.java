@@ -14,10 +14,8 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
@@ -93,8 +91,14 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
         teacherName.setText(p.getCurrrentTeacher().getName());
         teacherEmail.setText(p.getCurrrentTeacher().getEmail());
         teacherPassword.setText(p.getCurrrentTeacher().getPassword());
-        description.setText(p.getCurrrentTeacher().getDescription());
         profilePicture.setImageResource(p.getCurrrentTeacher().getProfilePic());
+
+        description.setText(p.getCurrrentTeacher().getDescription());
+
+        if (description.getText().toString().equals("")) {
+            description.setText("You have no description... Add one bu pressing 'edit profile'");
+        }
+
 
         confirmEdit.setVisibility(View.INVISIBLE);
         cancelEdit.setVisibility(View.INVISIBLE);
@@ -155,18 +159,17 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
             cancelEdit.setVisibility(View.VISIBLE);
             profilePicture.setVisibility(View.GONE);
             greenBox.setVisibility(View.GONE);
-            editProfile.setClickable(false);
+            editProfile.setVisibility(View.INVISIBLE);
 
         } else if (v == confirmEdit) {
             System.out.println("Confirm edit");
 
-            if (editTextName.getText() != null && editTextEmail.getText() != null && editTextPassword.getText() != null) {
+            if (!editTextName.getText().toString().equals("") && !editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
                 //Update singleton
                 p.getCurrrentTeacher().setName(String.valueOf(editTextName.getText()));
                 p.getCurrrentTeacher().setEmail(String.valueOf(editTextEmail.getText()));
                 p.getCurrrentTeacher().setPassword(String.valueOf(editTextPassword.getText()));
                 p.getCurrrentTeacher().setDescription(String.valueOf(editDescription.getText()));
-//            p.getCurrrentStudent().setProfilePicture(p.getCurrrentStudent().getProfilePicture());
 
                 //Update backend
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
@@ -189,7 +192,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
                         greenBox.setVisibility(View.VISIBLE);
 
                         Toast.makeText(getContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
-                        editProfile.setClickable(true);
+                        editProfile.setVisibility(View.VISIBLE);
 
 
                     }
@@ -197,7 +200,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
             } else {
                 System.out.println("Alt skal udfyldes");
                 Toast.makeText(getContext(), "All fields must be entered! Try again", Toast.LENGTH_SHORT).show();
-                editProfile.setClickable(true);
+                editProfile.setVisibility(View.VISIBLE);
             }
         } else if (v == cancelEdit) {
             switcher.showPrevious();
@@ -210,7 +213,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
             Toast.makeText(getContext(), "Edit cancelled!", Toast.LENGTH_SHORT).show();
             profilePicture.setVisibility(View.VISIBLE);
             greenBox.setVisibility(View.VISIBLE);
-
+            editProfile.setVisibility(View.VISIBLE);
         }
     }
 
@@ -227,27 +230,6 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-
-    public void test() {
-        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-        teachersDocument.update(p.getCurrrentTeacher().getId(), p.getCurrrentTeacher(), new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                //callback
-            }
-        });
-
-
-
-        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-        studentsDocument.update(p.getCurrrentStudent().getId(), p.getCurrrentStudent(), new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                //callback
-            }
-        });
     }
 }
 

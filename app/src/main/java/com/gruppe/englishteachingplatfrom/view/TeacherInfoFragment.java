@@ -191,7 +191,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         public void onCallback() {
                             FragPager.removeTeacher(FragPager.getFragman());
                             getActivity().getSupportFragmentManager().popBackStack();
-                            Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),name + " has been added to favorites",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -203,8 +203,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             if(fav) {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-                //FragPager.removeTeacher(FragPager.getFragman());
-                //Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
                 StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
                 studentFavoritesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                     @Override
@@ -212,7 +210,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         fav = false;
                         FragPager.addTeacher(FragPager.getFragman(),pos);
                         p.getCurrrentStudent().getFavoriteProfiles().remove(pos);
-                        Toast.makeText(getContext(), "fjernet " + name + " fra dine favoriter", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "removed " + name + " from your favorites", Toast.LENGTH_SHORT).show();
                         getActivity().getSupportFragmentManager().popBackStack();
                     }
                 });

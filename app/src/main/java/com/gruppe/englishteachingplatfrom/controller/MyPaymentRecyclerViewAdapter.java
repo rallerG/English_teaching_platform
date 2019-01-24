@@ -43,8 +43,6 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
     @Override
     public void onBindViewHolder(@NonNull final PaymentViewHolder paymentViewHolder, final int i) {
-//        Singleton.TeacherDummy teacherProfile = activePaymentList.get(i);
-
         paymentViewHolder.textViewName.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName());
         paymentViewHolder.textViewPrice.setText(Integer.toString(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getPrice())+" DKK");
         //TODO Make get date again
@@ -58,9 +56,8 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             @Override
             public void onClick(View v) {
                 System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
-                Toast.makeText(v.getContext(),"Accept nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"You accepted " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
 
-//                Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 final Payment payment = activePaymentList.get(paymentViewHolder.getAdapterPosition());
                 payment.setActive(false);
                 payment.setPayed(true);
@@ -68,6 +65,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
                 Date date = new Date();
                 String thePaymentDate = (dateFormat.format(date)).toString();
                 payment.setPaymentDate(thePaymentDate);
+                v.setClickable(false);
 
                 PaymentDocument paymentDocument = new PaymentDocumentImpl();
                 paymentDocument.update(payment.getId(), payment, new CallbackSuccess() {
@@ -89,9 +87,9 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
             @Override
             public void onClick(View v) {
                 System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
-                Toast.makeText(v.getContext(),"Reject nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(),"You rejected: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
+                v.setClickable(false);
 
-//                Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
                 final Payment payment = activePaymentList.get(paymentViewHolder.getAdapterPosition());
                 PaymentDocument paymentDocument = new PaymentDocumentImpl();
                 paymentDocument.delete(payment.getId(), new CallbackSuccess() {
@@ -104,9 +102,7 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
                 });
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -128,8 +124,6 @@ public class MyPaymentRecyclerViewAdapter extends RecyclerView.Adapter<MyPayment
 
             acceptButton = (Button) itemView.findViewById(R.id.accept_btn);
             rejectButton = (Button) itemView.findViewById(R.id.reject_btn);
-
-
         }
     }
 }

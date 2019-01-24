@@ -30,7 +30,6 @@ public class PaymentHistoryFragment extends Fragment {
     private int mColumnCount = 10;
 
 
-//    private List<Singleton.TeacherDummy> teacherPaymentHistorytList;
     private OnFragmentInteractionListener mListener;
     private Singleton p = Singleton.getInstance();
 
@@ -60,28 +59,13 @@ public class PaymentHistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//        if (getArguments() != null) {
-//            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        teacherPaymentHistorytList = test.getStudentDummies();
 
         View view = inflater.inflate(R.layout.fragment_payment_history_list, container, false);
-
-//        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_history);
-//            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            mRecyclerView.setAdapter(new MyPaymentHistoryRecyclerViewAdapter(p.getCurrrentStudent().getHistoryPaymentDummies(), mListener));
 
             //If teacher
             if (p.getCurrrentStudent() == null && p.getCurrrentTeacher() != null) {

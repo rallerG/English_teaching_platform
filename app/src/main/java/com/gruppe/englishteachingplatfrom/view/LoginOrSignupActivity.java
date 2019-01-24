@@ -119,7 +119,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
                 final Intent intent1 = new Intent(this, IntroductionStudent.class);
                 StudentsDocument studentDocument = new StudentsDocumentImpl();
-                studentDocument.get("1", new Callback<StudentProfile>() {
+                studentDocument.get("2", new Callback<StudentProfile>() {
                     @Override
                     public void onCallback(StudentProfile object) {
                         p.setCurrrentStudent(object);
@@ -143,7 +143,7 @@ public class LoginOrSignupActivity extends AppCompatActivity implements View.OnC
 
                 final Intent intent2 = new Intent(this, IntroductionTeacher.class);
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
-                teachersDocument.get("1", new Callback<TeacherProfile>() {
+                teachersDocument.get("2N4Hy3hLnugCWr61vT2Y", new Callback<TeacherProfile>() {
                     @Override
                     public void onCallback(TeacherProfile object) {
                         p.setCurrrentTeacher(object);

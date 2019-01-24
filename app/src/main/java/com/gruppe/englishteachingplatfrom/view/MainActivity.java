@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity
         burgerMenuName.setText(p.getCurrrentStudent().getName());
         profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
-//        burgerMenuName.setOnClickListener(this);
-//        System.out.println("Print! " + p.getCurrrentStudent().getName());
 
 
 
@@ -183,31 +181,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_filter_rating) {
-//            return true;
-//        } else if (id == R.id.action_filter_country) {
-//            //Do stuff
-//        } else if (id == R.id.action_filter_price) {
-//            //do stuff
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -231,7 +204,7 @@ public class MainActivity extends AppCompatActivity
                 ListFragment.clicked = false;
                 fragment = new FragPager();
                 fragment.setArguments(args);
-                setTitle(R.string.app_name);
+                setTitle("TeachENG");
                 break;
             case R.id.nav_matches:
                 PageFragment.clicked = false;
@@ -298,10 +271,6 @@ public class MainActivity extends AppCompatActivity
         if (p.getCurrrentStudent() != null){
             burgerMenuName.setText(p.getCurrrentStudent().getName());
         }
-
-
-
-
     }
 
     @Override
@@ -326,16 +295,6 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                     addToBackStack(null).commit();
         }
-//        else if (view == burgerMenuName) {
-//            Fragment ProfilePageFragment = new ProfilePageFragment();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.fragmentContent, ProfilePageFragment);
-//            ft.addToBackStack(null);
-//            ft.commit();
-//            setTitle("Profile");
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//        }
     }
 
     @Override

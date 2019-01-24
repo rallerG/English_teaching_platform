@@ -35,35 +35,12 @@ public class MyPaymentTeacherRecyclerViewAdapter extends RecyclerView.Adapter<My
 
     @Override
     public void onBindViewHolder(@NonNull final PaymentViewHolder paymentViewHolder, final int i) {
-//        Singleton.TeacherDummy teacherProfile = activePaymentList.get(i);
 
         paymentViewHolder.textViewName.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getName());
         paymentViewHolder.textViewPrice.setText(Integer.toString(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getPrice()) + " DKK");
         //TODO Make get date again
         paymentViewHolder.textViewDate.setText(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getRequestDate());
         paymentViewHolder.imageView.setImageResource(activePaymentList.get(paymentViewHolder.getAdapterPosition()).getStudent().getProfilePicture());
-
-//        paymentViewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-//        System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
-//        Toast.makeText(v.getContext(),"Accept nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
-//        Payment.payTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
-//        notifyDataSetChanged();
-//        }
-//        });
-
-//        paymentViewHolder.rejectButton.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-//        System.out.println("MyPaymentRecyclerViewAdapter.java: Knap " + paymentViewHolder.getAdapterPosition());
-//        Toast.makeText(v.getContext(),"Reject nr. " + paymentViewHolder.getAdapterPosition() + " som hedder: " + activePaymentList.get(paymentViewHolder.getAdapterPosition()).getTeacher().getName(), Toast.LENGTH_SHORT).show();
-//
-//        Payment.deleteTransaction(activePaymentList.get(paymentViewHolder.getAdapterPosition()));
-//        notifyDataSetChanged();
-//        }
-//        });
-
     }
 
 
@@ -77,7 +54,6 @@ public class MyPaymentTeacherRecyclerViewAdapter extends RecyclerView.Adapter<My
         ImageView imageView;
         TextView textViewName, textViewPrice, textViewDate;
 
-        //    Button acceptButton, rejectButton;
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
 

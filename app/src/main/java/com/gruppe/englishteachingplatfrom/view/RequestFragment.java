@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
@@ -36,6 +38,8 @@ public class RequestFragment extends Fragment {
     private Singleton p = Singleton.getInstance();
     MyRequestRecyclerViewAdapter mReqAdapter;
     public static boolean clicked = false;
+    private ProgressBar loader;
+    private TextView emptyList;
 
     public RequestFragment() {
     }
@@ -63,23 +67,8 @@ public class RequestFragment extends Fragment {
 
         recycler = view.findViewById(R.id.list);
         layoutManager = new LinearLayoutManager(getContext());
-
-      //  mAdapter = new MyRequestRecyclerViewAdapter(p.getCurrrentStudent().getPendingProfiles());
-/*        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnClickListener(new MyRequestRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Fragment F = new PendingRequestFragment();
-                Bundle bundle = new Bundle();
-                F.setArguments(bundle);
-                //remember information and description text (when objects are used)
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content, F).
-                        addToBackStack(null).commit();
-            }
-        });*/
-
+        emptyList = view.findViewById(R.id.emptyList);
+        loader = view.findViewById(R.id.loader3);
 
 
         TeacherPendingsDocument teacherPendingsDocument = new TeacherPendingsDocumentImpl(p.getCurrrentTeacher().getId());
@@ -120,21 +109,17 @@ public class RequestFragment extends Fragment {
                                     }
                                 });
                             }
+
                         }
+
                     });
+
+                }
+                loader.setVisibility(View.INVISIBLE);
+                if(p.getCurrrentTeacher().getPendingProfiles().size() == 0){
+                    emptyList.setVisibility(View.VISIBLE);
                 }
 
-                // Set the adapter
-               /* if (view instanceof RecyclerView) {
-                    Context context = view.getContext();
-                    RecyclerView recyclerView = (RecyclerView) view;
-                    if (mColumnCount <= 1) {
-                        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                    } else {
-                        recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-                    }
-                    recyclerView.setAdapter(new MyRequestRecyclerViewAdapter(getContext(), studentProfiles));
-                }*/
             }
         });
         return view;
