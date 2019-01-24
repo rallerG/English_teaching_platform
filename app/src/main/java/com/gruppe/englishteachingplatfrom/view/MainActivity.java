@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity
                 ListFragment.clicked = false;
                 fragment = new FragPager();
                 fragment.setArguments(args);
-                setTitle("Gruppe Magnus");
+                setTitle("TeachENG");
                 break;
             case R.id.nav_matches:
                 PageFragment.clicked = false;
