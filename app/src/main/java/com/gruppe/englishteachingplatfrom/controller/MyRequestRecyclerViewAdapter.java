@@ -74,16 +74,6 @@ public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequest
         holder.studName.setText(mValues.get(position).getName());
         holder.imageView.setImageResource(mValues.get(position).getProfilePicture());
 
-   /*     holder.itemHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
-
-            }
-        });*/
     }
 
 
