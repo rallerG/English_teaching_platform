@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     pDialog.setMessage("Logging in...");
                     pDialog.setCancelable(true);
                     pDialog.show();
+                    final String emailInput = (email.getText().toString()).toLowerCase();
 
                     final Intent intentTeacher = new Intent(this, IntroductionTeacher.class);
                     final Intent intentStudent = new Intent(this, IntroductionStudent.class);
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onCallback(List<TeacherProfile> listOfObjects) {
                             for (TeacherProfile teacherProfile : listOfObjects) {
-                                if (teacherProfile.getEmail().equals(email.getText().toString())) {
+                                if (teacherProfile.getEmail().equals(emailInput)) {
                                     if (teacherProfile.getPassword().equals(password.getText().toString())) {
                                         p.setCurrrentTeacher(teacherProfile);
                                         teacherProfile.setProfilePictures();
@@ -90,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onCallback(List<StudentProfile> listOfObjects) {
                                     for (StudentProfile studentProfile : listOfObjects) {
-                                        if (studentProfile.getEmail().equals(email.getText().toString())) {
+                                        if (studentProfile.getEmail().equals(emailInput)) {
                                             if (studentProfile.getPassword().equals(password.getText().toString())) {
                                                 p.setCurrrentStudent(studentProfile);
                                                 studentProfile.setProfilePictures();
