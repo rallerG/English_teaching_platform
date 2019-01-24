@@ -109,7 +109,7 @@ public class PageFragment extends Fragment implements View.OnClickListener {
         mLastClickTime = SystemClock.elapsedRealtime();
         if(!clicked)
             if(v == card) {
-
+                FragPager.backToSwipe();
                 Bundle bundle = new Bundle();
                 bundle.putString("name", tName);
                 bundle.putInt("price", tPrice);

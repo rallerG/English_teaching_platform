@@ -28,12 +28,14 @@ import java.util.Map;
 public class FragPager extends Fragment implements View.OnClickListener {
 
         private static ViewPager mPager;
-        private FragPagerAdapter mAdapter;
+        private static FragPagerAdapter mAdapter;
         private Singleton p = Singleton.getInstance();
         private FloatingActionButton floating_Send;
         private FloatingActionButton floating_Fav;
         private int position1;
+        private static int prevPos;
         private static FragmentManager fragmentMan;
+        private ViewPagerStack vps = new ViewPagerStack();
         private long mLastClickTime = 0;
 
 
@@ -53,7 +55,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             fragmentMan = getChildFragmentManager();
-
+            mAdapter = new FragPagerAdapter(getChildFragmentManager());
         }
 
         @Override
@@ -62,11 +64,19 @@ public class FragPager extends Fragment implements View.OnClickListener {
             View view =  inflater.inflate(R.layout.fragment_viewpager_list, container, false);
             fragmentMan = getChildFragmentManager();
             mPager = view.findViewById(R.id.ViewPager);
-            mPager.setPageTransformer(true, new ViewPagerStack());
+            mPager.setPageTransformer(true, vps);
             mPager.setOffscreenPageLimit(3);
-            mPager.setSaveFromParentEnabled(false);
-            mAdapter = new FragPagerAdapter(getChildFragmentManager() );
             mPager.setAdapter(mAdapter);
+            mPager.setSaveFromParentEnabled(false);
+
+            if(prevPos != 0){
+                mPager.setCurrentItem(prevPos, true);
+                System.out.println("changing current item");
+            } else if(prevPos == 0 ){
+                mPager.setCurrentItem(prevPos, true);
+                System.out.println("current item is position 0");
+            }
+
             floating_Fav = view.findViewById(R.id.floating_fav);
             floating_Send = view.findViewById(R.id.floating_send);
             floating_Send.setOnClickListener(this);
@@ -76,7 +86,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
                 floating_Fav.hide();
                 floating_Send.hide();
             }
-
 
 //            for(int i = 0; i < mAdapter.getCount(); i++){
 //                hm.put(i,0);
@@ -101,29 +110,38 @@ public class FragPager extends Fragment implements View.OnClickListener {
             return view;
         }
 
+        public static void backToSwipe(){
+            prevPos = mPager.getCurrentItem();
+        }
+
+        public void swipeFav(){
+            mPager.setCurrentItem(prevPos,true);
+        }
+
         public static void removeTeacher(FragmentManager fm){
             int pos = mPager.getCurrentItem();
             System.out.println("child count = " + mPager.getAdapter().getCount());
             if(pos <  mPager.getAdapter().getCount()){
+                backToSwipe();
                 Singleton.getInstance().getSwipeTeachers().remove(pos);
-                FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
-                mPager.setAdapter(mAdapt);
+                mAdapter = new FragPagerAdapter(fm);
+                mPager.setAdapter(mAdapter);
                 mPager.setSaveFromParentEnabled(false);
-                mPager.setCurrentItem(pos, true);
             }
             else if(pos ==  mPager.getAdapter().getCount() && pos!=0 ){
+                backToSwipe();
                 Singleton.getInstance().getSwipeTeachers().remove(pos);
-                FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
-                mPager.setAdapter(mAdapt);
+                mAdapter = new FragPagerAdapter(fm);
+                mPager.setAdapter(mAdapter);
                 mPager.setSaveFromParentEnabled(false);
-                mPager.setCurrentItem(pos-1, true);
             }
             else if(pos == 0) {
+                backToSwipe();
                 Singleton.getInstance().getSwipeTeachers().remove(pos);
-                FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
-                mPager.setAdapter(mAdapt);
+                mAdapter = new FragPagerAdapter(fm);
+                mPager.setAdapter(mAdapter);
                 mPager.setSaveFromParentEnabled(false);
-                mPager.setCurrentItem(pos, true);
+//                mPager.setCurrentItem(pos, true);
             }
             else System.out.println("There was an error in fragpager remove teacher " + pos);
 
@@ -134,18 +152,22 @@ public class FragPager extends Fragment implements View.OnClickListener {
 
         System.out.println("child count = " + mPager.getAdapter().getCount());
         if(pos <  mPager.getAdapter().getCount()){
+            backToSwipe();
             Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
             FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
             mPager.setAdapter(mAdapt);
             mPager.setSaveFromParentEnabled(false);
+
         }
         else if(pos ==  mPager.getAdapter().getCount() && pos!=0 ){
+            backToSwipe();
             Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
             FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
             mPager.setAdapter(mAdapt);
             mPager.setSaveFromParentEnabled(false);
         }
         else if(pos == 0) {
+            backToSwipe();
             Singleton.getInstance().getSwipeTeachers().add(Singleton.getInstance().getCurrrentStudent().getFavoriteProfiles().get(pos));
             FragPagerAdapter mAdapt = new FragPagerAdapter(fm);
             mPager.setAdapter(mAdapt);
@@ -181,6 +203,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
         position1 = mPager.getCurrentItem();
         String name =  p.getSwipeTeachers().get(position1).getName();
         if (v == floating_Send) {
+            backToSwipe();
             Bundle bundle = new Bundle();
             bundle.putString("name", name);
             bundle.putInt("price", p.getSwipeTeachers().get(position1).getPrice());
@@ -203,6 +226,7 @@ public class FragPager extends Fragment implements View.OnClickListener {
                     @Override
                     public void onCallback() {
                         removeTeacher(getFragman());
+                        swipeFav();
                     }
                 });
             Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
