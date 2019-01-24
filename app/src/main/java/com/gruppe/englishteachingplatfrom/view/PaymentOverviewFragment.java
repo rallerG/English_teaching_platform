@@ -260,10 +260,10 @@ public class PaymentOverviewFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-            return;
-        }
-        mLastClickTime = SystemClock.elapsedRealtime();
+//        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+//            return;
+//        }
+//        mLastClickTime = SystemClock.elapsedRealtime();
 
         if (v == activeButton) {
 
