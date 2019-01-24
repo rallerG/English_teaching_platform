@@ -89,26 +89,15 @@ public class FragPager extends Fragment implements View.OnClickListener {
                 return emptyView;
             }
 
-//            for(int i = 0; i < mAdapter.getCount(); i++){
-//                hm.put(i,0);
-//            }
 
             mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
                 @Override
                 public void onPageSelected(int position) {
                     System.out.println("FragPager.java: page changed " + position);
                     // code for action on page change
-//                    if(hm.get(position) != null){
-//                        if( hm.get(position) == 1){
-//                            System.out.println("FragPager.java: "+ hm.get(position));
-//                            floating_Fav.setImageResource(R.drawable.favourite_full);
-//                        }
-//                        else if (hm.get(position) == 0)floating_Fav.setImageResource(R.drawable.favourite_empty);
-//                    }
 
                 }
             });
-            // Need to find out how to have different pictures
             return view;
         }
 
@@ -143,7 +132,6 @@ public class FragPager extends Fragment implements View.OnClickListener {
                 mAdapter = new FragPagerAdapter(fm);
                 mPager.setAdapter(mAdapter);
                 mPager.setSaveFromParentEnabled(false);
-//                mPager.setCurrentItem(pos, true);
             }
             else System.out.println("There was an error in fragpager remove teacher " + pos);
 

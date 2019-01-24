@@ -203,8 +203,6 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             if(fav) {
                 ((FloatingActionButton) v).setImageResource(R.drawable.favourite_empty);
                 ((FloatingActionButton) v).setBackgroundColor(Color.parseColor("#FF0023"));
-                //FragPager.removeTeacher(FragPager.getFragman());
-                //Toast.makeText(getContext(),name + " er blevet tilføjet til favoriter",Toast.LENGTH_SHORT).show();
                 StudentFavoritesDocument studentFavoritesDocument = new StudentFavoritesDocumentImpl(p.getCurrrentStudent().getId());
                 studentFavoritesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                     @Override

@@ -26,7 +26,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
     private CardView card;
     private TextView name, language, Rate, Price;
     private ImageView imageView;
-    private Singleton teacher = Singleton.getInstance();
     private RatingBar rating;
     public static boolean clicked = false;
     private int pos, picture, tPrice;
@@ -123,14 +122,6 @@ public class PageFragment extends Fragment implements View.OnClickListener {
                 F.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, F).
                         addToBackStack(null).commit();
-//                Intent i = new Intent(getActivity(), TeacherInfoFragment.class);
-//                i.putExtra("name", tName);
-//                i.putExtra("price", tPrice);
-//                i.putExtra("rate", tRate);
-//                i.putExtra("language", tLang);
-//                i.putExtra("pos", pos);
-//                //remember information and description text (when objects are used)
-//                startActivity(i);
                 clicked = true;
             }
     }
