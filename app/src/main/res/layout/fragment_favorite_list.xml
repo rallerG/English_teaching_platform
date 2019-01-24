@@ -13,7 +13,7 @@
         android:layout_marginTop="200dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/emptyList"
@@ -22,7 +22,8 @@
             android:layout_gravity="center_horizontal"
             android:text="The list is empty"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:visibility="invisible" />
 
         <ProgressBar
             android:id="@+id/loader3"
