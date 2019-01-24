@@ -191,7 +191,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         public void onCallback() {
                             FragPager.removeTeacher(FragPager.getFragman());
                             getActivity().getSupportFragmentManager().popBackStack();
-                            Toast.makeText(getContext(),name + " has been added to favorites",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),tName + " has been added to favorites",Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -210,7 +210,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
                         fav = false;
                         FragPager.addTeacher(FragPager.getFragman(),pos);
                         p.getCurrrentStudent().getFavoriteProfiles().remove(pos);
-                        Toast.makeText(getContext(), "removed " + name + " from your favorites", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "removed " + tName + " from your favorites", Toast.LENGTH_SHORT).show();
                         getActivity().getSupportFragmentManager().popBackStack();
                     }
                 });
@@ -223,7 +223,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             studentPendingsDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                 @Override
                 public void onCallback() {
-                    Toast.makeText(getContext(),"removed from pending", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"removed" + tName + "from pending", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
             });
@@ -238,7 +238,7 @@ public class TeacherInfoFragment extends Fragment implements View.OnClickListene
             studentMatchesDocument.deleteEqualTo(id, true, new CallbackSuccess() {
                 @Override
                 public void onCallback() {
-                    Toast.makeText(getContext(),"removed from matches", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"removed"+ tName +  " from matches", Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
             });
