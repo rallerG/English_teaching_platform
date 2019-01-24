@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Adapter<MyPaymentTeacherHistoryRecyclerViewAdapter.PaymentViewHolder> {
 
     private ArrayList<Payment> paymentHistoryList;
-    //    private List<Singleton.TeacherDummy> paymentHistoryList;
     private PaymentHistoryFragment.OnFragmentInteractionListener mListener;
 
 
@@ -37,8 +36,6 @@ public class MyPaymentTeacherHistoryRecyclerViewAdapter extends RecyclerView.Ada
 
     @Override
     public void onBindViewHolder(@NonNull PaymentViewHolder paymentViewHolder, int i) {
-//        Singleton.TeacherDummy teacherProfile = paymentHistoryList.get(i);
-
         paymentViewHolder.textViewName.setText(paymentHistoryList.get(i).getStudent().getName());
         paymentViewHolder.textViewPrice.setText(paymentHistoryList.get(i).getPrice() + " DKK");
         paymentViewHolder.textViewDate.setText(paymentHistoryList.get(i).getPaymentDate());

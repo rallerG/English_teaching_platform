@@ -104,6 +104,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         studentPassword.setText(p.getCurrrentStudent().getPassword());
         profilePicture.setImageResource(p.getCurrrentStudent().getProfilePicture());
 
+        //Making buttons invisible to start
         confirmEdit.setVisibility(View.INVISIBLE);
         cancelEdit.setVisibility(View.INVISIBLE);
 
@@ -140,14 +141,8 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-            return;
-        }
-        mLastClickTime = SystemClock.elapsedRealtime();
         if (v == editProfile) {
             System.out.println("Edit this profile");
-
-            editProfile.setVisibility(View.INVISIBLE);
 
             switcher.showNext(); //or switcher.showPrevious();
             editTextName = (TextView) switcher.findViewById(R.id.hidden_edit_view);
@@ -161,25 +156,28 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             editTextPassword = (TextView) switcher3.findViewById(R.id.hidden_edit_view3);
             editTextPassword.setText(p.getCurrrentStudent().getPassword());
 
+            //Update visibility of clickable elements
             confirmEdit.setVisibility(View.VISIBLE);
             cancelEdit.setVisibility(View.VISIBLE);
-//            editProfile.setClickable(false);
+            editProfile.setVisibility(View.INVISIBLE);
 
         } else if (v == confirmEdit) {
             System.out.println("Confirm edit");
 
+            //Confirm all fields are entered
             if (!editTextName.getText().toString().equals("") && !editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
+
             //Update singleton
             p.getCurrrentStudent().setName(String.valueOf(editTextName.getText()));
             p.getCurrrentStudent().setEmail(String.valueOf(editTextEmail.getText()));
             p.getCurrrentStudent().setPassword(String.valueOf(editTextPassword.getText()));
-//            p.getCurrrentStudent().setProfilePicture(p.getCurrrentStudent().getProfilePicture());
 
             //Update backend
             StudentsDocument studentsDocument = new StudentsDocumentImpl();
             studentsDocument.update(p.getCurrrentStudent().getId(), p.getCurrrentStudent(), new CallbackSuccess() {
                 @Override
                 public void onCallback() {
+
                     //callback
                     studentName.setText(p.getCurrrentStudent().getName());
                     studentEmail.setText(p.getCurrrentStudent().getEmail());
@@ -193,6 +191,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
                     cancelEdit.setVisibility(View.INVISIBLE);
                     editProfile.setVisibility(View.VISIBLE);
 
+                    //Notify user
                     Toast.makeText(getContext(), "Profile updated!", Toast.LENGTH_SHORT).show();
 
                 }
@@ -206,9 +205,10 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             switcher3.showPrevious();
             confirmEdit.setVisibility(View.INVISIBLE);
             cancelEdit.setVisibility(View.INVISIBLE);
-//            editProfile.setClickable(true);
+
             editProfile.setVisibility(View.VISIBLE);
 
+            //Notify user
             Toast.makeText(getContext(), "Edit cancelled!", Toast.LENGTH_SHORT).show();
 
         }
@@ -227,26 +227,5 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-
-    public void test() {
-        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-        teachersDocument.update(p.getCurrrentTeacher().getId(), p.getCurrrentTeacher(), new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                //callback
-            }
-        });
-
-
-        
-        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-        studentsDocument.update(p.getCurrrentStudent().getId(), p.getCurrrentStudent(), new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                //callback
-            }
-        });
     }
 }

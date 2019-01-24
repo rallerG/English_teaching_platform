@@ -66,7 +66,6 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
         public final TextView mRatingNum;
         public final TextView mLanguageView;
         public final TextView mPriceView;
-//        public TeacherProfile mLProfile;
 
         public ViewHolder(View view, final OnItemClickListener Listener) {
             super(view);
@@ -100,5 +99,4 @@ public class MyFavoriteRecyclerViewAdapter extends RecyclerView.Adapter<MyFavori
                     + "'";
         }
     }
-
 }

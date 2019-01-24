@@ -1,37 +1,21 @@
 package com.gruppe.englishteachingplatfrom.controller;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
 import android.os.SystemClock;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.gruppe.englishteachingplatfrom.R;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 import com.gruppe.englishteachingplatfrom.model.StudentProfile;
-import com.gruppe.englishteachingplatfrom.view.PendingRequestFragment;
-import com.gruppe.englishteachingplatfrom.view.RequestFragment;
-import com.gruppe.englishteachingplatfrom.view.TeacherMainActivity;
 
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 
 public class MyRequestRecyclerViewAdapter extends RecyclerView.Adapter<MyRequestRecyclerViewAdapter.ViewHolder> implements View.OnClickListener, View.OnLongClickListener {

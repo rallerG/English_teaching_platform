@@ -14,10 +14,8 @@ import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.gruppe.englishteachingplatfrom.R;
-import com.gruppe.englishteachingplatfrom.backend.implementations.StudentsDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.implementations.TeachersDocumentImpl;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.CallbackSuccess;
-import com.gruppe.englishteachingplatfrom.backend.interfaces.StudentsDocument;
 import com.gruppe.englishteachingplatfrom.backend.interfaces.TeachersDocument;
 import com.gruppe.englishteachingplatfrom.model.Singleton;
 
@@ -98,7 +96,7 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
         description.setText(p.getCurrrentTeacher().getDescription());
 
         if (description.getText().toString().equals("")) {
-            description.setText("You have no description... Make one!");
+            description.setText("You have no description... Add one bu pressing 'edit profile'");
         }
 
 
@@ -173,8 +171,6 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
                 p.getCurrrentTeacher().setPassword(String.valueOf(editTextPassword.getText()));
                 p.getCurrrentTeacher().setDescription(String.valueOf(editDescription.getText()));
 
-//            p.getCurrrentStudent().setProfilePicture(p.getCurrrentStudent().getProfilePicture());
-
                 //Update backend
                 TeachersDocument teachersDocument = new TeachersDocumentImpl();
                 teachersDocument.update(p.getCurrrentTeacher().getId(), p.getCurrrentTeacher(), new CallbackSuccess() {
@@ -234,27 +230,6 @@ public class TeacherProfilePageFragment extends Fragment implements View.OnClick
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-
-    public void test() {
-        TeachersDocument teachersDocument = new TeachersDocumentImpl();
-        teachersDocument.update(p.getCurrrentTeacher().getId(), p.getCurrrentTeacher(), new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                //callback
-            }
-        });
-
-
-
-        StudentsDocument studentsDocument = new StudentsDocumentImpl();
-        studentsDocument.update(p.getCurrrentStudent().getId(), p.getCurrrentStudent(), new CallbackSuccess() {
-            @Override
-            public void onCallback() {
-                //callback
-            }
-        });
     }
 }
 
